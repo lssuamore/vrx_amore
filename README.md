@@ -17,7 +17,7 @@ password:
 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
 ```
 ```
-cd RobotX2022/
+cd vrx_amore/
 ```
 Initialize and update submodules. If submodule commands don't work, delete empty folders and git clone the correct packages from github in their place.
 ```
