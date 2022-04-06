@@ -288,6 +288,21 @@ actionlib_msgs_generate_messages_py/fast:
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+amore/CMakeFiles/buoy_nav_planner.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/buoy_nav_planner.dir/rule
+.PHONY : amore/CMakeFiles/buoy_nav_planner.dir/rule
+
+# Convenience name for target.
+buoy_nav_planner: amore/CMakeFiles/buoy_nav_planner.dir/rule
+
+.PHONY : buoy_nav_planner
+
+# fast build rule for target.
+buoy_nav_planner/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/build
+.PHONY : buoy_nav_planner/fast
+
+# Convenience name for target.
 amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
@@ -828,6 +843,21 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+amore/CMakeFiles/buoy_nav_array.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/buoy_nav_array.dir/rule
+.PHONY : amore/CMakeFiles/buoy_nav_array.dir/rule
+
+# Convenience name for target.
+buoy_nav_array: amore/CMakeFiles/buoy_nav_array.dir/rule
+
+.PHONY : buoy_nav_array
+
+# fast build rule for target.
+buoy_nav_array/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/build
+.PHONY : buoy_nav_array/fast
+
+# Convenience name for target.
 amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 .PHONY : amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
@@ -1121,6 +1151,60 @@ src/PID_HS_controller.cpp.s:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.s
 .PHONY : src/PID_HS_controller.cpp.s
 
+src/buoy_nav_array.o: src/buoy_nav_array.cpp.o
+
+.PHONY : src/buoy_nav_array.o
+
+# target to build an object file
+src/buoy_nav_array.cpp.o:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/src/buoy_nav_array.cpp.o
+.PHONY : src/buoy_nav_array.cpp.o
+
+src/buoy_nav_array.i: src/buoy_nav_array.cpp.i
+
+.PHONY : src/buoy_nav_array.i
+
+# target to preprocess a source file
+src/buoy_nav_array.cpp.i:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/src/buoy_nav_array.cpp.i
+.PHONY : src/buoy_nav_array.cpp.i
+
+src/buoy_nav_array.s: src/buoy_nav_array.cpp.s
+
+.PHONY : src/buoy_nav_array.s
+
+# target to generate assembly for a file
+src/buoy_nav_array.cpp.s:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/src/buoy_nav_array.cpp.s
+.PHONY : src/buoy_nav_array.cpp.s
+
+src/buoy_nav_planner.o: src/buoy_nav_planner.cpp.o
+
+.PHONY : src/buoy_nav_planner.o
+
+# target to build an object file
+src/buoy_nav_planner.cpp.o:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/src/buoy_nav_planner.cpp.o
+.PHONY : src/buoy_nav_planner.cpp.o
+
+src/buoy_nav_planner.i: src/buoy_nav_planner.cpp.i
+
+.PHONY : src/buoy_nav_planner.i
+
+# target to preprocess a source file
+src/buoy_nav_planner.cpp.i:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/src/buoy_nav_planner.cpp.i
+.PHONY : src/buoy_nav_planner.cpp.i
+
+src/buoy_nav_planner.s: src/buoy_nav_planner.cpp.s
+
+.PHONY : src/buoy_nav_planner.s
+
+# target to generate assembly for a file
+src/buoy_nav_planner.cpp.s:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/src/buoy_nav_planner.cpp.s
+.PHONY : src/buoy_nav_planner.cpp.s
+
 src/mission_control.o: src/mission_control.cpp.o
 
 .PHONY : src/mission_control.o
@@ -1248,6 +1332,7 @@ help:
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... PID_HS_controller"
 	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... buoy_nav_planner"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_cpp"
@@ -1285,6 +1370,7 @@ help:
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... install/local"
+	@echo "... buoy_nav_array"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... _amore_generate_messages_check_deps_usv_pose_msg"
@@ -1308,6 +1394,12 @@ help:
 	@echo "... src/PID_HS_controller.o"
 	@echo "... src/PID_HS_controller.i"
 	@echo "... src/PID_HS_controller.s"
+	@echo "... src/buoy_nav_array.o"
+	@echo "... src/buoy_nav_array.i"
+	@echo "... src/buoy_nav_array.s"
+	@echo "... src/buoy_nav_planner.o"
+	@echo "... src/buoy_nav_planner.i"
+	@echo "... src/buoy_nav_planner.s"
 	@echo "... src/mission_control.o"
 	@echo "... src/mission_control.i"
 	@echo "... src/mission_control.s"

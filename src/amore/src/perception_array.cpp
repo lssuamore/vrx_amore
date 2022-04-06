@@ -254,16 +254,6 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 		E_USV = odom->pose.pose.position.y;
 		D_USV = odom->pose.pose.position.z;
 		PSI_USV = odom->pose.pose.orientation.z;
-		
-		// adjust current heading back within -PI and PI
-		if (PSI_USV < -PI)
-		{
-			PSI_USV = PSI_USV + 2.0*PI;
-		}
-		if (PSI_USV > PI)
-		{
-			PSI_USV = PSI_USV - 2.0*PI;
-		}
 //	} // if navigation_array is in standard USV Pose Conversion mode
 } // end of pose_update()
 
@@ -372,7 +362,7 @@ void HSVFunc(cv::Mat imgHSV)
 	} // end of HSVFunc()
 
 // THIS FUNCTION: Performs the recursive characterization calculations to ID the buoys 
-// ACCEPTS: A counter and a sting key such as "red"
+// ACCEPTS: A counter and a string key such as "red"
 // RETURNS: The counter input but updated. Edits global variables
 // =============================================================================
 int ClassLocFunc(int cunter, int ckey, int keyer)
@@ -454,7 +444,7 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				// Classify the buoys	
 				area = cv::contourArea(contours[i]);																									// Area of the given BLOB. [pixels]
 				perimeter = cv::arcLength(contours[i], true);																						// Perimeter of the given BLOB. [pixels]
-				compactness = (area) / (pow(perimeter, 2));																							// Compactness of given BLOB
+				compactness = (area) / (pow(perimeter, 2));																						// Compactness of given BLOB
 				if ((compactness >= MbCMIN & compactness <= MbCMAX) && (Ry >= MbRMIN & Ry <= MbRMAX))	// Finds marker/regular buoys
 				{
 					reg_buoy = reg_buoy + 1;
@@ -710,83 +700,83 @@ void DisparityFunc()
 // =============================================================================
 void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 {
-	Mat imgHSV;																					// Holds the HSV copy of the original image
-	
-	try 
+	if (PA_state != 0) // as long as perception_array is not on standby
 	{
-		int counter = 0; 
-		// Convert original image to bgr8-type and make a copy in HSV color space
-		org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		// Converts message camera_msg into bgr8 type image
-		org_img.copyTo(background);															// Copies the original image to background image
-		cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV);					// Copies original image into HSV color space
-		HSVFunc(imgHSV);																		// Sets new color limits and finds blobs of imgHSV (contours)
-//		buoy_total = 0;																				// Reset the buoy count
-		// Find the red BLOBs
-		cv::inRange(imgHSV, red_low, red_high, red_mask); 
-		cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
-		red_mask = red_mask + red_mask1;												// Image containing only Red BLOBs
-		// Find the white BLOBs
-		cv::inRange(imgHSV, white_low, white_high, white_mask);
-		// Find the orange BLOBs
-		cv::inRange(imgHSV, orange_low, orange_high, orange_mask);
-		// Find the black BLOBs
-		cv::inRange(imgHSV, black_low, black_high, black_mask); 
-		// Find the green BLOBs
-		cv::inRange(imgHSV, green_low, green_high, green_mask);  
-		// Apply median filter with a kernal size of 3 to the new color images to get rid of small noise
-		cv::medianBlur(black_mask, black_mask, 3);
-		cv::medianBlur(white_mask, white_mask, 3);
-		cv::medianBlur(orange_mask, orange_mask, 3);
-		cv::medianBlur(red_mask, red_mask, 3);
-		cv::medianBlur(green_mask, green_mask, 3);
+		Mat imgHSV;																					// Holds the HSV copy of the original image
 		
-		// ASK TAYLOR ABOUT THIS SHIT
-		// Applies each mask to the original image using bitwise_and and outputs it to a new mat file which isn't useful rn
-/* 		cv::bitwise_and(org_img, org_img, mask=red_mask, red_res);
-		cv::bitwise_and(org_img, org_img, mask=white_mask, white_res); 
-		cv::bitwise_and(org_img, org_img, mask=orange_mask, orange_res);
-		cv::bitwise_and(org_img, org_img, mask=green_mask, green_res);
-		cv::bitwise_and(org_img, org_img, mask=black_mask, black_res); */
-		
-		cv::findContours(red_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);				// Finds the contours of the "red" image
-		counter = ClassLocFunc(counter, 1, 1);			// Classifies the buoy and marks its centroid
- 		cv::findContours(green_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "green" image
-		counter = ClassLocFunc(counter, 2, 1);																						// Classifies the buoy and marks its centroid
-		cv::findContours(white_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "white" image
-		counter = ClassLocFunc(counter, 3, 1);																						// Classifies the buoy and marks its centroid
-		cv::findContours(orange_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "orange" image
-		counter = ClassLocFunc(counter, 4, 1);																						// Classifies the buoy and marks its centroid
-	 	cv::findContours(black_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "black" image
-		counter = ClassLocFunc(counter, 5, 1);																						// Classifies the buoy and marks its centroid
-		// Perform the disparity calculations if BLOBs were detected
-		
-		buoy_total = counter;
-		size_mask_t = size_red + size_green + size_white + size_orange + size_black;
-		
-		// Perform the disparity calculations if BLOBs were detected
-		if (buoy_total == 0) // Nothing was found
+		try 
 		{
-			//ROS_INFO("No Object Detected by Left Camera. {perception_array}");
-		}
-	else 
-		{
-			for (int i = 0; i < size_mask_t; i++)
+			int counter = 0; 
+			// Convert original image to bgr8-type and make a copy in HSV color space
+			org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		// Converts message camera_msg into bgr8 type image
+			org_img.copyTo(background);															// Copies the original image to background image
+			cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV);					// Copies original image into HSV color space
+			HSVFunc(imgHSV);																		// Sets new color limits and finds blobs of imgHSV (contours)
+	//		buoy_total = 0;																				// Reset the buoy count
+			// Find the red BLOBs
+			cv::inRange(imgHSV, red_low, red_high, red_mask); 
+			cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
+			red_mask = red_mask + red_mask1;												// Image containing only Red BLOBs
+			// Find the white BLOBs
+			cv::inRange(imgHSV, white_low, white_high, white_mask);
+			// Find the orange BLOBs
+			cv::inRange(imgHSV, orange_low, orange_high, orange_mask);
+			// Find the black BLOBs
+			cv::inRange(imgHSV, black_low, black_high, black_mask); 
+			// Find the green BLOBs
+			cv::inRange(imgHSV, green_low, green_high, green_mask);  
+			// Apply median filter with a kernal size of 3 to the new color images to get rid of small noise
+			cv::medianBlur(black_mask, black_mask, 3);
+			cv::medianBlur(white_mask, white_mask, 3);
+			cv::medianBlur(orange_mask, orange_mask, 3);
+			cv::medianBlur(red_mask, red_mask, 3);
+			cv::medianBlur(green_mask, green_mask, 3);
+			
+			// ASK TAYLOR ABOUT THIS SHIT
+			// Applies each mask to the original image using bitwise_and and outputs it to a new mat file which isn't useful rn
+	/* 	cv::bitwise_and(org_img, org_img, mask=red_mask, red_res);
+			cv::bitwise_and(org_img, org_img, mask=white_mask, white_res); 
+			cv::bitwise_and(org_img, org_img, mask=orange_mask, orange_res);
+			cv::bitwise_and(org_img, org_img, mask=green_mask, green_res);
+			cv::bitwise_and(org_img, org_img, mask=black_mask, black_res); */
+			
+			cv::findContours(red_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);				// Finds the contours of the "red" image
+			counter = ClassLocFunc(counter, 1, 1);			// Classifies the buoy and marks its centroid
+			cv::findContours(green_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "green" image
+			counter = ClassLocFunc(counter, 2, 1);																						// Classifies the buoy and marks its centroid
+			cv::findContours(white_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "white" image
+			counter = ClassLocFunc(counter, 3, 1);																						// Classifies the buoy and marks its centroid
+			cv::findContours(orange_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "orange" image
+			counter = ClassLocFunc(counter, 4, 1);																						// Classifies the buoy and marks its centroid
+			cv::findContours(black_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "black" image
+			counter = ClassLocFunc(counter, 5, 1);																						// Classifies the buoy and marks its centroid
+			// Perform the disparity calculations if BLOBs were detected
+			
+			buoy_total = counter;
+			size_mask_t = size_red + size_green + size_white + size_orange + size_black;
+			
+			// Perform the disparity calculations if BLOBs were detected
+			if (buoy_total == 0) // Nothing was found
 			{
-				MC[i].x = u_x[i];
-				MC[i].y = v_y[i];
+				//ROS_INFO("No Object Detected by Left Camera. {perception_array}");
 			}
-		}
-		DisparityFunc();
-		if (PA_state == 2)		// IF TASK 3: PERCEPTION
-		{
+			else 
+			{
+				for (int i = 0; i < size_mask_t; i++)
+				{
+					MC[i].x = u_x[i];
+					MC[i].y = v_y[i];
+				}
+			}
+			DisparityFunc();
 			cv::imshow("Left Camera Updated", background);
+			cv::waitKey(30);
+		} // try 
+		catch (cv_bridge::Exception& e) //looks for errors 
+		{
+			ROS_ERROR("Left Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg -> encoding.c_str()); //prints out the encoding string
 		}
-		cv::waitKey(30);
-	}
-	catch (cv_bridge::Exception& e) //looks for errors 
-	{
-		ROS_ERROR("Left Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg -> encoding.c_str()); //prints out the encoding string
-	}
+	} // if (PA_state != 0) 
 } // end of LeftCamFunc()
 
 // THIS FUNCTION: Finds the BLOBs of interest and their centroids for the right camera sensor
@@ -795,68 +785,71 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 // =============================================================================
 void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 {
-	Mat imgHSV1;																									// Holds the HSV copy of the original image
-	
-	try 
-	{		
-		int counter1 = 0;																								// Used for placement in arrays
-		// Convert original image to bgr8-type and make a copy in HSV color space
-		org_img1 = cv_bridge::toCvShare(camera_msg1, "bgr8") -> image;					// Converts message camera_msg into bgr8 type image
-		org_img1.copyTo(background1);																		// Copies the original image to background image
-		cv::cvtColor(org_img1, imgHSV1, cv::COLOR_BGR2HSV);								// Holds the final BLOB detection result
-		HSVFunc(imgHSV1);																						// Sets new color limits and finds blobs of imgHSV1 (contours)
-		
-		// Find the red BLOBs
-		cv::inRange(imgHSV1, red_low, red_high, red_mask_r); 
-		cv::inRange(imgHSV1, red_low1, red_high1, red_mask1_r); 
-		red_mask_r = red_mask_r + red_mask1_r;														// Image containing only Red BLOBs
-		// Find the white BLOBs 
-		cv::inRange(imgHSV1, white_low, white_high, white_mask_r);
-		// Find the orange BLOBs
-		cv::inRange(imgHSV1, orange_low, orange_high, orange_mask_r);
-		// Find the black BLOBs
-		cv::inRange(imgHSV1, black_low, black_high, black_mask_r);
-		// Find the green BLOBs
-		cv::inRange(imgHSV1, green_low, green_high, green_mask_r);
-		
-		// Apply median filter with a kernal size of 3 to the new color images to get rid of small noise
-		cv::medianBlur(black_mask_r, black_mask_r, 3);
-		cv::medianBlur(white_mask_r, white_mask_r, 3);
-		cv::medianBlur(orange_mask_r, orange_mask_r, 3);
-		cv::medianBlur(red_mask_r, red_mask_r, 3);
-		cv::medianBlur(green_mask_r, green_mask_r, 3);
-		
-		cv::findContours(red_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);				// Finds the contours of the "red" image
-		counter1 = ClassLocFunc(counter1, 1, 0);																							// Classifies the buoy and marks its centroid
- 		cv::findContours(green_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "green" image
-		counter1 = ClassLocFunc(counter1, 2, 0);																						// Classifies the buoy and marks its centroid
-		cv::findContours(white_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "white" image
-		counter1 = ClassLocFunc(counter1, 3, 0);																						// Classifies the buoy and marks its centroid
-		cv::findContours(orange_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds the contours of the "orange" image
-		counter1 = ClassLocFunc(counter1, 4, 0);																						// Classifies the buoy and marks its centroid
-	 	cv::findContours(black_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "black" image
-		counter1 = ClassLocFunc(counter1, 5, 0);																						// Classifies the buoy and marks its centroid
-		
-		size_mask_t1 = size_red + size_green + size_white + size_orange + size_black;
-		
-		if (counter1 == 0) // Nothing was found
-		{
-			//ROS_INFO("No Object Detected by Right Camera. {perception_array}");
-		}
-		else 
-		{
-			for (int i = 0; i < size_mask_t1; i++)
-			{
-				MC1[i].x = u_x1[i];
-				MC1[i].y = v_y1[i];
-			}
-		}
-		cv::waitKey(30);
-	}
-	catch (cv_bridge::Exception& e) //looks for errors 
+	if (PA_state != 0) // as long as perception_array is not on standby
 	{
-		ROS_ERROR("Right Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg1 -> encoding.c_str()); //prints out the encoding string
-	}
+		Mat imgHSV1;																									// Holds the HSV copy of the original image
+	
+		try 
+		{		
+			int counter1 = 0;																								// Used for placement in arrays
+			// Convert original image to bgr8-type and make a copy in HSV color space
+			org_img1 = cv_bridge::toCvShare(camera_msg1, "bgr8") -> image;					// Converts message camera_msg into bgr8 type image
+			org_img1.copyTo(background1);																		// Copies the original image to background image
+			cv::cvtColor(org_img1, imgHSV1, cv::COLOR_BGR2HSV);								// Holds the final BLOB detection result
+			HSVFunc(imgHSV1);																						// Sets new color limits and finds blobs of imgHSV1 (contours)
+			
+			// Find the red BLOBs
+			cv::inRange(imgHSV1, red_low, red_high, red_mask_r); 
+			cv::inRange(imgHSV1, red_low1, red_high1, red_mask1_r); 
+			red_mask_r = red_mask_r + red_mask1_r;														// Image containing only Red BLOBs
+			// Find the white BLOBs 
+			cv::inRange(imgHSV1, white_low, white_high, white_mask_r);
+			// Find the orange BLOBs
+			cv::inRange(imgHSV1, orange_low, orange_high, orange_mask_r);
+			// Find the black BLOBs
+			cv::inRange(imgHSV1, black_low, black_high, black_mask_r);
+			// Find the green BLOBs
+			cv::inRange(imgHSV1, green_low, green_high, green_mask_r);
+			
+			// Apply median filter with a kernal size of 3 to the new color images to get rid of small noise
+			cv::medianBlur(black_mask_r, black_mask_r, 3);
+			cv::medianBlur(white_mask_r, white_mask_r, 3);
+			cv::medianBlur(orange_mask_r, orange_mask_r, 3);
+			cv::medianBlur(red_mask_r, red_mask_r, 3);
+			cv::medianBlur(green_mask_r, green_mask_r, 3);
+			
+			cv::findContours(red_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);				// Finds the contours of the "red" image
+			counter1 = ClassLocFunc(counter1, 1, 0);																							// Classifies the buoy and marks its centroid
+			cv::findContours(green_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "green" image
+			counter1 = ClassLocFunc(counter1, 2, 0);																						// Classifies the buoy and marks its centroid
+			cv::findContours(white_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "white" image
+			counter1 = ClassLocFunc(counter1, 3, 0);																						// Classifies the buoy and marks its centroid
+			cv::findContours(orange_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds the contours of the "orange" image
+			counter1 = ClassLocFunc(counter1, 4, 0);																						// Classifies the buoy and marks its centroid
+			cv::findContours(black_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "black" image
+			counter1 = ClassLocFunc(counter1, 5, 0);																						// Classifies the buoy and marks its centroid
+			
+			size_mask_t1 = size_red + size_green + size_white + size_orange + size_black;
+			
+			if (counter1 == 0) // Nothing was found
+			{
+				//ROS_INFO("No Object Detected by Right Camera. {perception_array}");
+			}
+			else 
+			{
+				for (int i = 0; i < size_mask_t1; i++)
+				{
+					MC1[i].x = u_x1[i];
+					MC1[i].y = v_y1[i];
+				}
+			}
+			cv::waitKey(30);
+		}
+		catch (cv_bridge::Exception& e) //looks for errors 
+		{
+			ROS_ERROR("Right Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg1 -> encoding.c_str()); //prints out the encoding string
+		}
+	} // if (PA_state != 0) 
 } // end of RightCamFunc()
 //............................................................End of funcs............................................................
 
@@ -868,8 +861,10 @@ int main(int argc, char **argv)
 	
 	// Variables
 	int i = 0;
+	
 	// Initializations
 	cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);
+	//cv::resizeWindow("Left Camera Updated", 100, 75);
 	//cv::namedWindow("Left Camera Features", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Updated", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Features", cv::WINDOW_AUTOSIZE);
@@ -912,9 +907,11 @@ int main(int argc, char **argv)
 	
 	while(ros::ok())
 	{
+		current_time = ros::Time::now();   											// sets current time to the time it is now
 		PERCEPTION_ARRAY_inspector();
 		ros::spinOnce();
 		loop_rate.sleep();
+		last_time = current_time;
 		loop_count += 1;
 	}
 } // end of main()
