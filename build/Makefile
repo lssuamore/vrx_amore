@@ -623,6 +623,19 @@ actionlib_msgs_generate_messages_py/fast:
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named buoy_nav_planner
+
+# Build rule for target.
+buoy_nav_planner: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 buoy_nav_planner
+.PHONY : buoy_nav_planner
+
+# fast build rule for target.
+buoy_nav_planner/fast:
+	$(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/build
+.PHONY : buoy_nav_planner/fast
+
+#=============================================================================
 # Target rules for targets named roscpp_generate_messages_eus
 
 # Build rule for target.
@@ -1089,6 +1102,19 @@ rosgraph_msgs_generate_messages_py: cmake_check_build_system
 rosgraph_msgs_generate_messages_py/fast:
 	$(MAKE) -f amore/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make amore/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named buoy_nav_array
+
+# Build rule for target.
+buoy_nav_array: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 buoy_nav_array
+.PHONY : buoy_nav_array
+
+# fast build rule for target.
+buoy_nav_array/fast:
+	$(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/build
+.PHONY : buoy_nav_array/fast
 
 #=============================================================================
 # Target rules for targets named nav_msgs_generate_messages_eus
@@ -3192,6 +3218,7 @@ help:
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... PID_HS_controller"
 	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... buoy_nav_planner"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_cpp"
@@ -3228,6 +3255,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... buoy_nav_array"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... _amore_generate_messages_check_deps_usv_pose_msg"

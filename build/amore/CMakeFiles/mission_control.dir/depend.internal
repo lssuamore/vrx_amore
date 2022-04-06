@@ -9,6 +9,7 @@ amore/CMakeFiles/mission_control.dir/src/mission_control.cpp.o
  /home/brad/vrx_amore/src/amore/src/mission_control.cpp
  /opt/ros/noetic/include/geometry_msgs/Point.h
  /opt/ros/noetic/include/geometry_msgs/Pose.h
+ /opt/ros/noetic/include/geometry_msgs/PoseArray.h
  /opt/ros/noetic/include/geometry_msgs/PoseWithCovariance.h
  /opt/ros/noetic/include/geometry_msgs/Quaternion.h
  /opt/ros/noetic/include/geometry_msgs/Twist.h

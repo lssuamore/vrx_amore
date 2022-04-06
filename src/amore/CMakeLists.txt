@@ -145,6 +145,9 @@ add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMA
 add_executable(PID_HP_controller src/PID_HP_controller.cpp)
 add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
+add_executable(buoy_nav_planner src/buoy_nav_planner.cpp)
+add_executable(buoy_nav_array src/buoy_nav_array.cpp)
+#add_executable(stereo_vis src/stereo_vis.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -173,6 +176,9 @@ target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST C
 target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
 target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(buoy_nav_planner ${catkin_LIBRARIES})
+target_link_libraries(buoy_nav_array ${catkin_LIBRARIES})
+#target_link_libraries(stereo_vis ${catkin_LIBRARIES})
 
 #]]
 

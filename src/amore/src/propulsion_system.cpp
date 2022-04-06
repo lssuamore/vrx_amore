@@ -69,7 +69,7 @@ float T_y_bf;														// thrust in y-direction in body-fixed frame
 float M_z;															// desired moment around the z-axis
 
 // matrix to hold outputs of controlller
-float tau[3][1];
+//float tau[3][1];
 
 float T_p;																// used to set the port (left) thruster output
 float T_s;																// used to set the starboard (right) thruster output
@@ -160,20 +160,6 @@ void state_update(const amore::state_msg::ConstPtr& msg)
 	}
 } // END OF state_update()
 
-// THIS FUNCTION: Updates the goal pose for the propulsion_system given by mission_control
-// ACCEPTS: usv_pose_msg from "current_goal_pose"
-// RETURNS: (VOID)
-// =============================================================================
-void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal) 
-{
-	if (PS_state == 1)						// if the propulsion_system is ON
-	{												// update NED goal position and orientation
-		x_goal = goal->position.x;		
-		y_goal = goal->position.y;
-		psi_goal = goal->psi.data;
-	}
-} // END OF goal_pose_update()
-
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
 // ACCEPTS: Current NED USV pose and velocities from "nav_ned"
 // RETURNS: (VOID)
@@ -189,11 +175,25 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 	} // if (PS_state == 1)
 } // END OF pose_update()
 
+// THIS FUNCTION: Updates the goal pose for the propulsion_system given by mission_control
+// ACCEPTS: usv_pose_msg from "current_goal_pose"
+// RETURNS: (VOID)
+// =============================================================================
+void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal) 
+{
+	if (PS_state == 1)						// if the propulsion_system is ON
+	{												// update NED goal position and orientation
+		x_goal = goal->position.x;		
+		y_goal = goal->position.y;
+		psi_goal = goal->psi.data;
+	}
+} // END OF goal_pose_update()
+
 // THIS FUNCTION UPDATES THE GAINS
 // ACCEPTS NOTHING (VOID) 
 // RETURNS NOTHING (VOID) 
 // =====================================================
-void parameters_function()
+void update_parameters_function()
 {
 	// GET ALL PARAMETERS FROM LAUNCH FILE
 	ros::param::get("/Kp_xy_G", Kp_x);
@@ -205,7 +205,7 @@ void parameters_function()
 	ros::param::get("/Ki_xy_G", Ki_x);
 	Ki_y = Ki_x; //::param::get("/Ki_y_G", Ki_y);
 	ros::param::get("/Ki_psi_G", Ki_psi);
-} // END OF parameters_function()
+} // END OF update_parameters_function()
 
 // THIS FUNCTION DISPLAYS THE UPDATED GAINS
 // ACCEPTS NOTHING (VOID) 
@@ -223,7 +223,65 @@ void display_gains()
 	ROS_INFO("Ki_xy is: %.2f --PS", Ki_x);
 	ROS_INFO("Ki_psi is: %.2f --PS\n", Ki_psi);
 } // END OF display_gains()
+
+// THIS FUNCTION: Resets the integral term once the errors become minimal 
+//									to avoid overshooting the goal if a huge effort's built up
+// ACCEPTS NOTHING (VOID) 
+// RETURNS NOTHING (VOID) 
+// =====================================================
+void Integral_reset()
+{
+	if ((float)abs(e_x) < 0.1)		// NOTE: this value may need adjusting
+	{
+	  e_x_total = 0.0;
+	}
+	if ((float)abs(e_y) < 0.1)		// NOTE: this value may need adjusting
+	{
+	  e_y_total = 0.0;
+	}
+	if ((float)abs(e_psi) < 0.5)	// NOTE: this value may need adjusting
+	{
+	  e_psi_total = 0.0;
+	}
+} // END OF Integral_reset()
+
+// THIS FUNCTION: Checks for saturation of thrust outputs and corrects if so
+// ACCEPTS NOTHING (VOID) 
+// RETURNS NOTHING (VOID) 
+// =====================================================
+void thrust_saturation_check()
+{
+	// check for saturation
+	if (((float)abs(T_p) > 1.0) || ((float)abs(T_s) > 1.0))
+	{
+		// correct for saturation by normalizing thrust data
+		if ((float)abs(T_p) > (float)abs(T_s))
+		{
+		  //ROS_DEBUG("LT IS ISSUE!");
+		  T_p_C= T_p / (float)abs(T_p);
+		  T_s_C = T_s / (float)abs(T_p);
+		}
+		else if ((float)abs(T_p) < (float)abs(T_s))
+		{
+		  //ROS_DEBUG("RT IS ISSUE!");
+		  T_p_C = T_p / (float)abs(T_s);
+		  T_s_C = T_s / (float)abs(T_s);
+		}
+		else 
+		{
+		  //ROS_DEBUG("Equal");
+		  //ROS_DEBUG("Divide by : %f\n", (float)abs(T_p));      // displays right thrust value
+		  T_p_C = T_p / (float)abs(T_p);
+		  T_s_C = T_s / (float)abs(T_p);
+		}
+		T_p = T_p_C;
+		T_s = T_s_C;
+		ROS_DEBUG("Port Thrust corrected: %.2f --PS", T_p);
+		ROS_DEBUG("Stbd Thrust corrected: %.2f --PS\n", T_s);
+	}
+} // END OF thrust_saturation_check()
 //............................................................End of Functions............................................................
+
 
 int main(int argc, char **argv)
 {
@@ -266,23 +324,10 @@ int main(int argc, char **argv)
 	  
 	  if (PS_state == 1)
 	  {
-		  // Update gain values
-		  parameters_function();
-		  //display_gains();
-
-		  // Integral Reset
-		  if ((float)abs(e_x) < 0.1) 
-		  {
-			  e_x_total=0.0;
-		  }
-		  if ((float)abs(e_y) < 0.1)
-		  {
-			  e_y_total=0.0;
-		  }
-		  if ((float)abs(e_psi) < 0.5)
-		  {
-			  e_psi_total=0.0;
-		  }
+		  update_parameters_function();			// Update all parameters in launch: gain values
+		  //display_gains();									// UNCOMMENT IF YOU WANT TO PRINT GAINS TO USER 
+		  
+		  Integral_reset();										// Reset integral term once the errors become minimal 
 		  
 		  // determine error in x and y (position)
 		  e_x = x_goal - x_usv_NED;
@@ -303,7 +348,7 @@ int main(int argc, char **argv)
 		  } */
 		  
 		  // position control law
-		  if (loop_count<6) // don't include differential term or integration term first time through
+		  if (loop_count<6) // don't include differential term or integration term first time through		!!!!!!!!!!!!!!!!!!! WHATS THE 6 DOING?
 		  {
 			  T_x = Kp_x*e_x;
 			  T_y = Kp_y*e_y;
@@ -472,34 +517,7 @@ int main(int argc, char **argv)
 		  ROS_DEBUG("Port Angle: %.2f", A_p);
 		  ROS_DEBUG("Stbd Angle: %.2f\n", A_s); */
 		  
-		  // check for saturation
-		  if (((float)abs(T_p) > 1.0) || ((float)abs(T_s) > 1.0))
-		  {
-			  // correct for saturation by normalizing thrust data
-			  if ((float)abs(T_p) > (float)abs(T_s))
-			  {
-				  //ROS_DEBUG("LT IS ISSUE!");
-				  T_p_C= T_p / (float)abs(T_p);
-				  T_s_C = T_s / (float)abs(T_p);
-			  }
-			  else if ((float)abs(T_p) < (float)abs(T_s))
-			  {
-				  //ROS_DEBUG("RT IS ISSUE!");
-				  T_p_C = T_p / (float)abs(T_s);
-				  T_s_C = T_s / (float)abs(T_s);
-			  }
-			  else 
-			  {
-				  //ROS_DEBUG("Equal");
-				  //ROS_DEBUG("Divide by : %f\n", (float)abs(T_p));      // displays right thrust value
-				  T_p_C = T_p / (float)abs(T_p);
-				  T_s_C = T_s / (float)abs(T_p);
-			  }
-			  T_p = T_p_C;
-			  T_s = T_s_C;
-			  ROS_DEBUG("Port Thrust corrected: %.2f --PS", T_p);
-			  ROS_DEBUG("Stbd Thrust corrected: %.2f --PS\n", T_s);
-		  }
+		  thrust_saturation_check();
 		  
 		  // DEBUG INFORMATION ////////////////////////////////////////////////////////////
 		  /* // Proportional, Derivative, and Integral amounts of control effort
@@ -534,12 +552,12 @@ int main(int argc, char **argv)
 		  if ((loop_count>30) && (PS_state == 1))                                                 
 		  { 
 			  LA.data = A_p;
-			  port_A_pub.publish(LA);
 			  LT.data = T_p;
-			  port_T_pub.publish(LT);
 			  RA.data = A_s;
-			  stbd_A_pub.publish(RA);
 			  RT.data = T_s;
+			  port_A_pub.publish(LA);
+			  port_T_pub.publish(LT);
+			  stbd_A_pub.publish(RA);
 			  stbd_T_pub.publish(RT);
 		  }
 		  
@@ -552,13 +570,13 @@ int main(int argc, char **argv)
 	  else // (PS_state == 0), Controller is turned off by command from high level
 	  {
 		  LA.data = 0.0;
-		  port_A_pub.publish(LA);
 		  LT.data = 0.0;
-		  port_T_pub.publish(LT);
 		  RA.data = 0.0;
-		  stbd_A_pub.publish(RA);
 		  RT.data = 0.0;
-		  stbd_T_pub.publish(RT);
+		  port_A_pub.publish(LA);
+		  port_T_pub.publish(LT);
+		  stbd_A_pub.publish(RA);
+	      stbd_T_pub.publish(RT);
 	  }
 	  
 	  loop_count += 1;
