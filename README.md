@@ -1,12 +1,8 @@
 # vrx_amore
 This repository holds all of the codes and packages for Team AMORE's VRX solution.
 ## Installation Process:
-
 ```
-cd ~
-```
-```
-git clone https://github.com/lssuamore/RobotX2022.git
+git clone https://github.com/lssuamore/vrx_amore.git
 ```
 username:
 ```
