@@ -13,6 +13,7 @@ amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noeti
 amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point.h
 amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point32.h
 amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/Pose.h
+amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/PoseArray.h
 amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/PoseWithCovariance.h
 amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/Quaternion.h
 amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o: /opt/ros/noetic/include/geometry_msgs/Twist.h

@@ -146,7 +146,6 @@ add_executable(PID_HP_controller src/PID_HP_controller.cpp)
 add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(buoy_nav_planner src/buoy_nav_planner.cpp)
-add_executable(buoy_nav_array src/buoy_nav_array.cpp)
 #add_executable(stereo_vis src/stereo_vis.cpp)
 
 ## Add cmake target dependencies of the library
@@ -177,7 +176,6 @@ target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
 target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(buoy_nav_planner ${catkin_LIBRARIES})
-target_link_libraries(buoy_nav_array ${catkin_LIBRARIES})
 #target_link_libraries(stereo_vis ${catkin_LIBRARIES})
 
 #]]
@@ -219,6 +217,7 @@ target_link_libraries(buoy_nav_array ${catkin_LIBRARIES})
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES launch/VRX_AMORE.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(FILES launch/buoy_nav.launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 # install(FILES
 #   # myfile1
 #   # myfile2

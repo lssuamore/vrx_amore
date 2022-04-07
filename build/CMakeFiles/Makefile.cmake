@@ -626,7 +626,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "amore/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake"
   "amore/CMakeFiles/geographic_msgs_generate_messages_eus.dir/DependInfo.cmake"
   "amore/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake"
-  "amore/CMakeFiles/buoy_nav_array.dir/DependInfo.cmake"
   "amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/DependInfo.cmake"
   "amore/CMakeFiles/nav_msgs_generate_messages_lisp.dir/DependInfo.cmake"
   "amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/DependInfo.cmake"
