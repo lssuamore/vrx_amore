@@ -25,7 +25,7 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-#include "nav_msgs/Odometry.h"
+#include "nav_msgs/Odometry.h"											// message type used for receiving NED USV state from navigation_array
 #include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
 #include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64

@@ -49,8 +49,9 @@
 #include "std_msgs/Float32.h"
 #include "std_msgs/Bool.h"
 #include "vrx_gazebo/Task.h"
-#include "amore/state_msg.h"
+#include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
 #include "amore/usv_pose_msg.h"
+#include "amore/NED_bouy.h"
 #include "geometry_msgs/PoseArray.h"
 //...........................................End of Included Libraries and Message Types....................................
 
@@ -205,11 +206,11 @@ bool my_key = true;                           									// If my_key = false, thi
 
 float LX, LY, RX, RY;																// Variables for the coordinates of the buoys w.r.t USV
 
-std_msgs::Bool pa_initialization_status;																		// "pa_initialization_state" message
-ros::Publisher pa_initialization_state_pub;																	// "pa_initialization_state" publisher
+std_msgs::Bool pa_initialization_status;								// "pa_initialization_state" message
+ros::Publisher pa_initialization_state_pub;							// "pa_initialization_state" publisher
 
-geometry_msgs::PoseArray left_right_buoy_array_msg;		// message used to hold and publish buoy locations
-ros::Publisher left_right_buoy_array_pub;								// "left_right_buoy_array" publisher
+amore::NED_bouy NED_buoys_msg[100];							// message used to hold and publish buoy locations
+ros::Publisher NED_buoys_pub;											// "NED_buoys" publisher
 
 ros::Time current_time, last_time;																				// creates time variables
 //........................................................End of Global Variables........................................................
@@ -684,36 +685,42 @@ void DisparityFunc()
 		lat_z_avg[i] = lat_z_avg[i]*k_lat;									// Improved average sway distance to the projection of the point [m]
 		
 		int true_size = 0;
-		left_right_buoy_array_msg.poses.clear();
+		NED_buoys_msg.clear();
 		
-		// Organize the calculated distances to their respective buoy types and color 
+		// Organize the calculated distances to their respective buoy types and color
 		for (int j=0; j<buoy_total; j++)
 		{
-			for (int g=0; g<buoy_total; g++) 						// Order the pairs into global arrays
+			for (int g=0; g<buoy_total; g++) 						// Order the buoys into global arrays in the order red, green, white, orange, black 
 			{
 				if ((u_x[j]==MC[g].x) && (v_y[j]==MC[g].y))
 				{
-					if (((z[g]) < 25.0) && ((z[g]) > 2.0) && ((lat_z_avg[g]) < 20.0) && ((lat_z_avg[g]) > -20.0))	// if calculated values are within expected range, put into array //	NEW ADDITION
+					if (((z[g]) < 15.0) && ((z[g]) > 2.0) && ((lat_z_avg[g]) < 10.0) && ((lat_z_avg[g]) > -10.0))	// if calculated values are within expected range, put into array //	NEW ADDITION	0-15
 					{
 						x_offset[j] = z[g];										// Surge (North) distance [m]
 						y_offset[j] = lat_z_avg[g];							// Sway (East) distance [m]
 						// Convert centroids from local NED to spherical ECEF using USVtoECEF()
 						USVtoECEF(x_offset[i], y_offset[i], N_USV, E_USV, D_USV, PSI_USV, j);
+						//NED_buoys_msg[true_size].header.frame_id = "";
+						NED_buoys_msg[true_size].position.x = z[g];
+						NED_buoys_msg[true_size].position.y = lat_z_avg[g];
 						true_size += 1;
 					}
 				}
 			}
 		}
-		
-	left_right_buoy_array_msg.poses[0].push_back(L);
-	left_right_buoy_array_msg.poses[1].push_back(R);
 
-		left_right_buoy_array_pub.publish(left_right_buoy_array_msg);		// publish left and right buoy locations, respectively, in array "left_right_buoy_array"
+		NED_buoys_pub.publish(NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
 		
 		ROS_INFO("Printing array of buoys locations wrt USV");
 		for (int wetworth=0; wetworth<true_size; wetworth++)
 		{
 			ROS_INFO("Point: %2i			x: %4.2f			y: %4.2f", wetworth, x_offset[wetworth], y_offset[wetworth]);
+		}
+		
+		ROS_INFO("Printing array of buoys locations wrt USV");
+		for (int dotcom=0; dotcom<true_size; dotcom++)
+		{
+			ROS_INFO("Point: %2i			x: %4.2f			y: %4.2f", dotcom, NED_buoys_msg[dotcom].position.x, NED_buoys_msg[dotcom].position.y);
 		}
 	}
 } // end of DisparityFunc()
@@ -912,7 +919,7 @@ int main(int argc, char **argv)
 	ros::Publisher objects_pub = nh5.advertise<std_msgs::Float32>("/objects", 10);// For publishing object information to mission_control
 	ros::Publisher target_pub = nh6.advertise<std_msgs::Float32>("/target", 10);// For publishing a target to the weapon_system
 	pa_initialization_state_pub = nh7.advertise<std_msgs::Bool>("pa_initialization_state", 1);// state of initialization
-	left_right_buoy_array_pub = nh8.advertise<geometry_msgs::PoseArray>("left_right_buoy_array", 1);						// current left and right buoy locations for planner to use to generate path
+	NED_buoys_pub = nh8.advertise<geometry_msgs::PoseArray>("NED_buoys", 1);						// current left and right buoy locations for planner to use to generate path
 	
 	// Initialize global variables
 	pa_initialization_status.data = false;
@@ -934,10 +941,12 @@ int main(int argc, char **argv)
 	{
 		current_time = ros::Time::now();   											// sets current time to the time it is now
 		PERCEPTION_ARRAY_inspector();
-		ros::spinOnce();
-		loop_rate.sleep();
-		last_time = current_time;
-		loop_count += 1;
+		ros::spinOnce();										// update subscribers
+		loop_rate.sleep();									// sleep for set loop_rate
+		last_time = current_time;						// update last_time
+		loop_count += 1;									// increment loop counter 
 	}
+	
+	return 0;
 } // end of main()
 //............................................................End of Main Program...........................................................

@@ -26,8 +26,8 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-#include "nav_msgs/Odometry.h"
-#include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
+#include "nav_msgs/Odometry.h"											// message type used for receiving NED USV state from navigation_array
+#include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
 #include "std_msgs/Bool.h"
 #include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
 #include "std_msgs/Float32.h"												// thruster commands
@@ -579,9 +579,10 @@ int main(int argc, char **argv)
 	      stbd_T_pub.publish(RT);
 	  }
 	  
-	  loop_count += 1;
-	  ros::spinOnce();
-	  loop_rate.sleep();
+	  ros::spinOnce();									// update subscribers
+	  loop_rate.sleep();									// sleep for set loop_rate
+	  last_time = current_time;						// update last_time
+	  loop_count += 1;									// increment loop counter 
   }
   LT.data = 0.0;
   port_T_pub.publish(LT);

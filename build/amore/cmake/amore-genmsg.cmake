@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "amore: 3 messages, 0 services")
+message(STATUS "amore: 4 messages, 0 services")
 
 set(MSG_I_FLAGS "-Iamore:/home/brad/vrx_amore/src/amore/msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -24,12 +24,17 @@ add_custom_target(_amore_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" NAME_WE)
 add_custom_target(_amore_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" "std_msgs/Float64:std_msgs/Header:geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" "std_msgs/Float64:geometry_msgs/Point:std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
 add_custom_target(_amore_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" "std_msgs/Int32:std_msgs/Header"
+)
+
+get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
+add_custom_target(_amore_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" "geometry_msgs/Point:std_msgs/Header"
 )
 
 #
@@ -47,13 +52,19 @@ _generate_msg_cpp(amore
 _generate_msg_cpp(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/amore
 )
 _generate_msg_cpp(amore
   "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/amore
+)
+_generate_msg_cpp(amore
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/amore
 )
 
@@ -77,6 +88,8 @@ get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_ms
 add_dependencies(amore_generate_messages_cpp _amore_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
 add_dependencies(amore_generate_messages_cpp _amore_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
+add_dependencies(amore_generate_messages_cpp _amore_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(amore_gencpp)
@@ -96,13 +109,19 @@ _generate_msg_eus(amore
 _generate_msg_eus(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/amore
 )
 _generate_msg_eus(amore
   "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/amore
+)
+_generate_msg_eus(amore
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/amore
 )
 
@@ -126,6 +145,8 @@ get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_ms
 add_dependencies(amore_generate_messages_eus _amore_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
 add_dependencies(amore_generate_messages_eus _amore_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
+add_dependencies(amore_generate_messages_eus _amore_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(amore_geneus)
@@ -145,13 +166,19 @@ _generate_msg_lisp(amore
 _generate_msg_lisp(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/amore
 )
 _generate_msg_lisp(amore
   "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/amore
+)
+_generate_msg_lisp(amore
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/amore
 )
 
@@ -175,6 +202,8 @@ get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_ms
 add_dependencies(amore_generate_messages_lisp _amore_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
 add_dependencies(amore_generate_messages_lisp _amore_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
+add_dependencies(amore_generate_messages_lisp _amore_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(amore_genlisp)
@@ -194,13 +223,19 @@ _generate_msg_nodejs(amore
 _generate_msg_nodejs(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/amore
 )
 _generate_msg_nodejs(amore
   "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/amore
+)
+_generate_msg_nodejs(amore
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/amore
 )
 
@@ -224,6 +259,8 @@ get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_ms
 add_dependencies(amore_generate_messages_nodejs _amore_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
 add_dependencies(amore_generate_messages_nodejs _amore_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
+add_dependencies(amore_generate_messages_nodejs _amore_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(amore_gennodejs)
@@ -243,13 +280,19 @@ _generate_msg_py(amore
 _generate_msg_py(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/amore
 )
 _generate_msg_py(amore
   "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/amore
+)
+_generate_msg_py(amore
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/amore
 )
 
@@ -272,6 +315,8 @@ add_dependencies(amore_generate_messages_py _amore_generate_messages_check_deps_
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" NAME_WE)
 add_dependencies(amore_generate_messages_py _amore_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
+add_dependencies(amore_generate_messages_py _amore_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
 add_dependencies(amore_generate_messages_py _amore_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

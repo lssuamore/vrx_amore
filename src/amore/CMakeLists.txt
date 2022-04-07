@@ -65,6 +65,7 @@ add_message_files(
   NED_waypoints.msg
   usv_pose_msg.msg
   state_msg.msg
+  NED_buoy.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -141,12 +142,11 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(mission_control src/mission_control.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(navigation_array src/navigation_array.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMAKE
+#add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(PID_HP_controller src/PID_HP_controller.cpp)
 add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(buoy_nav_planner src/buoy_nav_planner.cpp)
-#add_executable(stereo_vis src/stereo_vis.cpp)
+add_executable(path_planner src/path_planner.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -171,12 +171,11 @@ add_executable(buoy_nav_planner src/buoy_nav_planner.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(mission_control ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(navigation_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+#target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
 target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(buoy_nav_planner ${catkin_LIBRARIES})
-#target_link_libraries(stereo_vis ${catkin_LIBRARIES})
+target_link_libraries(path_planner ${catkin_LIBRARIES})
 
 #]]
 
