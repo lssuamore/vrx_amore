@@ -1104,19 +1104,6 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named buoy_nav_array
-
-# Build rule for target.
-buoy_nav_array: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 buoy_nav_array
-.PHONY : buoy_nav_array
-
-# fast build rule for target.
-buoy_nav_array/fast:
-	$(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/build
-.PHONY : buoy_nav_array/fast
-
-#=============================================================================
 # Target rules for targets named nav_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -3255,7 +3242,6 @@ help:
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... buoy_nav_array"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... _amore_generate_messages_check_deps_usv_pose_msg"

@@ -137,6 +137,8 @@ amore/state_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/state_msg.h
 amore/usv_pose_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/usv_pose_msg.h
+geometry_msgs/PoseArray.h
+/home/brad/vrx_amore/src/amore/src/geometry_msgs/PoseArray.h
 
 /opt/ros/noetic/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h
@@ -262,6 +264,26 @@ ros/message_operations.h
 geometry_msgs/Point.h
 -
 geometry_msgs/Quaternion.h
+-
+
+/opt/ros/noetic/include/geometry_msgs/PoseArray.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+geometry_msgs/Pose.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/PoseWithCovariance.h

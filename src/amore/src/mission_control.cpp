@@ -61,7 +61,7 @@ float e_xy_allowed = 0.4;       									// positional error tolerance threshold
 float e_psi_allowed = 0.4;      									// heading error tolerance threshold; NOTE: make as small as possible
 
 // STATES CONCERNED WITH "mission_control"
-int MC_state = 0;							// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
+int MC_state = 0;							// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 5 = Task 5 Planner; 4569 = HARD RESET (OR OTHER USE)
 // STATES CONCERNED WITH "navigation_array"
 int NA_state = 0;							// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
 // STATES CONCERNED WITH "propulsion_system"
@@ -134,6 +134,180 @@ ros::Time current_time, last_time;									// creates time variables
 
 
 //..................................................................Functions...........................................................................
+
+// START WITH FUNCTIONS FOR VISION PATH PLANNER 
+// update left and right buoy centroid location (x,y) in global frame
+void left_right_buoy_loc_update (const geometry_msgs::PoseArray::ConstPtr& buoys)
+{
+	if ((mission_control_initialized) && (MC_state == 5) && (!left_right_buoy_array_recieved))
+	{
+		CL_x = buoys->poses[0].position.x;
+		CL_y = buoys->poses[0].position.y;
+		CR_x = buoys->poses[1].position.x;
+		CR_y = buoys->poses[1].position.y;
+		left_right_buoy_array_recieved = true;
+	}
+}
+
+void calculate_buoy_waypoints()
+{
+	if ((MC_state == 5) && (!calculations_done) && (left_right_buoy_array_recieved))			// if the intermediate approach, mid-, and exit points have been calculated
+	{
+	/*// hardcode values
+	CL_x = 37.85;
+	CL_y = 2.2;
+	CR_x = 37.85;
+	CR_y = 15.75;
+	x_usv_NED = 24.24;
+	y_usv_NED = 11.88;
+	psi_NED = 0.0;*/
+	ROS_DEBUG("________vvvvvvvvvvv  {PP}  vvvvvvvvvvv___________________\n");
+	ROS_DEBUG("~~~USV POSE~~~");
+	ROS_DEBUG("Psi_NED: %f", psi_NED);
+	ROS_DEBUG("x_NED: %f", x_usv_NED);
+	ROS_DEBUG("y_NED: %f\n", y_usv_NED);
+	ROS_DEBUG("~~~Buoy locations wrt USV~~~");
+	ROS_DEBUG("LB_x: %f", CL_x);
+	ROS_DEBUG("LB_y: %f", CL_y);
+	ROS_DEBUG("RB_x: %f", CR_x);
+	ROS_DEBUG("RB_y: %f\n", CR_y);
+	CL_x_NED = cos(psi_NED)*CL_x - sin(psi_NED)*CL_y + x_usv_NED;
+	CL_y_NED = sin(psi_NED)*CL_x + cos(psi_NED)*CL_y + y_usv_NED;
+	CR_x_NED = cos(psi_NED)*CR_x - sin(psi_NED)*CR_y + x_usv_NED;
+	CR_y_NED = sin(psi_NED)*CR_x + cos(psi_NED)*CR_y + y_usv_NED;
+	ROS_DEBUG("~~~Buoy locations in NED frame~~~");
+	ROS_DEBUG("LB_x: %f", CL_x_NED);
+	ROS_DEBUG("LB_y: %f", CL_y_NED);
+	ROS_DEBUG("RB_x: %f", CR_x_NED);
+	ROS_DEBUG("RB_y: %f\n", CR_y_NED);
+
+	x_goal[1] = (CL_x_NED+CR_x_NED)/2.0; // x-location of midpoint
+	y_goal[1] = (CL_y_NED+CR_y_NED)/2.0; // y-location of midpoint
+	/* M_x = (CL_x_NED+CR_x_NED)/2.0; // x-location of midpoint
+	M_y = (CL_y_NED+CR_y_NED)/2.0; // y-location of midpoint */
+
+	/* ROS_DEBUG("x_usv_NED: %f\n", x_usv_NED);
+	ROS_DEBUG("y_usv_NED: %f\n", y_usv_NED); */
+	d_L = sqrt(pow((CL_x_NED-x_usv_NED),2.0)+pow((CL_y_NED-y_usv_NED),2.0));    // distance from USV to left buoy
+	d_M = sqrt(pow((M_x-x_usv_NED),2.0)+pow((M_y-y_usv_NED),2.0));      // distance from USV to midpoint
+	d_R = sqrt(pow((CR_x_NED-x_usv_NED),2.0)+pow((CR_y_NED-y_usv_NED),2.0));  // distance from USV to right buoy
+	d_I = (d_L+d_M+d_R)/3.0; // distance from midpoint to approach point
+
+	// intermediate approach point doesn't need to be more than 8 meters back from midpoint
+	if (d_I > 4.0)
+	{
+	  d_I = 4.0;
+	}
+	/* ROS_DEBUG("d_L: %f\n", d_L);
+	ROS_DEBUG("d_M: %f\n", d_M);
+	ROS_DEBUG("d_R: %f\n", d_R);
+	ROS_DEBUG("d_I: %f\n", d_I); */
+
+	d_LM = 0.5*sqrt(pow((CR_x_NED-CL_x_NED),2.0)+pow((CR_y_NED-CL_y_NED),2.0));                // half distance between left and right buoys
+	a_L = sqrt(pow(d_LM,2.0)+pow(d_I,2.0));                                                       // distance between left buoy and the approach point
+	theta = atan(d_I/d_LM);                                                                                    // angle created by d_I and d_LM
+	/* ROS_DEBUG("d_LM: %f\n", d_LM);
+	ROS_DEBUG("a_L: %f\n", a_L);
+	ROS_DEBUG("theta: %f\n", theta); */
+
+	x_I_CL = a_L*cos(theta);                                                                                 // x-coord. of intermediate point wrt left buoy 
+	y_I_CL = a_L*sin(theta);                                                                                  // y-coord. of intermediate point wrt left buoy
+	/* ROS_DEBUG("x_I_CL: %f\n", x_I_CL);
+	ROS_DEBUG("y_I_CL: %f\n", y_I_CL); */
+
+	x_E_CL = a_L*cos(theta);                                                                               // x-coord. of exit point wrt left buoy 
+	y_E_CL = -a_L*sin(theta);                                                                               // y-coord. of exit point wrt left buoy
+	/* ROS_DEBUG("x_E_CL: %f\n", x_E_CL);
+	ROS_DEBUG("y_E_CL: %f\n", y_E_CL); */
+
+	// calculate intermediate position wrt global
+	s_M = (CR_y_NED-CL_y_NED)/(CR_x_NED-CL_x_NED);                                                                // slope of of line from CL to CR 
+	alpha = atan2((CR_y_NED-CL_y_NED),(CR_x_NED-CL_x_NED));                                                                                           // angle of frame CL wrt global frame
+	/* ROS_DEBUG("s_M: %f\n", s_M);
+	ROS_DEBUG("alpha: %f\n", alpha); */
+	
+	x_goal[0] = cos(alpha)*x_I_CL - sin(alpha)*y_I_CL + CL_x_NED;                                            // x-coord. of intermediate point wrt global
+	y_goal[0] = sin(alpha)*x_I_CL + cos(alpha)*y_I_CL + CL_y_NED;                                           // y-coord. of intermediate point wrt global
+	/* I_x = cos(alpha)*x_I_CL - sin(alpha)*y_I_CL + CL_x_NED;                                            // x-coord. of intermediate point wrt global 
+	I_y = sin(alpha)*x_I_CL + cos(alpha)*y_I_CL + CL_y_NED;                                           // y-coord. of intermediate point wrt global */
+
+	x_goal[2] = cos(alpha)*x_E_CL - sin(alpha)*y_E_CL + CL_x_NED;                                            // x-coord. of exit point wrt global
+	y_goal[2] = sin(alpha)*x_E_CL + cos(alpha)*y_E_CL + CL_y_NED;                                           // y-coord. of exit point wrt global
+	/* E_x = cos(alpha)*x_E_CL - sin(alpha)*y_E_CL + CL_x_NED;                                            // x-coord. of intermediate point wrt global 
+	E_y = sin(alpha)*x_E_CL + cos(alpha)*y_E_CL + CL_y_NED;                                           // y-coord. of intermediate point wrt global */
+
+	// display calculated goal points to reach
+	ROS_DEBUG("~~~Desired points~~~");
+	ROS_DEBUG("I_x: %f", x_goal[0]);
+	ROS_DEBUG("I_y: %f", y_goal[0]);
+	ROS_DEBUG("M_x: %f", x_goal[1]);
+	ROS_DEBUG("M_y: %f", y_goal[1]);
+	ROS_DEBUG("E_x: %f", x_goal[2]);
+	ROS_DEBUG("E_y: %f\n", y_goal[2]);
+	ROS_DEBUG("________^^^^^^^^^^^  {PP}  ^^^^^^^^^^^___________________|\n");
+	
+	point = 0;
+	goal_poses = 3;
+	calculations_done = true;
+	loop_goal_recieved = loop_count;
+	} // if (!calculations_done)
+} // END OF calculate_buoy_waypoints()
+
+// NOTE: To simplify, use just message variables !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+void state_update()
+{
+	if (mission_control_initialized)
+	{
+		NA_state = 1;							// USV NED Pose Conversion mode 
+		MC_state = 5;						// Buoy navigation planner mode
+		PA_state = 2;							// Perception array is turned on 
+		if (calculations_done)
+		{
+			PS_state = 1;						// Turn on propulsion_system once the goal points have been calculated
+		}
+		else
+		{
+			PS_state = 0;
+		}
+		// UPDATE USER OF EACH CODES STATE
+		ROS_DEBUG("----------------- CURRENT STATES --------------------");
+		ROS_DEBUG("NA_state: %i --MC", NA_state);
+		ROS_DEBUG("PS_state: %i --MC", PS_state);
+		ROS_DEBUG("MC_state: %i --MC", MC_state);
+		ROS_DEBUG("PA_state: %i --MC", PA_state);
+	} // if (mission_control_initialized)
+	else
+	{
+		// ALL CODES ON STANDBY
+		NA_state = 0;		// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+		PS_state = 0;		// 0 = On Standby, 1 = LL controller ON
+		MC_state = 0;	// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
+		PA_state = 0;      // 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+	}
+	// PUBLISH EACH SUBSYTEMS STATE
+	// SEND STATE TO PROPULSION_SYSTEM
+	propulsion_system_state.header.seq +=1;										// sequence number
+	propulsion_system_state.header.stamp = current_time;					// set stamp to current time
+	propulsion_system_state.header.frame_id = "mission_control";			// header frame
+	propulsion_system_state.state.data = PS_state;								// set propulsion system state; 0 = OFF; 1 = ON
+	ps_state_pub.publish(propulsion_system_state);								// publish propulsion_system_state to "ps_state"
+
+	// SEND STATE TO NAVIGATION_ARRAY
+	navigation_array_state.header.seq +=1;											// sequence number
+	navigation_array_state.header.stamp = current_time;						// set stamp to current time
+	navigation_array_state.header.frame_id = "mission_control";				// header frame
+	navigation_array_state.state.data = NA_state;									// set navigation_array_state; 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+	na_state_pub.publish(navigation_array_state);									// publish navigation_array_state to "na_state"
+
+	// SEND STATE TO PERCEPTION_ARRAY
+	perception_array_state.header.seq +=1;											// sequence number
+	perception_array_state.header.stamp = current_time;						// set stamp to current time
+	perception_array_state.header.frame_id = "mission_control";			// header frame
+	perception_array_state.state.data = PA_state;										// set perception_array_state; 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+	pa_state_pub.publish(perception_array_state);									// publish perception_array_state to "pa_state"
+} // END OF state_update()
+// END OF FUNCTIONS FOR VISIONS PATH PLANNER 
+
 // SYSTEM INITIALIZATION CHECK FUNCTIONS /////////////////////////////////////////////////////////////////////////////////
 // THIS FUNCTION: Subscribes to the navigation_array to check initialization status
 // ACCEPTS: Initialization status from "na_initialization_state"
@@ -288,7 +462,7 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 	} // if navigation_array is in standard USV Pose Conversion mode
 } // END OF pose_update()
 
-// THIS FUNCTION: Updates and publishes all subsytem states, as well as mission_control state dependent on current system statuses
+/* // THIS FUNCTION: Updates and publishes all subsytem states, as well as mission_control state dependent on current system statuses
 // ACCEPTS: Current vrx task info from "vrx/task/info"
 // RETURNS: (VOID)
 // =============================================================================
@@ -297,7 +471,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 	// MUST SET THE FOLLOWING
 	NA_state = 0;				// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
 	PS_state = 0;				// 0 = On Standby, 1 = LL controller ON
-	MC_state = 0;			// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 4569 = HARD RESET (OR OTHER USE)
+	MC_state = 0;			// 0 = On Standby; 1 = SK Planner; 2 = WF Planner; 5 = Task 5 Planner; 4569 = HARD RESET (OR OTHER USE)
 	PA_state = 0;      		// 0 = On Standby, 1 = General State, 2 = Task 3: Perception
 	if (mission_control_initialized)
 	{
@@ -377,7 +551,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		{
 			NA_state = 1;				// navigation_array is in standard USV NED Pose Conversion mode
 			PA_state = 2;				// perception_array is in Task 3: Perception mode
-			/* if ((msg->state == "ready") || (msg->state == "running"))
+			if ((msg->state == "ready") || (msg->state == "running"))
 			{
 				NA_state = 0;
 				MC_state = 0;
@@ -386,11 +560,11 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 			{
 				NA_state = 0;
 				MC_state = 0;
-			} */
+			}
 		} // (msg->name == "perception")
 		
 		// 	INTEGRATED TASK CODES FOLLOW
-		/* else if (msg->name == "wildlife")
+		else if (msg->name == "wildlife")
 		{
 			if ()
 			{
@@ -404,15 +578,21 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				PS_state = 0;
 				MC_state = 0;
 			}
-		} // (msg->name == "wildlife") */
+		} // (msg->name == "wildlife")
 		else if (msg->name == "gymkhana")
 		{
 			if ((msg->state == "ready") || (msg->state == "running"))
 			{
-				NA_state = 0;
-				PS_state = 0;
-				MC_state = 0;
-				PA_state = 0;
+				NA_state = 1;
+				MC_state = 5;
+				if (calculations_done)
+				{
+					PS_state = 1;						// Turn on propulsion_system once the goal points have been calculated
+				}
+				else
+				{
+					PS_state = 0;
+				}
 			}
 			else
 			{
@@ -422,7 +602,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				PA_state = 0;
 			}
 		} // (msg->name == "gymkhana")
-		/* else if (msg->name == "scan_dock_deliver")
+		else if (msg->name == "scan_dock_deliver")
 		{
 			if ()
 			{
@@ -436,7 +616,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				PS_state = 0;
 				MC_state = 0;
 			}
-		} // (msg->name == "scan_dock_deliver") */
+		} // (msg->name == "scan_dock_deliver")
 		
 		else
 		{
@@ -475,7 +655,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		ROS_DEBUG("MC_state: %i --MC", MC_state);
 		ROS_DEBUG("PA_state: %i --MC", PA_state);
 	} // if (mission_control_initialized)
-} // END OF state_update()
+} // END OF state_update() */
 
 // THIS FUNCTION: Fills out current_goal_pose_msg and publishes to "current_goal_pose" for the propulsion_system
 // ACCEPTS: Nothing. Uses global variable pose arrays
@@ -495,124 +675,6 @@ void current_goal_pose_publish()
 
 	current_goal_pose_pub.publish(current_goal_pose_msg);		// publish goal usv pose to "current_goal_pose"
 } // END OF current_goal_pose_publish()
-
-// START WITH FUNCTIONS FOR VISION PATH PLANNER 
-// update left and right buoy centroid location (x,y) in global frame
-void left_right_buoy_loc_update (const geometry_msgs::PoseArray::ConstPtr& buoys)
-{
-	if ((mission_control_initialized) && (MC_state == 5) && (!left_right_buoy_array_recieved))
-	{
-		CL_x = buoys->poses[0].position.x;
-		CL_y = buoys->poses[0].position.y;
-		CR_x = buoys->poses[1].position.x;
-		CR_y = buoys->poses[1].position.y;
-		left_right_buoy_array_recieved = true;
-	}
-}
-
-void calculate_buoy_waypoints()
-{
-	if ((MC_state == 5) && (!calculations_done) && (left_right_buoy_array_recieved))			// if the intermediate approach, mid-, and exit points have been calculated
-	{
-	/*// hardcode values
-	CL_x = 37.85;
-	CL_y = 2.2;
-	CR_x = 37.85;
-	CR_y = 15.75;
-	x_usv_NED = 24.24;
-	y_usv_NED = 11.88;
-	psi_NED = 0.0;*/
-	ROS_DEBUG("________vvvvvvvvvvv  {PP}  vvvvvvvvvvv___________________\n");
-	ROS_DEBUG("~~~USV POSE~~~");
-	ROS_DEBUG("Psi_NED: %f", psi_NED);
-	ROS_DEBUG("x_NED: %f", x_usv_NED);
-	ROS_DEBUG("y_NED: %f\n", y_usv_NED);
-	ROS_DEBUG("~~~Buoy locations wrt USV~~~");
-	ROS_DEBUG("LB_x: %f", CL_x);
-	ROS_DEBUG("LB_y: %f", CL_y);
-	ROS_DEBUG("RB_x: %f", CR_x);
-	ROS_DEBUG("RB_y: %f\n", CR_y);
-	CL_x_NED = cos(psi_NED)*CL_x - sin(psi_NED)*CL_y + x_usv_NED;
-	CL_y_NED = sin(psi_NED)*CL_x + cos(psi_NED)*CL_y + y_usv_NED;
-	CR_x_NED = cos(psi_NED)*CR_x - sin(psi_NED)*CR_y + x_usv_NED;
-	CR_y_NED = sin(psi_NED)*CR_x + cos(psi_NED)*CR_y + y_usv_NED;
-	ROS_DEBUG("~~~Buoy locations in NED frame~~~");
-	ROS_DEBUG("LB_x: %f", CL_x_NED);
-	ROS_DEBUG("LB_y: %f", CL_y_NED);
-	ROS_DEBUG("RB_x: %f", CR_x_NED);
-	ROS_DEBUG("RB_y: %f\n", CR_y_NED);
-
-	x_goal[1] = (CL_x_NED+CR_x_NED)/2.0; // x-location of midpoint
-	y_goal[1] = (CL_y_NED+CR_y_NED)/2.0; // y-location of midpoint
-	/* M_x = (CL_x_NED+CR_x_NED)/2.0; // x-location of midpoint
-	M_y = (CL_y_NED+CR_y_NED)/2.0; // y-location of midpoint */
-
-	/* ROS_DEBUG("x_usv_NED: %f\n", x_usv_NED);
-	ROS_DEBUG("y_usv_NED: %f\n", y_usv_NED); */
-	d_L = sqrt(pow((CL_x_NED-x_usv_NED),2.0)+pow((CL_y_NED-y_usv_NED),2.0));    // distance from USV to left buoy
-	d_M = sqrt(pow((M_x-x_usv_NED),2.0)+pow((M_y-y_usv_NED),2.0));      // distance from USV to midpoint
-	d_R = sqrt(pow((CR_x_NED-x_usv_NED),2.0)+pow((CR_y_NED-y_usv_NED),2.0));  // distance from USV to right buoy
-	d_I = (d_L+d_M+d_R)/3.0; // distance from midpoint to approach point
-
-	// intermediate approach point doesn't need to be more than 8 meters back from midpoint
-	if (d_I > 4.0)
-	{
-	  d_I = 4.0;
-	}
-	/* ROS_DEBUG("d_L: %f\n", d_L);
-	ROS_DEBUG("d_M: %f\n", d_M);
-	ROS_DEBUG("d_R: %f\n", d_R);
-	ROS_DEBUG("d_I: %f\n", d_I); */
-
-	d_LM = 0.5*sqrt(pow((CR_x_NED-CL_x_NED),2.0)+pow((CR_y_NED-CL_y_NED),2.0));                // half distance between left and right buoys
-	a_L = sqrt(pow(d_LM,2.0)+pow(d_I,2.0));                                                       // distance between left buoy and the approach point
-	theta = atan(d_I/d_LM);                                                                                    // angle created by d_I and d_LM
-	/* ROS_DEBUG("d_LM: %f\n", d_LM);
-	ROS_DEBUG("a_L: %f\n", a_L);
-	ROS_DEBUG("theta: %f\n", theta); */
-
-	x_I_CL = a_L*cos(theta);                                                                                 // x-coord. of intermediate point wrt left buoy 
-	y_I_CL = a_L*sin(theta);                                                                                  // y-coord. of intermediate point wrt left buoy
-	/* ROS_DEBUG("x_I_CL: %f\n", x_I_CL);
-	ROS_DEBUG("y_I_CL: %f\n", y_I_CL); */
-
-	x_E_CL = a_L*cos(theta);                                                                               // x-coord. of exit point wrt left buoy 
-	y_E_CL = -a_L*sin(theta);                                                                               // y-coord. of exit point wrt left buoy
-	/* ROS_DEBUG("x_E_CL: %f\n", x_E_CL);
-	ROS_DEBUG("y_E_CL: %f\n", y_E_CL); */
-
-	// calculate intermediate position wrt global
-	s_M = (CR_y_NED-CL_y_NED)/(CR_x_NED-CL_x_NED);                                                                // slope of of line from CL to CR 
-	alpha = atan2((CR_y_NED-CL_y_NED),(CR_x_NED-CL_x_NED));                                                                                           // angle of frame CL wrt global frame
-	/* ROS_DEBUG("s_M: %f\n", s_M);
-	ROS_DEBUG("alpha: %f\n", alpha); */
-	
-	x_goal[0] = cos(alpha)*x_I_CL - sin(alpha)*y_I_CL + CL_x_NED;                                            // x-coord. of intermediate point wrt global
-	y_goal[0] = sin(alpha)*x_I_CL + cos(alpha)*y_I_CL + CL_y_NED;                                           // y-coord. of intermediate point wrt global
-	/* I_x = cos(alpha)*x_I_CL - sin(alpha)*y_I_CL + CL_x_NED;                                            // x-coord. of intermediate point wrt global 
-	I_y = sin(alpha)*x_I_CL + cos(alpha)*y_I_CL + CL_y_NED;                                           // y-coord. of intermediate point wrt global */
-
-	x_goal[2] = cos(alpha)*x_E_CL - sin(alpha)*y_E_CL + CL_x_NED;                                            // x-coord. of exit point wrt global
-	y_goal[2] = sin(alpha)*x_E_CL + cos(alpha)*y_E_CL + CL_y_NED;                                           // y-coord. of exit point wrt global
-	/* E_x = cos(alpha)*x_E_CL - sin(alpha)*y_E_CL + CL_x_NED;                                            // x-coord. of intermediate point wrt global 
-	E_y = sin(alpha)*x_E_CL + cos(alpha)*y_E_CL + CL_y_NED;                                           // y-coord. of intermediate point wrt global */
-
-	// display calculated goal points to reach
-	ROS_DEBUG("~~~Desired points~~~");
-	ROS_DEBUG("I_x: %f", I_x);
-	ROS_DEBUG("I_y: %f", I_y);
-	ROS_DEBUG("M_x: %f", M_x);
-	ROS_DEBUG("M_y: %f", M_y);
-	ROS_DEBUG("E_x: %f", E_x);
-	ROS_DEBUG("E_y: %f\n", E_y);
-	ROS_DEBUG("________^^^^^^^^^^^  {PP}  ^^^^^^^^^^^___________________|\n");
-	
-	point = 0;
-	goal_poses = 3;
-	calculations_done = true;
-	loop_goal_recieved = loop_count;
-	} // if (!calculations_done)
-} // END OF calculate_buoy_waypoints()
 //............................................................End of Functions............................................................
 
 int main(int argc, char **argv)
@@ -626,7 +688,7 @@ int main(int argc, char **argv)
   ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12;
   
   // Subscribers
-  ros::Subscriber task_status_sub = nh1.subscribe("/vrx/task/info", 1, state_update);																				// VRX task topic
+  //ros::Subscriber task_status_sub = nh1.subscribe("/vrx/task/info", 1, state_update);																				// VRX task topic
   ros::Subscriber NA_initialization_state_sub = nh2.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);		// initialization status of navigation_array
   ros::Subscriber PS_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);		// initialization status of propulsion_system
   ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);		// initialization status of perception_array
@@ -662,6 +724,7 @@ int main(int argc, char **argv)
 	  current_time = ros::Time::now();														// update current_time
 	  
 	  MISSION_CONTROL_inspector();													// check that entire system is initialized before starting calculations
+	  state_update();		// For buoy_nav_planner only /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// COMMENT THIS LINE OUT IF STANDARD OPERATION
 	  
 	  if ((MC_state == 1) || (MC_state == 2))	// TASK 1: STATION_KEEPING OR TASK 2: WAYFINDING
 	  {

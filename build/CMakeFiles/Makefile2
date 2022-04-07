@@ -111,7 +111,6 @@ amore/all: amore/CMakeFiles/PID_HS_controller.dir/all
 amore/all: amore/CMakeFiles/buoy_nav_planner.dir/all
 amore/all: amore/CMakeFiles/amore_generate_messages.dir/all
 amore/all: amore/CMakeFiles/PID_HP_controller.dir/all
-amore/all: amore/CMakeFiles/buoy_nav_array.dir/all
 amore/all: amore/CMakeFiles/perception_array.dir/all
 amore/all: amore/CMakeFiles/mission_control.dir/all
 amore/all: amore/CMakeFiles/navigation_array.dir/all
@@ -169,7 +168,6 @@ amore/clean: amore/CMakeFiles/amore_generate_messages_cpp.dir/clean
 amore/clean: amore/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
 amore/clean: amore/CMakeFiles/geographic_msgs_generate_messages_eus.dir/clean
 amore/clean: amore/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
-amore/clean: amore/CMakeFiles/buoy_nav_array.dir/clean
 amore/clean: amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/clean
 amore/clean: amore/CMakeFiles/nav_msgs_generate_messages_lisp.dir/clean
 amore/clean: amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/clean
@@ -760,12 +758,12 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googlemock/CMakeFiles/gmoc
 gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=29 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target gmock_main"
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googlemock/CMakeFiles/gmock_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/CMakeFiles/gmock_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/rule
@@ -814,12 +812,12 @@ gtest/googlemock/CMakeFiles/gmock.dir/clean:
 gtest/googletest/CMakeFiles/gtest_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=30 "Built target gtest_main"
 .PHONY : gtest/googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 gtest/googletest/CMakeFiles/gtest_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : gtest/googletest/CMakeFiles/gtest_main.dir/rule
@@ -841,7 +839,7 @@ gtest/googletest/CMakeFiles/gtest_main.dir/clean:
 gtest/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=30 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=29 "Built target gtest"
 .PHONY : gtest/googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1040,7 +1038,7 @@ vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages.dir/all: vrx/usv_msgs/CMakeFi
 
 # Build rule for subdir invocation for target.
 vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages.dir/rule
@@ -1230,7 +1228,7 @@ vrx/usv_msgs/CMakeFiles/usv_msgs_genpy.dir/all: vrx/usv_msgs/CMakeFiles/usv_msgs
 
 # Build rule for subdir invocation for target.
 vrx/usv_msgs/CMakeFiles/usv_msgs_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_msgs/CMakeFiles/usv_msgs_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_msgs/CMakeFiles/usv_msgs_genpy.dir/rule
@@ -1253,12 +1251,12 @@ vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/all: vrx/usv_msgs/CMak
 vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/all: vrx/usv_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/all
 	$(MAKE) -f vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/build.make vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/depend
 	$(MAKE) -f vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/build.make vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=58 "Built target usv_msgs_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target usv_msgs_generate_messages_py"
 .PHONY : vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_py.dir/rule
@@ -1363,12 +1361,12 @@ vrx/usv_msgs/CMakeFiles/usv_msgs_generate_messages_lisp.dir/clean:
 amore/CMakeFiles/propulsion_system.dir/all:
 	$(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/depend
 	$(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=45 "Built target propulsion_system"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target propulsion_system"
 .PHONY : amore/CMakeFiles/propulsion_system.dir/all
 
 # Build rule for subdir invocation for target.
 amore/CMakeFiles/propulsion_system.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/propulsion_system.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : amore/CMakeFiles/propulsion_system.dir/rule
@@ -1579,12 +1577,12 @@ amore/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean:
 amore/CMakeFiles/buoy_nav_planner.dir/all:
 	$(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/depend
 	$(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target buoy_nav_planner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=15 "Built target buoy_nav_planner"
 .PHONY : amore/CMakeFiles/buoy_nav_planner.dir/all
 
 # Build rule for subdir invocation for target.
 amore/CMakeFiles/buoy_nav_planner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/buoy_nav_planner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : amore/CMakeFiles/buoy_nav_planner.dir/rule
@@ -2584,33 +2582,6 @@ amore/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean:
 .PHONY : amore/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
 
 #=============================================================================
-# Target rules for target amore/CMakeFiles/buoy_nav_array.dir
-
-# All Build rule for target.
-amore/CMakeFiles/buoy_nav_array.dir/all:
-	$(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/depend
-	$(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=15 "Built target buoy_nav_array"
-.PHONY : amore/CMakeFiles/buoy_nav_array.dir/all
-
-# Build rule for subdir invocation for target.
-amore/CMakeFiles/buoy_nav_array.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/buoy_nav_array.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
-.PHONY : amore/CMakeFiles/buoy_nav_array.dir/rule
-
-# Convenience name for target.
-buoy_nav_array: amore/CMakeFiles/buoy_nav_array.dir/rule
-
-.PHONY : buoy_nav_array
-
-# clean rule for target.
-amore/CMakeFiles/buoy_nav_array.dir/clean:
-	$(MAKE) -f amore/CMakeFiles/buoy_nav_array.dir/build.make amore/CMakeFiles/buoy_nav_array.dir/clean
-.PHONY : amore/CMakeFiles/buoy_nav_array.dir/clean
-
-#=============================================================================
 # Target rules for target amore/CMakeFiles/nav_msgs_generate_messages_eus.dir
 
 # All Build rule for target.
@@ -3007,12 +2978,12 @@ amore/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/clean:
 amore/CMakeFiles/mission_control.dir/all:
 	$(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/depend
 	$(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=38 "Built target mission_control"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target mission_control"
 .PHONY : amore/CMakeFiles/mission_control.dir/all
 
 # Build rule for subdir invocation for target.
 amore/CMakeFiles/mission_control.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/mission_control.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : amore/CMakeFiles/mission_control.dir/rule
@@ -3034,12 +3005,12 @@ amore/CMakeFiles/mission_control.dir/clean:
 amore/CMakeFiles/navigation_array.dir/all:
 	$(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/depend
 	$(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=39 "Built target navigation_array"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target navigation_array"
 .PHONY : amore/CMakeFiles/navigation_array.dir/all
 
 # Build rule for subdir invocation for target.
 amore/CMakeFiles/navigation_array.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/navigation_array.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : amore/CMakeFiles/navigation_array.dir/rule
@@ -3277,7 +3248,7 @@ geonav_transform/CMakeFiles/actionlib_generate_messages_lisp.dir/clean:
 geonav_transform/CMakeFiles/geonav_transform.dir/all:
 	$(MAKE) -f geonav_transform/CMakeFiles/geonav_transform.dir/build.make geonav_transform/CMakeFiles/geonav_transform.dir/depend
 	$(MAKE) -f geonav_transform/CMakeFiles/geonav_transform.dir/build.make geonav_transform/CMakeFiles/geonav_transform.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=27 "Built target geonav_transform"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=26 "Built target geonav_transform"
 .PHONY : geonav_transform/CMakeFiles/geonav_transform.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3358,12 +3329,12 @@ geonav_transform/CMakeFiles/actionlib_generate_messages_py.dir/clean:
 geonav_transform/CMakeFiles/geonav_transform_node.dir/all: geonav_transform/CMakeFiles/geonav_transform.dir/all
 	$(MAKE) -f geonav_transform/CMakeFiles/geonav_transform_node.dir/build.make geonav_transform/CMakeFiles/geonav_transform_node.dir/depend
 	$(MAKE) -f geonav_transform/CMakeFiles/geonav_transform_node.dir/build.make geonav_transform/CMakeFiles/geonav_transform_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target geonav_transform_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=27 "Built target geonav_transform_node"
 .PHONY : geonav_transform/CMakeFiles/geonav_transform_node.dir/all
 
 # Build rule for subdir invocation for target.
 geonav_transform/CMakeFiles/geonav_transform_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 geonav_transform/CMakeFiles/geonav_transform_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : geonav_transform/CMakeFiles/geonav_transform_node.dir/rule
@@ -4476,7 +4447,7 @@ vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_sp
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/rule
@@ -4560,7 +4531,7 @@ vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_pl
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
@@ -4585,12 +4556,12 @@ vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/all: vrx/wave_gazeb
 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/all: vrx/wave_gazebo_plugins/CMakeFiles/wavegauge_plugin.dir/all
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/depend
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=16,17 "Built target buoyancy_gazebo_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=16 "Built target buoyancy_gazebo_plugin"
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/rule
@@ -4646,12 +4617,12 @@ vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/all: vrx
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/all: vrx/wave_gazebo_plugins/CMakeFiles/wavegauge_plugin.dir/all
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/depend
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target usv_gazebo_acoustic_pinger_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=51 "Built target usv_gazebo_acoustic_pinger_plugin"
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/rule
@@ -4732,12 +4703,12 @@ vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/all: vrx/wave_gazebo_
 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/all: vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/all
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/depend
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=18 "Built target buoyancy_plugin_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=17 "Built target buoyancy_plugin_test"
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/rule
@@ -4764,7 +4735,7 @@ vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/all: vrx/usv_
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/rule
@@ -4789,12 +4760,12 @@ vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/all: vrx/wave_gaz
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/all: vrx/wave_gazebo_plugins/CMakeFiles/wavegauge_plugin.dir/all
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/depend
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target usv_gazebo_thrust_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=54 "Built target usv_gazebo_thrust_plugin"
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/rule
@@ -4816,12 +4787,12 @@ vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/clean:
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/all:
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/depend
 	$(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=53,54 "Built target usv_gazebo_plugins__xacro_auto_generate_to_devel_space_"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=53 "Built target usv_gazebo_plugins__xacro_auto_generate_to_devel_space_"
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/rule
@@ -4875,7 +4846,7 @@ vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/all: vr
 
 # Build rule for subdir invocation for target.
 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/rule
@@ -5113,12 +5084,12 @@ vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate_to_devel_space_.dir/
 vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/all:
 	$(MAKE) -f vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/build.make vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/depend
 	$(MAKE) -f vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/build.make vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target model_erb_generation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=38 "Built target model_erb_generation"
 .PHONY : vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/wave_gazebo/CMakeFiles/model_erb_generation.dir/rule
@@ -5255,7 +5226,7 @@ vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/all: vrx/vrx_gazebo/C
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/rule
@@ -5282,7 +5253,7 @@ vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/all: vrx/vrx_gazebo/CMakeFile
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule
@@ -5309,7 +5280,7 @@ vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
@@ -5336,12 +5307,12 @@ vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/all: vrx/wave_gazebo_plugins/CMake
 vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/all: vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=46 "Built target sandisland_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=45 "Built target sandisland_test"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule
@@ -5417,7 +5388,7 @@ vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/cl
 vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/all:
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=19,20 "Built target dock_base_erb_generation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=18,19 "Built target dock_base_erb_generation"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/all
 
 # Build rule for subdir invocation for target.
@@ -5674,12 +5645,12 @@ vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/all: vrx/vrx_gazebo/CM
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=33 "Built target gymkhana_vrx_scoring_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=32 "Built target gymkhana_vrx_scoring_plugin"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/rule
@@ -5732,7 +5703,7 @@ vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/clean:
 vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/all: vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=21,22 "Built target dock_erb_generation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=20,21 "Built target dock_erb_generation"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/all
 
 # Build rule for subdir invocation for target.
@@ -5953,12 +5924,12 @@ vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/all: vrx/vrx_gazebo/CMak
 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=40 "Built target navigation_scoring_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=39,40 "Built target navigation_scoring_plugin"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/rule
@@ -6153,7 +6124,7 @@ vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/all: vrx/vrx_gazebo/CMak
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/rule
@@ -6504,12 +6475,12 @@ vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/all: vrx/vrx_gazebo/msgs/CMakeFiles
 vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=44 "Built target placard_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=43 "Built target placard_plugin"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule
@@ -6613,7 +6584,7 @@ vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/all: vrx/vrx_gazebo/msgs/CMakeFi
 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=37 "Built target light_buoy_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=36 "Built target light_buoy_plugin"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/all
 
 # Build rule for subdir invocation for target.
@@ -6717,7 +6688,7 @@ vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/all: vrx/wave_gazebo_plugins/C
 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=13 "Built target ball_shooter_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=13,14 "Built target ball_shooter_plugin"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/all
 
 # Build rule for subdir invocation for target.
@@ -6969,7 +6940,7 @@ vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/follo
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule
@@ -7073,12 +7044,12 @@ vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/vrx_
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all: vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=49 "Built target scoring_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=48 "Built target scoring_plugin"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule
@@ -7187,7 +7158,7 @@ vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/all: vrx/vrx_gazebo/CMakeF
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/rule
@@ -7406,7 +7377,7 @@ vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/all: vrx/vrx_gazebo/CMakeFiles/gui
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule
@@ -7432,12 +7403,12 @@ vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/all: vrx/wave_gazebo_plugi
 vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/all: vrx/wave_gazebo_plugins/CMakeFiles/wavegauge_plugin.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target sandisland_test_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=46 "Built target sandisland_test_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/rule
@@ -7540,7 +7511,7 @@ vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/all: vrx/wave_ga
 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/all: vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=43 "Built target perception_scoring_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target perception_scoring_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -7571,12 +7542,12 @@ vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/all: vrx/wave_
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/all: vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target gymkhana_vrx_scoring_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=33 "Built target gymkhana_vrx_scoring_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/rule
@@ -7684,7 +7655,7 @@ vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/all: vrx/vrx_gaz
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/rule
@@ -7793,7 +7764,7 @@ vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/all: vrx/vrx_gaz
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/rule
@@ -7999,12 +7970,12 @@ vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/all: vrx/wave_gazebo_plugin
 vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/all: vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target placard_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=44 "Built target placard_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rule
@@ -8107,7 +8078,7 @@ vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/all: vrx/wave_gazebo_plu
 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/all: vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target light_buoy_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=37 "Built target light_buoy_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -8210,12 +8181,12 @@ vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/all: vrx/wave_gazebo_p
 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/all: vrx/wave_gazebo_plugins/CMakeFiles/trajectory_msgs_generate_messages_py.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=14 "Built target ball_shooter_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target ball_shooter_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/rule
@@ -8320,7 +8291,7 @@ vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/all: vrx/vrx_gaze
 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/all: vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=48 "Built target scan_dock_scoring_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target scan_dock_scoring_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -8428,12 +8399,12 @@ vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/all: vrx/wave_gazebo_plugins
 vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/all: vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=26 "Built target follow_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target follow_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule
@@ -8536,12 +8507,12 @@ vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/all: vrx/wave_gazebo_plugin
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/all: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target scoring_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=49 "Built target scoring_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rule
@@ -8649,7 +8620,7 @@ vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/all: vrx/vrx_gazeb
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/rule
@@ -8753,7 +8724,7 @@ vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/all: vrx/vrx
 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/all: vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=51 "Built target stationkeeping_scoring_plugin_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target stationkeeping_scoring_plugin_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -8861,12 +8832,12 @@ vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/all: vrx/wave_gazebo_plugi
 vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/all: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=32 "Built target gui_task_widget_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num= "Built target gui_task_widget_autogen"
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/rule
@@ -8888,12 +8859,12 @@ vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/clean:
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/all: vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/build.make vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/build.make vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=23 "Built target dock_placard_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=22,23 "Built target dock_placard_msgs"
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/rule
@@ -8915,12 +8886,12 @@ vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/clean:
 vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/all: vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/all
 	$(MAKE) -f vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/build.make vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/build.make vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=34,35 "Built target light_buoy_colors_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=34 "Built target light_buoy_colors_msgs"
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs.dir/rule
@@ -8969,7 +8940,7 @@ vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/clean:
 vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/all:
 	$(MAKE) -f vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/build.make vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/depend
 	$(MAKE) -f vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/build.make vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=36 "Built target light_buoy_colors_msgs_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=35 "Built target light_buoy_colors_msgs_autogen"
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/light_buoy_colors_msgs_autogen.dir/all
 
 # Build rule for subdir invocation for target.
@@ -9023,12 +8994,12 @@ vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate_to_devel_space_.dir/clean:
 vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/all:
 	$(MAKE) -f vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/build.make vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/depend
 	$(MAKE) -f vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/build.make vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=59,60,61 "Built target vrx_2019__xacro_auto_generate"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=58,59,60,61 "Built target vrx_2019__xacro_auto_generate"
 .PHONY : vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/all
 
 # Build rule for subdir invocation for target.
 vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
 .PHONY : vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate.dir/rule
