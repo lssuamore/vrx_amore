@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "/home/brad/vrx_amore/devel/include/amore/NED_buoy.h"
   "/home/brad/vrx_amore/devel/include/amore/NED_waypoints.h"
   "/home/brad/vrx_amore/devel/include/amore/state_msg.h"
   "/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h"

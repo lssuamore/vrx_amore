@@ -26,8 +26,8 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-#include "nav_msgs/Odometry.h"
-#include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
+#include "nav_msgs/Odometry.h"											// message type used for receiving NED USV state from navigation_array
+#include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
 #include "std_msgs/Bool.h"
 #include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
 #include "amore/NED_waypoints.h"										// message created to hold an array of the converted WF goal waypoints w/ headings and the number of goal poses
@@ -63,32 +63,32 @@ float vxNED, vyNED, vzNED;											// linear velocities
 int NA_state = 0;							// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
 
 // Variables for WF converter
-int WF_loops_sent = 0;                                  																// count of loops to hold the same data point for before sending next
-int point_num = 0;                                               															// used to keep track of the point being converted
-int goal_poses_quantity = -1;                                   														// used to keep track of the number of goal poses to convert
+int WF_loops_sent = 0;                                  											// count of loops to hold the same data point for before sending next
+int point_num = 0;                                               										// used to keep track of the point being converted
+int goal_poses_quantity = -1;                                   									// used to keep track of the number of goal poses to convert
 
-float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];									// waypoint headings in quarternion form
-float goal_lat[100], goal_long[100];																				// waypoint spherical ECEF lat/long coordinates
-float NED_x_goal[100], NED_y_goal[100], NED_psi_goal[100];								// NED goal waypoint array
+float qx_goal[100], qy_goal[100], qz_goal[100], qw_goal[100];				// waypoint headings in quarternion form
+float goal_lat[100], goal_long[100];															// waypoint spherical ECEF lat/long coordinates
+float NED_x_goal[100], NED_y_goal[100], NED_psi_goal[100];			// NED goal waypoint array
 
-bool lat_lon_point_sent = false;              																		// lat_lon_point_sent = false, the current point has not been published to nav_odom for conversion
-bool lat_lon_goal_recieved = false;                  																// lat_lon_goal_recieved = false, goal waypoint poses in lat and long coordinates have not been acquired
-bool NED_waypoints_converted = false;     																	// NED_waypoints_converted = false, goal waypoints in NED have not been converted
+bool lat_lon_point_sent = false;              													// lat_lon_point_sent = false, the current point has not been published to nav_odom for conversion
+bool lat_lon_goal_recieved = false;                  											// lat_lon_goal_recieved = false, goal waypoint poses in lat and long coordinates have not been acquired
+bool NED_waypoints_converted = false;     												// NED_waypoints_converted = false, goal waypoints in NED have not been converted
 
-std_msgs::Bool na_initialization_status;																		// "na_initialization_state" message
-ros::Publisher na_initialization_state_pub;																	// "na_initialization_state" publisher
+std_msgs::Bool na_initialization_status;													// "na_initialization_state" message
+ros::Publisher na_initialization_state_pub;												// "na_initialization_state" publisher
 
-std_msgs::Bool goal_publish_status;																			// "goal_publish_state" message; false means goal NED waypoints have not been published
-ros::Publisher goal_publish_state_pub;																		// "goal_publish_state" publisher for whether NED converted waypoints have been published
+std_msgs::Bool goal_waypoints_publish_status;										// "goal_waypoints_publish_state" message; false means goal NED waypoints have not been published
+ros::Publisher goal_waypoints_publish_state_pub;									// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
 
-nav_msgs::Odometry nav_odom_msg, nav_ned_msg;												// "nav_odom" and "nav_ned" messages, respectively
-ros::Publisher nav_odom_pub;																						// "nav_odom" publisher
-ros::Publisher nav_ned_pub;																							// "nav_ned" publisher
+nav_msgs::Odometry nav_odom_msg, nav_ned_msg;							// "nav_odom" and "nav_ned" messages, respectively
+ros::Publisher nav_odom_pub;																	// "nav_odom" publisher
+ros::Publisher nav_ned_pub;																		// "nav_ned" publisher
 
-amore::NED_waypoints NED_waypoints_msg;															// "waypoints_NED" message
-ros::Publisher waypoints_ned_pub;																				// "waypoints_NED" publisher
+amore::NED_waypoints NED_waypoints_msg;										// "waypoints_NED" message
+ros::Publisher waypoints_ned_pub;															// "waypoints_NED" publisher
 
-ros::Time current_time, last_time;																				// creates time variables
+ros::Time current_time, last_time;															// creates time variables
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
@@ -326,21 +326,21 @@ int main(int argc, char **argv)
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);
 	ros::Subscriber gpspos_sub = nh2.subscribe("/wamv/sensors/gps/gps/fix", 10, GPS_Position_update);						// subscribes to GPS position
-	ros::Subscriber imu_sub = nh3.subscribe("/wamv/sensors/imu/imu/data", 100, IMU_processor);										// subscribes to IMU
-	ros::Subscriber gpsvel_sub = nh4.subscribe("/wamv/sensors/gps/gps/fix_velocity", 100, GPS_Velocity_update);		// subscribes to GPS velocity
+	ros::Subscriber imu_sub = nh3.subscribe("/wamv/sensors/imu/imu/data", 100, IMU_processor);									// subscribes to IMU
+	ros::Subscriber gpsvel_sub = nh4.subscribe("/wamv/sensors/gps/gps/fix_velocity", 100, GPS_Velocity_update);			// subscribes to GPS velocity
 	ros::Subscriber geonav_odom_sub = nh5.subscribe("geonav_odom", 100, NED_Func);
 	ros::Subscriber VRX_T1_goal_sub; // = nh6.subscribe("/vrx/station_keeping/goal", 1, VRX_T1_goal_update);				// subscriber for goal pose given by Task1_SK
-	ros::Subscriber VRX_T2_goal_sub; // = nh6.subscribe("/vrx/wayfinding/waypoints", 100, VRX_T2_goal_update);		// subscriber for goal waypoints given by Task2_WF
+	ros::Subscriber VRX_T2_goal_sub; // = nh6.subscribe("/vrx/wayfinding/waypoints", 100, VRX_T2_goal_update);			// subscriber for goal waypoints given by Task2_WF
 	
 	// Publishers
-	na_initialization_state_pub = nh8.advertise<std_msgs::Bool>("na_initialization_state", 1);												// publisher for state of initialization
-	nav_ned_pub = nh10.advertise<nav_msgs::Odometry>("nav_ned", 100); 																			// USV NED state publisher
-	nav_odom_pub = nh11.advertise<nav_msgs::Odometry>("nav_odom", 100); 																	// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
-	waypoints_ned_pub = nh12.advertise<amore::NED_waypoints>("waypoints_ned", 100); 												// goal poses converted to NED publisher
-	goal_publish_state_pub = nh13.advertise<std_msgs::Bool>("goal_publish_state", 1);														// "goal_publish_state" publisher for whether NED converted waypoints have been published
+	na_initialization_state_pub = nh8.advertise<std_msgs::Bool>("na_initialization_state", 1);											// publisher for state of initialization
+	nav_ned_pub = nh10.advertise<nav_msgs::Odometry>("nav_ned", 100); 																	// USV NED state publisher
+	nav_odom_pub = nh11.advertise<nav_msgs::Odometry>("nav_odom", 100); 																// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
+	waypoints_ned_pub = nh12.advertise<amore::NED_waypoints>("waypoints_ned", 100); 											// goal poses converted to NED publisher
+	goal_waypoints_publish_state_pub = nh13.advertise<std_msgs::Bool>("goal_waypoints_publish_state", 1);				// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
 	
 	// Initialize global variables
-	goal_publish_status.data = false;
+	goal_waypoints_publish_status.data = false;
 	na_initialization_status.data = false;
 	current_time = ros::Time::now();   											// sets current time to the time it is now
 	last_time = ros::Time::now();        											// sets last time to the time it is now
@@ -354,10 +354,15 @@ int main(int argc, char **argv)
 		
 		NAVIGATION_ARRAY_inspector();									// check, update, and publish na_initialization_status
 		
-		goal_publish_state_pub.publish(goal_publish_status);	// publish whether NED converted waypoints have been published
+		goal_waypoints_publish_state_pub.publish(goal_waypoints_publish_status);	// publish whether NED converted waypoints have been published
+		
+		if (NA_state == 0)
+		{
+			goal_waypoints_publish_status.data = false;
+		}			
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		if (NA_state == 1)																	// standard USV Pose Conversion mode
+		else if (NA_state == 1)																	// standard USV Pose Conversion mode
 		{
 			nav_odom_publish();														// THIS FUNCTION FILLS OUT nav_odom_msg AND PUBLISHES TO "nav_odom"
 		
@@ -388,12 +393,11 @@ int main(int argc, char **argv)
 		
 			// publish the NED USV state
 			nav_ned_pub.publish(nav_ned_msg);
-			goal_publish_status.data = false;
 		} // if USV Pose Conversion mode
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF GOAL POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		if ((!NED_waypoints_converted) && ((NA_state == 2) || (NA_state == 3)))						// if Goal Pose Conversion mode 
+		else if ((!NED_waypoints_converted) && ((NA_state == 2) || (NA_state == 3)))						// if Goal Pose Conversion mode 
 		{
 			// first subscribe to goal poses dependent upon which task
 			if (!lat_lon_goal_recieved)
@@ -442,7 +446,7 @@ int main(int argc, char **argv)
 		} // if Goal Pose Conversion mode
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF GOAL POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			
-		if ((NED_waypoints_converted) && (!goal_publish_status.data))
+		if ((NED_waypoints_converted) && (!goal_waypoints_publish_status.data))
 		{
 			NED_waypoints_msg.points.clear();
 			
@@ -461,11 +465,11 @@ int main(int argc, char **argv)
 				ROS_INFO("psi: %f -- NA", NED_psi_goal[i]);
 			}
 			waypoints_ned_pub.publish(NED_waypoints_msg);
-			goal_publish_status.data = true;
+			goal_waypoints_publish_status.data = true;
 			ROS_INFO("WAYPOINTS HAVE BEEN PUBLISHED -- NA");
-		} // if ((NED_waypoints_converted) && (!goal_publish_status.data))
+		} // if ((NED_waypoints_converted) && (!goal_waypoints_publish_status.data))
 		
-		if (goal_publish_status.data)
+		if (goal_waypoints_publish_status.data)
 		{
 			waypoints_ned_pub.publish(NED_waypoints_msg);
 			// reset for next times conversion
@@ -474,10 +478,10 @@ int main(int argc, char **argv)
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF WF GOAL POSES CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
-		last_time = current_time;
-		ros::spinOnce();
-		loop_rate.sleep();
-		loop_count += 1;
+		ros::spinOnce();										// update subscribers
+		loop_rate.sleep();									// sleep for set loop_rate
+		last_time = current_time;						// update last_time
+		loop_count += 1;									// increment loop counter 
 	}
 	return 0;
 } // end of main()

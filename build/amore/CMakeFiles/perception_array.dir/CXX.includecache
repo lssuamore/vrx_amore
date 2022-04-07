@@ -137,6 +137,8 @@ amore/state_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/state_msg.h
 amore/usv_pose_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/usv_pose_msg.h
+amore/NED_bouy.h
+/home/brad/vrx_amore/src/amore/src/amore/NED_bouy.h
 geometry_msgs/PoseArray.h
 /home/brad/vrx_amore/src/amore/src/geometry_msgs/PoseArray.h
 

@@ -42,6 +42,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg"
     "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
     "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
+    "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
     )
 endif()
 

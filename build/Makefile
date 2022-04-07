@@ -597,6 +597,19 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named path_planner
+
+# Build rule for target.
+path_planner: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 path_planner
+.PHONY : path_planner
+
+# fast build rule for target.
+path_planner/fast:
+	$(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/build
+.PHONY : path_planner/fast
+
+#=============================================================================
 # Target rules for targets named PID_HS_controller
 
 # Build rule for target.
@@ -621,19 +634,6 @@ actionlib_msgs_generate_messages_py: cmake_check_build_system
 actionlib_msgs_generate_messages_py/fast:
 	$(MAKE) -f amore/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make amore/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named buoy_nav_planner
-
-# Build rule for target.
-buoy_nav_planner: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 buoy_nav_planner
-.PHONY : buoy_nav_planner
-
-# fast build rule for target.
-buoy_nav_planner/fast:
-	$(MAKE) -f amore/CMakeFiles/buoy_nav_planner.dir/build.make amore/CMakeFiles/buoy_nav_planner.dir/build
-.PHONY : buoy_nav_planner/fast
 
 #=============================================================================
 # Target rules for targets named roscpp_generate_messages_eus
@@ -1195,6 +1195,19 @@ actionlib_msgs_generate_messages_nodejs/fast:
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named _amore_generate_messages_check_deps_NED_buoy
+
+# Build rule for target.
+_amore_generate_messages_check_deps_NED_buoy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _amore_generate_messages_check_deps_NED_buoy
+.PHONY : _amore_generate_messages_check_deps_NED_buoy
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_NED_buoy/fast:
+	$(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/build
+.PHONY : _amore_generate_messages_check_deps_NED_buoy/fast
+
+#=============================================================================
 # Target rules for targets named amore_geneus
 
 # Build rule for target.
@@ -1219,19 +1232,6 @@ amore_generate_messages_eus: cmake_check_build_system
 amore_generate_messages_eus/fast:
 	$(MAKE) -f amore/CMakeFiles/amore_generate_messages_eus.dir/build.make amore/CMakeFiles/amore_generate_messages_eus.dir/build
 .PHONY : amore_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named perception_array
-
-# Build rule for target.
-perception_array: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 perception_array
-.PHONY : perception_array
-
-# fast build rule for target.
-perception_array/fast:
-	$(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/build
-.PHONY : perception_array/fast
 
 #=============================================================================
 # Target rules for targets named amore_generate_messages_lisp
@@ -3203,9 +3203,9 @@ help:
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_nodejs"
+	@echo "... path_planner"
 	@echo "... PID_HS_controller"
 	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... buoy_nav_planner"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_cpp"
@@ -3249,9 +3249,9 @@ help:
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
+	@echo "... _amore_generate_messages_check_deps_NED_buoy"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
-	@echo "... perception_array"
 	@echo "... amore_generate_messages_lisp"
 	@echo "... amore_genlisp"
 	@echo "... amore_generate_messages_nodejs"
