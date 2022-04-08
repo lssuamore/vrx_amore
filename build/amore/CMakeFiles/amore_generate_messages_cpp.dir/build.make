@@ -69,8 +69,8 @@ amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/vrx_amore/devel/include
 
 /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg
-/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from amore/usv_pose_msg.msg"
@@ -94,9 +94,9 @@ amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/vrx_amore/devel/include
 
 /home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /home/brad/vrx_amore/src/amore/msg/NED_buoys.msg
+/home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /home/brad/vrx_amore/src/amore/msg/NED_buoy.msg
 /home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /opt/ros/noetic/share/std_msgs/msg/String.msg
-/home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/include/amore/NED_buoys.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from amore/NED_buoys.msg"
 	cd /home/brad/vrx_amore/src/amore && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/vrx_amore/src/amore/msg/NED_buoys.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/include/amore -e /opt/ros/noetic/share/gencpp/cmake/..

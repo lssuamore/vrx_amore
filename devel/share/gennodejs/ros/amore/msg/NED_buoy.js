@@ -12,7 +12,6 @@ const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
 let geometry_msgs = _finder('geometry_msgs');
-let std_msgs = _finder('std_msgs');
 
 //-----------------------------------------------------------
 
@@ -34,7 +33,7 @@ class NED_buoy {
         this.id = initObj.id
       }
       else {
-        this.id = new std_msgs.msg.String();
+        this.id = '';
       }
     }
   }
@@ -44,7 +43,7 @@ class NED_buoy {
     // Serialize message field [position]
     bufferOffset = geometry_msgs.msg.Point.serialize(obj.position, buffer, bufferOffset);
     // Serialize message field [id]
-    bufferOffset = std_msgs.msg.String.serialize(obj.id, buffer, bufferOffset);
+    bufferOffset = _serializer.string(obj.id, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -55,14 +54,14 @@ class NED_buoy {
     // Deserialize message field [position]
     data.position = geometry_msgs.msg.Point.deserialize(buffer, bufferOffset);
     // Deserialize message field [id]
-    data.id = std_msgs.msg.String.deserialize(buffer, bufferOffset);
+    data.id = _deserializer.string(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += std_msgs.msg.String.getMessageSize(object.id);
-    return length + 24;
+    length += _getByteLength(object.id);
+    return length + 28;
   }
 
   static datatype() {
@@ -72,14 +71,14 @@ class NED_buoy {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '790dcb77cf1dd99c8074cf037e8fb43c';
+    return 'b5a6f8471e86877e93afa9bcacce1774';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     geometry_msgs/Point position
-    std_msgs/String id
+    string id
     
     ================================================================================
     MSG: geometry_msgs/Point
@@ -87,10 +86,6 @@ class NED_buoy {
     float64 x
     float64 y
     float64 z
-    
-    ================================================================================
-    MSG: std_msgs/String
-    string data
     
     `;
   }
@@ -109,10 +104,10 @@ class NED_buoy {
     }
 
     if (msg.id !== undefined) {
-      resolved.id = std_msgs.msg.String.Resolve(msg.id)
+      resolved.id = msg.id;
     }
     else {
-      resolved.id = new std_msgs.msg.String()
+      resolved.id = ''
     }
 
     return resolved;

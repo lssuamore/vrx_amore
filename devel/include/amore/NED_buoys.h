@@ -129,12 +129,12 @@ struct MD5Sum< ::amore::NED_buoys_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "66eb3e590120fc112f4428d211246397";
+    return "770b53fd7910d5fb852692f8fc415cee";
   }
 
   static const char* value(const ::amore::NED_buoys_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x66eb3e590120fc11ULL;
-  static const uint64_t static_value2 = 0x2f4428d211246397ULL;
+  static const uint64_t static_value1 = 0x770b53fd7910d5fbULL;
+  static const uint64_t static_value2 = 0x852692f8fc415ceeULL;
 };
 
 template<class ContainerAllocator>
@@ -159,7 +159,7 @@ struct Definition< ::amore::NED_buoys_<ContainerAllocator> >
 "================================================================================\n"
 "MSG: amore/NED_buoy\n"
 "geometry_msgs/Point position\n"
-"std_msgs/String id\n"
+"string id\n"
 "\n"
 "================================================================================\n"
 "MSG: geometry_msgs/Point\n"
@@ -167,10 +167,6 @@ struct Definition< ::amore::NED_buoys_<ContainerAllocator> >
 "float64 x\n"
 "float64 y\n"
 "float64 z\n"
-"\n"
-"================================================================================\n"
-"MSG: std_msgs/String\n"
-"string data\n"
 ;
   }
 

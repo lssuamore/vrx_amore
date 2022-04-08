@@ -1,2 +1,2 @@
 geometry_msgs/Point position
-std_msgs/String id
+string id

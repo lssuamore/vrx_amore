@@ -82,7 +82,7 @@ class NED_buoys {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '66eb3e590120fc112f4428d211246397';
+    return '770b53fd7910d5fb852692f8fc415cee';
   }
 
   static messageDefinition() {
@@ -94,7 +94,7 @@ class NED_buoys {
     ================================================================================
     MSG: amore/NED_buoy
     geometry_msgs/Point position
-    std_msgs/String id
+    string id
     
     ================================================================================
     MSG: geometry_msgs/Point
@@ -102,10 +102,6 @@ class NED_buoys {
     float64 x
     float64 y
     float64 z
-    
-    ================================================================================
-    MSG: std_msgs/String
-    string data
     
     `;
   }

@@ -2,6 +2,7 @@
 8fdeacadd24a5dc02543b22d35f33e03 /home/brad/vrx_amore/devel/include/amore/NED_buoy.h
 6e057537f7e5bf517cef95feac2fde77 /home/brad/vrx_amore/devel/include/amore/NED_buoys.h
 a603fc49f56ebac1340809e9f1b34459 /home/brad/vrx_amore/devel/include/amore/NED_waypoints.h
+8381adfa37bad5dbbf4a29dd25b7434c /home/brad/vrx_amore/devel/include/amore/ned_buoy.h
 fb3760ea2e327a628cdbf7c7802e38e4 /home/brad/vrx_amore/devel/include/amore/state_msg.h
 be46150325c11cb39f02ceec7eb493eb /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h
 e641d27f67b582c8275eb7f54695eb58 /home/brad/vrx_amore/devel/include/usv_msgs/RangeBearing.h
@@ -13,6 +14,7 @@ a49bc68d94f1f3438c18753bb39c66be /home/brad/vrx_amore/devel/lib/python3/dist-pac
 fc21564ac527871b18cc9a7767e0c6ce /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_buoys.py
 47567a5f9c9ef453c50d91ffc3e504c0 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py
 ead1bab8ccd04b3f3be2a870d78549f5 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py
+9d735a904f972f52bd3b17835aa829ae /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_ned_buoy.py
 ec2ed5f401a4edae8c301cb44c445be6 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py
 d359503f68b47f9e9f66c81526b354b5 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py
 386dafb4605d2379a77eb11bf5a7ff81 /home/brad/vrx_amore/devel/lib/python3/dist-packages/usv_msgs/msg/_RangeBearing.py
@@ -26,6 +28,7 @@ cd2f19f4241959d354d6333011c4ba53 /home/brad/vrx_amore/devel/lib/python3/dist-pac
 67785c2f009afd81eea7edc370f6f191 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_buoy.lisp
 cf0f63e4a632d7a5c14d2099d376ca96 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_buoys.lisp
 b4dce928a02e3ce81b6b299f0b184d4a /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp
+176250ccb7e52ffce8297a58651f1071 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/ned_buoy.lisp
 8c0236886aae3d252981bd276fa1975d /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state_msg.lisp
 fa0748f81948f68986527a53d0de45e1 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose_msg.lisp
 2927855b5edb71dec4266ea9691437ee /home/brad/vrx_amore/devel/share/common-lisp/ros/usv_msgs/msg/RangeBearing.lisp
@@ -36,6 +39,7 @@ a0561c387a47f9c7168025b91f8cf04c /home/brad/vrx_amore/devel/share/common-lisp/ro
 6e80bd36f4dd13004edc9ff0fe86c0cf /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_buoy.js
 0d62c34ae2623f25e131eea9a7b382bb /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_buoys.js
 a8af7476af766c5be5e0b7339c419580 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js
+2032ec76c307272b18a93d1d425a40f2 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/ned_buoy.js
 9bc8f3d1eb93992f62294f68f63fc3ee /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state_msg.js
 ce31c1223eeb415525d060e58ac0d4f2 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js
 2894a57771ced7b810a0519a7f413161 /home/brad/vrx_amore/devel/share/gennodejs/ros/usv_msgs/msg/RangeBearing.js
@@ -47,6 +51,7 @@ dce7f5ebaeba0c4d8e5688a8610aad38 /home/brad/vrx_amore/devel/share/gennodejs/ros/
 08e36a653e47811395d4d6c15973451e /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l
 7190af23a937141cbaa4eb9ab76b76f9 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l
 496eaaf599bd67f619f76d0c5a513ace /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_waypoints.l
+2332bd28592718b076f1c6c3cd8cecdb /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/ned_buoy.l
 5eddd4fd05ab28f99f955d38527e8ed0 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/state_msg.l
 350f81eba0e7ca280cab4dd317d3b26d /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l
 9fd6a7e6a490e57ecf34713dcebb6e47 /home/brad/vrx_amore/devel/share/roseus/ros/usv_msgs/manifest.l
@@ -102,10 +107,10 @@ a57a3488e4e20089932035597137322f /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/
 8dbbc98eae4d86155b8c03c0a422d2c7 /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 5defaa8e9d6684588a72aee17d489e32 CMakeFiles/clean_test_results
 3a19a618022aea91bf0008df73d8a1e1 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy
-838b9c4893aab2267b4a8937cf18612e amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys
+39a6cea89ff5ea906ead38564250da7d amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys
 400fc3083b9ed0258ef5c9c083ae1ebf amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints
 9fbd10805c2cbcf50f64ee8363ad9a62 amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg
-bf64956b6daaa8e76f618513491ebf10 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg
+6c485bd07d1acd7843348af016200b13 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg
 0d2bec88385c72253c2d95f9e2ad5de9 amore/CMakeFiles/amore_generate_messages_cpp
 0d2bec88385c72253c2d95f9e2ad5de9 amore/CMakeFiles/amore_generate_messages_eus
 0d2bec88385c72253c2d95f9e2ad5de9 amore/CMakeFiles/amore_generate_messages_lisp
