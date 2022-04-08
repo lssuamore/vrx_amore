@@ -8,10 +8,9 @@ import struct
 
 import amore.msg
 import geometry_msgs.msg
-import std_msgs.msg
 
 class NED_buoys(genpy.Message):
-  _md5sum = "66eb3e590120fc112f4428d211246397"
+  _md5sum = "770b53fd7910d5fb852692f8fc415cee"
   _type = "amore/NED_buoys"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """amore/NED_buoy[] buoys
@@ -20,7 +19,7 @@ int32 quantity
 ================================================================================
 MSG: amore/NED_buoy
 geometry_msgs/Point position
-std_msgs/String id
+string id
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -28,10 +27,6 @@ MSG: geometry_msgs/Point
 float64 x
 float64 y
 float64 z
-
-================================================================================
-MSG: std_msgs/String
-string data
 """
   __slots__ = ['buoys','quantity']
   _slot_types = ['amore/NED_buoy[]','int32']
@@ -79,8 +74,7 @@ string data
         _v1 = val1.position
         _x = _v1
         buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
-        _v2 = val1.id
-        _x = _v2.data
+        _x = val1.id
         length = len(_x)
         if python3 or type(_x) == unicode:
           _x = _x.encode('utf-8')
@@ -108,21 +102,20 @@ string data
       self.buoys = []
       for i in range(0, length):
         val1 = amore.msg.NED_buoy()
-        _v3 = val1.position
-        _x = _v3
+        _v2 = val1.position
+        _x = _v2
         start = end
         end += 24
         (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
-        _v4 = val1.id
         start = end
         end += 4
         (length,) = _struct_I.unpack(str[start:end])
         start = end
         end += length
         if python3:
-          _v4.data = str[start:end].decode('utf-8', 'rosmsg')
+          val1.id = str[start:end].decode('utf-8', 'rosmsg')
         else:
-          _v4.data = str[start:end]
+          val1.id = str[start:end]
         self.buoys.append(val1)
       start = end
       end += 4
@@ -142,11 +135,10 @@ string data
       length = len(self.buoys)
       buff.write(_struct_I.pack(length))
       for val1 in self.buoys:
-        _v5 = val1.position
-        _x = _v5
+        _v3 = val1.position
+        _x = _v3
         buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
-        _v6 = val1.id
-        _x = _v6.data
+        _x = val1.id
         length = len(_x)
         if python3 or type(_x) == unicode:
           _x = _x.encode('utf-8')
@@ -175,21 +167,20 @@ string data
       self.buoys = []
       for i in range(0, length):
         val1 = amore.msg.NED_buoy()
-        _v7 = val1.position
-        _x = _v7
+        _v4 = val1.position
+        _x = _v4
         start = end
         end += 24
         (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
-        _v8 = val1.id
         start = end
         end += 4
         (length,) = _struct_I.unpack(str[start:end])
         start = end
         end += length
         if python3:
-          _v8.data = str[start:end].decode('utf-8', 'rosmsg')
+          val1.id = str[start:end].decode('utf-8', 'rosmsg')
         else:
-          _v8.data = str[start:end]
+          val1.id = str[start:end]
         self.buoys.append(val1)
       start = end
       end += 4

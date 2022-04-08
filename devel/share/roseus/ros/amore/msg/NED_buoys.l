@@ -72,7 +72,7 @@
    self)
   )
 
-(setf (get amore::NED_buoys :md5sum-) "66eb3e590120fc112f4428d211246397")
+(setf (get amore::NED_buoys :md5sum-) "770b53fd7910d5fb852692f8fc415cee")
 (setf (get amore::NED_buoys :datatype-) "amore/NED_buoys")
 (setf (get amore::NED_buoys :definition-)
       "amore/NED_buoy[] buoys
@@ -81,7 +81,7 @@ int32 quantity
 ================================================================================
 MSG: amore/NED_buoy
 geometry_msgs/Point position
-std_msgs/String id
+string id
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -90,14 +90,10 @@ float64 x
 float64 y
 float64 z
 
-================================================================================
-MSG: std_msgs/String
-string data
-
 ")
 
 
 
-(provide :amore/NED_buoys "66eb3e590120fc112f4428d211246397")
+(provide :amore/NED_buoys "770b53fd7910d5fb852692f8fc415cee")
 
 

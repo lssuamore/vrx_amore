@@ -115,8 +115,6 @@ opencv2/opencv.hpp
 /home/brad/vrx_amore/src/amore/src/opencv2/opencv.hpp
 geometry_msgs/Point.h
 /home/brad/vrx_amore/src/amore/src/geometry_msgs/Point.h
-amore/NED_waypoints.h
-/home/brad/vrx_amore/src/amore/src/amore/NED_waypoints.h
 geographic_msgs/GeoPoseStamped.h
 /home/brad/vrx_amore/src/amore/src/geographic_msgs/GeoPoseStamped.h
 nav_msgs/Odometry.h
@@ -133,12 +131,12 @@ std_msgs/Bool.h
 /home/brad/vrx_amore/src/amore/src/std_msgs/Bool.h
 vrx_gazebo/Task.h
 /home/brad/vrx_amore/src/amore/src/vrx_gazebo/Task.h
+amore/NED_waypoints.h
+/home/brad/vrx_amore/src/amore/src/amore/NED_waypoints.h
 amore/state_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/state_msg.h
 amore/usv_pose_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/usv_pose_msg.h
-amore/NED_bouy.h
-/home/brad/vrx_amore/src/amore/src/amore/NED_bouy.h
 geometry_msgs/PoseArray.h
 /home/brad/vrx_amore/src/amore/src/geometry_msgs/PoseArray.h
 

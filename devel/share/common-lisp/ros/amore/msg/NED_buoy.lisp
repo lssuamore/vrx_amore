@@ -15,8 +15,8 @@
    (id
     :reader id
     :initarg :id
-    :type std_msgs-msg:String
-    :initform (cl:make-instance 'std_msgs-msg:String)))
+    :type cl:string
+    :initform ""))
 )
 
 (cl:defclass NED_buoy (<NED_buoy>)
@@ -39,12 +39,24 @@
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <NED_buoy>) ostream)
   "Serializes a message object of type '<NED_buoy>"
   (roslisp-msg-protocol:serialize (cl:slot-value msg 'position) ostream)
-  (roslisp-msg-protocol:serialize (cl:slot-value msg 'id) ostream)
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'id))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'id))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <NED_buoy>) istream)
   "Deserializes a message object of type '<NED_buoy>"
   (roslisp-msg-protocol:deserialize (cl:slot-value msg 'position) istream)
-  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'id) istream)
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'id) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'id) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<NED_buoy>)))
@@ -55,20 +67,20 @@
   "amore/NED_buoy")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<NED_buoy>)))
   "Returns md5sum for a message object of type '<NED_buoy>"
-  "790dcb77cf1dd99c8074cf037e8fb43c")
+  "b5a6f8471e86877e93afa9bcacce1774")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'NED_buoy)))
   "Returns md5sum for a message object of type 'NED_buoy"
-  "790dcb77cf1dd99c8074cf037e8fb43c")
+  "b5a6f8471e86877e93afa9bcacce1774")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<NED_buoy>)))
   "Returns full string definition for message of type '<NED_buoy>"
-  (cl:format cl:nil "geometry_msgs/Point position~%std_msgs/String id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%================================================================================~%MSG: std_msgs/String~%string data~%~%~%"))
+  (cl:format cl:nil "geometry_msgs/Point position~%string id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'NED_buoy)))
   "Returns full string definition for message of type 'NED_buoy"
-  (cl:format cl:nil "geometry_msgs/Point position~%std_msgs/String id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%================================================================================~%MSG: std_msgs/String~%string data~%~%~%"))
+  (cl:format cl:nil "geometry_msgs/Point position~%string id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <NED_buoy>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'position))
-     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'id))
+     4 (cl:length (cl:slot-value msg 'id))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <NED_buoy>))
   "Converts a ROS message object to a list"

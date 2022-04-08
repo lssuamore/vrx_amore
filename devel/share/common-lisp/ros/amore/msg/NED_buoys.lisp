@@ -80,16 +80,16 @@
   "amore/NED_buoys")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<NED_buoys>)))
   "Returns md5sum for a message object of type '<NED_buoys>"
-  "66eb3e590120fc112f4428d211246397")
+  "770b53fd7910d5fb852692f8fc415cee")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'NED_buoys)))
   "Returns md5sum for a message object of type 'NED_buoys"
-  "66eb3e590120fc112f4428d211246397")
+  "770b53fd7910d5fb852692f8fc415cee")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<NED_buoys>)))
   "Returns full string definition for message of type '<NED_buoys>"
-  (cl:format cl:nil "amore/NED_buoy[] buoys~%int32 quantity~%~%================================================================================~%MSG: amore/NED_buoy~%geometry_msgs/Point position~%std_msgs/String id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%================================================================================~%MSG: std_msgs/String~%string data~%~%~%"))
+  (cl:format cl:nil "amore/NED_buoy[] buoys~%int32 quantity~%~%================================================================================~%MSG: amore/NED_buoy~%geometry_msgs/Point position~%string id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'NED_buoys)))
   "Returns full string definition for message of type 'NED_buoys"
-  (cl:format cl:nil "amore/NED_buoy[] buoys~%int32 quantity~%~%================================================================================~%MSG: amore/NED_buoy~%geometry_msgs/Point position~%std_msgs/String id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%================================================================================~%MSG: std_msgs/String~%string data~%~%~%"))
+  (cl:format cl:nil "amore/NED_buoy[] buoys~%int32 quantity~%~%================================================================================~%MSG: amore/NED_buoy~%geometry_msgs/Point position~%string id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <NED_buoys>))
   (cl:+ 0
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'buoys) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ (roslisp-msg-protocol:serialization-length ele))))

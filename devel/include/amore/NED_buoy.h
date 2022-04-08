@@ -16,7 +16,6 @@
 #include <ros/message_operations.h>
 
 #include <geometry_msgs/Point.h>
-#include <std_msgs/String.h>
 
 namespace amore
 {
@@ -40,7 +39,7 @@ struct NED_buoy_
    typedef  ::geometry_msgs::Point_<ContainerAllocator>  _position_type;
   _position_type position;
 
-   typedef  ::std_msgs::String_<ContainerAllocator>  _id_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _id_type;
   _id_type id;
 
 
@@ -130,12 +129,12 @@ struct MD5Sum< ::amore::NED_buoy_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "790dcb77cf1dd99c8074cf037e8fb43c";
+    return "b5a6f8471e86877e93afa9bcacce1774";
   }
 
   static const char* value(const ::amore::NED_buoy_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x790dcb77cf1dd99cULL;
-  static const uint64_t static_value2 = 0x8074cf037e8fb43cULL;
+  static const uint64_t static_value1 = 0xb5a6f8471e86877eULL;
+  static const uint64_t static_value2 = 0x93afa9bcacce1774ULL;
 };
 
 template<class ContainerAllocator>
@@ -155,7 +154,7 @@ struct Definition< ::amore::NED_buoy_<ContainerAllocator> >
   static const char* value()
   {
     return "geometry_msgs/Point position\n"
-"std_msgs/String id\n"
+"string id\n"
 "\n"
 "================================================================================\n"
 "MSG: geometry_msgs/Point\n"
@@ -163,10 +162,6 @@ struct Definition< ::amore::NED_buoy_<ContainerAllocator> >
 "float64 x\n"
 "float64 y\n"
 "float64 z\n"
-"\n"
-"================================================================================\n"
-"MSG: std_msgs/String\n"
-"string data\n"
 ;
   }
 
@@ -209,8 +204,7 @@ struct Printer< ::amore::NED_buoy_<ContainerAllocator> >
     s << std::endl;
     Printer< ::geometry_msgs::Point_<ContainerAllocator> >::stream(s, indent + "  ", v.position);
     s << indent << "id: ";
-    s << std::endl;
-    Printer< ::std_msgs::String_<ContainerAllocator> >::stream(s, indent + "  ", v.id);
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.id);
   }
 };
 

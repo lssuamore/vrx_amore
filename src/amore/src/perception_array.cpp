@@ -1,17 +1,16 @@
-// Filename:								perception_array.cpp
-// Creation Date:						03/25/2022
+// Filename:									perception_array.cpp
+// Creation Date:							03/25/2022
 // Last Revision Date:
-// Author(s) [email]:					Shaede Perzanowski [sperzanowski1@lssu.edu]
-//												Brad Hacker [bhacker@lssu.edu]
-// Revisor(s) [Revision Date]:
+// Author(s) [email]:						Shaede Perzanowski [sperzanowski1@lssu.edu]	Taylor Lamorie [tlamorie@lssu]
+//													Brad Hacker [bhacker@lssu.edu]
+// Revisor(s) [Revision Date]:		Brad Hacker [04/07/22]
 // Organization/Institution:			Team AMORE / RobotX Club - Lake Superior State University
 
 //...................................................About perception_array.cpp.....................................................................
 // The perception_array.cpp file is used to access image data from the on-board camera sensors of the USV. 
-// The program uses OpenCV and is essentially an updated version of stereo_vis.cpp orignially created by
-// Taylor Lamorie [tlamorie@lssu.edu], Brad Hacker, and Shaede Perzanowski.
+// The program uses OpenCV. 
 
-// Inputs and Outputs of the perception_array.cpp file
+// Inputs and Outputs
 //				Inputs: Camera sensor data from forward facing cameras, state command from mission_control, USV
 //							pose from mission_control, and data from OpenCV
 //				Outputs: Detected object data to mission_control, target data to weapon_system,
@@ -40,7 +39,6 @@
 #include "cv_bridge/cv_bridge.h"
 #include "opencv2/opencv.hpp"
 #include "geometry_msgs/Point.h"
-#include "amore/NED_waypoints.h"
 #include "geographic_msgs/GeoPoseStamped.h"
 #include "nav_msgs/Odometry.h"
 #include "time.h"
@@ -49,9 +47,11 @@
 #include "std_msgs/Float32.h"
 #include "std_msgs/Bool.h"
 #include "vrx_gazebo/Task.h"
+#include "amore/NED_waypoints.h"
 #include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
 #include "amore/usv_pose_msg.h"
-#include "amore/NED_bouys.h"
+//#include "amore/NED_buoy.h"
+//#include "amore/NED_buoys.h"
 #include "geometry_msgs/PoseArray.h"
 //...........................................End of Included Libraries and Message Types....................................
 
@@ -217,8 +217,8 @@ float LX, LY, RX, RY;																// Variables for the coordinates of the buo
 std_msgs::Bool pa_initialization_status;								// "pa_initialization_state" message
 ros::Publisher pa_initialization_state_pub;							// "pa_initialization_state" publisher
 
-amore::NED_bouys NED_buoys_msg;								// message used to hold and publish buoy locations
-ros::Publisher NED_buoys_pub;											// "NED_buoys" publisher
+// amore::NED_buoys NED_buoys_msg;								// message used to hold and publish buoy locations
+// ros::Publisher NED_buoys_pub;											// "NED_buoys" publisher
 
 ros::Time current_time, last_time;										// creates time variables
 //........................................................End of Global Variables........................................................
@@ -483,7 +483,8 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 					mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);								// Finds the centroid of each BLOB [pixels]
 					u_x[cunter] = mc[i].x;																								// x-bar of centroid [pixels]
 					v_y[cunter] = mc[i].y;																								// y-bar of centroid [pixels]
-					colors[cunter] = c_key[0];																							// Orders the colors to the centroids 
+					colors[cunter] = c_key[0];																								// Orders the colors to the centroids
+					
 					cunter += 1;																												// Counter for the number of BLOBs
 				}
 				// Finds extreme points of buoys
@@ -500,12 +501,14 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				compactness = (area) / (pow(perimeter, 2));																									// Compactness of given BLOB
 				if ((compactness >= MbCMIN & compactness <= MbCMAX) && (Ry >= MbRMIN & Ry <= MbRMAX))	// Finds marker/regular buoys
 				{
+					// This is weird that we wait until three 
 					reg_buoy = reg_buoy + 1;
 					if (reg_buoy >=3)
 					{
 						typers[cunter] = 'm';
 						color_type_buoy = c_key;
 						color_type_buoy.insert(0, MbHead);						// Append MbHead to the front of color_type_buoy
+						// add array of strings here 
 						//printf("the buoy identification string is: %s\n", color_type_buoy.c_str());
 						current_time = ros::Time::now(); //time
 						task3_message.header.seq +=1;												// sequence number
@@ -539,7 +542,7 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 						color_type_buoy1 = " ";
 						break;
 					}
-				}	
+				}
 			}
 		}
 	}
@@ -730,8 +733,9 @@ void DisparityFunc()
 		k_lat = lateral_scale(lat_z_avg[i], z[i]);							// Final lateral gain
 		lat_z_avg[i] = lat_z_avg[i]*k_lat;									// Improved average sway distance to the projection of the point [m]
 		
-		int true_size = 0;
-		NED_buoys_msg.clear();
+		/* int true_size = 0;
+		NED_buoys_msg.buoys.clear();
+		string buoy_id = " "; */
 		
 		// Organize the calculated distances to their respective buoy types and color
 		for (int j=0; j<buoy_total; j++)
@@ -740,38 +744,32 @@ void DisparityFunc()
 			{
 				if ((u_x[j]==MC[g].x) && (v_y[j]==MC[g].y))
 				{
-					if (((z[g]) < 15.0) && ((z[g]) > 2.0) && ((lat_z_avg[g]) < 10.0) && ((lat_z_avg[g]) > -10.0))	// if calculated values are within expected range, put into array //	NEW ADDITION	0-15
+					x_offset[j] = z[g];										// Surge (North) distance [m]
+					y_offset[j] = lat_z_avg[g];							// Sway (East) distance [m]
+					// Convert centroids from local NED to spherical ECEF using USVtoECEF()
+					USVtoECEF(x_offset[i], y_offset[i], N_USV, E_USV, D_USV, PSI_USV, j);
+					/* if (((z[g]) < 15.0) && ((z[g]) > 5.0) && ((lat_z_avg[g]) < 10.0) && ((lat_z_avg[g]) > -10.0))	// if calculated values are within expected range, put into array //	NEW ADDITION	7 - 15, -9 - 9
 					{
-						x_offset[j] = z[g];										// Surge (North) distance [m]
-						y_offset[j] = lat_z_avg[g];							// Sway (East) distance [m]
-						// Convert centroids from local NED to spherical ECEF using USVtoECEF()
-						USVtoECEF(x_offset[i], y_offset[i], N_USV, E_USV, D_USV, PSI_USV, j);
-						
-						amore::NED_bouy buoy;
+						buoy_id = "red";
+						amore::NED_buoy buoy;
 						buoy.position.x = z[g];
 						buoy.position.y = lat_z_avg[g];
-						buoy.id = "";
+						buoy.id = buoy_id.c_str();
 						NED_buoys_msg.buoys.push_back(buoy);
 						true_size += 1;
-					}
+					} */
 				}
 			}
 		}
 		
-		NED_buoys_msg.quantity = true_size;				// publish quantity of poses so the high level control knows
+		/* NED_buoys_msg.quantity = true_size;				// publish quantity of poses so the high level control knows
 		NED_buoys_pub.publish(NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
 		
-		ROS_INFO("Printing array of buoys locations wrt USV");
-		for (int wetworth=0; wetworth<true_size; wetworth++)
+		ROS_INFO("Printing array of buoys locations wrt USV -- PA");
+		for (int wentworth=0; wentworth<true_size; wentworth++)
 		{
-			ROS_INFO("Point: %2i			x: %4.2f			y: %4.2f", wetworth, x_offset[wetworth], y_offset[wetworth]);
-		}
-		
-		ROS_INFO("Printing array of buoys locations wrt USV");
-		for (int dotcom=0; dotcom<true_size; dotcom++)
-		{
-			ROS_INFO("Point: %2i			x: %4.2f			y: %4.2f", dotcom, NED_buoys_msg[dotcom].position.x, NED_buoys_msg[dotcom].position.y);
-		}
+			ROS_INFO("Point: %2i			x: %4.2f			y: %4.2f", wentworth, NED_buoys_msg.buoys[wentworth].position.x, NED_buoys_msg.buoys[wentworth].position.y);
+		} */
 	}
 } // end of DisparityFunc()
 
@@ -972,7 +970,7 @@ int main(int argc, char **argv)
 	ros::Publisher objects_pub = nh9.advertise<std_msgs::Float32>("/objects", 10);					// For publishing object information to mission_control
 	ros::Publisher target_pub = nh10.advertise<std_msgs::Float32>("/target", 10);						// For publishing a target to the weapon_system
 	pa_initialization_state_pub = nh11.advertise<std_msgs::Bool>("pa_initialization_state", 1);	// state of initialization
-	NED_buoys_pub = nh12.advertise<geometry_msgs::PoseArray>("NED_buoys", 1);			// current left and right buoy locations for planner to use to generate path
+	//NED_buoys_pub = nh12.advertise<geometry_msgs::PoseArray>("NED_buoys", 1);			// current left and right buoy locations for planner to use to generate path
 	
 	// Initialize global variables
 	pa_initialization_status.data = false;

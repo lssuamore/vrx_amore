@@ -7,14 +7,13 @@ import genpy
 import struct
 
 import geometry_msgs.msg
-import std_msgs.msg
 
 class NED_buoy(genpy.Message):
-  _md5sum = "790dcb77cf1dd99c8074cf037e8fb43c"
+  _md5sum = "b5a6f8471e86877e93afa9bcacce1774"
   _type = "amore/NED_buoy"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """geometry_msgs/Point position
-std_msgs/String id
+string id
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -22,13 +21,9 @@ MSG: geometry_msgs/Point
 float64 x
 float64 y
 float64 z
-
-================================================================================
-MSG: std_msgs/String
-string data
 """
   __slots__ = ['position','id']
-  _slot_types = ['geometry_msgs/Point','std_msgs/String']
+  _slot_types = ['geometry_msgs/Point','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -50,10 +45,10 @@ string data
       if self.position is None:
         self.position = geometry_msgs.msg.Point()
       if self.id is None:
-        self.id = std_msgs.msg.String()
+        self.id = ''
     else:
       self.position = geometry_msgs.msg.Point()
-      self.id = std_msgs.msg.String()
+      self.id = ''
 
   def _get_types(self):
     """
@@ -69,7 +64,7 @@ string data
     try:
       _x = self
       buff.write(_get_struct_3d().pack(_x.position.x, _x.position.y, _x.position.z))
-      _x = self.id.data
+      _x = self.id
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -88,8 +83,6 @@ string data
     try:
       if self.position is None:
         self.position = geometry_msgs.msg.Point()
-      if self.id is None:
-        self.id = std_msgs.msg.String()
       end = 0
       _x = self
       start = end
@@ -101,9 +94,9 @@ string data
       start = end
       end += length
       if python3:
-        self.id.data = str[start:end].decode('utf-8', 'rosmsg')
+        self.id = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.id.data = str[start:end]
+        self.id = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -118,7 +111,7 @@ string data
     try:
       _x = self
       buff.write(_get_struct_3d().pack(_x.position.x, _x.position.y, _x.position.z))
-      _x = self.id.data
+      _x = self.id
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -138,8 +131,6 @@ string data
     try:
       if self.position is None:
         self.position = geometry_msgs.msg.Point()
-      if self.id is None:
-        self.id = std_msgs.msg.String()
       end = 0
       _x = self
       start = end
@@ -151,9 +142,9 @@ string data
       start = end
       end += length
       if python3:
-        self.id.data = str[start:end].decode('utf-8', 'rosmsg')
+        self.id = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.id.data = str[start:end]
+        self.id = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill

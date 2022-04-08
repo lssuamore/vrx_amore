@@ -12,8 +12,6 @@
 ;;//! \htmlinclude NED_buoy.msg.html
 (if (not (find-package "GEOMETRY_MSGS"))
   (ros::roseus-add-msgs "geometry_msgs"))
-(if (not (find-package "STD_MSGS"))
-  (ros::roseus-add-msgs "std_msgs"))
 
 
 (defclass amore::NED_buoy
@@ -24,11 +22,11 @@
   (:init
    (&key
     ((:position __position) (instance geometry_msgs::Point :init))
-    ((:id __id) (instance std_msgs::String :init))
+    ((:id __id) "")
     )
    (send-super :init)
    (setq _position __position)
-   (setq _id __id)
+   (setq _id (string __id))
    self)
   (:position
    (&rest __position)
@@ -38,19 +36,15 @@
        (if __position (setq _position (car __position)))
        _position)))
   (:id
-   (&rest __id)
-   (if (keywordp (car __id))
-       (send* _id __id)
-     (progn
-       (if __id (setq _id (car __id)))
-       _id)))
+   (&optional __id)
+   (if __id (setq _id __id)) _id)
   (:serialization-length
    ()
    (+
     ;; geometry_msgs/Point _position
     (send _position :serialization-length)
-    ;; std_msgs/String _id
-    (send _id :serialization-length)
+    ;; string _id
+    4 (length _id)
     ))
   (:serialize
    (&optional strm)
@@ -58,25 +52,25 @@
               (make-string-output-stream (send self :serialization-length)))))
      ;; geometry_msgs/Point _position
        (send _position :serialize s)
-     ;; std_msgs/String _id
-       (send _id :serialize s)
+     ;; string _id
+       (write-long (length _id) s) (princ _id s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
    ;; geometry_msgs/Point _position
      (send _position :deserialize buf ptr-) (incf ptr- (send _position :serialization-length))
-   ;; std_msgs/String _id
-     (send _id :deserialize buf ptr-) (incf ptr- (send _id :serialization-length))
+   ;; string _id
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _id (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
 
-(setf (get amore::NED_buoy :md5sum-) "790dcb77cf1dd99c8074cf037e8fb43c")
+(setf (get amore::NED_buoy :md5sum-) "b5a6f8471e86877e93afa9bcacce1774")
 (setf (get amore::NED_buoy :datatype-) "amore/NED_buoy")
 (setf (get amore::NED_buoy :definition-)
       "geometry_msgs/Point position
-std_msgs/String id
+string id
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -85,14 +79,10 @@ float64 x
 float64 y
 float64 z
 
-================================================================================
-MSG: std_msgs/String
-string data
-
 ")
 
 
 
-(provide :amore/NED_buoy "790dcb77cf1dd99c8074cf037e8fb43c")
+(provide :amore/NED_buoy "b5a6f8471e86877e93afa9bcacce1774")
 
 
