@@ -95,14 +95,35 @@ using namespace std;
 int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
 bool system_initialized = false;								// false means the system has not been initialized
 
-// STATES CONCERNED WITH "navigation_array"
-int NA_state = 0;	// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
-// STATES CONCERNED WITH "path_planner"
-int PP_state = 0;		// 0 = On Standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
-// STATES CONCERNED WITH "propulsion_system"
-int PS_state = 0;		// 0 = On Standby; 1 = LL controller ON
-// STATES CONCERNED WITH "perception_array"
-int PA_state = 0;		// 0 = On Standby; 1 = General State; 2 = Task 3: Perception
+//	STATES CONCERNED WITH "navigation_array"
+int NA_state = 0;
+//	0 = On standby
+//	1 = USV NED pose converter
+//	2 = Station-Keeping NED goal pose converter
+//	3 = Wayfinding NED goal pose converter
+
+//	STATES CONCERNED WITH "path_planner"
+int PP_state = 0;
+//	0 = On standby
+//	1 = Station-Keeping
+//	2 = Wayfinding
+//	4 = Wildlife Encounter and Avoid
+//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = Task 6: Scan and Dock and Deliver
+	
+//	STATES CONCERNED WITH "propulsion_system"
+int PS_state = 0;
+//	0 = On standby
+//	1 = Propulsion system ON
+
+//	STATES CONCERNED WITH "perception_array"
+int PA_state = 0;
+//	0 = On standby
+//	1 = General State
+//	3 = Task 3: Landmark Localization and Characterization
+//	4 = Task 4: Wildlife Encounter and Avoid
+//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = Task 6: Scan and Dock and Deliver
 
 //below is the hsv ranges for each color default lighting
 
@@ -300,14 +321,14 @@ void pa_state_update(const amore::state_msg::ConstPtr& msg)
 // =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 {
-//	if (PA_state == 2) // if navigation_array is in standard USV Pose Conversion mode 
-//	{
+	if (NA_state == 1) // if navigation_array is in USV NED pose converter mode 
+	{
 		// Update NED USV pose 
 		N_USV = odom->pose.pose.position.x;
 		E_USV = odom->pose.pose.position.y;
 		D_USV = odom->pose.pose.position.z;
 		PSI_USV = odom->pose.pose.orientation.z;
-//	} // if navigation_array is in standard USV Pose Conversion mode
+	} // if navigation_array is in standard USV Pose Conversion mode
 } // end of pose_update()
 
 // THIS FUNCTION: Converts from the relative USV frame to spherical ECEF
@@ -938,9 +959,6 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "perception_array");
 	
-	// Variables
-	int i = 0;
-	
 	// Initializations
 	cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);
 	//cv::resizeWindow("Left Camera Updated", 100, 75);
@@ -992,6 +1010,35 @@ int main(int argc, char **argv)
 	{
 		current_time = ros::Time::now();   											// sets current time to the time it is now
 		PERCEPTION_ARRAY_inspector();
+		//	0 = On standby
+		//	1 = General State
+		//	3 = Task 3: Landmark Localization and Characterization
+		//	4 = Task 4: Wildlife Encounter and Avoid
+		//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+		//	6 = Task 6: Scan and Dock and Deliver
+		switch(PA_state)
+		{
+			case 0:						// On standby
+			
+				break;
+			case 1:						// General State
+			
+				break;
+			case 3:						// Task 3: Landmark Localization and Characterization
+			
+				break;
+			case 4:						// Task 4: Wildlife Encounter and Avoid
+			
+				break;
+			case 5:						// Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+			
+				break;
+			case 6:						// Task 6: Scan and Dock and Deliver
+			
+				break;
+			default:
+				break;
+		}
 		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
