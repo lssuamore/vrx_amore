@@ -116,8 +116,8 @@ void MISSION_CONTROL_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	ROS_INFO("Loop count = %i", loop_count);
-	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized))	//  && (perception_array_initialized)
+	//ROS_INFO("Loop count = %i", loop_count);
+	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized))
 	{
 		system_initialized = true;
 		//ROS_INFO("mission_control_initialized");
@@ -513,7 +513,7 @@ int main(int argc, char **argv)
 	ros::Subscriber na_initialization_state_sub = nh1.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);								// initialization status of navigation_array
 	ros::Subscriber pp_initialization_state_sub = nh2.subscribe("pp_initialization_state", 1, PATH_PLANNER_inspector);										// initialization status of path_planner
 	ros::Subscriber ps_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);							// initialization status of propulsion_system
-	//ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);								// initialization status of perception_array
+	ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);								// initialization status of perception_array
 	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
 	ros::Subscriber task_status_sub = nh6.subscribe("/vrx/task/info", 1, state_update);																								// VRX task topic
 	ros::Subscriber goal_waypoints_publish_state_sub = nh7.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
@@ -540,7 +540,7 @@ int main(int argc, char **argv)
 	last_time = current_time;								// sets last time to the time it is now
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(100);
+	ros::Rate loop_rate(200);
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())

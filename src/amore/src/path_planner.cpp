@@ -430,7 +430,7 @@ int main(int argc, char **argv)
 	last_time = current_time;										// sets last time to the current_time
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(100);
+	ros::Rate loop_rate(50);
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())

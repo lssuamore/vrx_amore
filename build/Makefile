@@ -558,6 +558,19 @@ PID_HS_controller/fast:
 .PHONY : PID_HS_controller/fast
 
 #=============================================================================
+# Target rules for targets named PID_HP_controller
+
+# Build rule for target.
+PID_HP_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_controller
+.PHONY : PID_HP_controller
+
+# fast build rule for target.
+PID_HP_controller/fast:
+	$(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
+.PHONY : PID_HP_controller/fast
+
+#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -1013,19 +1026,6 @@ amore_generate_messages/fast:
 .PHONY : amore_generate_messages/fast
 
 #=============================================================================
-# Target rules for targets named PID_HP_controller
-
-# Build rule for target.
-PID_HP_controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_controller
-.PHONY : PID_HP_controller
-
-# fast build rule for target.
-PID_HP_controller/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
-.PHONY : PID_HP_controller/fast
-
-#=============================================================================
 # Target rules for targets named amore_generate_messages_py
 
 # Build rule for target.
@@ -1245,6 +1245,19 @@ amore_generate_messages_eus: cmake_check_build_system
 amore_generate_messages_eus/fast:
 	$(MAKE) -f amore/CMakeFiles/amore_generate_messages_eus.dir/build.make amore/CMakeFiles/amore_generate_messages_eus.dir/build
 .PHONY : amore_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named perception_array
+
+# Build rule for target.
+perception_array: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 perception_array
+.PHONY : perception_array
+
+# fast build rule for target.
+perception_array/fast:
+	$(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/build
+.PHONY : perception_array/fast
 
 #=============================================================================
 # Target rules for targets named amore_generate_messages_lisp
@@ -3213,6 +3226,7 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... PID_HS_controller"
+	@echo "... PID_HP_controller"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
@@ -3248,7 +3262,6 @@ help:
 	@echo "... nav_msgs_generate_messages_py"
 	@echo "... _amore_generate_messages_check_deps_NED_buoys"
 	@echo "... amore_generate_messages"
-	@echo "... PID_HP_controller"
 	@echo "... amore_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
@@ -3266,6 +3279,7 @@ help:
 	@echo "... _amore_generate_messages_check_deps_NED_buoy"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
+	@echo "... perception_array"
 	@echo "... amore_generate_messages_lisp"
 	@echo "... amore_genlisp"
 	@echo "... amore_generate_messages_nodejs"

@@ -417,7 +417,7 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
 	  
 	// Set the loop sleep rate
-	ros::Rate loop_rate(20);															// {Hz} GPS update rate: 20, IMU update rate: 100
+	ros::Rate loop_rate(200);															// {Hz} GPS update rate: 20, IMU update rate: 100
 
 	while(ros::ok())
 	{		
