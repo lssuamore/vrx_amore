@@ -108,6 +108,43 @@ ros::Time current_time, last_time;						// creates time variables
 
 //..................................................................Functions...........................................................................
 // SYSTEM INITIALIZATION CHECK FUNCTIONS /////////////////////////////////////////////////////////////////////////////////
+// THIS FUNCTION: Checks initialization status of entire system using global variable initialization statuses
+// ACCEPTS: (VOID) 
+// RETURNS: (VOID) 
+// =============================================================================
+void MISSION_CONTROL_inspector()
+{
+	current_time = ros::Time::now();   		// sets current_time to the time it is now
+	loop_count += 1;									// increment loop counter
+	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized))
+	{
+		system_initialized = true;
+		//ROS_INFO("mission_control_initialized");
+	}
+	else
+	{
+		system_initialized = false;
+		ROS_INFO("!mission_control_initialized --MC");
+	}
+	/* // UPDATE USER OF INITIALIZATION STATUSES
+	if (navigation_array_initialized)
+	{
+		ROS_INFO("navigation_array_initialized");
+	}
+	if (path_planner_initialized)
+	{
+		ROS_INFO("path_planner_initialized");
+	}
+	if (propulsion_system_initialized)
+	{
+		ROS_INFO("propulsion_system_initialized");
+	}
+	if (perception_array_initialized)
+	{
+		ROS_INFO("perception_array_initialized");
+	} */
+} // END OF MISSION_CONTROL_inspector()
+
 // THIS FUNCTION: Subscribes to the navigation_array to check initialization status
 // ACCEPTS: Initialization status from "na_initialization_state"
 // RETURNS: (VOID)
@@ -171,41 +208,6 @@ void PERCEPTION_ARRAY_inspector(const std_msgs::Bool status)
 		perception_array_initialized = false;
 	}
 } // END OF PERCEPTION_ARRAY_inspector()
-
-// THIS FUNCTION: Checks initialization status of entire system using global variable initialization statuses
-// ACCEPTS: (VOID) 
-// RETURNS: (VOID) 
-// =============================================================================
-void MISSION_CONTROL_inspector()
-{
-	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized))
-	{
-		system_initialized = true;
-		//ROS_INFO("mission_control_initialized");
-	}
-	else
-	{
-		system_initialized = false;
-		ROS_INFO("!mission_control_initialized --MC");
-	}
-	/* // UPDATE USER OF INITIALIZATION STATUSES
-	if (navigation_array_initialized)
-	{
-		ROS_INFO("navigation_array_initialized");
-	}
-	if (path_planner_initialized)
-	{
-		ROS_INFO("path_planner_initialized");
-	}
-	if (propulsion_system_initialized)
-	{
-		ROS_INFO("propulsion_system_initialized");
-	}
-	if (perception_array_initialized)
-	{
-		ROS_INFO("perception_array_initialized");
-	} */
-} // END OF MISSION_CONTROL_inspector()
 // END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // THIS FUNCTION: Updates when NED waypoints have been converted and published to "waypoints_ned" to know when to tell path_planner to subscribe
@@ -542,14 +544,12 @@ int main(int argc, char **argv)
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
 	{
-		current_time = ros::Time::now();		// update current_time
-
 		MISSION_CONTROL_inspector();		// check that entire system is initialized before starting calculations
 
-		ros::spinOnce();									// update subscribers
+		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		loop_count += 1;									// increment loop counter 
+		//loop_count += 1;									// increment loop counter
 	} // while(ros::ok())
 
 	ros::spinOnce();

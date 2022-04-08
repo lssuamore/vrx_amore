@@ -121,12 +121,14 @@ ros::Time current_time, last_time;															// creates time variables
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
-// THIS FUNCTION: Updates and publishes initialization status to "na_initialization_state"
+// THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "na_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
 // =============================================================================
 void NAVIGATION_ARRAY_inspector()
 {
+	current_time = ros::Time::now();   		// sets current_time to the time it is now
+	loop_count += 1;									// increment loop counter
 	if (loop_count > 10)
 	{
 		system_initialized = true;
@@ -415,12 +417,10 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
 	  
 	// Set the loop sleep rate
-	ros::Rate loop_rate(20);															// {Hz} GPS update rate: 20 Hz, IMU update rate: 100 Hz
+	ros::Rate loop_rate(20);															// {Hz} GPS update rate: 20, IMU update rate: 100
 
 	while(ros::ok())
-	{
-		current_time = ros::Time::now();											// update current_time
-		
+	{		
 		NAVIGATION_ARRAY_inspector();									// check, update, and publish na_initialization_status
 		
 		goal_waypoints_publish_state_pub.publish(goal_waypoints_publish_status);	// publish whether NED converted waypoints have been published
@@ -550,7 +550,7 @@ int main(int argc, char **argv)
 		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		loop_count += 1;									// increment loop counter 
+		//loop_count += 1;									// increment loop counter
 	}
 	return 0;
 } // end of main()

@@ -245,12 +245,14 @@ ros::Time current_time, last_time;										// creates time variables
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
-// THIS FUNCTION: Updates and publishes initialization status to "pa_initialization_state"
+// THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "pa_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
 // =============================================================================
 void PERCEPTION_ARRAY_inspector()
 {
+	current_time = ros::Time::now();   		// sets current_time to the time it is now
+	loop_count += 1;									// increment loop counter
 	if (loop_count > 10)
 	{
 		system_initialized = true;
@@ -996,7 +998,7 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
   
 	// Set the loop sleep rate
-	ros::Rate loop_rate(200);
+	ros::Rate loop_rate(200);															// 
 
 	ros::spinOnce();
 	loop_rate.sleep();
@@ -1008,7 +1010,6 @@ int main(int argc, char **argv)
 	
 	while(ros::ok())
 	{
-		current_time = ros::Time::now();   											// sets current time to the time it is now
 		PERCEPTION_ARRAY_inspector();
 		//	0 = On standby
 		//	1 = General State
@@ -1042,7 +1043,7 @@ int main(int argc, char **argv)
 		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		loop_count += 1;									// increment loop counter 
+		//loop_count += 1;									// increment loop counter
 	}
 	
 	return 0;
