@@ -1,8 +1,6 @@
 (cl:in-package amore-msg)
-(cl:export '(HEADER-VAL
-          HEADER
-          POSITION-VAL
+(cl:export '(POSITION-VAL
           POSITION
-          QUANTITY-VAL
-          QUANTITY
+          ID-VAL
+          ID
 ))

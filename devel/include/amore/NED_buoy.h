@@ -15,8 +15,8 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
-#include <std_msgs/Header.h>
 #include <geometry_msgs/Point.h>
+#include <std_msgs/String.h>
 
 namespace amore
 {
@@ -26,27 +26,22 @@ struct NED_buoy_
   typedef NED_buoy_<ContainerAllocator> Type;
 
   NED_buoy_()
-    : header()
-    , position()
-    , quantity(0)  {
+    : position()
+    , id()  {
     }
   NED_buoy_(const ContainerAllocator& _alloc)
-    : header(_alloc)
-    , position(_alloc)
-    , quantity(0)  {
+    : position(_alloc)
+    , id(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
-  _header_type header;
-
    typedef  ::geometry_msgs::Point_<ContainerAllocator>  _position_type;
   _position_type position;
 
-   typedef int32_t _quantity_type;
-  _quantity_type quantity;
+   typedef  ::std_msgs::String_<ContainerAllocator>  _id_type;
+  _id_type id;
 
 
 
@@ -77,9 +72,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::amore::NED_buoy_<ContainerAllocator1> & lhs, const ::amore::NED_buoy_<ContainerAllocator2> & rhs)
 {
-  return lhs.header == rhs.header &&
-    lhs.position == rhs.position &&
-    lhs.quantity == rhs.quantity;
+  return lhs.position == rhs.position &&
+    lhs.id == rhs.id;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +116,12 @@ struct IsFixedSize< ::amore::NED_buoy_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct HasHeader< ::amore::NED_buoy_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::amore::NED_buoy_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 
@@ -136,12 +130,12 @@ struct MD5Sum< ::amore::NED_buoy_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "6eb72406b17b4b923602e9676657c80a";
+    return "790dcb77cf1dd99c8074cf037e8fb43c";
   }
 
   static const char* value(const ::amore::NED_buoy_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x6eb72406b17b4b92ULL;
-  static const uint64_t static_value2 = 0x3602e9676657c80aULL;
+  static const uint64_t static_value1 = 0x790dcb77cf1dd99cULL;
+  static const uint64_t static_value2 = 0x8074cf037e8fb43cULL;
 };
 
 template<class ContainerAllocator>
@@ -160,25 +154,8 @@ struct Definition< ::amore::NED_buoy_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "std_msgs/Header header\n"
-"geometry_msgs/Point position\n"
-"int32 quantity\n"
-"\n"
-"================================================================================\n"
-"MSG: std_msgs/Header\n"
-"# Standard metadata for higher-level stamped data types.\n"
-"# This is generally used to communicate timestamped data \n"
-"# in a particular coordinate frame.\n"
-"# \n"
-"# sequence ID: consecutively increasing ID \n"
-"uint32 seq\n"
-"#Two-integer timestamp that is expressed as:\n"
-"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
-"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
-"# time-handling sugar is provided by the client library\n"
-"time stamp\n"
-"#Frame this data is associated with\n"
-"string frame_id\n"
+    return "geometry_msgs/Point position\n"
+"std_msgs/String id\n"
 "\n"
 "================================================================================\n"
 "MSG: geometry_msgs/Point\n"
@@ -186,6 +163,10 @@ struct Definition< ::amore::NED_buoy_<ContainerAllocator> >
 "float64 x\n"
 "float64 y\n"
 "float64 z\n"
+"\n"
+"================================================================================\n"
+"MSG: std_msgs/String\n"
+"string data\n"
 ;
   }
 
@@ -204,9 +185,8 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.header);
       stream.next(m.position);
-      stream.next(m.quantity);
+      stream.next(m.id);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -225,14 +205,12 @@ struct Printer< ::amore::NED_buoy_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::amore::NED_buoy_<ContainerAllocator>& v)
   {
-    s << indent << "header: ";
-    s << std::endl;
-    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
     s << indent << "position: ";
     s << std::endl;
     Printer< ::geometry_msgs::Point_<ContainerAllocator> >::stream(s, indent + "  ", v.position);
-    s << indent << "quantity: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.quantity);
+    s << indent << "id: ";
+    s << std::endl;
+    Printer< ::std_msgs::String_<ContainerAllocator> >::stream(s, indent + "  ", v.id);
   }
 };
 

@@ -57,6 +57,7 @@ amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/r
 amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l
 amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/state_msg.l
 amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l
+amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l
 amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/manifest.l
 
 
@@ -69,8 +70,8 @@ amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/r
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l: /opt/ros/noetic/lib/geneus/gen_eus.py
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l: /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
-/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from amore/usv_pose_msg.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg
 
@@ -83,13 +84,21 @@ amore/CMakeFiles/amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/r
 
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l: /opt/ros/noetic/lib/geneus/gen_eus.py
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l: /home/brad/vrx_amore/src/amore/msg/NED_buoy.msg
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l: /opt/ros/noetic/share/std_msgs/msg/String.msg
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from amore/NED_buoy.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/amore/msg/NED_buoy.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg
 
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l: /home/brad/vrx_amore/src/amore/msg/NED_buoys.msg
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l: /home/brad/vrx_amore/src/amore/msg/NED_buoy.msg
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l: /opt/ros/noetic/share/std_msgs/msg/String.msg
+/home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from amore/NED_buoys.msg"
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/amore/msg/NED_buoys.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg
+
 /home/brad/vrx_amore/devel/share/roseus/ros/amore/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for amore"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp manifest code for amore"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/brad/vrx_amore/devel/share/roseus/ros/amore amore geometry_msgs std_msgs
 
 amore_generate_messages_eus: amore/CMakeFiles/amore_generate_messages_eus
@@ -97,6 +106,7 @@ amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/m
 amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/usv_pose_msg.l
 amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/state_msg.l
 amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoy.l
+amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/msg/NED_buoys.l
 amore_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/amore/manifest.l
 amore_generate_messages_eus: amore/CMakeFiles/amore_generate_messages_eus.dir/build.make
 

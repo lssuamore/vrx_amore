@@ -10,28 +10,11 @@ import geometry_msgs.msg
 import std_msgs.msg
 
 class NED_buoy(genpy.Message):
-  _md5sum = "6eb72406b17b4b923602e9676657c80a"
+  _md5sum = "790dcb77cf1dd99c8074cf037e8fb43c"
   _type = "amore/NED_buoy"
-  _has_header = True  # flag to mark the presence of a Header object
-  _full_text = """std_msgs/Header header
-geometry_msgs/Point position
-int32 quantity
-
-================================================================================
-MSG: std_msgs/Header
-# Standard metadata for higher-level stamped data types.
-# This is generally used to communicate timestamped data 
-# in a particular coordinate frame.
-# 
-# sequence ID: consecutively increasing ID 
-uint32 seq
-#Two-integer timestamp that is expressed as:
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-# time-handling sugar is provided by the client library
-time stamp
-#Frame this data is associated with
-string frame_id
+  _has_header = False  # flag to mark the presence of a Header object
+  _full_text = """geometry_msgs/Point position
+std_msgs/String id
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -39,9 +22,13 @@ MSG: geometry_msgs/Point
 float64 x
 float64 y
 float64 z
+
+================================================================================
+MSG: std_msgs/String
+string data
 """
-  __slots__ = ['header','position','quantity']
-  _slot_types = ['std_msgs/Header','geometry_msgs/Point','int32']
+  __slots__ = ['position','id']
+  _slot_types = ['geometry_msgs/Point','std_msgs/String']
 
   def __init__(self, *args, **kwds):
     """
@@ -51,7 +38,7 @@ float64 z
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,position,quantity
+       position,id
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -60,16 +47,13 @@ float64 z
     if args or kwds:
       super(NED_buoy, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.header is None:
-        self.header = std_msgs.msg.Header()
       if self.position is None:
         self.position = geometry_msgs.msg.Point()
-      if self.quantity is None:
-        self.quantity = 0
+      if self.id is None:
+        self.id = std_msgs.msg.String()
     else:
-      self.header = std_msgs.msg.Header()
       self.position = geometry_msgs.msg.Point()
-      self.quantity = 0
+      self.id = std_msgs.msg.String()
 
   def _get_types(self):
     """
@@ -84,15 +68,13 @@ float64 z
     """
     try:
       _x = self
-      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
-      _x = self.header.frame_id
+      buff.write(_get_struct_3d().pack(_x.position.x, _x.position.y, _x.position.z))
+      _x = self.id.data
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
-      _x = self
-      buff.write(_get_struct_3di().pack(_x.position.x, _x.position.y, _x.position.z, _x.quantity))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -104,28 +86,24 @@ float64 z
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
-      if self.header is None:
-        self.header = std_msgs.msg.Header()
       if self.position is None:
         self.position = geometry_msgs.msg.Point()
+      if self.id is None:
+        self.id = std_msgs.msg.String()
       end = 0
       _x = self
       start = end
-      end += 12
-      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      end += 24
+      (_x.position.x, _x.position.y, _x.position.z,) = _get_struct_3d().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.header.frame_id = str[start:end].decode('utf-8', 'rosmsg')
+        self.id.data = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.header.frame_id = str[start:end]
-      _x = self
-      start = end
-      end += 28
-      (_x.position.x, _x.position.y, _x.position.z, _x.quantity,) = _get_struct_3di().unpack(str[start:end])
+        self.id.data = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -139,15 +117,13 @@ float64 z
     """
     try:
       _x = self
-      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
-      _x = self.header.frame_id
+      buff.write(_get_struct_3d().pack(_x.position.x, _x.position.y, _x.position.z))
+      _x = self.id.data
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
-      _x = self
-      buff.write(_get_struct_3di().pack(_x.position.x, _x.position.y, _x.position.z, _x.quantity))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -160,28 +136,24 @@ float64 z
     if python3:
       codecs.lookup_error("rosmsg").msg_type = self._type
     try:
-      if self.header is None:
-        self.header = std_msgs.msg.Header()
       if self.position is None:
         self.position = geometry_msgs.msg.Point()
+      if self.id is None:
+        self.id = std_msgs.msg.String()
       end = 0
       _x = self
       start = end
-      end += 12
-      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      end += 24
+      (_x.position.x, _x.position.y, _x.position.z,) = _get_struct_3d().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.header.frame_id = str[start:end].decode('utf-8', 'rosmsg')
+        self.id.data = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.header.frame_id = str[start:end]
-      _x = self
-      start = end
-      end += 28
-      (_x.position.x, _x.position.y, _x.position.z, _x.quantity,) = _get_struct_3di().unpack(str[start:end])
+        self.id.data = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -190,15 +162,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_3I = None
-def _get_struct_3I():
-    global _struct_3I
-    if _struct_3I is None:
-        _struct_3I = struct.Struct("<3I")
-    return _struct_3I
-_struct_3di = None
-def _get_struct_3di():
-    global _struct_3di
-    if _struct_3di is None:
-        _struct_3di = struct.Struct("<3di")
-    return _struct_3di
+_struct_3d = None
+def _get_struct_3d():
+    global _struct_3d
+    if _struct_3d is None:
+        _struct_3d = struct.Struct("<3d")
+    return _struct_3d

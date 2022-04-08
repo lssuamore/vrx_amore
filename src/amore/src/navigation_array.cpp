@@ -47,7 +47,17 @@
 
 
 //..............................................................Global Variables............................................................
-int loop_count = 0;                                    							// loop counter, first 10 loops used to intitialize subscribers
+int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
+bool system_initialized = false;								// false means the system has not been initialized
+
+// STATES CONCERNED WITH "navigation_array"
+int NA_state = 0;	// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+// STATES CONCERNED WITH "path_planner"
+int PP_state = 0;		// 0 = On Standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
+// STATES CONCERNED WITH "propulsion_system"
+int PS_state = 0;		// 0 = On Standby; 1 = LL controller ON
+// STATES CONCERNED WITH "perception_array"
+int PA_state = 0;		// 0 = On Standby; 1 = General State; 2 = Task 3: Perception
 
 double latitude, longitude, altitude;										// ECEF position variables in spherical coordinates
 float qx, qy, qz, qw;														
@@ -59,8 +69,6 @@ float q1NED, q2NED, q3NED, q0NED;
 float phiNED, thetaNED, psiNED;									
 float omega_xNED, omega_yNED, omega_zNED;			// angular velocities
 float vxNED, vyNED, vzNED;											// linear velocities
-
-int NA_state = 0;							// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
 
 // Variables for WF converter
 int WF_loops_sent = 0;                                  											// count of loops to hold the same data point for before sending next
@@ -100,30 +108,67 @@ void NAVIGATION_ARRAY_inspector()
 {
 	if (loop_count > 10)
 	{
-		na_initialization_status.data = true;
+		system_initialized = true;
 		//ROS_INFO("navigation_array_initialized -- NA");
 	}
 	else
 	{
-		na_initialization_status.data = false;
+		system_initialized = false;
 		ROS_INFO("!navigation_array_initialized -- NA");
 	}
-	
+	na_initialization_status.data = system_initialized;
 	na_initialization_state_pub.publish(na_initialization_status);						// publish the initialization status of the navigation_array to "na_initialization_state"
 } // END OF NAVIGATION_ARRAY_inspector()
 
-// THIS FUNCTION: Updates the state of navigation_array given by mission_control
-// ACCEPTS: state_msg from "na_state"
-// RETURNS: (VOID)
+/////////////////////////////////////////////////////////////////		STATE UPDATERS		///////////////////////////////////////////////////////////////////
+// THIS FUNCTION: Updates the state of "navigation_array" given by "mission_control"
+// ACCEPTS: navigation_array state_msg from "na_state"
+// RETURNS: (VOID)		Updates global variables
 // =============================================================================
-void state_update(const amore::state_msg::ConstPtr& msg)
+void na_state_update(const amore::state_msg::ConstPtr& msg)
 {
-	// do not start anything until subscribers to sensor data are initialized
-	if (na_initialization_status.data)
+	if (system_initialized)
 	{
 		NA_state = msg->state.data;
 	}
-} // END OF state_update()
+} // END OF na_state_update()
+
+// THIS FUNCTION: Updates the state of "path_planner" given by "mission_control"
+// ACCEPTS: path_planner state_msg from "pp_state"
+// RETURNS: (VOID)		Updates global variables
+// =============================================================================
+void pp_state_update(const amore::state_msg::ConstPtr& msg)
+{
+	if (system_initialized)
+	{
+		PP_state = msg->state.data;
+	}
+} // END OF pp_state_update()
+
+// THIS FUNCTION: Updates the state of "propulsion_system" given by "mission_control"
+// ACCEPTS: propulsion_system state_msg from "ps_state"
+// RETURNS: (VOID)
+// =============================================================================
+void ps_state_update(const amore::state_msg::ConstPtr& msg) 
+{
+	if (system_initialized)
+	{
+		PS_state = msg->state.data;
+	}
+} // END OF ps_state_update()
+
+// THIS FUNCTION: Updates the state of "perception_array" given by "mission_control"
+// ACCEPTS: perception_array state_msg from "pa_state"
+// RETURNS: (VOID) Updates global variable
+// =============================================================================
+void pa_state_update(const amore::state_msg::ConstPtr& msg) 
+{
+	if (system_initialized)
+	{
+		PA_state = msg->state.data;
+	}
+} // END OF pa_state_update()
+//////////////////////////////////////////////////////////////		STATE UPDATERS END		///////////////////////////////////////////////////////////////////
 
 //..................................................................Sensor functions.................................................................
 // THIS FUNCTION: Updates the USV position in spherical ECEF coordinates 
@@ -321,23 +366,26 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13, nh14;
   
 	// Subscribers
-	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, state_update);
-	ros::Subscriber gpspos_sub = nh2.subscribe("/wamv/sensors/gps/gps/fix", 10, GPS_Position_update);						// subscribes to GPS position
-	ros::Subscriber imu_sub = nh3.subscribe("/wamv/sensors/imu/imu/data", 100, IMU_processor);									// subscribes to IMU
-	ros::Subscriber gpsvel_sub = nh4.subscribe("/wamv/sensors/gps/gps/fix_velocity", 100, GPS_Velocity_update);			// subscribes to GPS velocity
-	ros::Subscriber geonav_odom_sub = nh5.subscribe("geonav_odom", 100, NED_Func);
-	ros::Subscriber VRX_T1_goal_sub; // = nh6.subscribe("/vrx/station_keeping/goal", 1, VRX_T1_goal_update);				// subscriber for goal pose given by Task1_SK
-	ros::Subscriber VRX_T2_goal_sub; // = nh6.subscribe("/vrx/wayfinding/waypoints", 100, VRX_T2_goal_update);			// subscriber for goal waypoints given by Task2_WF
+	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
+	ros::Subscriber pp_state_sub = nh2.subscribe("pp_state", 1, pp_state_update);
+	ros::Subscriber ps_state_sub = nh3.subscribe("ps_state", 1, ps_state_update);
+	ros::Subscriber pa_state_sub = nh4.subscribe("pa_state", 1, pa_state_update);
+	ros::Subscriber gpspos_sub = nh5.subscribe("/wamv/sensors/gps/gps/fix", 10, GPS_Position_update);						// subscribes to GPS position
+	ros::Subscriber imu_sub = nh6.subscribe("/wamv/sensors/imu/imu/data", 100, IMU_processor);									// subscribes to IMU
+	ros::Subscriber gpsvel_sub = nh7.subscribe("/wamv/sensors/gps/gps/fix_velocity", 100, GPS_Velocity_update);			// subscribes to GPS velocity
+	ros::Subscriber geonav_odom_sub = nh8.subscribe("geonav_odom", 100, NED_Func);
+	ros::Subscriber VRX_T1_goal_sub; // = nh9.subscribe("/vrx/station_keeping/goal", 1, VRX_T1_goal_update);				// subscriber for goal pose given by Task1_SK
+	ros::Subscriber VRX_T2_goal_sub; // = nh9.subscribe("/vrx/wayfinding/waypoints", 100, VRX_T2_goal_update);			// subscriber for goal waypoints given by Task2_WF
 	
 	// Publishers
-	na_initialization_state_pub = nh8.advertise<std_msgs::Bool>("na_initialization_state", 1);											// publisher for state of initialization
-	nav_ned_pub = nh10.advertise<nav_msgs::Odometry>("nav_ned", 100); 																	// USV NED state publisher
-	nav_odom_pub = nh11.advertise<nav_msgs::Odometry>("nav_odom", 100); 																// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
-	waypoints_ned_pub = nh12.advertise<amore::NED_waypoints>("waypoints_ned", 100); 											// goal poses converted to NED publisher
-	goal_waypoints_publish_state_pub = nh13.advertise<std_msgs::Bool>("goal_waypoints_publish_state", 1);				// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
+	na_initialization_state_pub = nh10.advertise<std_msgs::Bool>("na_initialization_state", 1);											// publisher for state of initialization
+	nav_ned_pub = nh11.advertise<nav_msgs::Odometry>("nav_ned", 100); 																	// USV NED state publisher
+	nav_odom_pub = nh12.advertise<nav_msgs::Odometry>("nav_odom", 100); 																// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
+	waypoints_ned_pub = nh13.advertise<amore::NED_waypoints>("waypoints_ned", 100); 											// goal poses converted to NED publisher
+	goal_waypoints_publish_state_pub = nh14.advertise<std_msgs::Bool>("goal_waypoints_publish_state", 1);				// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
 	
 	// Initialize global variables
 	goal_waypoints_publish_status.data = false;
@@ -406,11 +454,11 @@ int main(int argc, char **argv)
 				
 				if (NA_state == 2)						// TASK 1: STATION_KEEPING
 				{
-					VRX_T1_goal_sub = nh6.subscribe("/vrx/station_keeping/goal", 1, VRX_T1_goal_update);					// subscriber for goal pose given by Task1_SK
+					VRX_T1_goal_sub = nh9.subscribe("/vrx/station_keeping/goal", 1, VRX_T1_goal_update);					// subscriber for goal pose given by Task1_SK
 				}
 				else if (NA_state == 3)				// TASK 2: WAYFINDING
 				{
-					VRX_T2_goal_sub = nh6.subscribe("/vrx/wayfinding/waypoints", 1, VRX_T2_goal_update);             	// subscriber for goal waypoints given by Task2_WF
+					VRX_T2_goal_sub = nh9.subscribe("/vrx/wayfinding/waypoints", 1, VRX_T2_goal_update);             	// subscriber for goal waypoints given by Task2_WF
 				}
 				ros::spinOnce();
 				loop_rate.sleep();

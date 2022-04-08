@@ -183,6 +183,36 @@ propulsion_system/fast:
 .PHONY : propulsion_system/fast
 
 # Convenience name for target.
+amore/CMakeFiles/path_planner.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/path_planner.dir/rule
+.PHONY : amore/CMakeFiles/path_planner.dir/rule
+
+# Convenience name for target.
+path_planner: amore/CMakeFiles/path_planner.dir/rule
+
+.PHONY : path_planner
+
+# fast build rule for target.
+path_planner/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/build
+.PHONY : path_planner/fast
+
+# Convenience name for target.
+amore/CMakeFiles/PID_HS_controller.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HS_controller.dir/rule
+.PHONY : amore/CMakeFiles/PID_HS_controller.dir/rule
+
+# Convenience name for target.
+PID_HS_controller: amore/CMakeFiles/PID_HS_controller.dir/rule
+
+.PHONY : PID_HS_controller
+
+# fast build rule for target.
+PID_HS_controller/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
+.PHONY : PID_HS_controller/fast
+
+# Convenience name for target.
 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
@@ -256,36 +286,6 @@ uuid_msgs_generate_messages_nodejs: amore/CMakeFiles/uuid_msgs_generate_messages
 uuid_msgs_generate_messages_nodejs/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build.make amore/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-amore/CMakeFiles/path_planner.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/path_planner.dir/rule
-.PHONY : amore/CMakeFiles/path_planner.dir/rule
-
-# Convenience name for target.
-path_planner: amore/CMakeFiles/path_planner.dir/rule
-
-.PHONY : path_planner
-
-# fast build rule for target.
-path_planner/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/build
-.PHONY : path_planner/fast
-
-# Convenience name for target.
-amore/CMakeFiles/PID_HS_controller.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HS_controller.dir/rule
-.PHONY : amore/CMakeFiles/PID_HS_controller.dir/rule
-
-# Convenience name for target.
-PID_HS_controller: amore/CMakeFiles/PID_HS_controller.dir/rule
-
-.PHONY : PID_HS_controller
-
-# fast build rule for target.
-PID_HS_controller/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
-.PHONY : PID_HS_controller/fast
 
 # Convenience name for target.
 amore/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
@@ -706,6 +706,21 @@ nav_msgs_generate_messages_py: amore/CMakeFiles/nav_msgs_generate_messages_py.di
 nav_msgs_generate_messages_py/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make amore/CMakeFiles/nav_msgs_generate_messages_py.dir/build
 .PHONY : nav_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_NED_buoys: amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_NED_buoys
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_NED_buoys/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/build
+.PHONY : _amore_generate_messages_check_deps_NED_buoys/fast
 
 # Convenience name for target.
 amore/CMakeFiles/amore_generate_messages.dir/rule:
@@ -1256,13 +1271,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... propulsion_system"
+	@echo "... path_planner"
+	@echo "... PID_HS_controller"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_nodejs"
-	@echo "... path_planner"
-	@echo "... PID_HS_controller"
 	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_eus"
@@ -1291,6 +1306,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_py"
+	@echo "... _amore_generate_messages_check_deps_NED_buoys"
 	@echo "... amore_generate_messages"
 	@echo "... PID_HP_controller"
 	@echo "... amore_generate_messages_py"
