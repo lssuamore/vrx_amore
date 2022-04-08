@@ -24,7 +24,7 @@ add_custom_target(_amore_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" NAME_WE)
 add_custom_target(_amore_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" "std_msgs/Header:std_msgs/Float64:geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg" "geometry_msgs/Point:std_msgs/Float64:std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/state_msg.msg" NAME_WE)
@@ -34,12 +34,12 @@ add_custom_target(_amore_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" NAME_WE)
 add_custom_target(_amore_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" "std_msgs/String:geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg" "geometry_msgs/Point"
 )
 
 get_filename_component(_filename "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg" NAME_WE)
 add_custom_target(_amore_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg" "geometry_msgs/Point:amore/NED_buoy:std_msgs/String"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "amore" "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg" "amore/NED_buoy:geometry_msgs/Point"
 )
 
 #
@@ -57,7 +57,7 @@ _generate_msg_cpp(amore
 _generate_msg_cpp(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/amore
 )
 _generate_msg_cpp(amore
@@ -69,13 +69,13 @@ _generate_msg_cpp(amore
 _generate_msg_cpp(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/amore
 )
 _generate_msg_cpp(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/amore
 )
 
@@ -122,7 +122,7 @@ _generate_msg_eus(amore
 _generate_msg_eus(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/amore
 )
 _generate_msg_eus(amore
@@ -134,13 +134,13 @@ _generate_msg_eus(amore
 _generate_msg_eus(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/amore
 )
 _generate_msg_eus(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/amore
 )
 
@@ -187,7 +187,7 @@ _generate_msg_lisp(amore
 _generate_msg_lisp(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/amore
 )
 _generate_msg_lisp(amore
@@ -199,13 +199,13 @@ _generate_msg_lisp(amore
 _generate_msg_lisp(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/amore
 )
 _generate_msg_lisp(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/amore
 )
 
@@ -252,7 +252,7 @@ _generate_msg_nodejs(amore
 _generate_msg_nodejs(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/amore
 )
 _generate_msg_nodejs(amore
@@ -264,13 +264,13 @@ _generate_msg_nodejs(amore
 _generate_msg_nodejs(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/amore
 )
 _generate_msg_nodejs(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/amore
 )
 
@@ -317,7 +317,7 @@ _generate_msg_py(amore
 _generate_msg_py(amore
   "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float64.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/amore
 )
 _generate_msg_py(amore
@@ -329,13 +329,13 @@ _generate_msg_py(amore
 _generate_msg_py(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/amore
 )
 _generate_msg_py(amore
   "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/amore
 )
 

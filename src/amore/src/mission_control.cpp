@@ -3,7 +3,7 @@
 //  Last Revision Date:							04/04/2022
 //  Author(s) [email]:								Bradley Hacker [bhacker@lssu.edu]
 //  Revisor(s) [email] {Revision Date}:	Bradley Hacker [bhacker@lssu.edu] {03/28/2022}
-//  Organization/Institution:					Lake Superior State University - Team AMORE
+//  Organization/Institution:						Lake Superior State University - Team AMORE
 // 
 // ...............................About mission_control.cpp......................................
 //  This code acts as the autonomous state machine of the WAM-V USV.
@@ -55,9 +55,9 @@ int NA_state = 0;
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
 //	0 = On standby
-//	1 = Station-Keeping
-//	2 = Wayfinding
-//	4 = Wildlife Encounter and Avoid
+//	1 = Task 1: Station-Keeping
+//	2 = Task 2: Wayfinding
+//	4 = Task 4: Wildlife Encounter and Avoid
 //	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = Task 6: Scan and Dock and Deliver
 	
@@ -116,7 +116,8 @@ void MISSION_CONTROL_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized))
+	ROS_INFO("Loop count = %i", loop_count);
+	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized))	//  && (perception_array_initialized)
 	{
 		system_initialized = true;
 		//ROS_INFO("mission_control_initialized");
@@ -295,9 +296,9 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 	//	STATES CONCERNED WITH "path_planner"
 	PP_state = 0;
 	//	0 = On standby
-	//	1 = Station-Keeping
-	//	2 = Wayfinding
-	//	4 = Wildlife Encounter and Avoid
+	//	1 = Task 1: Station-Keeping
+	//	2 = Task 2: Wayfinding
+	//	4 = Task 4: Wildlife Encounter and Avoid
 	//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 	//	6 = Task 6: Scan and Dock and Deliver
 		
@@ -512,7 +513,7 @@ int main(int argc, char **argv)
 	ros::Subscriber na_initialization_state_sub = nh1.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);								// initialization status of navigation_array
 	ros::Subscriber pp_initialization_state_sub = nh2.subscribe("pp_initialization_state", 1, PATH_PLANNER_inspector);										// initialization status of path_planner
 	ros::Subscriber ps_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);							// initialization status of propulsion_system
-	ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);								// initialization status of perception_array
+	//ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);								// initialization status of perception_array
 	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
 	ros::Subscriber task_status_sub = nh6.subscribe("/vrx/task/info", 1, state_update);																								// VRX task topic
 	ros::Subscriber goal_waypoints_publish_state_sub = nh7.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
