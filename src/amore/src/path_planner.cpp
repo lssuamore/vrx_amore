@@ -43,6 +43,17 @@
 
 //..............................................................Global Variables............................................................
 int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
+bool system_initialized = false;								// false means the system has not been initialized
+
+// STATES CONCERNED WITH "navigation_array"
+int NA_state = 0;	// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+// STATES CONCERNED WITH "path_planner"
+int PP_state = 0;		// 0 = On Standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
+// STATES CONCERNED WITH "propulsion_system"
+int PS_state = 0;		// 0 = On Standby; 1 = LL controller ON
+// STATES CONCERNED WITH "perception_array"
+int PA_state = 0;		// 0 = On Standby; 1 = General State; 2 = Task 3: Perception
+
 int point = 0;                     		    							// number of points on trajectory reached 
 int goal_poses;              											// total number of poses to reach 
 int loop_goal_recieved;         									// this is kept in order to ensure planner doesn't start controller until the goal is published
@@ -54,13 +65,9 @@ float e_x, e_y, e_xy, e_psi;									// current errors between goal pose and usv
 
 bool NED_waypoints_recieved = false;				// false means NED goal poses have not been acquired from navigation_array for task 1 or 2
 bool E_reached = false;        									// false means the last point has not been reached
-//float e_xy_prev, e_psi_prev;								// previous errors
 
 float e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = 0.4;      									// heading error tolerance threshold; NOTE: make as small as possible
-
-// STATES CONCERNED WITH "path_planner"
-int PP_state = 0;		// 0 = On Standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
 
 // VARIABLES FOR THE BUOY NAVIGATION CALCULATIONS
 // for calculating desired poses
@@ -126,41 +133,67 @@ void PATH_PLANNER_inspector()
 {
 	if (loop_count > 10)
 	{
-		pp_initialization_status.data = true;
+		system_initialized = true;
 		//ROS_INFO("path_planner_initialized -- NA");
 	}
 	else
 	{
-		pp_initialization_status.data = false;
+		system_initialized = false;
 		ROS_INFO("!path_planner_initialized -- NA");
 	}
-	
-	pp_initialization_state_pub.publish(pp_initialization_status);						// publish the initialization status of the path_planner to "pp_initialization_state"
+	pp_initialization_status.data = system_initialized;
+	pp_initialization_state_pub.publish(pp_initialization_status);		// publish the initialization status of the path_planner to "pp_initialization_state"
 } // END OF PATH_PLANNER_inspector()
 
-// THIS FUNCTION: Updates the state of path_planner given by mission_control
-// ACCEPTS: state_msg from "pp_state"
-// RETURNS: (VOID)
+/////////////////////////////////////////////////////////////////		STATE UPDATERS		///////////////////////////////////////////////////////////////////
+// THIS FUNCTION: Updates the state of "navigation_array" given by "mission_control"
+// ACCEPTS: navigation_array state_msg from "na_state"
+// RETURNS: (VOID)		Updates global variables
 // =============================================================================
-void state_update(const amore::state_msg::ConstPtr& msg)
+void na_state_update(const amore::state_msg::ConstPtr& msg)
 {
-	// do not start anything until subscribers to sensor data are initialized
-	if (pp_initialization_status.data)
+	if (system_initialized)
+	{
+		NA_state = msg->state.data;
+	}
+} // END OF na_state_update()
+
+// THIS FUNCTION: Updates the state of "path_planner" given by "mission_control"
+// ACCEPTS: path_planner state_msg from "pp_state"
+// RETURNS: (VOID)		Updates global variables
+// =============================================================================
+void pp_state_update(const amore::state_msg::ConstPtr& msg)
+{
+	if (system_initialized)
 	{
 		PP_state = msg->state.data;
 	}
-	if (PP_state == 0)
+} // END OF pp_state_update()
+
+// THIS FUNCTION: Updates the state of "propulsion_system" given by "mission_control"
+// ACCEPTS: propulsion_system state_msg from "ps_state"
+// RETURNS: (VOID)
+// =============================================================================
+void ps_state_update(const amore::state_msg::ConstPtr& msg) 
+{
+	if (system_initialized)
 	{
-		// reset all variables to be used for next run
-		goal_pose_publish_status.data = false;
-		NED_buoys_recieved = false;
-		calculations_done = false;
-		E_reached = false;
-		NED_waypoints_recieved = false;
-		e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
-		e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
+		PS_state = msg->state.data;
 	}
-} // END OF state_update()
+} // END OF ps_state_update()
+
+// THIS FUNCTION: Updates the state of "perception_array" given by "mission_control"
+// ACCEPTS: perception_array state_msg from "pa_state"
+// RETURNS: (VOID) Updates global variable
+// =============================================================================
+void pa_state_update(const amore::state_msg::ConstPtr& msg) 
+{
+	if (system_initialized)
+	{
+		PA_state = msg->state.data;
+	}
+} // END OF pa_state_update()
+//////////////////////////////////////////////////////////////		STATE UPDATERS END		///////////////////////////////////////////////////////////////////
 
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
 // ACCEPTS: Current NED USV pose and velocities from "nav_ned"
@@ -196,7 +229,7 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 // =============================================================================
 void goal_NED_waypoints_update(const amore::NED_waypoints::ConstPtr& goal) 
 {
-	if ((pp_initialization_status.data) && ((PP_state == 1) || (PP_state == 2)))		// if the system is initialized and station-keeping or wayfinding task 
+	if ((system_initialized) && ((PP_state == 1) || (PP_state == 2)))		// if the system is initialized and station-keeping or wayfinding task 
 	{
 		if (!NED_waypoints_recieved)				// if the NED goal waypoints have been published but not recieved yet
 		{
@@ -245,7 +278,7 @@ void current_goal_pose_publish()
 // update left and right buoy centroid location (x,y) in global frame
 void NED_buoys_update (const geometry_msgs::PoseArray::ConstPtr& buoys)
 {
-	if ((pp_initialization_status.data) && (PP_state == 5) && (!NED_buoys_recieved))
+	if ((system_initialized) && (PP_state == 5) && (!NED_buoys_recieved))
 	{
 		CL_x = buoys->poses[0].position.x;
 		CL_y = buoys->poses[0].position.y;
@@ -342,89 +375,103 @@ void calculate_buoy_waypoints()
 
 int main(int argc, char **argv)
 {
-  // names the program for visual purposes
-  ros::init(argc, argv, "path_planner");
-  
-  ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
-  
-  // NodeHandles
-  ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8;
-  
-  // Subscribers
-  ros::Subscriber pp_state_sub = nh1.subscribe("pp_state", 1, state_update);
-  ros::Subscriber nav_NED_sub = nh2.subscribe("nav_ned", 1, pose_update);																// current USV pose converted to NED
-  ros::Subscriber waypoints_NED_sub = nh4.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);				// goal waypoints converted to NED
-  
-  // Publishers
-  pp_initialization_state_pub = nh6.advertise<std_msgs::Bool>("pp_initialization_state", 1);						// publisher for state of initialization
-  current_goal_pose_pub = nh7.advertise<amore::usv_pose_msg>("current_goal_pose", 1);					// current goal for low level controller (propulsion_system)
-  goal_pose_publish_state_pub = nh8.advertise<std_msgs::Bool>("goal_pose_publish_state", 1);			// "goal_pose_publish_state" publisher for whether NED converted waypoints have been published
-  
-  // Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Initialize simulation time
-  ros::Time::init();
-  
-  // Initialize global variables
-  goal_pose_publish_status.data = false;
-  pp_initialization_status.data = false;
-  current_time = ros::Time::now();						// sets current time to the time it is now
-  last_time = current_time;										// sets last time to the current_time
-  
-  //sets the frequency for which the program sleeps at. 10=1/10 second
-  ros::Rate loop_rate(100);
+	// names the program for visual purposes
+	ros::init(argc, argv, "path_planner");
 
-  // ros::ok() will stop when the user inputs Ctrl+C
-  while(ros::ok())
-  {
-	  current_time = ros::Time::now();														// update current_time
-	  
-	  PATH_PLANNER_inspector();															// check that entire system is initialized before starting calculations
-	  
-	  goal_pose_publish_state_pub.publish(goal_pose_publish_status);	// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON 
-	  
-	  if ((PP_state == 1) || (PP_state == 2))	// TASK 1: STATION_KEEPING OR TASK 2: WAYFINDING
-	  {
-		  if ((loop_count > loop_goal_recieved) && (NED_waypoints_recieved))
-		  {
-			  if (PP_state == 2)
-			  {
-				  // determine error in x and y (position)
-				  e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
-				  e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
-				  e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
-				  e_psi = psi_goal[point] - psi_NED;
-				  
-				  if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
-				  {
-					  point += 1;
-					  ROS_INFO("Point %i reached. --MC", point);
-					  if (point==goal_poses)
-					  {
+	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
+
+	// NodeHandles
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10;
+
+	// Subscribers
+	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
+	ros::Subscriber pp_state_sub = nh2.subscribe("pp_state", 1, pp_state_update);
+	ros::Subscriber ps_state_sub = nh3.subscribe("ps_state", 1, ps_state_update);
+	ros::Subscriber pa_state_sub = nh4.subscribe("pa_state", 1, pa_state_update);
+	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
+	ros::Subscriber waypoints_NED_sub = nh6.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);				// goal waypoints converted to NED
+
+	// Publishers
+	pp_initialization_state_pub = nh8.advertise<std_msgs::Bool>("pp_initialization_state", 1);						// publisher for state of initialization
+	current_goal_pose_pub = nh9.advertise<amore::usv_pose_msg>("current_goal_pose", 1);					// current goal for low level controller (propulsion_system)
+	goal_pose_publish_state_pub = nh10.advertise<std_msgs::Bool>("goal_pose_publish_state", 1);			// "goal_pose_publish_state" publisher for whether NED converted waypoints have been published
+
+	// Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Initialize simulation time
+	ros::Time::init();
+
+	// Initialize global variables
+	goal_pose_publish_status.data = false;
+	pp_initialization_status.data = false;
+	current_time = ros::Time::now();							// sets current time to the time it is now
+	last_time = current_time;										// sets last time to the current_time
+
+	//sets the frequency for which the program sleeps at. 10=1/10 second
+	ros::Rate loop_rate(100);
+
+	// ros::ok() will stop when the user inputs Ctrl+C
+	while(ros::ok())
+	{
+		current_time = ros::Time::now();														// update current_time
+
+		PATH_PLANNER_inspector();															// check that entire system is initialized before starting calculations
+
+		goal_pose_publish_state_pub.publish(goal_pose_publish_status);	// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON 
+
+		if (PP_state == 0)
+		{
+			// reset all variables to be used for next run
+			goal_pose_publish_status.data = false;
+			NED_buoys_recieved = false;
+			calculations_done = false;
+			E_reached = false;
+			NED_waypoints_recieved = false;
+			e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
+			e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
+		}
+		else if ((PP_state == 1) || (PP_state == 2))	// TASK 1: STATION_KEEPING OR TASK 2: WAYFINDING
+		{
+			if ((loop_count > (loop_goal_recieved)) && (NED_waypoints_recieved))
+			{
+				if ((NA_state == 1) && (PP_state == 2) && (PS_state == 1))		// if the navigation_array is providing NED USV state, Wayfinding planner is active, and the propulsion_system is ON
+				{
+					// determine error in x and y (position)
+					e_x = x_goal[point] - x_usv_NED;                                       // calculate error in x position
+					e_y = y_goal[point] - y_usv_NED;                                       // calculate error in y position
+					e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
+					e_psi = psi_goal[point] - psi_NED;
+
+					if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
+					{
+						point += 1;
+						ROS_INFO("Point %i reached. --MC", point);
+						if (point==goal_poses)
+						{
 						  E_reached = true;
 						  ROS_INFO("End point has been reached. --MC\n");
-					  }
-				  }
-			
-				  if (E_reached)		// reset and go to points again once last point has been reached with a smaller tolerance threshold
-				  {
-					  point = 0;
-					  e_xy_allowed /= 2;
-					  e_psi_allowed /= 2;
-					  E_reached = false;
-				  }
-			  } // if ((PP_state == 2) && (PS_state == 1))
-			  current_goal_pose_publish();
-		  } // if (loop_count > loop_goal_recieved)
-	  } // if ((PP_state == 1) || (PP_state == 2))
-	  
-	  ros::spinOnce();									// update subscribers
-	  loop_rate.sleep();									// sleep for set loop_rate
-	  last_time = current_time;						// update last_time
-	  loop_count += 1;									// increment loop counter 
-  } // while(ros::ok())
+						}
+					}
 
-  ros::spinOnce();
-  loop_rate.sleep();
+					if (E_reached)		// reset and go to points again once last point has been reached with a smaller tolerance threshold
+					{
+						point = 0;
+						e_xy_allowed /= 2;
+						e_psi_allowed /= 2;
+						E_reached = false;
+					}
+				} // if (PP_state == 2)
+				current_goal_pose_publish();
+			} // if (loop_count > loop_goal_recieved)
+		} // if ((PP_state == 1) || (PP_state == 2))
 
-  return 0;
+		ros::spinOnce();									// update subscribers
+		loop_rate.sleep();									// sleep for set loop_rate
+		last_time = current_time;						// update last_time
+		loop_count += 1;									// increment loop counter 
+	} // while(ros::ok())
+
+	ros::spinOnce();
+	loop_rate.sleep();
+
+	return 0;
 }

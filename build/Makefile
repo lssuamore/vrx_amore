@@ -532,6 +532,32 @@ propulsion_system/fast:
 .PHONY : propulsion_system/fast
 
 #=============================================================================
+# Target rules for targets named path_planner
+
+# Build rule for target.
+path_planner: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 path_planner
+.PHONY : path_planner
+
+# fast build rule for target.
+path_planner/fast:
+	$(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/build
+.PHONY : path_planner/fast
+
+#=============================================================================
+# Target rules for targets named PID_HS_controller
+
+# Build rule for target.
+PID_HS_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PID_HS_controller
+.PHONY : PID_HS_controller
+
+# fast build rule for target.
+PID_HS_controller/fast:
+	$(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
+.PHONY : PID_HS_controller/fast
+
+#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -595,32 +621,6 @@ uuid_msgs_generate_messages_nodejs: cmake_check_build_system
 uuid_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f amore/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build.make amore/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named path_planner
-
-# Build rule for target.
-path_planner: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 path_planner
-.PHONY : path_planner
-
-# fast build rule for target.
-path_planner/fast:
-	$(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/build
-.PHONY : path_planner/fast
-
-#=============================================================================
-# Target rules for targets named PID_HS_controller
-
-# Build rule for target.
-PID_HS_controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_HS_controller
-.PHONY : PID_HS_controller
-
-# fast build rule for target.
-PID_HS_controller/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
-.PHONY : PID_HS_controller/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_msgs_generate_messages_py
@@ -985,6 +985,19 @@ nav_msgs_generate_messages_py: cmake_check_build_system
 nav_msgs_generate_messages_py/fast:
 	$(MAKE) -f amore/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make amore/CMakeFiles/nav_msgs_generate_messages_py.dir/build
 .PHONY : nav_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named _amore_generate_messages_check_deps_NED_buoys
+
+# Build rule for target.
+_amore_generate_messages_check_deps_NED_buoys: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _amore_generate_messages_check_deps_NED_buoys
+.PHONY : _amore_generate_messages_check_deps_NED_buoys
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_NED_buoys/fast:
+	$(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/build
+.PHONY : _amore_generate_messages_check_deps_NED_buoys/fast
 
 #=============================================================================
 # Target rules for targets named amore_generate_messages
@@ -3198,13 +3211,13 @@ help:
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... usv_msgs_generate_messages_lisp"
 	@echo "... propulsion_system"
+	@echo "... path_planner"
+	@echo "... PID_HS_controller"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_nodejs"
-	@echo "... path_planner"
-	@echo "... PID_HS_controller"
 	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... uuid_msgs_generate_messages_eus"
@@ -3233,6 +3246,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_py"
+	@echo "... _amore_generate_messages_check_deps_NED_buoys"
 	@echo "... amore_generate_messages"
 	@echo "... PID_HP_controller"
 	@echo "... amore_generate_messages_py"

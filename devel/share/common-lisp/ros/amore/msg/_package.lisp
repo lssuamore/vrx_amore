@@ -3,6 +3,8 @@
   (:export
    "<NED_BUOY>"
    "NED_BUOY"
+   "<NED_BUOYS>"
+   "NED_BUOYS"
    "<NED_WAYPOINTS>"
    "NED_WAYPOINTS"
    "<STATE_MSG>"
