@@ -870,7 +870,7 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 				}
 			}
 			DisparityFunc();
-			cv::imshow("Left Camera Updated", background);
+			//cv::imshow("Left Camera Updated", background);
 			cv::waitKey(30);
 		} // try 
 		catch (cv_bridge::Exception& e) //looks for errors 
@@ -961,7 +961,7 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "perception_array");
 	
 	// Initializations
-	cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);
+	//cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);
 	//cv::resizeWindow("Left Camera Updated", 100, 75);
 	//cv::namedWindow("Left Camera Features", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Updated", cv::WINDOW_AUTOSIZE);
@@ -997,12 +997,12 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
   
 	// Set the loop sleep rate
-	ros::Rate loop_rate(200);															// 
+	ros::Rate loop_rate(60);															// {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
 
 	ros::spinOnce();
 	loop_rate.sleep();
 	
-	cv::destroyWindow("Left Camera Updated");
+	//cv::destroyWindow("Left Camera Updated");
 	//cv::destroyWindow("Left Camera Features");
 	//cv::destroyWindow("Right Camera Updated");
 	//cv::destroyWindow("Right Camera Features");
