@@ -157,12 +157,14 @@ ros::Time current_time, last_time;									// creates time variables
 
 
 //..................................................................Functions.................................................................
-// THIS FUNCTION: Updates and publishes initialization status to "ps_initialization_state"
+// THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "ps_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
 // =============================================================================
 void PROPULSION_SYSTEM_inspector()
 {
+	current_time = ros::Time::now();   		// sets current_time to the time it is now
+	loop_count += 1;									// increment loop counter
 	if (loop_count > 10)
 	{
 		system_initialized = true;
@@ -388,8 +390,6 @@ int main(int argc, char **argv)
 	//rosk::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
 	{
-		current_time = ros::Time::now();													// update current_time
-
 		PROPULSION_SYSTEM_inspector();											// check initialization status and update ps_initialization_status
 
 		if (PS_state == 1)
@@ -649,10 +649,10 @@ int main(int argc, char **argv)
 			stbd_T_pub.publish(RT);
 		}
 
-		ros::spinOnce();									// update subscribers
+		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		loop_count += 1;									// increment loop counter 
+		//loop_count += 1;									// increment loop counter
 	}
 	LT.data = 0.0;
 	port_T_pub.publish(LT);

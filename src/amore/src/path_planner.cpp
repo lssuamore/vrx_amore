@@ -146,12 +146,14 @@ ros::Time current_time, last_time;									// creates time variables
 
 
 //..................................................................Functions...........................................................................
-// THIS FUNCTION: Updates and publishes initialization status to "pp_initialization_state"
+// THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "pp_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
 // =============================================================================
 void PATH_PLANNER_inspector()
 {
+	current_time = ros::Time::now();   		// sets current_time to the time it is now
+	loop_count += 1;									// increment loop counter
 	if (loop_count > 10)
 	{
 		system_initialized = true;
@@ -433,8 +435,6 @@ int main(int argc, char **argv)
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
 	{
-		current_time = ros::Time::now();														// update current_time
-
 		PATH_PLANNER_inspector();															// check that entire system is initialized before starting calculations
 
 		goal_pose_publish_state_pub.publish(goal_pose_publish_status);	// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON 
@@ -485,10 +485,10 @@ int main(int argc, char **argv)
 			} // if (loop_count > loop_goal_recieved)
 		} // if ((PP_state == 1) || (PP_state == 2))
 
-		ros::spinOnce();									// update subscribers
+		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		loop_count += 1;									// increment loop counter 
+		//loop_count += 1;									// increment loop counter
 	} // while(ros::ok())
 
 	ros::spinOnce();
