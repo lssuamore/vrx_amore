@@ -60,9 +60,9 @@ int NA_state = 0;
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
 //	0 = On standby
-//	1 = Station-Keeping
-//	2 = Wayfinding
-//	4 = Wildlife Encounter and Avoid
+//	1 = Task 1: Station-Keeping
+//	2 = Task 2: Wayfinding
+//	4 = Task 4: Wildlife Encounter and Avoid
 //	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = Task 6: Scan and Dock and Deliver
 	

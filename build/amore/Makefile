@@ -213,21 +213,6 @@ PID_HS_controller/fast:
 .PHONY : PID_HS_controller/fast
 
 # Convenience name for target.
-amore/CMakeFiles/PID_HP_controller.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_controller.dir/rule
-.PHONY : amore/CMakeFiles/PID_HP_controller.dir/rule
-
-# Convenience name for target.
-PID_HP_controller: amore/CMakeFiles/PID_HP_controller.dir/rule
-
-.PHONY : PID_HP_controller
-
-# fast build rule for target.
-PID_HP_controller/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
-.PHONY : PID_HP_controller/fast
-
-# Convenience name for target.
 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
@@ -753,6 +738,21 @@ amore_generate_messages/fast:
 .PHONY : amore_generate_messages/fast
 
 # Convenience name for target.
+amore/CMakeFiles/PID_HP_controller.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_controller.dir/rule
+.PHONY : amore/CMakeFiles/PID_HP_controller.dir/rule
+
+# Convenience name for target.
+PID_HP_controller: amore/CMakeFiles/PID_HP_controller.dir/rule
+
+.PHONY : PID_HP_controller
+
+# fast build rule for target.
+PID_HP_controller/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
+.PHONY : PID_HP_controller/fast
+
+# Convenience name for target.
 amore/CMakeFiles/amore_generate_messages_py.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_generate_messages_py.dir/rule
 .PHONY : amore/CMakeFiles/amore_generate_messages_py.dir/rule
@@ -1008,21 +1008,6 @@ amore_generate_messages_eus/fast:
 .PHONY : amore_generate_messages_eus/fast
 
 # Convenience name for target.
-amore/CMakeFiles/perception_array.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/perception_array.dir/rule
-.PHONY : amore/CMakeFiles/perception_array.dir/rule
-
-# Convenience name for target.
-perception_array: amore/CMakeFiles/perception_array.dir/rule
-
-.PHONY : perception_array
-
-# fast build rule for target.
-perception_array/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/build
-.PHONY : perception_array/fast
-
-# Convenience name for target.
 amore/CMakeFiles/amore_generate_messages_lisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/amore_generate_messages_lisp.dir/rule
@@ -1247,33 +1232,6 @@ src/path_planner.cpp.s:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.s
 .PHONY : src/path_planner.cpp.s
 
-src/perception_array.o: src/perception_array.cpp.o
-
-.PHONY : src/perception_array.o
-
-# target to build an object file
-src/perception_array.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.o
-.PHONY : src/perception_array.cpp.o
-
-src/perception_array.i: src/perception_array.cpp.i
-
-.PHONY : src/perception_array.i
-
-# target to preprocess a source file
-src/perception_array.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.i
-.PHONY : src/perception_array.cpp.i
-
-src/perception_array.s: src/perception_array.cpp.s
-
-.PHONY : src/perception_array.s
-
-# target to generate assembly for a file
-src/perception_array.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/perception_array.dir/build.make amore/CMakeFiles/perception_array.dir/src/perception_array.cpp.s
-.PHONY : src/perception_array.cpp.s
-
 src/propulsion_system.o: src/propulsion_system.cpp.o
 
 .PHONY : src/propulsion_system.o
@@ -1315,7 +1273,6 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... PID_HS_controller"
-	@echo "... PID_HP_controller"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
@@ -1351,6 +1308,7 @@ help:
 	@echo "... nav_msgs_generate_messages_py"
 	@echo "... _amore_generate_messages_check_deps_NED_buoys"
 	@echo "... amore_generate_messages"
+	@echo "... PID_HP_controller"
 	@echo "... amore_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
@@ -1369,7 +1327,6 @@ help:
 	@echo "... _amore_generate_messages_check_deps_NED_buoy"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
-	@echo "... perception_array"
 	@echo "... amore_generate_messages_lisp"
 	@echo "... amore_genlisp"
 	@echo "... amore_generate_messages_nodejs"
@@ -1392,9 +1349,6 @@ help:
 	@echo "... src/path_planner.o"
 	@echo "... src/path_planner.i"
 	@echo "... src/path_planner.s"
-	@echo "... src/perception_array.o"
-	@echo "... src/perception_array.i"
-	@echo "... src/perception_array.s"
 	@echo "... src/propulsion_system.o"
 	@echo "... src/propulsion_system.i"
 	@echo "... src/propulsion_system.s"

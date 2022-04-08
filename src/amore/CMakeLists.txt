@@ -143,7 +143,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(mission_control src/mission_control.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(navigation_array src/navigation_array.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMAKE
+#add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(PID_HP_controller src/PID_HP_controller.cpp)
 add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
@@ -172,7 +172,7 @@ add_executable(path_planner src/path_planner.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(mission_control ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(navigation_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+#target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
 target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE

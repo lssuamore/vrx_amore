@@ -55,9 +55,9 @@ int NA_state = 0;
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
 //	0 = On standby
-//	1 = Station-Keeping
-//	2 = Wayfinding
-//	4 = Wildlife Encounter and Avoid
+//	1 = Task 1: Station-Keeping
+//	2 = Task 2: Wayfinding
+//	4 = Task 4: Wildlife Encounter and Avoid
 //	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = Task 6: Scan and Dock and Deliver
 	
@@ -157,12 +157,12 @@ void PATH_PLANNER_inspector()
 	if (loop_count > 10)
 	{
 		system_initialized = true;
-		//ROS_INFO("path_planner_initialized -- NA");
+		//ROS_INFO("path_planner_initialized -- PP");
 	}
 	else
 	{
 		system_initialized = false;
-		ROS_INFO("!path_planner_initialized -- NA");
+		ROS_INFO("!path_planner_initialized -- PP");
 	}
 	pp_initialization_status.data = system_initialized;
 	pp_initialization_state_pub.publish(pp_initialization_status);		// publish the initialization status of the path_planner to "pp_initialization_state"
@@ -436,8 +436,37 @@ int main(int argc, char **argv)
 	while(ros::ok())
 	{
 		PATH_PLANNER_inspector();															// check that entire system is initialized before starting calculations
-
-		goal_pose_publish_state_pub.publish(goal_pose_publish_status);	// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON 
+		goal_pose_publish_state_pub.publish(goal_pose_publish_status);	// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON
+		
+		//	0 = On standby
+		//	1 = Station-Keeping
+		//	2 = Wayfinding
+		//	4 = Wildlife Encounter and Avoid
+		//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+		//	6 = Task 6: Scan and Dock and Deliver
+		switch(PA_state)
+		{
+			case 0:						// On standby
+			
+				break;
+			case 1:						// Station-Keeping
+			
+				break;
+			case 2:						// Wayfinding
+			
+				break;
+			case 4:						// Wildlife Encounter and Avoid
+			
+				break;
+			case 5:						// Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+			
+				break;
+			case 6:						// Scan and Dock and Deliver
+			
+				break;
+			default:
+				break;
+		}
 
 		if (PP_state == 0)
 		{
