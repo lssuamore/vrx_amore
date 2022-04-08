@@ -45,14 +45,35 @@
 int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
 bool system_initialized = false;								// false means the system has not been initialized
 
-// STATES CONCERNED WITH "navigation_array"
-int NA_state = 0;	// 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
-// STATES CONCERNED WITH "path_planner"
-int PP_state = 0;		// 0 = On Standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
-// STATES CONCERNED WITH "propulsion_system"
-int PS_state = 0;		// 0 = On Standby; 1 = LL controller ON
-// STATES CONCERNED WITH "perception_array"
-int PA_state = 0;		// 0 = On Standby; 1 = General State; 2 = Task 3: Perception
+//	STATES CONCERNED WITH "navigation_array"
+int NA_state = 0;
+//	0 = On standby
+//	1 = USV NED pose converter
+//	2 = Station-Keeping NED goal pose converter
+//	3 = Wayfinding NED goal pose converter
+
+//	STATES CONCERNED WITH "path_planner"
+int PP_state = 0;
+//	0 = On standby
+//	1 = Station-Keeping
+//	2 = Wayfinding
+//	4 = Wildlife Encounter and Avoid
+//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = Task 6: Scan and Dock and Deliver
+	
+//	STATES CONCERNED WITH "propulsion_system"
+int PS_state = 0;
+//	0 = On standby
+//	1 = Propulsion system ON
+
+//	STATES CONCERNED WITH "perception_array"
+int PA_state = 0;
+//	0 = On standby
+//	1 = General State
+//	3 = Task 3: Landmark Localization and Characterization
+//	4 = Task 4: Wildlife Encounter and Avoid
+//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = Task 6: Scan and Dock and Deliver
 
 int point = 0;                     		    							// number of points on trajectory reached 
 int goal_poses;              											// total number of poses to reach 
@@ -261,44 +282,71 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 // =============================================================================
 void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simplify, use just message variables !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 {
-	// MUST SET THE FOLLOWING
-	NA_state = 0;				// 0 = On standby; 1 = USV NED pose conversion; 2 = SK NED goal pose conversion; 3 = WF NED goal pose conversion; 4569 = HARD RESET (OR OTHER USE)
-	PP_state = 0;				// 0 = On standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
-	PS_state = 0;				// 0 = On standby, 1 = Propulsion system ON
-	PA_state = 0;      		// 0 = On standby, 1 = General state, 2 = Task 3: Perception
-	if (system_initialized)
+	// FIRST RESET STATES TO BE SET ACCORDINGLY TO CURRENT SYSTEM STATUSES
+	//	STATES CONCERNED WITH "navigation_array"
+	NA_state = 0;
+	//	0 = On standby
+	//	1 = USV NED pose converter
+	//	2 = Station-Keeping NED goal pose converter
+	//	3 = Wayfinding NED goal pose converter
+
+	//	STATES CONCERNED WITH "path_planner"
+	PP_state = 0;
+	//	0 = On standby
+	//	1 = Station-Keeping
+	//	2 = Wayfinding
+	//	4 = Wildlife Encounter and Avoid
+	//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+	//	6 = Task 6: Scan and Dock and Deliver
+		
+	//	STATES CONCERNED WITH "propulsion_system"
+	PS_state = 0;
+	//	0 = On standby
+	//	1 = Propulsion system ON
+
+	//	STATES CONCERNED WITH "perception_array"
+	PA_state = 0;
+	//	0 = On standby
+	//	1 = General State
+	//	3 = Task 3: Landmark Localization and Characterization
+	//	4 = Task 4: Wildlife Encounter and Avoid
+	//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+	//	6 = Task 6: Scan and Dock and Deliver
+	
+	if (system_initialized)											// Do not begin subsytem activity until system is initialized
 	{
 		if (msg->name == "station_keeping")
 		{
 			if ((msg->state == "ready") || (msg->state == "running"))
 			{
-				if (NED_waypoints_published)		// if the goal pose has been converted from lat/long and published by navigation_array
+				if (NED_waypoints_published)				// if the goal pose has been converted from lat/long and published by navigation_array
 				{
-					NA_state = 1;								// navigation_array is in standard USV NED pose conversion mode
-					PP_state = 1;								// path_planner is in station_keeping mode
+					NA_state = 1;										// USV NED pose converter
+					PP_state = 1;										// Station-Keeping path planner
 					if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
 					{
-						PS_state = 1;								// propulsion_system is ON
+						PS_state = 1;									// Propulsion system ON
 					}
 					else
 					{
-						PS_state = 0;								// propulsion_system is on standby
+						PS_state = 0;									// Propulsion system on standby
 					}	// if (NED_goal_pose_published)
 				}	// if (NED_waypoints_published)
 				else
 				{
-					NA_state = 2;								// navigation_array is in SK NED goal pose conversion mode
-					PP_state = 0;								// path_planner is on standby
-					PS_state = 0;								// propulsion_system is on standby
+					NA_state = 2;										// Station-Keeping NED goal pose converter
+					PP_state = 0;										// Path planner on standby
+					PS_state = 0;										// Propulsion system on standby
 				}
 			}
 			else
 			{
+				// ALL CODES ON STANDBY
 				NA_state = 0;
 				PP_state = 0;
 				PS_state = 0;
 				PA_state = 0;
-				// reset task statuses as long as task is in "initial" or "finished"
+				// reset task statuses as long as task is in "initial" or "finished" state
 				NED_waypoints_published = false;
 				point = 0;
 			}
@@ -309,39 +357,40 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 			{
 				if (NED_waypoints_published)		// if the goal pose has been converted from lat/long and published by navigation_array
 				{
-					NA_state = 1;								// navigation_array is in standard USV NED pose conversion mode
-					PP_state = 2;								// path_planner is in station_keeping mode
+					NA_state = 1;										// USV NED pose converter
+					PP_state = 2;										// Wayfinding path planner
 					if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
 					{
-						PS_state = 1;								// propulsion_system is ON
+						PS_state = 1;									// Propulsion system ON
 					}
 					else
 					{
-						PS_state = 0;								// propulsion_system is on standby
+						PS_state = 0;									// Propulsion system on standby
 					}	// if (NED_goal_pose_published)
 				}	// if (NED_waypoints_published)
 				else
 				{
-					NA_state = 3;								// navigation_array is in WF NED goal pose conversion mode
-					PP_state = 0;								// path_planner is on standby
-					PS_state = 0;								// propulsion_system is on standby
+					NA_state = 3;										// Wayfinding NED goal pose converter
+					PP_state = 0;										// Path planner on standby
+					PS_state = 0;										// Propulsion system on standby
 				}
 			}
 			else
 			{
+				// ALL CODES ON STANDBY
 				NA_state = 0;
 				PP_state = 0;
 				PS_state = 0;
 				PA_state = 0;
-				// reset task statuses as long as task is in "initial" or "finished"
+				// reset task statuses as long as task is in "initial" or "finished" state
 				NED_waypoints_published = false;
 				point = 0;
 			}
 		} // (msg->name == "wayfinding")
-		else if (msg->name == "perception")										// NOT DONE YET
+		else if (msg->name == "perception")
 		{
-			NA_state = 1;				// navigation_array is in standard USV NED Pose Conversion mode
-			PA_state = 2;				// perception_array is in Task 3: Perception mode
+			NA_state = 1;											// USV NED pose converter
+			PA_state = 3;											// Task 3: Landmark Localization and Characterization
 		} // (msg->name == "perception")
 		
 		// 	INTEGRATED TASK CODES FOLLOW
@@ -364,19 +413,20 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		{
 			if ((msg->state == "ready") || (msg->state == "running"))
 			{
-				NA_state = 1;								// navigation_array is in standard USV NED pose conversion mode
-				PP_state = 5;								// path_planner is in channel navigation and pinger localization mode
+				NA_state = 1;										// USV NED pose converter
+				PP_state = 5;										// Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance path planner
 				if (NED_goal_pose_published)	// if the goal pose has been published to propulsion_system
 				{
-					PS_state = 1;							// Turn on propulsion_system once the goal points have been calculated
+					PS_state = 1;									// Propulsion system ON
 				}
 				else
 				{
-					PS_state = 0;
+					PS_state = 0;									// Propulsion system on standby
 				}
 			}
 			else
 			{
+				// ALL CODES ON STANDBY
 				NA_state = 0;
 				PP_state = 0;
 				PS_state = 0;
@@ -412,36 +462,36 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		na_state_msg.header.seq +=1;											// sequence number
 		na_state_msg.header.stamp = current_time;					// set stamp to current time
 		na_state_msg.header.frame_id = "mission_control";		// header frame
-		na_state_msg.state.data = NA_state;								// set navigation_array_state; 0 = On Standby; 1 = USV NED Pose Conversion; 2 = SK NED Goal Pose Conversion; 3 = WF NED Goal Pose Conversion; 4569 = HARD RESET (OR OTHER USE)
+		na_state_msg.state.data = NA_state;								// set navigation_array_state
 		na_state_pub.publish(na_state_msg);								// publish na_state_msg to "na_state"
 		
 		// SEND STATE TO PATH_PLANNER
 		pp_state_msg.header.seq +=1;											// sequence number
 		pp_state_msg.header.stamp = current_time;					// set stamp to current time
 		pp_state_msg.header.frame_id = "mission_control";		// header frame
-		pp_state_msg.state.data = PP_state;								// set path_planner_state; 0 = On Standby; 1 = Station-keeping; 2 = Wayfinding; 4 = Wildlife; 5 = Channel navigation and pinger localization; 4569 = HARD RESET (OR OTHER USE)
+		pp_state_msg.state.data = PP_state;								// set path_planner_state
 		pp_state_pub.publish(pp_state_msg);								// publish pp_state_msg to "pp_state"
 		
 		// SEND STATE TO PROPULSION_SYSTEM
 		ps_state_msg.header.seq +=1;											// sequence number
 		ps_state_msg.header.stamp = current_time;					// set stamp to current time
 		ps_state_msg.header.frame_id = "mission_control";		// header frame
-		ps_state_msg.state.data = PS_state;								// set propulsion_system_state; 0 = OFF; 1 = ON
+		ps_state_msg.state.data = PS_state;								// set propulsion_system_state
 		ps_state_pub.publish(ps_state_msg);								// publish ps_state_msg to "ps_state"		
 
 		// SEND STATE TO PERCEPTION_ARRAY
 		pa_state_msg.header.seq +=1;											// sequence number
 		pa_state_msg.header.stamp = current_time;					// set stamp to current time
 		pa_state_msg.header.frame_id = "mission_control";		// header frame
-		pa_state_msg.state.data = PA_state;								// set perception_array_state; 0 = On Standby, 1 = General State, 2 = Task 3: Perception
+		pa_state_msg.state.data = PA_state;								// set perception_array_state
 		pa_state_pub.publish(pa_state_msg);								// publish pa_state_msg to "pa_state"
 		
-		/* // UPDATE USER OF EACH CODES STATE
+		// UPDATE USER OF EACH CODES STATE
 		ROS_DEBUG("----------------- CURRENT STATES --------------------");
 		ROS_DEBUG("NA_state: %i --MC", NA_state);
 		ROS_DEBUG("PP_state: %i --MC", PP_state);
 		ROS_DEBUG("PS_state: %i --MC", PS_state);
-		ROS_DEBUG("PA_state: %i --MC", PA_state); */
+		ROS_DEBUG("PA_state: %i --MC", PA_state);
 	} // if (system_initialized)
 } // END OF state_update()
 //............................................................End of Functions............................................................
