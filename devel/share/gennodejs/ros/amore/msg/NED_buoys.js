@@ -11,7 +11,7 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
-let NED_buoy = require('./NED_buoy.js');
+let geometry_msgs = _finder('geometry_msgs');
 
 //-----------------------------------------------------------
 
@@ -44,7 +44,7 @@ class NED_buoys {
     // Serialize the length for message field [buoys]
     bufferOffset = _serializer.uint32(obj.buoys.length, buffer, bufferOffset);
     obj.buoys.forEach((val) => {
-      bufferOffset = NED_buoy.serialize(val, buffer, bufferOffset);
+      bufferOffset = geometry_msgs.msg.PointStamped.serialize(val, buffer, bufferOffset);
     });
     // Serialize message field [quantity]
     bufferOffset = _serializer.int32(obj.quantity, buffer, bufferOffset);
@@ -60,7 +60,7 @@ class NED_buoys {
     len = _deserializer.uint32(buffer, bufferOffset);
     data.buoys = new Array(len);
     for (let i = 0; i < len; ++i) {
-      data.buoys[i] = NED_buoy.deserialize(buffer, bufferOffset)
+      data.buoys[i] = geometry_msgs.msg.PointStamped.deserialize(buffer, bufferOffset)
     }
     // Deserialize message field [quantity]
     data.quantity = _deserializer.int32(buffer, bufferOffset);
@@ -70,7 +70,7 @@ class NED_buoys {
   static getMessageSize(object) {
     let length = 0;
     object.buoys.forEach((val) => {
-      length += NED_buoy.getMessageSize(val);
+      length += geometry_msgs.msg.PointStamped.getMessageSize(val);
     });
     return length + 8;
   }
@@ -82,19 +82,36 @@ class NED_buoys {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '770b53fd7910d5fb852692f8fc415cee';
+    return '8674d58f3fb14856192d33f62b336838';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    amore/NED_buoy[] buoys
+    geometry_msgs/PointStamped[] buoys
     int32 quantity
     
     ================================================================================
-    MSG: amore/NED_buoy
-    geometry_msgs/Point position
-    string id
+    MSG: geometry_msgs/PointStamped
+    # This represents a Point with reference coordinate frame and timestamp
+    Header header
+    Point point
+    
+    ================================================================================
+    MSG: std_msgs/Header
+    # Standard metadata for higher-level stamped data types.
+    # This is generally used to communicate timestamped data 
+    # in a particular coordinate frame.
+    # 
+    # sequence ID: consecutively increasing ID 
+    uint32 seq
+    #Two-integer timestamp that is expressed as:
+    # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+    # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+    # time-handling sugar is provided by the client library
+    time stamp
+    #Frame this data is associated with
+    string frame_id
     
     ================================================================================
     MSG: geometry_msgs/Point
@@ -115,7 +132,7 @@ class NED_buoys {
     if (msg.buoys !== undefined) {
       resolved.buoys = new Array(msg.buoys.length);
       for (let i = 0; i < resolved.buoys.length; ++i) {
-        resolved.buoys[i] = NED_buoy.Resolve(msg.buoys[i]);
+        resolved.buoys[i] = geometry_msgs.msg.PointStamped.Resolve(msg.buoys[i]);
       }
     }
     else {

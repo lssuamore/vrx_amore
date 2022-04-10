@@ -213,21 +213,6 @@ PID_HS_controller/fast:
 .PHONY : PID_HS_controller/fast
 
 # Convenience name for target.
-amore/CMakeFiles/PID_HP_controller.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_controller.dir/rule
-.PHONY : amore/CMakeFiles/PID_HP_controller.dir/rule
-
-# Convenience name for target.
-PID_HP_controller: amore/CMakeFiles/PID_HP_controller.dir/rule
-
-.PHONY : PID_HP_controller
-
-# fast build rule for target.
-PID_HP_controller/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
-.PHONY : PID_HP_controller/fast
-
-# Convenience name for target.
 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
@@ -753,6 +738,21 @@ amore_generate_messages/fast:
 .PHONY : amore_generate_messages/fast
 
 # Convenience name for target.
+amore/CMakeFiles/PID_HP_controller.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_controller.dir/rule
+.PHONY : amore/CMakeFiles/PID_HP_controller.dir/rule
+
+# Convenience name for target.
+PID_HP_controller: amore/CMakeFiles/PID_HP_controller.dir/rule
+
+.PHONY : PID_HP_controller
+
+# fast build rule for target.
+PID_HP_controller/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
+.PHONY : PID_HP_controller/fast
+
+# Convenience name for target.
 amore/CMakeFiles/amore_generate_messages_py.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_generate_messages_py.dir/rule
 .PHONY : amore/CMakeFiles/amore_generate_messages_py.dir/rule
@@ -961,21 +961,6 @@ actionlib_msgs_generate_messages_nodejs: amore/CMakeFiles/actionlib_msgs_generat
 actionlib_msgs_generate_messages_nodejs/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make amore/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/rule
-.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/rule
-
-# Convenience name for target.
-_amore_generate_messages_check_deps_NED_buoy: amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/rule
-
-.PHONY : _amore_generate_messages_check_deps_NED_buoy
-
-# fast build rule for target.
-_amore_generate_messages_check_deps_NED_buoy/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/build
-.PHONY : _amore_generate_messages_check_deps_NED_buoy/fast
 
 # Convenience name for target.
 amore/CMakeFiles/amore_geneus.dir/rule:
@@ -1315,7 +1300,6 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... PID_HS_controller"
-	@echo "... PID_HP_controller"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
@@ -1351,6 +1335,7 @@ help:
 	@echo "... nav_msgs_generate_messages_py"
 	@echo "... _amore_generate_messages_check_deps_NED_buoys"
 	@echo "... amore_generate_messages"
+	@echo "... PID_HP_controller"
 	@echo "... amore_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
@@ -1366,7 +1351,6 @@ help:
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
-	@echo "... _amore_generate_messages_check_deps_NED_buoy"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
 	@echo "... perception_array"

@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/home/brad/vrx_amore/devel/include/amore/NED_buoys.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+geometry_msgs/PointStamped.h
+-
+
 /home/brad/vrx_amore/devel/include/amore/NED_waypoints.h
 string
 -
@@ -113,8 +131,8 @@ cv_bridge/cv_bridge.h
 /home/brad/vrx_amore/src/amore/src/cv_bridge/cv_bridge.h
 opencv2/opencv.hpp
 /home/brad/vrx_amore/src/amore/src/opencv2/opencv.hpp
-geometry_msgs/Point.h
-/home/brad/vrx_amore/src/amore/src/geometry_msgs/Point.h
+geometry_msgs/PointStamped.h
+/home/brad/vrx_amore/src/amore/src/geometry_msgs/PointStamped.h
 geographic_msgs/GeoPoseStamped.h
 /home/brad/vrx_amore/src/amore/src/geographic_msgs/GeoPoseStamped.h
 nav_msgs/Odometry.h
@@ -137,6 +155,8 @@ amore/state_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/state_msg.h
 amore/usv_pose_msg.h
 /home/brad/vrx_amore/src/amore/src/amore/usv_pose_msg.h
+amore/NED_buoys.h
+/home/brad/vrx_amore/src/amore/src/amore/NED_buoys.h
 geometry_msgs/PoseArray.h
 /home/brad/vrx_amore/src/amore/src/geometry_msgs/PoseArray.h
 
@@ -244,6 +264,26 @@ ros/serialization.h
 ros/builtin_message_traits.h
 -
 ros/message_operations.h
+-
+
+/opt/ros/noetic/include/geometry_msgs/PointStamped.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+geometry_msgs/Point.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/Pose.h

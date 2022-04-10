@@ -6,8 +6,6 @@
                :std_msgs-msg
 )
   :components ((:file "_package")
-    (:file "NED_buoy" :depends-on ("_package_NED_buoy"))
-    (:file "_package_NED_buoy" :depends-on ("_package"))
     (:file "NED_buoys" :depends-on ("_package_NED_buoys"))
     (:file "_package_NED_buoys" :depends-on ("_package"))
     (:file "NED_waypoints" :depends-on ("_package_NED_waypoints"))

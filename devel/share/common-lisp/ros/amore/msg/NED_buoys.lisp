@@ -10,8 +10,8 @@
   ((buoys
     :reader buoys
     :initarg :buoys
-    :type (cl:vector amore-msg:NED_buoy)
-   :initform (cl:make-array 0 :element-type 'amore-msg:NED_buoy :initial-element (cl:make-instance 'amore-msg:NED_buoy)))
+    :type (cl:vector geometry_msgs-msg:PointStamped)
+   :initform (cl:make-array 0 :element-type 'geometry_msgs-msg:PointStamped :initial-element (cl:make-instance 'geometry_msgs-msg:PointStamped)))
    (quantity
     :reader quantity
     :initarg :quantity
@@ -62,7 +62,7 @@
   (cl:setf (cl:slot-value msg 'buoys) (cl:make-array __ros_arr_len))
   (cl:let ((vals (cl:slot-value msg 'buoys)))
     (cl:dotimes (i __ros_arr_len)
-    (cl:setf (cl:aref vals i) (cl:make-instance 'amore-msg:NED_buoy))
+    (cl:setf (cl:aref vals i) (cl:make-instance 'geometry_msgs-msg:PointStamped))
   (roslisp-msg-protocol:deserialize (cl:aref vals i) istream))))
     (cl:let ((unsigned 0))
       (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
@@ -80,16 +80,16 @@
   "amore/NED_buoys")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<NED_buoys>)))
   "Returns md5sum for a message object of type '<NED_buoys>"
-  "770b53fd7910d5fb852692f8fc415cee")
+  "8674d58f3fb14856192d33f62b336838")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'NED_buoys)))
   "Returns md5sum for a message object of type 'NED_buoys"
-  "770b53fd7910d5fb852692f8fc415cee")
+  "8674d58f3fb14856192d33f62b336838")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<NED_buoys>)))
   "Returns full string definition for message of type '<NED_buoys>"
-  (cl:format cl:nil "amore/NED_buoy[] buoys~%int32 quantity~%~%================================================================================~%MSG: amore/NED_buoy~%geometry_msgs/Point position~%string id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
+  (cl:format cl:nil "geometry_msgs/PointStamped[] buoys~%int32 quantity~%~%================================================================================~%MSG: geometry_msgs/PointStamped~%# This represents a Point with reference coordinate frame and timestamp~%Header header~%Point point~%~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'NED_buoys)))
   "Returns full string definition for message of type 'NED_buoys"
-  (cl:format cl:nil "amore/NED_buoy[] buoys~%int32 quantity~%~%================================================================================~%MSG: amore/NED_buoy~%geometry_msgs/Point position~%string id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
+  (cl:format cl:nil "geometry_msgs/PointStamped[] buoys~%int32 quantity~%~%================================================================================~%MSG: geometry_msgs/PointStamped~%# This represents a Point with reference coordinate frame and timestamp~%Header header~%Point point~%~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <NED_buoys>))
   (cl:+ 0
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'buoys) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ (roslisp-msg-protocol:serialization-length ele))))

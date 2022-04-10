@@ -550,7 +550,6 @@ int main(int argc, char **argv)
 		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		//loop_count += 1;									// increment loop counter
 	}
 	return 0;
 } // end of main()

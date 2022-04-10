@@ -652,7 +652,6 @@ int main(int argc, char **argv)
 		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate
 		last_time = current_time;						// update last_time
-		//loop_count += 1;									// increment loop counter
 	}
 	LT.data = 0.0;
 	port_T_pub.publish(LT);

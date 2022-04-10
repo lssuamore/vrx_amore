@@ -15,7 +15,7 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
-#include <amore/NED_buoy.h>
+#include <geometry_msgs/PointStamped.h>
 
 namespace amore
 {
@@ -36,7 +36,7 @@ struct NED_buoys_
 
 
 
-   typedef std::vector< ::amore::NED_buoy_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::amore::NED_buoy_<ContainerAllocator> >::other >  _buoys_type;
+   typedef std::vector< ::geometry_msgs::PointStamped_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::geometry_msgs::PointStamped_<ContainerAllocator> >::other >  _buoys_type;
   _buoys_type buoys;
 
    typedef int32_t _quantity_type;
@@ -129,12 +129,12 @@ struct MD5Sum< ::amore::NED_buoys_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "770b53fd7910d5fb852692f8fc415cee";
+    return "8674d58f3fb14856192d33f62b336838";
   }
 
   static const char* value(const ::amore::NED_buoys_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x770b53fd7910d5fbULL;
-  static const uint64_t static_value2 = 0x852692f8fc415ceeULL;
+  static const uint64_t static_value1 = 0x8674d58f3fb14856ULL;
+  static const uint64_t static_value2 = 0x192d33f62b336838ULL;
 };
 
 template<class ContainerAllocator>
@@ -153,13 +153,30 @@ struct Definition< ::amore::NED_buoys_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "amore/NED_buoy[] buoys\n"
+    return "geometry_msgs/PointStamped[] buoys\n"
 "int32 quantity\n"
 "\n"
 "================================================================================\n"
-"MSG: amore/NED_buoy\n"
-"geometry_msgs/Point position\n"
-"string id\n"
+"MSG: geometry_msgs/PointStamped\n"
+"# This represents a Point with reference coordinate frame and timestamp\n"
+"Header header\n"
+"Point point\n"
+"\n"
+"================================================================================\n"
+"MSG: std_msgs/Header\n"
+"# Standard metadata for higher-level stamped data types.\n"
+"# This is generally used to communicate timestamped data \n"
+"# in a particular coordinate frame.\n"
+"# \n"
+"# sequence ID: consecutively increasing ID \n"
+"uint32 seq\n"
+"#Two-integer timestamp that is expressed as:\n"
+"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
+"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
+"# time-handling sugar is provided by the client library\n"
+"time stamp\n"
+"#Frame this data is associated with\n"
+"string frame_id\n"
 "\n"
 "================================================================================\n"
 "MSG: geometry_msgs/Point\n"
@@ -211,7 +228,7 @@ struct Printer< ::amore::NED_buoys_<ContainerAllocator> >
       s << indent << "  buoys[" << i << "]: ";
       s << std::endl;
       s << indent;
-      Printer< ::amore::NED_buoy_<ContainerAllocator> >::stream(s, indent + "    ", v.buoys[i]);
+      Printer< ::geometry_msgs::PointStamped_<ContainerAllocator> >::stream(s, indent + "    ", v.buoys[i]);
     }
     s << indent << "quantity: ";
     Printer<int32_t>::stream(s, indent + "  ", v.quantity);
