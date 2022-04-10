@@ -558,19 +558,6 @@ PID_HS_controller/fast:
 .PHONY : PID_HS_controller/fast
 
 #=============================================================================
-# Target rules for targets named PID_HP_controller
-
-# Build rule for target.
-PID_HP_controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_controller
-.PHONY : PID_HP_controller
-
-# fast build rule for target.
-PID_HP_controller/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
-.PHONY : PID_HP_controller/fast
-
-#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -1026,6 +1013,19 @@ amore_generate_messages/fast:
 .PHONY : amore_generate_messages/fast
 
 #=============================================================================
+# Target rules for targets named PID_HP_controller
+
+# Build rule for target.
+PID_HP_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_controller
+.PHONY : PID_HP_controller
+
+# fast build rule for target.
+PID_HP_controller/fast:
+	$(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
+.PHONY : PID_HP_controller/fast
+
+#=============================================================================
 # Target rules for targets named amore_generate_messages_py
 
 # Build rule for target.
@@ -1206,19 +1206,6 @@ actionlib_msgs_generate_messages_nodejs: cmake_check_build_system
 actionlib_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f amore/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make amore/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named _amore_generate_messages_check_deps_NED_buoy
-
-# Build rule for target.
-_amore_generate_messages_check_deps_NED_buoy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _amore_generate_messages_check_deps_NED_buoy
-.PHONY : _amore_generate_messages_check_deps_NED_buoy
-
-# fast build rule for target.
-_amore_generate_messages_check_deps_NED_buoy/fast:
-	$(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoy.dir/build
-.PHONY : _amore_generate_messages_check_deps_NED_buoy/fast
 
 #=============================================================================
 # Target rules for targets named amore_geneus
@@ -3226,7 +3213,6 @@ help:
 	@echo "... propulsion_system"
 	@echo "... path_planner"
 	@echo "... PID_HS_controller"
-	@echo "... PID_HP_controller"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
@@ -3262,6 +3248,7 @@ help:
 	@echo "... nav_msgs_generate_messages_py"
 	@echo "... _amore_generate_messages_check_deps_NED_buoys"
 	@echo "... amore_generate_messages"
+	@echo "... PID_HP_controller"
 	@echo "... amore_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
@@ -3276,7 +3263,6 @@ help:
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
-	@echo "... _amore_generate_messages_check_deps_NED_buoy"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
 	@echo "... perception_array"

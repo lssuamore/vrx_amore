@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 include amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/progress.make
 
 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys:
-	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py amore /home/brad/vrx_amore/src/amore/msg/NED_buoys.msg amore/NED_buoy:geometry_msgs/Point
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py amore /home/brad/vrx_amore/src/amore/msg/NED_buoys.msg geometry_msgs/Point:geometry_msgs/PointStamped:std_msgs/Header
 
 _amore_generate_messages_check_deps_NED_buoys: amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys
 _amore_generate_messages_check_deps_NED_buoys: amore/CMakeFiles/_amore_generate_messages_check_deps_NED_buoys.dir/build.make

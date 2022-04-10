@@ -6,20 +6,37 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import amore.msg
 import geometry_msgs.msg
+import std_msgs.msg
 
 class NED_buoys(genpy.Message):
-  _md5sum = "770b53fd7910d5fb852692f8fc415cee"
+  _md5sum = "8674d58f3fb14856192d33f62b336838"
   _type = "amore/NED_buoys"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """amore/NED_buoy[] buoys
+  _full_text = """geometry_msgs/PointStamped[] buoys
 int32 quantity
 
 ================================================================================
-MSG: amore/NED_buoy
-geometry_msgs/Point position
-string id
+MSG: geometry_msgs/PointStamped
+# This represents a Point with reference coordinate frame and timestamp
+Header header
+Point point
+
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
 
 ================================================================================
 MSG: geometry_msgs/Point
@@ -29,7 +46,7 @@ float64 y
 float64 z
 """
   __slots__ = ['buoys','quantity']
-  _slot_types = ['amore/NED_buoy[]','int32']
+  _slot_types = ['geometry_msgs/PointStamped[]','int32']
 
   def __init__(self, *args, **kwds):
     """
@@ -71,15 +88,21 @@ float64 z
       length = len(self.buoys)
       buff.write(_struct_I.pack(length))
       for val1 in self.buoys:
-        _v1 = val1.position
-        _x = _v1
-        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
-        _x = val1.id
+        _v1 = val1.header
+        _x = _v1.seq
+        buff.write(_get_struct_I().pack(_x))
+        _v2 = _v1.stamp
+        _x = _v2
+        buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
+        _x = _v1.frame_id
         length = len(_x)
         if python3 or type(_x) == unicode:
           _x = _x.encode('utf-8')
           length = len(_x)
         buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+        _v3 = val1.point
+        _x = _v3
+        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
       _x = self.quantity
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
@@ -101,21 +124,30 @@ float64 z
       (length,) = _struct_I.unpack(str[start:end])
       self.buoys = []
       for i in range(0, length):
-        val1 = amore.msg.NED_buoy()
-        _v2 = val1.position
-        _x = _v2
+        val1 = geometry_msgs.msg.PointStamped()
+        _v4 = val1.header
         start = end
-        end += 24
-        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
+        end += 4
+        (_v4.seq,) = _get_struct_I().unpack(str[start:end])
+        _v5 = _v4.stamp
+        _x = _v5
+        start = end
+        end += 8
+        (_x.secs, _x.nsecs,) = _get_struct_2I().unpack(str[start:end])
         start = end
         end += 4
         (length,) = _struct_I.unpack(str[start:end])
         start = end
         end += length
         if python3:
-          val1.id = str[start:end].decode('utf-8', 'rosmsg')
+          _v4.frame_id = str[start:end].decode('utf-8', 'rosmsg')
         else:
-          val1.id = str[start:end]
+          _v4.frame_id = str[start:end]
+        _v6 = val1.point
+        _x = _v6
+        start = end
+        end += 24
+        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
         self.buoys.append(val1)
       start = end
       end += 4
@@ -135,15 +167,21 @@ float64 z
       length = len(self.buoys)
       buff.write(_struct_I.pack(length))
       for val1 in self.buoys:
-        _v3 = val1.position
-        _x = _v3
-        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
-        _x = val1.id
+        _v7 = val1.header
+        _x = _v7.seq
+        buff.write(_get_struct_I().pack(_x))
+        _v8 = _v7.stamp
+        _x = _v8
+        buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
+        _x = _v7.frame_id
         length = len(_x)
         if python3 or type(_x) == unicode:
           _x = _x.encode('utf-8')
           length = len(_x)
         buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+        _v9 = val1.point
+        _x = _v9
+        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
       _x = self.quantity
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
@@ -166,21 +204,30 @@ float64 z
       (length,) = _struct_I.unpack(str[start:end])
       self.buoys = []
       for i in range(0, length):
-        val1 = amore.msg.NED_buoy()
-        _v4 = val1.position
-        _x = _v4
+        val1 = geometry_msgs.msg.PointStamped()
+        _v10 = val1.header
         start = end
-        end += 24
-        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
+        end += 4
+        (_v10.seq,) = _get_struct_I().unpack(str[start:end])
+        _v11 = _v10.stamp
+        _x = _v11
+        start = end
+        end += 8
+        (_x.secs, _x.nsecs,) = _get_struct_2I().unpack(str[start:end])
         start = end
         end += 4
         (length,) = _struct_I.unpack(str[start:end])
         start = end
         end += length
         if python3:
-          val1.id = str[start:end].decode('utf-8', 'rosmsg')
+          _v10.frame_id = str[start:end].decode('utf-8', 'rosmsg')
         else:
-          val1.id = str[start:end]
+          _v10.frame_id = str[start:end]
+        _v12 = val1.point
+        _x = _v12
+        start = end
+        end += 24
+        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
         self.buoys.append(val1)
       start = end
       end += 4
@@ -193,6 +240,12 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_2I = None
+def _get_struct_2I():
+    global _struct_2I
+    if _struct_2I is None:
+        _struct_2I = struct.Struct("<2I")
+    return _struct_2I
 _struct_3d = None
 def _get_struct_3d():
     global _struct_3d

@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg;/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg;/home/brad/vrx_amore/src/amore/msg/state_msg.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
+messages_str = "/home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg;/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg;/home/brad/vrx_amore/src/amore/msg/state_msg.msg;/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
 services_str = ""
 pkg_name = "amore"
 dependencies_str = "geometry_msgs;std_msgs"

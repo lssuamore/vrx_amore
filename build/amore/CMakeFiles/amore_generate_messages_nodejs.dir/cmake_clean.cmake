@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_buoy.js"
   "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_buoys.js"
   "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js"
   "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state_msg.js"

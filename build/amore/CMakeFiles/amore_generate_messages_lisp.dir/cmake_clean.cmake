@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_buoy.lisp"
   "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_buoys.lisp"
   "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp"
   "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state_msg.lisp"
