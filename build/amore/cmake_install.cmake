@@ -1,8 +1,8 @@
-# Install script for directory: /home/brad/vrx_amore/src/amore
+# Install script for directory: /home/taylor/vrx_amore/src/amore
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/brad/vrx_amore/install")
+  set(CMAKE_INSTALL_PREFIX "/home/taylor/vrx_amore/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,62 +39,62 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/msg" TYPE FILE FILES
-    "/home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg"
-    "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
-    "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
-    "/home/brad/vrx_amore/src/amore/msg/NED_buoy.msg"
-    "/home/brad/vrx_amore/src/amore/msg/NED_buoys.msg"
+    "/home/taylor/vrx_amore/src/amore/msg/NED_waypoints.msg"
+    "/home/taylor/vrx_amore/src/amore/msg/usv_pose_msg.msg"
+    "/home/taylor/vrx_amore/src/amore/msg/state_msg.msg"
+    "/home/taylor/vrx_amore/src/amore/msg/NED_buoy.msg"
+    "/home/taylor/vrx_amore/src/amore/msg/NED_buoys.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/brad/vrx_amore/build/amore/catkin_generated/installspace/amore-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/taylor/vrx_amore/build/amore/catkin_generated/installspace/amore-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/brad/vrx_amore/devel/include/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/taylor/vrx_amore/devel/include/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/brad/vrx_amore/devel/share/roseus/ros/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/taylor/vrx_amore/devel/share/roseus/ros/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/taylor/vrx_amore/devel/share/common-lisp/ros/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/taylor/vrx_amore/devel/share/gennodejs/ros/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/taylor/vrx_amore/devel/lib/python3/dist-packages/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/taylor/vrx_amore/devel/lib/python3/dist-packages/amore")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/brad/vrx_amore/build/amore/catkin_generated/installspace/amore.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/taylor/vrx_amore/build/amore/catkin_generated/installspace/amore.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/brad/vrx_amore/build/amore/catkin_generated/installspace/amore-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES "/home/taylor/vrx_amore/build/amore/catkin_generated/installspace/amore-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/cmake" TYPE FILE FILES
-    "/home/brad/vrx_amore/build/amore/catkin_generated/installspace/amoreConfig.cmake"
-    "/home/brad/vrx_amore/build/amore/catkin_generated/installspace/amoreConfig-version.cmake"
+    "/home/taylor/vrx_amore/build/amore/catkin_generated/installspace/amoreConfig.cmake"
+    "/home/taylor/vrx_amore/build/amore/catkin_generated/installspace/amoreConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/vrx_amore/src/amore/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/taylor/vrx_amore/src/amore/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/brad/vrx_amore/src/amore/launch/VRX_AMORE.launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore" TYPE FILE FILES "/home/taylor/vrx_amore/src/amore/launch/VRX_AMORE.launch")
 endif()
 

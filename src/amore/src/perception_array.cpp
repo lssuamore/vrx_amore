@@ -997,7 +997,7 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
   
 	// Set the loop sleep rate
-	ros::Rate loop_rate(60);															// {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
+	ros::Rate loop_rate(200);															// {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
 
 	ros::spinOnce();
 	loop_rate.sleep();

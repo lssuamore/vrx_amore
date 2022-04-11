@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/msg/Contact.js"
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/msg/Task.js"
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/srv/BallShooter.js"
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/srv/ColorSequence.js"
+  "/home/taylor/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/msg/Contact.js"
+  "/home/taylor/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/msg/Task.js"
+  "/home/taylor/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/srv/BallShooter.js"
+  "/home/taylor/vrx_amore/devel/share/gennodejs/ros/vrx_gazebo/srv/ColorSequence.js"
   "CMakeFiles/vrx_gazebo_generate_messages_nodejs"
 )
 

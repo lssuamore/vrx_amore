@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/libWavefieldModelPlugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libWavefieldModelPlugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libWavefieldModelPlugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libWavefieldModelPlugin.so"
   "CMakeFiles/WavefieldModelPlugin.dir/src/WavefieldModelPlugin.cc.o"
 )
 

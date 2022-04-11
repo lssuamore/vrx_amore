@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/taylor/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
+CMAKE_BINARY_DIR = /home/taylor/vrx_amore/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles /home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/progress.marks
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
+	cd /home/taylor/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/taylor/vrx_amore/build/CMakeFiles /home/taylor/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/progress.marks
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/taylor/vrx_amore/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/clean
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/preinstall
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/preinstall
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/taylor/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ clean_test_results_vrx_gazebo: vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_
 
 # fast build rule for target.
 clean_test_results_vrx_gazebo/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/build.make vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/build.make vrx/vrx_gazebo/CMakeFiles/clean_test_results_vrx_gazebo.dir/build
 .PHONY : clean_test_results_vrx_gazebo/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ _run_tests_vrx_gazebo_rostest_test_sandisland.test: vrx/vrx_gazebo/CMakeFiles/_r
 
 # fast build rule for target.
 _run_tests_vrx_gazebo_rostest_test_sandisland.test/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build.make vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build.make vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build
 .PHONY : _run_tests_vrx_gazebo_rostest_test_sandisland.test/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ _run_tests_vrx_gazebo_rostest: vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_r
 
 # fast build rule for target.
 _run_tests_vrx_gazebo_rostest/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/build.make vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/build.make vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo_rostest.dir/build
 .PHONY : _run_tests_vrx_gazebo_rostest/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ run_tests_vrx_gazebo_rostest: vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_ros
 
 # fast build rule for target.
 run_tests_vrx_gazebo_rostest/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/build.make vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/build.make vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest.dir/build
 .PHONY : run_tests_vrx_gazebo_rostest/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ run_tests_vrx_gazebo: vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/rule
 
 # fast build rule for target.
 run_tests_vrx_gazebo/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/build.make vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/build.make vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo.dir/build
 .PHONY : run_tests_vrx_gazebo/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ run_tests_vrx_gazebo_rostest_test_sandisland.test: vrx/vrx_gazebo/CMakeFiles/run
 
 # fast build rule for target.
 run_tests_vrx_gazebo_rostest_test_sandisland.test/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build.make vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build.make vrx/vrx_gazebo/CMakeFiles/run_tests_vrx_gazebo_rostest_test_sandisland.test.dir/build
 .PHONY : run_tests_vrx_gazebo_rostest_test_sandisland.test/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ sandisland_test: vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/rule
 
 # fast build rule for target.
 sandisland_test/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build
 .PHONY : sandisland_test/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ vrx_gazebo_generate_obstacle_course_buoys: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_
 
 # fast build rule for target.
 vrx_gazebo_generate_obstacle_course_buoys/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_obstacle_course_buoys.dir/build
 .PHONY : vrx_gazebo_generate_obstacle_course_buoys/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ vrx_gazebo__xacro_auto_generate_to_devel_space_: vrx/vrx_gazebo/CMakeFiles/vrx_g
 
 # fast build rule for target.
 vrx_gazebo__xacro_auto_generate_to_devel_space_/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate_to_devel_space_.dir/build
 .PHONY : vrx_gazebo__xacro_auto_generate_to_devel_space_/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ dock_base_erb_generation: vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir
 
 # fast build rule for target.
 dock_base_erb_generation/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build
 .PHONY : dock_base_erb_generation/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ perception_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.d
 
 # fast build rule for target.
 perception_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build
 .PHONY : perception_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ vrx_gazebo_generate_messages_lisp: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate
 
 # fast build rule for target.
 vrx_gazebo_generate_messages_lisp/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_lisp.dir/build
 .PHONY : vrx_gazebo_generate_messages_lisp/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ _run_tests_vrx_gazebo: vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/rule
 
 # fast build rule for target.
 _run_tests_vrx_gazebo/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/build.make vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/build.make vrx/vrx_gazebo/CMakeFiles/_run_tests_vrx_gazebo.dir/build
 .PHONY : _run_tests_vrx_gazebo/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ vrx_gazebo_generate_messages_nodejs: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genera
 
 # fast build rule for target.
 vrx_gazebo_generate_messages_nodejs/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_nodejs.dir/build
 .PHONY : vrx_gazebo_generate_messages_nodejs/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ _vrx_gazebo_generate_messages_check_deps_Contact: vrx/vrx_gazebo/CMakeFiles/_vrx
 
 # fast build rule for target.
 _vrx_gazebo_generate_messages_check_deps_Contact/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Contact.dir/build
 .PHONY : _vrx_gazebo_generate_messages_check_deps_Contact/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -404,12 +404,12 @@ gymkhana_vrx_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plug
 
 # fast build rule for target.
 gymkhana_vrx_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build
 .PHONY : gymkhana_vrx_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -419,12 +419,12 @@ vrx_gazebo_generate_messages_eus: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_
 
 # fast build rule for target.
 vrx_gazebo_generate_messages_eus/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build
 .PHONY : vrx_gazebo_generate_messages_eus/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/rule
 
 # Convenience name for target.
@@ -434,12 +434,12 @@ dock_erb_generation: vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/rule
 
 # fast build rule for target.
 dock_erb_generation/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build.make vrx/vrx_gazebo/CMakeFiles/dock_erb_generation.dir/build
 .PHONY : dock_erb_generation/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -449,12 +449,12 @@ vrx_gazebo_generate_messages_cpp: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_
 
 # fast build rule for target.
 vrx_gazebo_generate_messages_cpp/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_cpp.dir/build
 .PHONY : vrx_gazebo_generate_messages_cpp/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/rule
 
 # Convenience name for target.
@@ -464,12 +464,12 @@ vrx_gazebo_gencpp: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/rule
 
 # fast build rule for target.
 vrx_gazebo_gencpp/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gencpp.dir/build
 .PHONY : vrx_gazebo_gencpp/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/rule
 
 # Convenience name for target.
@@ -479,12 +479,12 @@ vrx_gazebo_genpy: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/rule
 
 # fast build rule for target.
 vrx_gazebo_genpy/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genpy.dir/build
 .PHONY : vrx_gazebo_genpy/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/rule
 
 # Convenience name for target.
@@ -494,12 +494,12 @@ vrx_gazebo_genlisp: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/rule
 
 # fast build rule for target.
 vrx_gazebo_genlisp/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_genlisp.dir/build
 .PHONY : vrx_gazebo_genlisp/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -509,12 +509,12 @@ navigation_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.d
 
 # fast build rule for target.
 navigation_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build
 .PHONY : navigation_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/rule
 
 # Convenience name for target.
@@ -524,12 +524,12 @@ vrx_gazebo_geneus: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/rule
 
 # fast build rule for target.
 vrx_gazebo_geneus/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_geneus.dir/build
 .PHONY : vrx_gazebo_geneus/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -539,12 +539,12 @@ vrx_gazebo_generate_messages: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_mess
 
 # fast build rule for target.
 vrx_gazebo_generate_messages/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages.dir/build
 .PHONY : vrx_gazebo_generate_messages/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/rule
 
 # Convenience name for target.
@@ -554,12 +554,12 @@ _vrx_gazebo_generate_messages_check_deps_Task: vrx/vrx_gazebo/CMakeFiles/_vrx_ga
 
 # fast build rule for target.
 _vrx_gazebo_generate_messages_check_deps_Task/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_Task.dir/build
 .PHONY : _vrx_gazebo_generate_messages_check_deps_Task/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -569,12 +569,12 @@ wayfinding_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.d
 
 # fast build rule for target.
 wayfinding_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build
 .PHONY : wayfinding_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/rule
 
 # Convenience name for target.
@@ -584,12 +584,12 @@ vrx_gazebo__xacro_auto_generate: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_aut
 
 # fast build rule for target.
 vrx_gazebo__xacro_auto_generate/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo__xacro_auto_generate.dir/build
 .PHONY : vrx_gazebo__xacro_auto_generate/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/rule
 
 # Convenience name for target.
@@ -599,12 +599,12 @@ vrx_gazebo_xacro_generated_to_devel_space_: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo
 
 # fast build rule for target.
 vrx_gazebo_xacro_generated_to_devel_space_/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_xacro_generated_to_devel_space_.dir/build
 .PHONY : vrx_gazebo_xacro_generated_to_devel_space_/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -614,12 +614,12 @@ vrx_gazebo_gennodejs: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/rule
 
 # fast build rule for target.
 vrx_gazebo_gennodejs/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_gennodejs.dir/build
 .PHONY : vrx_gazebo_gennodejs/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/rule
 
 # Convenience name for target.
@@ -629,12 +629,12 @@ _vrx_gazebo_generate_messages_check_deps_BallShooter: vrx/vrx_gazebo/CMakeFiles/
 
 # fast build rule for target.
 _vrx_gazebo_generate_messages_check_deps_BallShooter/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_BallShooter.dir/build
 .PHONY : _vrx_gazebo_generate_messages_check_deps_BallShooter/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -644,12 +644,12 @@ vrx_gazebo_generate_messages_py: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_m
 
 # fast build rule for target.
 vrx_gazebo_generate_messages_py/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/build.make vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_py.dir/build
 .PHONY : vrx_gazebo_generate_messages_py/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/rule
 
 # Convenience name for target.
@@ -659,12 +659,12 @@ waypoint_markers: vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/rule
 
 # fast build rule for target.
 waypoint_markers/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build
 .PHONY : waypoint_markers/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule
 
 # Convenience name for target.
@@ -674,12 +674,12 @@ placard_plugin: vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/rule
 
 # fast build rule for target.
 placard_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build
 .PHONY : placard_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/rule
 
 # Convenience name for target.
@@ -689,12 +689,12 @@ light_buoy_plugin: vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/rule
 
 # fast build rule for target.
 light_buoy_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build
 .PHONY : light_buoy_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/rule
 
 # Convenience name for target.
@@ -704,12 +704,12 @@ ball_shooter_plugin: vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/rule
 
 # fast build rule for target.
 ball_shooter_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build
 .PHONY : ball_shooter_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/rule
 
 # Convenience name for target.
@@ -719,12 +719,12 @@ _vrx_gazebo_generate_messages_check_deps_ColorSequence: vrx/vrx_gazebo/CMakeFile
 
 # fast build rule for target.
 _vrx_gazebo_generate_messages_check_deps_ColorSequence/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/build.make vrx/vrx_gazebo/CMakeFiles/_vrx_gazebo_generate_messages_check_deps_ColorSequence.dir/build
 .PHONY : _vrx_gazebo_generate_messages_check_deps_ColorSequence/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -734,12 +734,12 @@ scan_dock_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir
 
 # fast build rule for target.
 scan_dock_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build
 .PHONY : scan_dock_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule
 
 # Convenience name for target.
@@ -749,12 +749,12 @@ follow_plugin: vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/rule
 
 # fast build rule for target.
 follow_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build
 .PHONY : follow_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -764,12 +764,12 @@ scoring_plugin: vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/rule
 
 # fast build rule for target.
 scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build
 .PHONY : scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -779,12 +779,12 @@ wildlife_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/r
 
 # fast build rule for target.
 wildlife_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build
 .PHONY : wildlife_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/rule
 
 # Convenience name for target.
@@ -794,12 +794,12 @@ stationkeeping_scoring_plugin: vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_
 
 # fast build rule for target.
 stationkeeping_scoring_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build
 .PHONY : stationkeeping_scoring_plugin/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule
 
 # Convenience name for target.
@@ -809,12 +809,12 @@ gui_task_widget: vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/rule
 
 # fast build rule for target.
 gui_task_widget/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build
 .PHONY : gui_task_widget/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/rule
 
 # Convenience name for target.
@@ -824,12 +824,12 @@ sandisland_test_autogen: vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/r
 
 # fast build rule for target.
 sandisland_test_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test_autogen.dir/build
 .PHONY : sandisland_test_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -839,12 +839,12 @@ perception_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/perception_scoring_
 
 # fast build rule for target.
 perception_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin_autogen.dir/build
 .PHONY : perception_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -854,12 +854,12 @@ gymkhana_vrx_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scor
 
 # fast build rule for target.
 gymkhana_vrx_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin_autogen.dir/build
 .PHONY : gymkhana_vrx_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -869,12 +869,12 @@ navigation_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/navigation_scoring_
 
 # fast build rule for target.
 navigation_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/build
 .PHONY : navigation_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -884,12 +884,12 @@ wayfinding_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_
 
 # fast build rule for target.
 wayfinding_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin_autogen.dir/build
 .PHONY : wayfinding_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/rule
 
 # Convenience name for target.
@@ -899,12 +899,12 @@ waypoint_markers_autogen: vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir
 
 # fast build rule for target.
 waypoint_markers_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers_autogen.dir/build
 .PHONY : waypoint_markers_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -914,12 +914,12 @@ placard_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/rul
 
 # fast build rule for target.
 placard_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin_autogen.dir/build
 .PHONY : placard_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -929,12 +929,12 @@ light_buoy_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.d
 
 # fast build rule for target.
 light_buoy_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin_autogen.dir/build
 .PHONY : light_buoy_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -944,12 +944,12 @@ ball_shooter_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autog
 
 # fast build rule for target.
 ball_shooter_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin_autogen.dir/build
 .PHONY : ball_shooter_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -959,12 +959,12 @@ scan_dock_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_pl
 
 # fast build rule for target.
 scan_dock_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin_autogen.dir/build
 .PHONY : scan_dock_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -974,12 +974,12 @@ follow_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/rule
 
 # fast build rule for target.
 follow_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin_autogen.dir/build
 .PHONY : follow_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -989,12 +989,12 @@ scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/rul
 
 # fast build rule for target.
 scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin_autogen.dir/build
 .PHONY : scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -1004,12 +1004,12 @@ wildlife_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plug
 
 # fast build rule for target.
 wildlife_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin_autogen.dir/build
 .PHONY : wildlife_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/rule
 
 # Convenience name for target.
@@ -1019,12 +1019,12 @@ stationkeeping_scoring_plugin_autogen: vrx/vrx_gazebo/CMakeFiles/stationkeeping_
 
 # fast build rule for target.
 stationkeeping_scoring_plugin_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin_autogen.dir/build
 .PHONY : stationkeeping_scoring_plugin_autogen/fast
 
 # Convenience name for target.
 vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/rule
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/rule
 .PHONY : vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/rule
 
 # Convenience name for target.
@@ -1034,7 +1034,7 @@ gui_task_widget_autogen: vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/r
 
 # fast build rule for target.
 gui_task_widget_autogen/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/build
 .PHONY : gui_task_widget_autogen/fast
 
 ball_shooter_plugin_autogen/mocs_compilation.o: ball_shooter_plugin_autogen/mocs_compilation.cpp.o
@@ -1043,7 +1043,7 @@ ball_shooter_plugin_autogen/mocs_compilation.o: ball_shooter_plugin_autogen/mocs
 
 # target to build an object file
 ball_shooter_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : ball_shooter_plugin_autogen/mocs_compilation.cpp.o
 
 ball_shooter_plugin_autogen/mocs_compilation.i: ball_shooter_plugin_autogen/mocs_compilation.cpp.i
@@ -1052,7 +1052,7 @@ ball_shooter_plugin_autogen/mocs_compilation.i: ball_shooter_plugin_autogen/mocs
 
 # target to preprocess a source file
 ball_shooter_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : ball_shooter_plugin_autogen/mocs_compilation.cpp.i
 
 ball_shooter_plugin_autogen/mocs_compilation.s: ball_shooter_plugin_autogen/mocs_compilation.cpp.s
@@ -1061,7 +1061,7 @@ ball_shooter_plugin_autogen/mocs_compilation.s: ball_shooter_plugin_autogen/mocs
 
 # target to generate assembly for a file
 ball_shooter_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : ball_shooter_plugin_autogen/mocs_compilation.cpp.s
 
 follow_plugin_autogen/mocs_compilation.o: follow_plugin_autogen/mocs_compilation.cpp.o
@@ -1070,7 +1070,7 @@ follow_plugin_autogen/mocs_compilation.o: follow_plugin_autogen/mocs_compilation
 
 # target to build an object file
 follow_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/follow_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/follow_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : follow_plugin_autogen/mocs_compilation.cpp.o
 
 follow_plugin_autogen/mocs_compilation.i: follow_plugin_autogen/mocs_compilation.cpp.i
@@ -1079,7 +1079,7 @@ follow_plugin_autogen/mocs_compilation.i: follow_plugin_autogen/mocs_compilation
 
 # target to preprocess a source file
 follow_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/follow_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/follow_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : follow_plugin_autogen/mocs_compilation.cpp.i
 
 follow_plugin_autogen/mocs_compilation.s: follow_plugin_autogen/mocs_compilation.cpp.s
@@ -1088,7 +1088,7 @@ follow_plugin_autogen/mocs_compilation.s: follow_plugin_autogen/mocs_compilation
 
 # target to generate assembly for a file
 follow_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/follow_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/follow_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : follow_plugin_autogen/mocs_compilation.cpp.s
 
 gui_task_widget_autogen/mocs_compilation.o: gui_task_widget_autogen/mocs_compilation.cpp.o
@@ -1097,7 +1097,7 @@ gui_task_widget_autogen/mocs_compilation.o: gui_task_widget_autogen/mocs_compila
 
 # target to build an object file
 gui_task_widget_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/gui_task_widget_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/gui_task_widget_autogen/mocs_compilation.cpp.o
 .PHONY : gui_task_widget_autogen/mocs_compilation.cpp.o
 
 gui_task_widget_autogen/mocs_compilation.i: gui_task_widget_autogen/mocs_compilation.cpp.i
@@ -1106,7 +1106,7 @@ gui_task_widget_autogen/mocs_compilation.i: gui_task_widget_autogen/mocs_compila
 
 # target to preprocess a source file
 gui_task_widget_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/gui_task_widget_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/gui_task_widget_autogen/mocs_compilation.cpp.i
 .PHONY : gui_task_widget_autogen/mocs_compilation.cpp.i
 
 gui_task_widget_autogen/mocs_compilation.s: gui_task_widget_autogen/mocs_compilation.cpp.s
@@ -1115,7 +1115,7 @@ gui_task_widget_autogen/mocs_compilation.s: gui_task_widget_autogen/mocs_compila
 
 # target to generate assembly for a file
 gui_task_widget_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/gui_task_widget_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/gui_task_widget_autogen/mocs_compilation.cpp.s
 .PHONY : gui_task_widget_autogen/mocs_compilation.cpp.s
 
 gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.o: gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1124,7 +1124,7 @@ gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.o: gymkhana_vrx_scoring_plu
 
 # target to build an object file
 gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.i: gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1133,7 +1133,7 @@ gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.i: gymkhana_vrx_scoring_plu
 
 # target to preprocess a source file
 gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.s: gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1142,7 +1142,7 @@ gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.s: gymkhana_vrx_scoring_plu
 
 # target to generate assembly for a file
 gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : gymkhana_vrx_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 light_buoy_plugin_autogen/mocs_compilation.o: light_buoy_plugin_autogen/mocs_compilation.cpp.o
@@ -1151,7 +1151,7 @@ light_buoy_plugin_autogen/mocs_compilation.o: light_buoy_plugin_autogen/mocs_com
 
 # target to build an object file
 light_buoy_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : light_buoy_plugin_autogen/mocs_compilation.cpp.o
 
 light_buoy_plugin_autogen/mocs_compilation.i: light_buoy_plugin_autogen/mocs_compilation.cpp.i
@@ -1160,7 +1160,7 @@ light_buoy_plugin_autogen/mocs_compilation.i: light_buoy_plugin_autogen/mocs_com
 
 # target to preprocess a source file
 light_buoy_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : light_buoy_plugin_autogen/mocs_compilation.cpp.i
 
 light_buoy_plugin_autogen/mocs_compilation.s: light_buoy_plugin_autogen/mocs_compilation.cpp.s
@@ -1169,7 +1169,7 @@ light_buoy_plugin_autogen/mocs_compilation.s: light_buoy_plugin_autogen/mocs_com
 
 # target to generate assembly for a file
 light_buoy_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/light_buoy_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : light_buoy_plugin_autogen/mocs_compilation.cpp.s
 
 navigation_scoring_plugin_autogen/mocs_compilation.o: navigation_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1178,7 +1178,7 @@ navigation_scoring_plugin_autogen/mocs_compilation.o: navigation_scoring_plugin_
 
 # target to build an object file
 navigation_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : navigation_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 navigation_scoring_plugin_autogen/mocs_compilation.i: navigation_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1187,7 +1187,7 @@ navigation_scoring_plugin_autogen/mocs_compilation.i: navigation_scoring_plugin_
 
 # target to preprocess a source file
 navigation_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : navigation_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 navigation_scoring_plugin_autogen/mocs_compilation.s: navigation_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1196,7 +1196,7 @@ navigation_scoring_plugin_autogen/mocs_compilation.s: navigation_scoring_plugin_
 
 # target to generate assembly for a file
 navigation_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : navigation_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 perception_scoring_plugin_autogen/mocs_compilation.o: perception_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1205,7 +1205,7 @@ perception_scoring_plugin_autogen/mocs_compilation.o: perception_scoring_plugin_
 
 # target to build an object file
 perception_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/perception_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/perception_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : perception_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 perception_scoring_plugin_autogen/mocs_compilation.i: perception_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1214,7 +1214,7 @@ perception_scoring_plugin_autogen/mocs_compilation.i: perception_scoring_plugin_
 
 # target to preprocess a source file
 perception_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/perception_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/perception_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : perception_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 perception_scoring_plugin_autogen/mocs_compilation.s: perception_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1223,7 +1223,7 @@ perception_scoring_plugin_autogen/mocs_compilation.s: perception_scoring_plugin_
 
 # target to generate assembly for a file
 perception_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/perception_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/perception_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : perception_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 placard_plugin_autogen/mocs_compilation.o: placard_plugin_autogen/mocs_compilation.cpp.o
@@ -1232,7 +1232,7 @@ placard_plugin_autogen/mocs_compilation.o: placard_plugin_autogen/mocs_compilati
 
 # target to build an object file
 placard_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : placard_plugin_autogen/mocs_compilation.cpp.o
 
 placard_plugin_autogen/mocs_compilation.i: placard_plugin_autogen/mocs_compilation.cpp.i
@@ -1241,7 +1241,7 @@ placard_plugin_autogen/mocs_compilation.i: placard_plugin_autogen/mocs_compilati
 
 # target to preprocess a source file
 placard_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : placard_plugin_autogen/mocs_compilation.cpp.i
 
 placard_plugin_autogen/mocs_compilation.s: placard_plugin_autogen/mocs_compilation.cpp.s
@@ -1250,7 +1250,7 @@ placard_plugin_autogen/mocs_compilation.s: placard_plugin_autogen/mocs_compilati
 
 # target to generate assembly for a file
 placard_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : placard_plugin_autogen/mocs_compilation.cpp.s
 
 sandisland_test_autogen/mocs_compilation.o: sandisland_test_autogen/mocs_compilation.cpp.o
@@ -1259,7 +1259,7 @@ sandisland_test_autogen/mocs_compilation.o: sandisland_test_autogen/mocs_compila
 
 # target to build an object file
 sandisland_test_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/sandisland_test_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/sandisland_test_autogen/mocs_compilation.cpp.o
 .PHONY : sandisland_test_autogen/mocs_compilation.cpp.o
 
 sandisland_test_autogen/mocs_compilation.i: sandisland_test_autogen/mocs_compilation.cpp.i
@@ -1268,7 +1268,7 @@ sandisland_test_autogen/mocs_compilation.i: sandisland_test_autogen/mocs_compila
 
 # target to preprocess a source file
 sandisland_test_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/sandisland_test_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/sandisland_test_autogen/mocs_compilation.cpp.i
 .PHONY : sandisland_test_autogen/mocs_compilation.cpp.i
 
 sandisland_test_autogen/mocs_compilation.s: sandisland_test_autogen/mocs_compilation.cpp.s
@@ -1277,7 +1277,7 @@ sandisland_test_autogen/mocs_compilation.s: sandisland_test_autogen/mocs_compila
 
 # target to generate assembly for a file
 sandisland_test_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/sandisland_test_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/sandisland_test_autogen/mocs_compilation.cpp.s
 .PHONY : sandisland_test_autogen/mocs_compilation.cpp.s
 
 scan_dock_scoring_plugin_autogen/mocs_compilation.o: scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1286,7 +1286,7 @@ scan_dock_scoring_plugin_autogen/mocs_compilation.o: scan_dock_scoring_plugin_au
 
 # target to build an object file
 scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 scan_dock_scoring_plugin_autogen/mocs_compilation.i: scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1295,7 +1295,7 @@ scan_dock_scoring_plugin_autogen/mocs_compilation.i: scan_dock_scoring_plugin_au
 
 # target to preprocess a source file
 scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 scan_dock_scoring_plugin_autogen/mocs_compilation.s: scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1304,7 +1304,7 @@ scan_dock_scoring_plugin_autogen/mocs_compilation.s: scan_dock_scoring_plugin_au
 
 # target to generate assembly for a file
 scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : scan_dock_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 scoring_plugin_autogen/mocs_compilation.o: scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1313,7 +1313,7 @@ scoring_plugin_autogen/mocs_compilation.o: scoring_plugin_autogen/mocs_compilati
 
 # target to build an object file
 scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : scoring_plugin_autogen/mocs_compilation.cpp.o
 
 scoring_plugin_autogen/mocs_compilation.i: scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1322,7 +1322,7 @@ scoring_plugin_autogen/mocs_compilation.i: scoring_plugin_autogen/mocs_compilati
 
 # target to preprocess a source file
 scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : scoring_plugin_autogen/mocs_compilation.cpp.i
 
 scoring_plugin_autogen/mocs_compilation.s: scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1331,7 +1331,7 @@ scoring_plugin_autogen/mocs_compilation.s: scoring_plugin_autogen/mocs_compilati
 
 # target to generate assembly for a file
 scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : scoring_plugin_autogen/mocs_compilation.cpp.s
 
 src/ball_shooter_plugin.o: src/ball_shooter_plugin.cc.o
@@ -1340,7 +1340,7 @@ src/ball_shooter_plugin.o: src/ball_shooter_plugin.cc.o
 
 # target to build an object file
 src/ball_shooter_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.o
 .PHONY : src/ball_shooter_plugin.cc.o
 
 src/ball_shooter_plugin.i: src/ball_shooter_plugin.cc.i
@@ -1349,7 +1349,7 @@ src/ball_shooter_plugin.i: src/ball_shooter_plugin.cc.i
 
 # target to preprocess a source file
 src/ball_shooter_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.i
 .PHONY : src/ball_shooter_plugin.cc.i
 
 src/ball_shooter_plugin.s: src/ball_shooter_plugin.cc.s
@@ -1358,7 +1358,7 @@ src/ball_shooter_plugin.s: src/ball_shooter_plugin.cc.s
 
 # target to generate assembly for a file
 src/ball_shooter_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.s
 .PHONY : src/ball_shooter_plugin.cc.s
 
 src/follow_plugin.o: src/follow_plugin.cc.o
@@ -1367,7 +1367,7 @@ src/follow_plugin.o: src/follow_plugin.cc.o
 
 # target to build an object file
 src/follow_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/src/follow_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/src/follow_plugin.cc.o
 .PHONY : src/follow_plugin.cc.o
 
 src/follow_plugin.i: src/follow_plugin.cc.i
@@ -1376,7 +1376,7 @@ src/follow_plugin.i: src/follow_plugin.cc.i
 
 # target to preprocess a source file
 src/follow_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/src/follow_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/src/follow_plugin.cc.i
 .PHONY : src/follow_plugin.cc.i
 
 src/follow_plugin.s: src/follow_plugin.cc.s
@@ -1385,7 +1385,7 @@ src/follow_plugin.s: src/follow_plugin.cc.s
 
 # target to generate assembly for a file
 src/follow_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/src/follow_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/follow_plugin.dir/src/follow_plugin.cc.s
 .PHONY : src/follow_plugin.cc.s
 
 src/gui_task_widget.o: src/gui_task_widget.cc.o
@@ -1394,7 +1394,7 @@ src/gui_task_widget.o: src/gui_task_widget.cc.o
 
 # target to build an object file
 src/gui_task_widget.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/src/gui_task_widget.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/src/gui_task_widget.cc.o
 .PHONY : src/gui_task_widget.cc.o
 
 src/gui_task_widget.i: src/gui_task_widget.cc.i
@@ -1403,7 +1403,7 @@ src/gui_task_widget.i: src/gui_task_widget.cc.i
 
 # target to preprocess a source file
 src/gui_task_widget.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/src/gui_task_widget.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/src/gui_task_widget.cc.i
 .PHONY : src/gui_task_widget.cc.i
 
 src/gui_task_widget.s: src/gui_task_widget.cc.s
@@ -1412,7 +1412,7 @@ src/gui_task_widget.s: src/gui_task_widget.cc.s
 
 # target to generate assembly for a file
 src/gui_task_widget.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/src/gui_task_widget.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/build.make vrx/vrx_gazebo/CMakeFiles/gui_task_widget.dir/src/gui_task_widget.cc.s
 .PHONY : src/gui_task_widget.cc.s
 
 src/gymkhana_scoring_plugin.o: src/gymkhana_scoring_plugin.cc.o
@@ -1421,7 +1421,7 @@ src/gymkhana_scoring_plugin.o: src/gymkhana_scoring_plugin.cc.o
 
 # target to build an object file
 src/gymkhana_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.o
 .PHONY : src/gymkhana_scoring_plugin.cc.o
 
 src/gymkhana_scoring_plugin.i: src/gymkhana_scoring_plugin.cc.i
@@ -1430,7 +1430,7 @@ src/gymkhana_scoring_plugin.i: src/gymkhana_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/gymkhana_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.i
 .PHONY : src/gymkhana_scoring_plugin.cc.i
 
 src/gymkhana_scoring_plugin.s: src/gymkhana_scoring_plugin.cc.s
@@ -1439,7 +1439,7 @@ src/gymkhana_scoring_plugin.s: src/gymkhana_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/gymkhana_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_plugin.cc.s
 .PHONY : src/gymkhana_scoring_plugin.cc.s
 
 src/light_buoy_plugin.o: src/light_buoy_plugin.cc.o
@@ -1448,7 +1448,7 @@ src/light_buoy_plugin.o: src/light_buoy_plugin.cc.o
 
 # target to build an object file
 src/light_buoy_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.o
 .PHONY : src/light_buoy_plugin.cc.o
 
 src/light_buoy_plugin.i: src/light_buoy_plugin.cc.i
@@ -1457,7 +1457,7 @@ src/light_buoy_plugin.i: src/light_buoy_plugin.cc.i
 
 # target to preprocess a source file
 src/light_buoy_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.i
 .PHONY : src/light_buoy_plugin.cc.i
 
 src/light_buoy_plugin.s: src/light_buoy_plugin.cc.s
@@ -1466,7 +1466,7 @@ src/light_buoy_plugin.s: src/light_buoy_plugin.cc.s
 
 # target to generate assembly for a file
 src/light_buoy_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/light_buoy_plugin.dir/src/light_buoy_plugin.cc.s
 .PHONY : src/light_buoy_plugin.cc.s
 
 src/navigation_scoring_plugin.o: src/navigation_scoring_plugin.cc.o
@@ -1475,7 +1475,7 @@ src/navigation_scoring_plugin.o: src/navigation_scoring_plugin.cc.o
 
 # target to build an object file
 src/navigation_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.o
 .PHONY : src/navigation_scoring_plugin.cc.o
 
 src/navigation_scoring_plugin.i: src/navigation_scoring_plugin.cc.i
@@ -1484,7 +1484,7 @@ src/navigation_scoring_plugin.i: src/navigation_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/navigation_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.i
 .PHONY : src/navigation_scoring_plugin.cc.i
 
 src/navigation_scoring_plugin.s: src/navigation_scoring_plugin.cc.s
@@ -1493,7 +1493,7 @@ src/navigation_scoring_plugin.s: src/navigation_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/navigation_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.s
 .PHONY : src/navigation_scoring_plugin.cc.s
 
 src/perception_scoring_plugin.o: src/perception_scoring_plugin.cc.o
@@ -1502,7 +1502,7 @@ src/perception_scoring_plugin.o: src/perception_scoring_plugin.cc.o
 
 # target to build an object file
 src/perception_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/src/perception_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/src/perception_scoring_plugin.cc.o
 .PHONY : src/perception_scoring_plugin.cc.o
 
 src/perception_scoring_plugin.i: src/perception_scoring_plugin.cc.i
@@ -1511,7 +1511,7 @@ src/perception_scoring_plugin.i: src/perception_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/perception_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/src/perception_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/src/perception_scoring_plugin.cc.i
 .PHONY : src/perception_scoring_plugin.cc.i
 
 src/perception_scoring_plugin.s: src/perception_scoring_plugin.cc.s
@@ -1520,7 +1520,7 @@ src/perception_scoring_plugin.s: src/perception_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/perception_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/src/perception_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/perception_scoring_plugin.dir/src/perception_scoring_plugin.cc.s
 .PHONY : src/perception_scoring_plugin.cc.s
 
 src/placard_plugin.o: src/placard_plugin.cc.o
@@ -1529,7 +1529,7 @@ src/placard_plugin.o: src/placard_plugin.cc.o
 
 # target to build an object file
 src/placard_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.o
 .PHONY : src/placard_plugin.cc.o
 
 src/placard_plugin.i: src/placard_plugin.cc.i
@@ -1538,7 +1538,7 @@ src/placard_plugin.i: src/placard_plugin.cc.i
 
 # target to preprocess a source file
 src/placard_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.i
 .PHONY : src/placard_plugin.cc.i
 
 src/placard_plugin.s: src/placard_plugin.cc.s
@@ -1547,7 +1547,7 @@ src/placard_plugin.s: src/placard_plugin.cc.s
 
 # target to generate assembly for a file
 src/placard_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.s
 .PHONY : src/placard_plugin.cc.s
 
 src/scan_dock_scoring_plugin.o: src/scan_dock_scoring_plugin.cc.o
@@ -1556,7 +1556,7 @@ src/scan_dock_scoring_plugin.o: src/scan_dock_scoring_plugin.cc.o
 
 # target to build an object file
 src/scan_dock_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/src/scan_dock_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/src/scan_dock_scoring_plugin.cc.o
 .PHONY : src/scan_dock_scoring_plugin.cc.o
 
 src/scan_dock_scoring_plugin.i: src/scan_dock_scoring_plugin.cc.i
@@ -1565,7 +1565,7 @@ src/scan_dock_scoring_plugin.i: src/scan_dock_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/scan_dock_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/src/scan_dock_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/src/scan_dock_scoring_plugin.cc.i
 .PHONY : src/scan_dock_scoring_plugin.cc.i
 
 src/scan_dock_scoring_plugin.s: src/scan_dock_scoring_plugin.cc.s
@@ -1574,7 +1574,7 @@ src/scan_dock_scoring_plugin.s: src/scan_dock_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/scan_dock_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/src/scan_dock_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scan_dock_scoring_plugin.dir/src/scan_dock_scoring_plugin.cc.s
 .PHONY : src/scan_dock_scoring_plugin.cc.s
 
 src/scoring_plugin.o: src/scoring_plugin.cc.o
@@ -1583,7 +1583,7 @@ src/scoring_plugin.o: src/scoring_plugin.cc.o
 
 # target to build an object file
 src/scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o
 .PHONY : src/scoring_plugin.cc.o
 
 src/scoring_plugin.i: src/scoring_plugin.cc.i
@@ -1592,7 +1592,7 @@ src/scoring_plugin.i: src/scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.i
 .PHONY : src/scoring_plugin.cc.i
 
 src/scoring_plugin.s: src/scoring_plugin.cc.s
@@ -1601,7 +1601,7 @@ src/scoring_plugin.s: src/scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.s
 .PHONY : src/scoring_plugin.cc.s
 
 src/stationkeeping_scoring_plugin.o: src/stationkeeping_scoring_plugin.cc.o
@@ -1610,7 +1610,7 @@ src/stationkeeping_scoring_plugin.o: src/stationkeeping_scoring_plugin.cc.o
 
 # target to build an object file
 src/stationkeeping_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.o
 .PHONY : src/stationkeeping_scoring_plugin.cc.o
 
 src/stationkeeping_scoring_plugin.i: src/stationkeeping_scoring_plugin.cc.i
@@ -1619,7 +1619,7 @@ src/stationkeeping_scoring_plugin.i: src/stationkeeping_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/stationkeeping_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.i
 .PHONY : src/stationkeeping_scoring_plugin.cc.i
 
 src/stationkeeping_scoring_plugin.s: src/stationkeeping_scoring_plugin.cc.s
@@ -1628,7 +1628,7 @@ src/stationkeeping_scoring_plugin.s: src/stationkeeping_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/stationkeeping_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/src/stationkeeping_scoring_plugin.cc.s
 .PHONY : src/stationkeeping_scoring_plugin.cc.s
 
 src/wayfinding_scoring_plugin.o: src/wayfinding_scoring_plugin.cc.o
@@ -1637,7 +1637,7 @@ src/wayfinding_scoring_plugin.o: src/wayfinding_scoring_plugin.cc.o
 
 # target to build an object file
 src/wayfinding_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/src/wayfinding_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/src/wayfinding_scoring_plugin.cc.o
 .PHONY : src/wayfinding_scoring_plugin.cc.o
 
 src/wayfinding_scoring_plugin.i: src/wayfinding_scoring_plugin.cc.i
@@ -1646,7 +1646,7 @@ src/wayfinding_scoring_plugin.i: src/wayfinding_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/wayfinding_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/src/wayfinding_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/src/wayfinding_scoring_plugin.cc.i
 .PHONY : src/wayfinding_scoring_plugin.cc.i
 
 src/wayfinding_scoring_plugin.s: src/wayfinding_scoring_plugin.cc.s
@@ -1655,7 +1655,7 @@ src/wayfinding_scoring_plugin.s: src/wayfinding_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/wayfinding_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/src/wayfinding_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/src/wayfinding_scoring_plugin.cc.s
 .PHONY : src/wayfinding_scoring_plugin.cc.s
 
 src/waypoint_markers.o: src/waypoint_markers.cc.o
@@ -1664,7 +1664,7 @@ src/waypoint_markers.o: src/waypoint_markers.cc.o
 
 # target to build an object file
 src/waypoint_markers.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.o
 .PHONY : src/waypoint_markers.cc.o
 
 src/waypoint_markers.i: src/waypoint_markers.cc.i
@@ -1673,7 +1673,7 @@ src/waypoint_markers.i: src/waypoint_markers.cc.i
 
 # target to preprocess a source file
 src/waypoint_markers.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.i
 .PHONY : src/waypoint_markers.cc.i
 
 src/waypoint_markers.s: src/waypoint_markers.cc.s
@@ -1682,7 +1682,7 @@ src/waypoint_markers.s: src/waypoint_markers.cc.s
 
 # target to generate assembly for a file
 src/waypoint_markers.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.s
 .PHONY : src/waypoint_markers.cc.s
 
 src/wildlife_scoring_plugin.o: src/wildlife_scoring_plugin.cc.o
@@ -1691,7 +1691,7 @@ src/wildlife_scoring_plugin.o: src/wildlife_scoring_plugin.cc.o
 
 # target to build an object file
 src/wildlife_scoring_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/src/wildlife_scoring_plugin.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/src/wildlife_scoring_plugin.cc.o
 .PHONY : src/wildlife_scoring_plugin.cc.o
 
 src/wildlife_scoring_plugin.i: src/wildlife_scoring_plugin.cc.i
@@ -1700,7 +1700,7 @@ src/wildlife_scoring_plugin.i: src/wildlife_scoring_plugin.cc.i
 
 # target to preprocess a source file
 src/wildlife_scoring_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/src/wildlife_scoring_plugin.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/src/wildlife_scoring_plugin.cc.i
 .PHONY : src/wildlife_scoring_plugin.cc.i
 
 src/wildlife_scoring_plugin.s: src/wildlife_scoring_plugin.cc.s
@@ -1709,7 +1709,7 @@ src/wildlife_scoring_plugin.s: src/wildlife_scoring_plugin.cc.s
 
 # target to generate assembly for a file
 src/wildlife_scoring_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/src/wildlife_scoring_plugin.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/src/wildlife_scoring_plugin.cc.s
 .PHONY : src/wildlife_scoring_plugin.cc.s
 
 stationkeeping_scoring_plugin_autogen/mocs_compilation.o: stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1718,7 +1718,7 @@ stationkeeping_scoring_plugin_autogen/mocs_compilation.o: stationkeeping_scoring
 
 # target to build an object file
 stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 stationkeeping_scoring_plugin_autogen/mocs_compilation.i: stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1727,7 +1727,7 @@ stationkeeping_scoring_plugin_autogen/mocs_compilation.i: stationkeeping_scoring
 
 # target to preprocess a source file
 stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 stationkeeping_scoring_plugin_autogen/mocs_compilation.s: stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1736,7 +1736,7 @@ stationkeeping_scoring_plugin_autogen/mocs_compilation.s: stationkeeping_scoring
 
 # target to generate assembly for a file
 stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/stationkeeping_scoring_plugin.dir/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 test/sandisland.o: test/sandisland.cc.o
@@ -1745,7 +1745,7 @@ test/sandisland.o: test/sandisland.cc.o
 
 # target to build an object file
 test/sandisland.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/test/sandisland.cc.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/test/sandisland.cc.o
 .PHONY : test/sandisland.cc.o
 
 test/sandisland.i: test/sandisland.cc.i
@@ -1754,7 +1754,7 @@ test/sandisland.i: test/sandisland.cc.i
 
 # target to preprocess a source file
 test/sandisland.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/test/sandisland.cc.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/test/sandisland.cc.i
 .PHONY : test/sandisland.cc.i
 
 test/sandisland.s: test/sandisland.cc.s
@@ -1763,7 +1763,7 @@ test/sandisland.s: test/sandisland.cc.s
 
 # target to generate assembly for a file
 test/sandisland.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/test/sandisland.cc.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/build.make vrx/vrx_gazebo/CMakeFiles/sandisland_test.dir/test/sandisland.cc.s
 .PHONY : test/sandisland.cc.s
 
 wayfinding_scoring_plugin_autogen/mocs_compilation.o: wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1772,7 +1772,7 @@ wayfinding_scoring_plugin_autogen/mocs_compilation.o: wayfinding_scoring_plugin_
 
 # target to build an object file
 wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 wayfinding_scoring_plugin_autogen/mocs_compilation.i: wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1781,7 +1781,7 @@ wayfinding_scoring_plugin_autogen/mocs_compilation.i: wayfinding_scoring_plugin_
 
 # target to preprocess a source file
 wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 wayfinding_scoring_plugin_autogen/mocs_compilation.s: wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1790,7 +1790,7 @@ wayfinding_scoring_plugin_autogen/mocs_compilation.s: wayfinding_scoring_plugin_
 
 # target to generate assembly for a file
 wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wayfinding_scoring_plugin.dir/wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : wayfinding_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 waypoint_markers_autogen/mocs_compilation.o: waypoint_markers_autogen/mocs_compilation.cpp.o
@@ -1799,7 +1799,7 @@ waypoint_markers_autogen/mocs_compilation.o: waypoint_markers_autogen/mocs_compi
 
 # target to build an object file
 waypoint_markers_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.o
 .PHONY : waypoint_markers_autogen/mocs_compilation.cpp.o
 
 waypoint_markers_autogen/mocs_compilation.i: waypoint_markers_autogen/mocs_compilation.cpp.i
@@ -1808,7 +1808,7 @@ waypoint_markers_autogen/mocs_compilation.i: waypoint_markers_autogen/mocs_compi
 
 # target to preprocess a source file
 waypoint_markers_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.i
 .PHONY : waypoint_markers_autogen/mocs_compilation.cpp.i
 
 waypoint_markers_autogen/mocs_compilation.s: waypoint_markers_autogen/mocs_compilation.cpp.s
@@ -1817,7 +1817,7 @@ waypoint_markers_autogen/mocs_compilation.s: waypoint_markers_autogen/mocs_compi
 
 # target to generate assembly for a file
 waypoint_markers_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/build.make vrx/vrx_gazebo/CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.s
 .PHONY : waypoint_markers_autogen/mocs_compilation.cpp.s
 
 wildlife_scoring_plugin_autogen/mocs_compilation.o: wildlife_scoring_plugin_autogen/mocs_compilation.cpp.o
@@ -1826,7 +1826,7 @@ wildlife_scoring_plugin_autogen/mocs_compilation.o: wildlife_scoring_plugin_auto
 
 # target to build an object file
 wildlife_scoring_plugin_autogen/mocs_compilation.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/wildlife_scoring_plugin_autogen/mocs_compilation.cpp.o
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/wildlife_scoring_plugin_autogen/mocs_compilation.cpp.o
 .PHONY : wildlife_scoring_plugin_autogen/mocs_compilation.cpp.o
 
 wildlife_scoring_plugin_autogen/mocs_compilation.i: wildlife_scoring_plugin_autogen/mocs_compilation.cpp.i
@@ -1835,7 +1835,7 @@ wildlife_scoring_plugin_autogen/mocs_compilation.i: wildlife_scoring_plugin_auto
 
 # target to preprocess a source file
 wildlife_scoring_plugin_autogen/mocs_compilation.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/wildlife_scoring_plugin_autogen/mocs_compilation.cpp.i
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/wildlife_scoring_plugin_autogen/mocs_compilation.cpp.i
 .PHONY : wildlife_scoring_plugin_autogen/mocs_compilation.cpp.i
 
 wildlife_scoring_plugin_autogen/mocs_compilation.s: wildlife_scoring_plugin_autogen/mocs_compilation.cpp.s
@@ -1844,7 +1844,7 @@ wildlife_scoring_plugin_autogen/mocs_compilation.s: wildlife_scoring_plugin_auto
 
 # target to generate assembly for a file
 wildlife_scoring_plugin_autogen/mocs_compilation.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/wildlife_scoring_plugin_autogen/mocs_compilation.cpp.s
+	cd /home/taylor/vrx_amore/build && $(MAKE) -f vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/build.make vrx/vrx_gazebo/CMakeFiles/wildlife_scoring_plugin.dir/wildlife_scoring_plugin_autogen/mocs_compilation.cpp.s
 .PHONY : wildlife_scoring_plugin_autogen/mocs_compilation.cpp.s
 
 # Help Target
@@ -2019,6 +2019,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/taylor/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

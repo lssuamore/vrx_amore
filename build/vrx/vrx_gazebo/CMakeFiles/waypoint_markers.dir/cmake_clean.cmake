@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/waypoint_markers_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/waypoint_markers_autogen.dir/ParseCache.txt"
   "waypoint_markers_autogen"
-  "/home/brad/vrx_amore/devel/lib/libwaypoint_markers.pdb"
-  "/home/brad/vrx_amore/devel/lib/libwaypoint_markers.so"
+  "/home/taylor/vrx_amore/devel/lib/libwaypoint_markers.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libwaypoint_markers.so"
   "CMakeFiles/waypoint_markers.dir/src/waypoint_markers.cc.o"
   "CMakeFiles/waypoint_markers.dir/waypoint_markers_autogen/mocs_compilation.cpp.o"
 )

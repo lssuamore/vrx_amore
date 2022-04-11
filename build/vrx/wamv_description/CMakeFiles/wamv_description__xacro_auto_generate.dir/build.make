@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/taylor/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
+CMAKE_BINARY_DIR = /home/taylor/vrx_amore/build
 
 # Utility rule file for wamv_description__xacro_auto_generate.
 
@@ -56,9 +56,9 @@ include vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.di
 vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate: vrx/wamv_description/urdf/wamv_base.urdf
 
 
-vrx/wamv_description/urdf/wamv_base.urdf: /home/brad/vrx_amore/src/vrx/wamv_description/urdf/wamv_base.urdf.xacro
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "xacro: generating urdf/wamv_base.urdf from urdf/wamv_base.urdf.xacro"
-	cd /home/brad/vrx_amore/src/vrx/wamv_description && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wamv_description/urdf/wamv_base.urdf urdf/wamv_base.urdf.xacro
+vrx/wamv_description/urdf/wamv_base.urdf: /home/taylor/vrx_amore/src/vrx/wamv_description/urdf/wamv_base.urdf.xacro
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "xacro: generating urdf/wamv_base.urdf from urdf/wamv_base.urdf.xacro"
+	cd /home/taylor/vrx_amore/src/vrx/wamv_description && /home/taylor/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/taylor/vrx_amore/build/vrx/wamv_description/urdf/wamv_base.urdf urdf/wamv_base.urdf.xacro
 
 wamv_description__xacro_auto_generate: vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate
 wamv_description__xacro_auto_generate: vrx/wamv_description/urdf/wamv_base.urdf
@@ -72,10 +72,10 @@ vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/build:
 .PHONY : vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/build
 
 vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/clean:
-	cd /home/brad/vrx_amore/build/vrx/wamv_description && $(CMAKE_COMMAND) -P CMakeFiles/wamv_description__xacro_auto_generate.dir/cmake_clean.cmake
+	cd /home/taylor/vrx_amore/build/vrx/wamv_description && $(CMAKE_COMMAND) -P CMakeFiles/wamv_description__xacro_auto_generate.dir/cmake_clean.cmake
 .PHONY : vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/clean
 
 vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/depend:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/wamv_description /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/wamv_description /home/brad/vrx_amore/build/vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/taylor/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/taylor/vrx_amore/src /home/taylor/vrx_amore/src/vrx/wamv_description /home/taylor/vrx_amore/build /home/taylor/vrx_amore/build/vrx/wamv_description /home/taylor/vrx_amore/build/vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/wamv_description/CMakeFiles/wamv_description__xacro_auto_generate.dir/depend
 

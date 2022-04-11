@@ -67,14 +67,14 @@ set(vrx_2019_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(vrx_2019_SOURCE_PREFIX /home/brad/vrx_amore/src/vrx/vrx_2019)
-  set(vrx_2019_DEVEL_PREFIX /home/brad/vrx_amore/devel)
+  set(vrx_2019_SOURCE_PREFIX /home/taylor/vrx_amore/src/vrx/vrx_2019)
+  set(vrx_2019_DEVEL_PREFIX /home/taylor/vrx_amore/devel)
   set(vrx_2019_INSTALL_PREFIX "")
   set(vrx_2019_PREFIX ${vrx_2019_DEVEL_PREFIX})
 else()
   set(vrx_2019_SOURCE_PREFIX "")
   set(vrx_2019_DEVEL_PREFIX "")
-  set(vrx_2019_INSTALL_PREFIX /home/brad/vrx_amore/install)
+  set(vrx_2019_INSTALL_PREFIX /home/taylor/vrx_amore/install)
   set(vrx_2019_PREFIX ${vrx_2019_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/brad/vrx_amore/install/lib;/home/brad/vrx_amore/devel/lib;/home/brad/RobotX2022/devel/lib;/home/brad/vrx_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/taylor/vrx_amore/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

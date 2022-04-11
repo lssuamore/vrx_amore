@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so"
   "CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o"
 )
 

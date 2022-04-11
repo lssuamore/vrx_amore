@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/libwavegauge_plugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libwavegauge_plugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libwavegauge_plugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libwavegauge_plugin.so"
   "CMakeFiles/wavegauge_plugin.dir/src/wavegauge_plugin.cc.o"
 )
 

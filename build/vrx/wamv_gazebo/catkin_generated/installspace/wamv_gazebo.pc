@@ -1,4 +1,4 @@
-prefix=/home/brad/vrx_amore/install
+prefix=/home/taylor/vrx_amore/install
 
 Name: wamv_gazebo
 Description: Description of wamv_gazebo

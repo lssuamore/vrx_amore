@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/amore/navigation_array"
-  "/home/brad/vrx_amore/devel/lib/amore/navigation_array.pdb"
+  "/home/taylor/vrx_amore/devel/lib/amore/navigation_array"
+  "/home/taylor/vrx_amore/devel/lib/amore/navigation_array.pdb"
   "CMakeFiles/navigation_array.dir/src/navigation_array.cpp.o"
 )
 

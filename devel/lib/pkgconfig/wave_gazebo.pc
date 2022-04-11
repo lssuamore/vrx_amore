@@ -1,4 +1,4 @@
-prefix=/home/brad/vrx_amore/devel
+prefix=/home/taylor/vrx_amore/devel
 
 Name: wave_gazebo
 Description: Description of wave_gazebo

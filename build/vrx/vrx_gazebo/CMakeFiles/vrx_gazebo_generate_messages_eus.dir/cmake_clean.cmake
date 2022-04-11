@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l"
-  "/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l"
-  "/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l"
-  "/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l"
-  "/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l"
+  "/home/taylor/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l"
+  "/home/taylor/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l"
+  "/home/taylor/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l"
+  "/home/taylor/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l"
+  "/home/taylor/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l"
   "CMakeFiles/vrx_gazebo_generate_messages_eus"
 )
 

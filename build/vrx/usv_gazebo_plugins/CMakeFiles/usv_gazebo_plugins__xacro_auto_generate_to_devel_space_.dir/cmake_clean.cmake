@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/usv_gazebo_plugins/worlds"
-  "/home/brad/vrx_amore/devel/share/usv_gazebo_plugins/worlds/buoyancy_plugin_demo.world"
+  "/home/taylor/vrx_amore/devel/share/usv_gazebo_plugins/worlds"
+  "/home/taylor/vrx_amore/devel/share/usv_gazebo_plugins/worlds/buoyancy_plugin_demo.world"
   "CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_"
   "worlds/buoyancy_plugin_demo.world"
 )

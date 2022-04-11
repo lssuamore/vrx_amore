@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/libWavefieldVisualPlugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libWavefieldVisualPlugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libWavefieldVisualPlugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libWavefieldVisualPlugin.so"
   "CMakeFiles/WavefieldVisualPlugin.dir/src/WavefieldVisualPlugin.cc.o"
 )
 
