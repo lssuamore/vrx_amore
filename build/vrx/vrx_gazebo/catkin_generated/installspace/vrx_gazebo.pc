@@ -1,4 +1,4 @@
-prefix=/home/shaede/vrx_amore/install
+prefix=/home/brad/vrx_amore/install
 
 Name: vrx_gazebo
 Description: Description of vrx_gazebo

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
+CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 
 # Utility rule file for dock_placard_msgs_autogen.
 
@@ -55,13 +55,13 @@ include vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/progress.ma
 
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen: vrx/vrx_gazebo/msgs/dock_placard.pb.cc
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen: vrx/vrx_gazebo/msgs/dock_placard.pb.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target dock_placard_msgs"
-	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs && /usr/bin/cmake -E cmake_autogen /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/AutogenInfo.json ""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target dock_placard_msgs"
+	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs && /usr/bin/cmake -E cmake_autogen /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/AutogenInfo.json ""
 
-vrx/vrx_gazebo/msgs/dock_placard.pb.h: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msgs/dock_placard.proto
+vrx/vrx_gazebo/msgs/dock_placard.pb.h: /home/brad/vrx_amore/src/vrx/vrx_gazebo/msgs/dock_placard.proto
 vrx/vrx_gazebo/msgs/dock_placard.pb.h: /usr/bin/protoc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Running cpp protocol buffer compiler on dock_placard.proto"
-	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs && /usr/bin/protoc --cpp_out /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs -I /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msgs -I /usr/include/gazebo-11/gazebo/msgs/proto /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msgs/dock_placard.proto
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Running cpp protocol buffer compiler on dock_placard.proto"
+	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs && /usr/bin/protoc --cpp_out /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs -I /home/brad/vrx_amore/src/vrx/vrx_gazebo/msgs -I /usr/include/gazebo-11/gazebo/msgs/proto /home/brad/vrx_amore/src/vrx/vrx_gazebo/msgs/dock_placard.proto
 
 vrx/vrx_gazebo/msgs/dock_placard.pb.cc: vrx/vrx_gazebo/msgs/dock_placard.pb.h
 	@$(CMAKE_COMMAND) -E touch_nocreate vrx/vrx_gazebo/msgs/dock_placard.pb.cc
@@ -79,10 +79,10 @@ vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/build: dock_placard
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/build
 
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/clean:
-	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs && $(CMAKE_COMMAND) -P CMakeFiles/dock_placard_msgs_autogen.dir/cmake_clean.cmake
+	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs && $(CMAKE_COMMAND) -P CMakeFiles/dock_placard_msgs_autogen.dir/cmake_clean.cmake
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/clean
 
 vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/depend:
-	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msgs /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs /home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/vrx_gazebo/msgs /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs /home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs_autogen.dir/depend
 

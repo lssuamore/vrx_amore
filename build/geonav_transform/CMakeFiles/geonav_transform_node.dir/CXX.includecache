@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/shaede/vrx_amore/src/geonav_transform/include/geonav_transform/geonav_transform.h
+/home/brad/vrx_amore/src/geonav_transform/include/geonav_transform/geonav_transform.h
 ros/ros.h
 -
 nav_msgs/Odometry.h
@@ -30,9 +30,9 @@ Eigen/Dense
 string
 -
 
-/home/shaede/vrx_amore/src/geonav_transform/src/geonav_transform_node.cpp
+/home/brad/vrx_amore/src/geonav_transform/src/geonav_transform_node.cpp
 geonav_transform/geonav_transform.h
-/home/shaede/vrx_amore/src/geonav_transform/src/geonav_transform/geonav_transform.h
+/home/brad/vrx_amore/src/geonav_transform/src/geonav_transform/geonav_transform.h
 ros/ros.h
 -
 

@@ -1,21 +1,21 @@
 {
-	"BUILD_DIR" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen",
-	"CMAKE_BINARY_DIR" : "/home/shaede/vrx_amore/build",
-	"CMAKE_CURRENT_BINARY_DIR" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/home/shaede/vrx_amore/src/vrx/vrx_gazebo",
+	"BUILD_DIR" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen",
+	"CMAKE_BINARY_DIR" : "/home/brad/vrx_amore/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/brad/vrx_amore/src/vrx/vrx_gazebo",
 	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
-	"CMAKE_SOURCE_DIR" : "/home/shaede/vrx_amore/src",
+	"CMAKE_SOURCE_DIR" : "/home/brad/vrx_amore/src",
 	"HEADERS" : 
 	[
 		[
-			"/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh",
+			"/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh",
 			"MU",
 			"UVLADIE3JM/moc_gui_task_widget.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"BOOST_ALL_NO_LIB",
@@ -48,10 +48,10 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/home/shaede/vrx_amore/devel/include",
-		"/home/shaede/vrx_amore/src/vrx/vrx_gazebo/include",
-		"/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include",
-		"/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include",
+		"/home/brad/vrx_amore/devel/include",
+		"/home/brad/vrx_amore/src/vrx/vrx_gazebo/include",
+		"/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include",
+		"/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include",
 		"/opt/ros/noetic/include",
 		"/opt/ros/noetic/include/xmlrpcpp",
 		"/usr/include/gazebo-11",
@@ -60,7 +60,7 @@
 		"/usr/include/OGRE",
 		"/usr/include/OGRE/Terrain",
 		"/usr/include/OGRE/Paging",
-		"/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs",
+		"/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs",
 		"/usr/include/simbody",
 		"/usr/include/ignition/math6",
 		"/usr/include/ignition/transport8",
@@ -95,20 +95,20 @@
 		"-c",
 		"/usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 4,
-	"PARSE_CACHE_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/ParseCache.txt",
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "/usr/lib/qt5/bin/uic",
 	"QT_VERSION_MAJOR" : 5,
-	"SETTINGS_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/gui_task_widget_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.cc",
+			"/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.cc",
 			"MU"
 		]
 	],

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/shaede/vrx_amore/devel/lib/amore/PID_HS_controller"
-  "/home/shaede/vrx_amore/devel/lib/amore/PID_HS_controller.pdb"
+  "/home/brad/vrx_amore/devel/lib/amore/PID_HS_controller"
+  "/home/brad/vrx_amore/devel/lib/amore/PID_HS_controller.pdb"
   "CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.o"
 )
 

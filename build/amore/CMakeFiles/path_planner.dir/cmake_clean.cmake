@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/shaede/vrx_amore/devel/lib/amore/path_planner"
-  "/home/shaede/vrx_amore/devel/lib/amore/path_planner.pdb"
+  "/home/brad/vrx_amore/devel/lib/amore/path_planner"
+  "/home/brad/vrx_amore/devel/lib/amore/path_planner.pdb"
   "CMakeFiles/path_planner.dir/src/path_planner.cpp.o"
 )
 

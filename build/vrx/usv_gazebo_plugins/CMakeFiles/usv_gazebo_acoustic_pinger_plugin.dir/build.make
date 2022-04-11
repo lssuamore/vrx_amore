@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
+CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 
 # Include any dependencies generated for this target.
 include vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/depend.make
@@ -58,17 +58,17 @@ include vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/
 include vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/flags.make
 
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/flags.make
-vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o: /home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o"
-	cd /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o -c /home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc
+vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o: /home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o"
+	cd /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o -c /home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc
 
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.i"
-	cd /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc > CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.i
+	cd /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc > CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.i
 
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.s"
-	cd /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc -o CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.s
+	cd /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc -o CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.s
 
 # Object files for target usv_gazebo_acoustic_pinger_plugin
 usv_gazebo_acoustic_pinger_plugin_OBJECTS = \
@@ -77,182 +77,182 @@ usv_gazebo_acoustic_pinger_plugin_OBJECTS = \
 # External object files for target usv_gazebo_acoustic_pinger_plugin
 usv_gazebo_acoustic_pinger_plugin_EXTERNAL_OBJECTS =
 
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.7.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/shaede/vrx_amore/devel/lib/libWavefieldVisualPlugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/shaede/vrx_amore/devel/lib/libwavegauge_plugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_api_plugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_paths_plugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroslib.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librospack.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2_ros.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libactionlib.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libmessage_filters.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libxmlrpcpp.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp_serialization.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librostime.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libcpp_common.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.2.1
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.4.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.9.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.10.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libuuid.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/shaede/vrx_amore/devel/lib/libWavefieldModelPlugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/shaede/vrx_amore/devel/lib/libHydrodynamics.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_api_plugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_paths_plugin.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroslib.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librospack.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2_ros.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libactionlib.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libmessage_filters.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libxmlrpcpp.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp_serialization.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librostime.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libcpp_common.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libblas.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblapack.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libblas.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblapack.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libccd.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libfcl.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libassimp.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.7.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.2.1
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.4.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.9.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.10.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.0
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libuuid.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libuuid.so
-/home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so"
-	cd /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/link.txt --verbose=$(VERBOSE)
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.7.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/brad/vrx_amore/devel/lib/libWavefieldVisualPlugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/brad/vrx_amore/devel/lib/libwavegauge_plugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_api_plugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_paths_plugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroslib.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librospack.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2_ros.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libactionlib.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libmessage_filters.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libxmlrpcpp.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp_serialization.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librostime.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libcpp_common.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.2.1
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.4.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.9.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.10.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libuuid.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/brad/vrx_amore/devel/lib/libWavefieldModelPlugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /home/brad/vrx_amore/devel/lib/libHydrodynamics.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_api_plugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libgazebo_ros_paths_plugin.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroslib.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librospack.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpython3.8.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2_ros.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libactionlib.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libmessage_filters.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libxmlrpcpp.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libtf2.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libdynamic_reconfigure_config_init_mutex.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libroscpp_serialization.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/librostime.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /opt/ros/noetic/lib/libcpp_common.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libblas.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblapack.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libblas.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liblapack.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libccd.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libfcl.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libassimp.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.7.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.2.1
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.4.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.9.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.10.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.0
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libuuid.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: /usr/lib/x86_64-linux-gnu/libuuid.so
+/home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library /home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so"
+	cd /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build: /home/shaede/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so
+vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build: /home/brad/vrx_amore/devel/lib/libusv_gazebo_acoustic_pinger_plugin.so
 
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build
 
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/clean:
-	cd /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins && $(CMAKE_COMMAND) -P CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/cmake_clean.cmake
+	cd /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins && $(CMAKE_COMMAND) -P CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/cmake_clean.cmake
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/clean
 
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/depend:
-	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/usv_gazebo_plugins /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/depend
 

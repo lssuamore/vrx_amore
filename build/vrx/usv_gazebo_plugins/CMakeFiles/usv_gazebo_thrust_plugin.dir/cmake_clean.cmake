@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/shaede/vrx_amore/devel/lib/libusv_gazebo_thrust_plugin.pdb"
-  "/home/shaede/vrx_amore/devel/lib/libusv_gazebo_thrust_plugin.so"
+  "/home/brad/vrx_amore/devel/lib/libusv_gazebo_thrust_plugin.pdb"
+  "/home/brad/vrx_amore/devel/lib/libusv_gazebo_thrust_plugin.so"
   "CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.o"
 )
 

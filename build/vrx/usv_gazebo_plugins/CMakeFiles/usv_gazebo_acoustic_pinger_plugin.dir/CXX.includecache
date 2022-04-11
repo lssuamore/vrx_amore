@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/shaede/vrx_amore/devel/include/usv_msgs/RangeBearing.h
+/home/brad/vrx_amore/devel/include/usv_msgs/RangeBearing.h
 string
 -
 vector
@@ -24,7 +24,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/acoustic_pinger_plugin.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/acoustic_pinger_plugin.hh
 geometry_msgs/Vector3.h
 -
 ros/ros.h
@@ -48,7 +48,7 @@ gazebo/sensors/GaussianNoiseModel.hh
 ignition/math/Vector3.hh
 -
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/acoustic_pinger_plugin.cc
 usv_msgs/RangeBearing.h
 -
 cmath
@@ -56,7 +56,7 @@ cmath
 ignition/math/Pose3.hh
 -
 usv_gazebo_plugins/acoustic_pinger_plugin.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/acoustic_pinger_plugin.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/acoustic_pinger_plugin.hh
 
 /opt/ros/noetic/include/geometry_msgs/Vector3.h
 string

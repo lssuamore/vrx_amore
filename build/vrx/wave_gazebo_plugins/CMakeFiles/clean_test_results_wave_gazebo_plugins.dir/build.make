@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
+CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 
 # Utility rule file for clean_test_results_wave_gazebo_plugins.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
 include vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/progress.make
 
 vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins:
-	cd /home/shaede/vrx_amore/build/vrx/wave_gazebo_plugins && /usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/remove_test_results.py /home/shaede/vrx_amore/build/test_results/wave_gazebo_plugins
+	cd /home/brad/vrx_amore/build/vrx/wave_gazebo_plugins && /usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/remove_test_results.py /home/brad/vrx_amore/build/test_results/wave_gazebo_plugins
 
 clean_test_results_wave_gazebo_plugins: vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins
 clean_test_results_wave_gazebo_plugins: vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/build.make
@@ -67,10 +67,10 @@ vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/bu
 .PHONY : vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/build
 
 vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/clean:
-	cd /home/shaede/vrx_amore/build/vrx/wave_gazebo_plugins && $(CMAKE_COMMAND) -P CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/cmake_clean.cmake
+	cd /home/brad/vrx_amore/build/vrx/wave_gazebo_plugins && $(CMAKE_COMMAND) -P CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/cmake_clean.cmake
 .PHONY : vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/clean
 
 vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/depend:
-	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/vrx/wave_gazebo_plugins /home/shaede/vrx_amore/build/vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/wave_gazebo_plugins /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/wave_gazebo_plugins /home/brad/vrx_amore/build/vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/wave_gazebo_plugins/CMakeFiles/clean_test_results_wave_gazebo_plugins.dir/depend
 

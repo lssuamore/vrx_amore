@@ -1,4 +1,4 @@
-prefix=/home/shaede/vrx_amore/devel
+prefix=/home/brad/vrx_amore/devel
 
 Name: wamv_description
 Description: Description of wamv_description

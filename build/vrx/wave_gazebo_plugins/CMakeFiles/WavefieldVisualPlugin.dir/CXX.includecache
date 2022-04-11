@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Gazebo.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Gazebo.hh
 string
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Utilities.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Utilities.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -24,7 +24,7 @@ ignition/math/Vector3.hh
 string
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -40,7 +40,7 @@ memory
 vector
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldVisualPlugin.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldVisualPlugin.hh
 gazebo/common/Plugin.hh
 -
 gazebo/msgs/msgs.hh
@@ -54,7 +54,7 @@ string
 vector
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/WavefieldVisualPlugin.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/WavefieldVisualPlugin.cc
 memory
 -
 thread
@@ -90,19 +90,19 @@ ignition/math/Vector2.hh
 ignition/math/Vector3.hh
 -
 gazebo/rendering/ogre_gazebo.h
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/gazebo/rendering/ogre_gazebo.h
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/gazebo/rendering/ogre_gazebo.h
 gazebo/rendering/Camera.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/gazebo/rendering/Camera.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/gazebo/rendering/Camera.hh
 gazebo/rendering/UserCamera.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/gazebo/rendering/UserCamera.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/gazebo/rendering/UserCamera.hh
 wave_gazebo_plugins/WavefieldVisualPlugin.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldVisualPlugin.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldVisualPlugin.hh
 wave_gazebo_plugins/Gazebo.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Gazebo.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Gazebo.hh
 wave_gazebo_plugins/Wavefield.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
 wave_gazebo_plugins/Utilities.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
 
 /usr/include/gazebo-11/gazebo/Master.hh
 string

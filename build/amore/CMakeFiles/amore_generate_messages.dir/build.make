@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
+CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 
 # Utility rule file for amore_generate_messages.
 
@@ -63,10 +63,10 @@ amore/CMakeFiles/amore_generate_messages.dir/build: amore_generate_messages
 .PHONY : amore/CMakeFiles/amore_generate_messages.dir/build
 
 amore/CMakeFiles/amore_generate_messages.dir/clean:
-	cd /home/shaede/vrx_amore/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/amore_generate_messages.dir/cmake_clean.cmake
+	cd /home/brad/vrx_amore/build/amore && $(CMAKE_COMMAND) -P CMakeFiles/amore_generate_messages.dir/cmake_clean.cmake
 .PHONY : amore/CMakeFiles/amore_generate_messages.dir/clean
 
 amore/CMakeFiles/amore_generate_messages.dir/depend:
-	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/amore /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/amore /home/shaede/vrx_amore/build/amore/CMakeFiles/amore_generate_messages.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/amore /home/brad/vrx_amore/build /home/brad/vrx_amore/build/amore /home/brad/vrx_amore/build/amore/CMakeFiles/amore_generate_messages.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : amore/CMakeFiles/amore_generate_messages.dir/depend
 

@@ -413,6 +413,31 @@ void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 	}	
 } // END OF VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 
+// THIS FUNCTION: 	Publishes the current task converted waypoints to "waypoints_ned"
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+// =============================================================================
+void waypoints_publish()
+{
+	NED_waypoints_msg.points.clear();
+			
+	NED_waypoints_msg.quantity = goal_poses_quantity;        // publish quantity of poses so the high level control knows
+	
+	for (int i = 0; i < goal_poses_quantity; i++)
+	{
+		geometry_msgs::Point point;
+		point.x = NED_x_goal[i];
+		point.y = NED_y_goal[i];
+		point.z = NED_psi_goal[i];
+		NED_waypoints_msg.points.push_back(point);
+		ROS_INFO("point: %i -- NA", i);
+		ROS_INFO("x: %f -- NA", NED_x_goal[i]);
+		ROS_INFO("y: %f -- NA", NED_y_goal[i]);
+		ROS_INFO("psi: %f -- NA", NED_psi_goal[i]);
+	}
+	waypoints_ned_pub.publish(NED_waypoints_msg);
+} // end of waypoints_publish()
+
 // THIS FUNCTION: 	Publishes the current animal poses w/ IDs in local NED convention to "ned_animals"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
@@ -470,11 +495,11 @@ int main(int argc, char **argv)
 	
 	// Publishers
 	na_initialization_state_pub = nh10.advertise<std_msgs::Bool>("na_initialization_state", 1);											// publisher for state of initialization
-	nav_ned_pub = nh11.advertise<nav_msgs::Odometry>("nav_ned", 100); 																	// USV NED state publisher
-	nav_odom_pub = nh12.advertise<nav_msgs::Odometry>("nav_odom", 100); 																// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
-	waypoints_ned_pub = nh13.advertise<amore::NED_waypoints>("waypoints_ned", 100); 											// goal poses converted to NED publisher
-	goal_waypoints_publish_state_pub = nh14.advertise<std_msgs::Bool>("goal_waypoints_publish_state", 1);				// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
-	NED_animals_pub = nh15.advertise<amore::NED_objects>("ned_animals", 100);					// current animal IDs with respective locations for planner to use to generate path
+	goal_waypoints_publish_state_pub = nh11.advertise<std_msgs::Bool>("goal_waypoints_publish_state", 1);				// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
+	nav_ned_pub = nh12.advertise<nav_msgs::Odometry>("nav_ned", 100); 																	// USV NED state publisher
+	nav_odom_pub = nh13.advertise<nav_msgs::Odometry>("nav_odom", 100); 																// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
+	waypoints_ned_pub = nh14.advertise<amore::NED_waypoints>("waypoints_ned", 100); 											// goal poses converted to NED publisher
+	NED_animals_pub = nh15.advertise<amore::NED_objects>("ned_animals", 100);														// current animal IDs with respective locations for planner to use to generate path
 	
 	// Initialize global variables
 	goal_waypoints_publish_status.data = false;
@@ -589,23 +614,7 @@ int main(int argc, char **argv)
 		{
 			if ((NA_state == 2) || (NA_state == 3))
 			{
-				NED_waypoints_msg.points.clear();
-			
-				NED_waypoints_msg.quantity = goal_poses_quantity;        // publish quantity of poses so the high level control knows
-				
-				for (int i = 0; i < goal_poses_quantity; i++)
-				{
-					geometry_msgs::Point point;
-					point.x = NED_x_goal[i];
-					point.y = NED_y_goal[i];
-					point.z = NED_psi_goal[i];
-					NED_waypoints_msg.points.push_back(point);
-					ROS_INFO("point: %i -- NA", i);
-					ROS_INFO("x: %f -- NA", NED_x_goal[i]);
-					ROS_INFO("y: %f -- NA", NED_y_goal[i]);
-					ROS_INFO("psi: %f -- NA", NED_psi_goal[i]);
-				}
-				waypoints_ned_pub.publish(NED_waypoints_msg);
+				waypoints_publish();
 			}
 			else if (NA_state == 4)
 			{
@@ -619,16 +628,16 @@ int main(int argc, char **argv)
 		{
 			if ((PP_state == 1) || (PP_state == 2))
 			{
-				waypoints_ned_pub.publish(NED_waypoints_msg);
+				waypoints_ned_pub.publish(NED_waypoints_msg);		// waypoints_publish();
 			}
 			else if (PP_state == 4)
 			{
-				animals_publish();
+				NED_animals_pub.publish(NED_animals_msg);				// animals_publish();
 			}
 			// reset for next times conversion
 			lat_lon_goal_recieved = false;
 			NED_waypoints_converted = false;
-			goal_waypoints_publish_status.data = false;
+			//goal_waypoints_publish_status.data = false;
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF WF GOAL POSES CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		

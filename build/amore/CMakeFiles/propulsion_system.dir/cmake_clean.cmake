@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/shaede/vrx_amore/devel/lib/amore/propulsion_system"
-  "/home/shaede/vrx_amore/devel/lib/amore/propulsion_system.pdb"
+  "/home/brad/vrx_amore/devel/lib/amore/propulsion_system"
+  "/home/brad/vrx_amore/devel/lib/amore/propulsion_system.pdb"
   "CMakeFiles/propulsion_system.dir/src/propulsion_system.cpp.o"
 )
 
