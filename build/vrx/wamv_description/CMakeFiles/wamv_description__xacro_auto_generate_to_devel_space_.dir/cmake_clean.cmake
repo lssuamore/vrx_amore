@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/wamv_description/urdf"
-  "/home/brad/vrx_amore/devel/share/wamv_description/urdf/wamv_base.urdf"
+  "/home/shaede/vrx_amore/devel/share/wamv_description/urdf"
+  "/home/shaede/vrx_amore/devel/share/wamv_description/urdf/wamv_base.urdf"
   "CMakeFiles/wamv_description__xacro_auto_generate_to_devel_space_"
   "urdf/wamv_base.urdf"
 )

@@ -50,8 +50,8 @@
 #include "amore/NED_waypoints.h"
 #include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
 #include "amore/usv_pose_msg.h"
-#include "amore/NED_buoys.h"
-#include "geometry_msgs/PoseArray.h"
+#include "amore/NED_objects.h"
+//#include "geometry_msgs/PoseArray.h"
 //...........................................End of Included Libraries and Message Types....................................
 
 
@@ -236,7 +236,7 @@ float LX, LY, RX, RY;																// Variables for the coordinates of the buo
 std_msgs::Bool pa_initialization_status;								// "pa_initialization_state" message
 ros::Publisher pa_initialization_state_pub;							// "pa_initialization_state" publisher
 
-amore::NED_buoys NED_buoys_msg;								// message used to hold and publish buoy locations
+amore::NED_objects NED_buoys_msg;								// message used to hold and publish buoy locations
 ros::Publisher NED_buoys_pub;											// "NED_buoys" publisher
 
 ros::Time current_time, last_time;										// creates time variables
@@ -445,8 +445,8 @@ void buoys_publish()
 {
 	int true_size = 0;
 	string buoy_id = " ";
-	// VARIABLES FOR SELF CREATED BUOY ARRAY MESSAGE CONTAINING BUOYS WITH THEIR RESPECTIVE NED POSITIONS AND IDs
-	NED_buoys_msg.buoys.clear();
+	// VARIABLES FOR SELF CREATED OBJECT ARRAY MESSAGE CONTAINING OBJECTS WITH THEIR RESPECTIVE NED POSITIONS AND IDs
+	NED_buoys_msg.objects.clear();
 	
 	for (int i=0; i<buoy_total; i++)
 	{
@@ -501,7 +501,7 @@ void buoys_publish()
 			buoy.header.frame_id = color_type_buoy.c_str(); 	// header frame
 			buoy.point.x = x_offset[i];
 			buoy.point.y = y_offset[i];
-			NED_buoys_msg.buoys.push_back(buoy);
+			NED_buoys_msg.objects.push_back(buoy);
 			true_size += 1;
 		}
 		color_type_buoy = " ";
@@ -509,7 +509,7 @@ void buoys_publish()
 	ROS_INFO("Printing array of buoys locations wrt USV -- PA");
 	for (int j=0; j<true_size; j++)
 	{
-		ROS_INFO("Buoy: %s		number: %2i			x: %4.2f			y: %4.2f", NED_buoys_msg.buoys[j].header.frame_id.c_str(), j, NED_buoys_msg.buoys[j].point.x, NED_buoys_msg.buoys[j].point.y);
+		ROS_INFO("Buoy: %s		number: %2i			x: %4.2f			y: %4.2f", NED_buoys_msg.objects[j].header.frame_id.c_str(), j, NED_buoys_msg.objects[j].point.x, NED_buoys_msg.objects[j].point.y);
 	}
 	NED_buoys_msg.quantity = true_size;				// publish quantity of poses so the path planner knows
 	NED_buoys_pub.publish(NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
@@ -1033,7 +1033,7 @@ int main(int argc, char **argv)
 	ros::Publisher objects_pub = nh9.advertise<std_msgs::Float32>("/objects", 10);					// For publishing object information to mission_control
 	ros::Publisher target_pub = nh10.advertise<std_msgs::Float32>("/target", 10);						// For publishing a target to the weapon_system
 	pa_initialization_state_pub = nh11.advertise<std_msgs::Bool>("pa_initialization_state", 1);	// state of initialization
-	NED_buoys_pub = nh12.advertise<amore::NED_buoys>("NED_buoys", 100);					// current buoy IDs with respective locations for planner to use to generate path
+	NED_buoys_pub = nh12.advertise<amore::NED_objects>("NED_buoys", 100);					// current buoy IDs with respective locations for planner to use to generate path
 	
 	// Initialize global variables
 	pa_initialization_status.data = false;

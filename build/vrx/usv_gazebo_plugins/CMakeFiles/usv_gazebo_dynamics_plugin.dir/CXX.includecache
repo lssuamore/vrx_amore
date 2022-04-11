@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/usv_gazebo_dynamics_plugin.hh
+/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/usv_gazebo_dynamics_plugin.hh
 Eigen/Core
 -
 string
@@ -22,13 +22,13 @@ gazebo/physics/physics.hh
 sdf/sdf.hh
 -
 wave_gazebo_plugins/Wavefield.hh
-/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/Wavefield.hh
+/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/Wavefield.hh
 wave_gazebo_plugins/WavefieldEntity.hh
-/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldEntity.hh
+/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldEntity.hh
 wave_gazebo_plugins/WavefieldModelPlugin.hh
-/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldModelPlugin.hh
+/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldModelPlugin.hh
 
-/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_dynamics_plugin.cc
+/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_dynamics_plugin.cc
 ros/ros.h
 -
 tf2/LinearMath/Transform.h
@@ -44,9 +44,9 @@ algorithm
 ignition/math/Pose3.hh
 -
 usv_gazebo_plugins/usv_gazebo_dynamics_plugin.hh
-/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/usv_gazebo_dynamics_plugin.hh
+/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/usv_gazebo_dynamics_plugin.hh
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
+/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -62,7 +62,7 @@ memory
 vector
 -
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
+/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
 memory
 -
 string
@@ -72,7 +72,7 @@ gazebo/gazebo.hh
 gazebo/physics/Base.hh
 -
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldModelPlugin.hh
+/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldModelPlugin.hh
 memory
 -
 string

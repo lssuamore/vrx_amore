@@ -1,8 +1,8 @@
-# Install script for directory: /home/brad/vrx_amore/src/vrx/wamv_gazebo
+# Install script for directory: /home/shaede/vrx_amore/src/vrx/wamv_gazebo
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/brad/vrx_amore/install")
+  set(CMAKE_INSTALL_PREFIX "/home/shaede/vrx_amore/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,37 +38,37 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/brad/vrx_amore/build/vrx/wamv_gazebo/catkin_generated/installspace/wamv_gazebo.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/shaede/vrx_amore/build/vrx/wamv_gazebo/catkin_generated/installspace/wamv_gazebo.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/cmake" TYPE FILE FILES
-    "/home/brad/vrx_amore/build/vrx/wamv_gazebo/catkin_generated/installspace/wamv_gazeboConfig.cmake"
-    "/home/brad/vrx_amore/build/vrx/wamv_gazebo/catkin_generated/installspace/wamv_gazeboConfig-version.cmake"
+    "/home/shaede/vrx_amore/build/vrx/wamv_gazebo/catkin_generated/installspace/wamv_gazeboConfig.cmake"
+    "/home/shaede/vrx_amore/build/vrx/wamv_gazebo/catkin_generated/installspace/wamv_gazeboConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo" TYPE FILE FILES "/home/brad/vrx_amore/src/vrx/wamv_gazebo/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo" TYPE FILE FILES "/home/shaede/vrx_amore/src/vrx/wamv_gazebo/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/urdf" TYPE FILE FILES "/home/brad/vrx_amore/build/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/urdf" TYPE FILE FILES "/home/shaede/vrx_amore/build/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/models" TYPE DIRECTORY FILES "/home/brad/vrx_amore/src/vrx/wamv_gazebo/models/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/models" TYPE DIRECTORY FILES "/home/shaede/vrx_amore/src/vrx/wamv_gazebo/models/")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/urdf" TYPE DIRECTORY FILES "/home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/urdf" TYPE DIRECTORY FILES "/home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/config" TYPE DIRECTORY FILES "/home/brad/vrx_amore/src/vrx/wamv_gazebo/config/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/config" TYPE DIRECTORY FILES "/home/shaede/vrx_amore/src/vrx/wamv_gazebo/config/")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/launch" TYPE DIRECTORY FILES "/home/brad/vrx_amore/src/vrx/wamv_gazebo/launch/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wamv_gazebo/launch" TYPE DIRECTORY FILES "/home/shaede/vrx_amore/src/vrx/wamv_gazebo/launch/")
 endif()
 

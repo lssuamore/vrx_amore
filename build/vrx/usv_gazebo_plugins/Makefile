@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
+CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles /home/brad/vrx_amore/build/vrx/usv_gazebo_plugins/CMakeFiles/progress.marks
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/brad/vrx_amore/build/CMakeFiles 0
+	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/shaede/vrx_amore/build/CMakeFiles /home/shaede/vrx_amore/build/vrx/usv_gazebo_plugins/CMakeFiles/progress.marks
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shaede/vrx_amore/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/clean
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/preinstall
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/preinstall
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ _run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test: vrx/usv_gazebo_plugins
 
 # fast build rule for target.
 _run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build
 .PHONY : _run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ usv_gazebo_plugins_xacro_generated_to_devel_space_: vrx/usv_gazebo_plugins/CMake
 
 # fast build rule for target.
 usv_gazebo_plugins_xacro_generated_to_devel_space_/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins_xacro_generated_to_devel_space_.dir/build
 .PHONY : usv_gazebo_plugins_xacro_generated_to_devel_space_/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ clean_test_results_usv_gazebo_plugins: vrx/usv_gazebo_plugins/CMakeFiles/clean_t
 
 # fast build rule for target.
 clean_test_results_usv_gazebo_plugins/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/clean_test_results_usv_gazebo_plugins.dir/build
 .PHONY : clean_test_results_usv_gazebo_plugins/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ usv_gazebo_dynamics_plugin: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamic
 
 # fast build rule for target.
 usv_gazebo_dynamics_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build
 .PHONY : usv_gazebo_dynamics_plugin/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test: vrx/usv_gazebo_plugins/
 
 # fast build rule for target.
 run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test.dir/build
 .PHONY : run_tests_usv_gazebo_plugins_gtest_buoyancy_plugin_test/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ buoyancy_gazebo_plugin: vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin
 
 # fast build rule for target.
 buoyancy_gazebo_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build
 .PHONY : buoyancy_gazebo_plugin/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ usv_gazebo_wind_plugin: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin
 
 # fast build rule for target.
 usv_gazebo_wind_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build
 .PHONY : usv_gazebo_wind_plugin/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ usv_gazebo_acoustic_pinger_plugin: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_
 
 # fast build rule for target.
 usv_gazebo_acoustic_pinger_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build
 .PHONY : usv_gazebo_acoustic_pinger_plugin/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ _run_tests_usv_gazebo_plugins_gtest: vrx/usv_gazebo_plugins/CMakeFiles/_run_test
 
 # fast build rule for target.
 _run_tests_usv_gazebo_plugins_gtest/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins_gtest.dir/build
 .PHONY : _run_tests_usv_gazebo_plugins_gtest/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ usv_gazebo_plugins__xacro_auto_generate: vrx/usv_gazebo_plugins/CMakeFiles/usv_g
 
 # fast build rule for target.
 usv_gazebo_plugins__xacro_auto_generate/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate.dir/build
 .PHONY : usv_gazebo_plugins__xacro_auto_generate/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ buoyancy_plugin_test: vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir
 
 # fast build rule for target.
 buoyancy_plugin_test/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build
 .PHONY : buoyancy_plugin_test/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ run_tests_usv_gazebo_plugins: vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_ga
 
 # fast build rule for target.
 run_tests_usv_gazebo_plugins/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins.dir/build
 .PHONY : run_tests_usv_gazebo_plugins/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ usv_gazebo_thrust_plugin: vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_pl
 
 # fast build rule for target.
 usv_gazebo_thrust_plugin/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build
 .PHONY : usv_gazebo_thrust_plugin/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ usv_gazebo_plugins__xacro_auto_generate_to_devel_space_: vrx/usv_gazebo_plugins/
 
 # fast build rule for target.
 usv_gazebo_plugins__xacro_auto_generate_to_devel_space_/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_plugins__xacro_auto_generate_to_devel_space_.dir/build
 .PHONY : usv_gazebo_plugins__xacro_auto_generate_to_devel_space_/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ _run_tests_usv_gazebo_plugins: vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_
 
 # fast build rule for target.
 _run_tests_usv_gazebo_plugins/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/_run_tests_usv_gazebo_plugins.dir/build
 .PHONY : _run_tests_usv_gazebo_plugins/fast
 
 # Convenience name for target.
 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/rule
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/rule
 .PHONY : vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/rule
 
 # Convenience name for target.
@@ -404,7 +404,7 @@ run_tests_usv_gazebo_plugins_gtest: vrx/usv_gazebo_plugins/CMakeFiles/run_tests_
 
 # fast build rule for target.
 run_tests_usv_gazebo_plugins_gtest/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/build
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/run_tests_usv_gazebo_plugins_gtest.dir/build
 .PHONY : run_tests_usv_gazebo_plugins_gtest/fast
 
 src/acoustic_pinger_plugin.o: src/acoustic_pinger_plugin.cc.o
@@ -413,7 +413,7 @@ src/acoustic_pinger_plugin.o: src/acoustic_pinger_plugin.cc.o
 
 # target to build an object file
 src/acoustic_pinger_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.o
 .PHONY : src/acoustic_pinger_plugin.cc.o
 
 src/acoustic_pinger_plugin.i: src/acoustic_pinger_plugin.cc.i
@@ -422,7 +422,7 @@ src/acoustic_pinger_plugin.i: src/acoustic_pinger_plugin.cc.i
 
 # target to preprocess a source file
 src/acoustic_pinger_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.i
 .PHONY : src/acoustic_pinger_plugin.cc.i
 
 src/acoustic_pinger_plugin.s: src/acoustic_pinger_plugin.cc.s
@@ -431,7 +431,7 @@ src/acoustic_pinger_plugin.s: src/acoustic_pinger_plugin.cc.s
 
 # target to generate assembly for a file
 src/acoustic_pinger_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_acoustic_pinger_plugin.dir/src/acoustic_pinger_plugin.cc.s
 .PHONY : src/acoustic_pinger_plugin.cc.s
 
 src/buoyancy_gazebo_plugin.o: src/buoyancy_gazebo_plugin.cc.o
@@ -440,7 +440,7 @@ src/buoyancy_gazebo_plugin.o: src/buoyancy_gazebo_plugin.cc.o
 
 # target to build an object file
 src/buoyancy_gazebo_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/buoyancy_gazebo_plugin.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/buoyancy_gazebo_plugin.cc.o
 .PHONY : src/buoyancy_gazebo_plugin.cc.o
 
 src/buoyancy_gazebo_plugin.i: src/buoyancy_gazebo_plugin.cc.i
@@ -449,7 +449,7 @@ src/buoyancy_gazebo_plugin.i: src/buoyancy_gazebo_plugin.cc.i
 
 # target to preprocess a source file
 src/buoyancy_gazebo_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/buoyancy_gazebo_plugin.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/buoyancy_gazebo_plugin.cc.i
 .PHONY : src/buoyancy_gazebo_plugin.cc.i
 
 src/buoyancy_gazebo_plugin.s: src/buoyancy_gazebo_plugin.cc.s
@@ -458,7 +458,7 @@ src/buoyancy_gazebo_plugin.s: src/buoyancy_gazebo_plugin.cc.s
 
 # target to generate assembly for a file
 src/buoyancy_gazebo_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/buoyancy_gazebo_plugin.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/buoyancy_gazebo_plugin.cc.s
 .PHONY : src/buoyancy_gazebo_plugin.cc.s
 
 src/polyhedron_volume.o: src/polyhedron_volume.cc.o
@@ -467,7 +467,7 @@ src/polyhedron_volume.o: src/polyhedron_volume.cc.o
 
 # target to build an object file
 src/polyhedron_volume.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/polyhedron_volume.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/polyhedron_volume.cc.o
 .PHONY : src/polyhedron_volume.cc.o
 
 src/polyhedron_volume.i: src/polyhedron_volume.cc.i
@@ -476,7 +476,7 @@ src/polyhedron_volume.i: src/polyhedron_volume.cc.i
 
 # target to preprocess a source file
 src/polyhedron_volume.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/polyhedron_volume.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/polyhedron_volume.cc.i
 .PHONY : src/polyhedron_volume.cc.i
 
 src/polyhedron_volume.s: src/polyhedron_volume.cc.s
@@ -485,7 +485,7 @@ src/polyhedron_volume.s: src/polyhedron_volume.cc.s
 
 # target to generate assembly for a file
 src/polyhedron_volume.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/polyhedron_volume.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/polyhedron_volume.cc.s
 .PHONY : src/polyhedron_volume.cc.s
 
 src/shape_volume.o: src/shape_volume.cc.o
@@ -494,7 +494,7 @@ src/shape_volume.o: src/shape_volume.cc.o
 
 # target to build an object file
 src/shape_volume.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/shape_volume.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/shape_volume.cc.o
 .PHONY : src/shape_volume.cc.o
 
 src/shape_volume.i: src/shape_volume.cc.i
@@ -503,7 +503,7 @@ src/shape_volume.i: src/shape_volume.cc.i
 
 # target to preprocess a source file
 src/shape_volume.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/shape_volume.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/shape_volume.cc.i
 .PHONY : src/shape_volume.cc.i
 
 src/shape_volume.s: src/shape_volume.cc.s
@@ -512,7 +512,7 @@ src/shape_volume.s: src/shape_volume.cc.s
 
 # target to generate assembly for a file
 src/shape_volume.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/shape_volume.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_gazebo_plugin.dir/src/shape_volume.cc.s
 .PHONY : src/shape_volume.cc.s
 
 src/usv_gazebo_dynamics_plugin.o: src/usv_gazebo_dynamics_plugin.cc.o
@@ -521,7 +521,7 @@ src/usv_gazebo_dynamics_plugin.o: src/usv_gazebo_dynamics_plugin.cc.o
 
 # target to build an object file
 src/usv_gazebo_dynamics_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/src/usv_gazebo_dynamics_plugin.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/src/usv_gazebo_dynamics_plugin.cc.o
 .PHONY : src/usv_gazebo_dynamics_plugin.cc.o
 
 src/usv_gazebo_dynamics_plugin.i: src/usv_gazebo_dynamics_plugin.cc.i
@@ -530,7 +530,7 @@ src/usv_gazebo_dynamics_plugin.i: src/usv_gazebo_dynamics_plugin.cc.i
 
 # target to preprocess a source file
 src/usv_gazebo_dynamics_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/src/usv_gazebo_dynamics_plugin.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/src/usv_gazebo_dynamics_plugin.cc.i
 .PHONY : src/usv_gazebo_dynamics_plugin.cc.i
 
 src/usv_gazebo_dynamics_plugin.s: src/usv_gazebo_dynamics_plugin.cc.s
@@ -539,7 +539,7 @@ src/usv_gazebo_dynamics_plugin.s: src/usv_gazebo_dynamics_plugin.cc.s
 
 # target to generate assembly for a file
 src/usv_gazebo_dynamics_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/src/usv_gazebo_dynamics_plugin.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_dynamics_plugin.dir/src/usv_gazebo_dynamics_plugin.cc.s
 .PHONY : src/usv_gazebo_dynamics_plugin.cc.s
 
 src/usv_gazebo_thrust_plugin.o: src/usv_gazebo_thrust_plugin.cc.o
@@ -548,7 +548,7 @@ src/usv_gazebo_thrust_plugin.o: src/usv_gazebo_thrust_plugin.cc.o
 
 # target to build an object file
 src/usv_gazebo_thrust_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.o
 .PHONY : src/usv_gazebo_thrust_plugin.cc.o
 
 src/usv_gazebo_thrust_plugin.i: src/usv_gazebo_thrust_plugin.cc.i
@@ -557,7 +557,7 @@ src/usv_gazebo_thrust_plugin.i: src/usv_gazebo_thrust_plugin.cc.i
 
 # target to preprocess a source file
 src/usv_gazebo_thrust_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.i
 .PHONY : src/usv_gazebo_thrust_plugin.cc.i
 
 src/usv_gazebo_thrust_plugin.s: src/usv_gazebo_thrust_plugin.cc.s
@@ -566,7 +566,7 @@ src/usv_gazebo_thrust_plugin.s: src/usv_gazebo_thrust_plugin.cc.s
 
 # target to generate assembly for a file
 src/usv_gazebo_thrust_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_thrust_plugin.dir/src/usv_gazebo_thrust_plugin.cc.s
 .PHONY : src/usv_gazebo_thrust_plugin.cc.s
 
 src/usv_gazebo_wind_plugin.o: src/usv_gazebo_wind_plugin.cc.o
@@ -575,7 +575,7 @@ src/usv_gazebo_wind_plugin.o: src/usv_gazebo_wind_plugin.cc.o
 
 # target to build an object file
 src/usv_gazebo_wind_plugin.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.o
 .PHONY : src/usv_gazebo_wind_plugin.cc.o
 
 src/usv_gazebo_wind_plugin.i: src/usv_gazebo_wind_plugin.cc.i
@@ -584,7 +584,7 @@ src/usv_gazebo_wind_plugin.i: src/usv_gazebo_wind_plugin.cc.i
 
 # target to preprocess a source file
 src/usv_gazebo_wind_plugin.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.i
 .PHONY : src/usv_gazebo_wind_plugin.cc.i
 
 src/usv_gazebo_wind_plugin.s: src/usv_gazebo_wind_plugin.cc.s
@@ -593,7 +593,7 @@ src/usv_gazebo_wind_plugin.s: src/usv_gazebo_wind_plugin.cc.s
 
 # target to generate assembly for a file
 src/usv_gazebo_wind_plugin.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.s
 .PHONY : src/usv_gazebo_wind_plugin.cc.s
 
 test/buoyancy_test.o: test/buoyancy_test.cc.o
@@ -602,7 +602,7 @@ test/buoyancy_test.o: test/buoyancy_test.cc.o
 
 # target to build an object file
 test/buoyancy_test.cc.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/test/buoyancy_test.cc.o
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/test/buoyancy_test.cc.o
 .PHONY : test/buoyancy_test.cc.o
 
 test/buoyancy_test.i: test/buoyancy_test.cc.i
@@ -611,7 +611,7 @@ test/buoyancy_test.i: test/buoyancy_test.cc.i
 
 # target to preprocess a source file
 test/buoyancy_test.cc.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/test/buoyancy_test.cc.i
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/test/buoyancy_test.cc.i
 .PHONY : test/buoyancy_test.cc.i
 
 test/buoyancy_test.s: test/buoyancy_test.cc.s
@@ -620,7 +620,7 @@ test/buoyancy_test.s: test/buoyancy_test.cc.s
 
 # target to generate assembly for a file
 test/buoyancy_test.cc.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/test/buoyancy_test.cc.s
+	cd /home/shaede/vrx_amore/build && $(MAKE) -f vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/build.make vrx/usv_gazebo_plugins/CMakeFiles/buoyancy_plugin_test.dir/test/buoyancy_test.cc.s
 .PHONY : test/buoyancy_test.cc.s
 
 # Help Target
@@ -687,6 +687,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

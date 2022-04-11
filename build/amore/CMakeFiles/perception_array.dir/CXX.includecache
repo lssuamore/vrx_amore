@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/devel/include/amore/NED_buoys.h
+/home/shaede/vrx_amore/devel/include/amore/NED_objects.h
 string
 -
 vector
@@ -24,7 +24,7 @@ ros/message_operations.h
 geometry_msgs/PointStamped.h
 -
 
-/home/brad/vrx_amore/devel/include/amore/NED_waypoints.h
+/home/shaede/vrx_amore/devel/include/amore/NED_waypoints.h
 string
 -
 vector
@@ -42,7 +42,7 @@ ros/message_operations.h
 geometry_msgs/Point.h
 -
 
-/home/brad/vrx_amore/devel/include/amore/state_msg.h
+/home/shaede/vrx_amore/devel/include/amore/state_msg.h
 string
 -
 vector
@@ -62,7 +62,7 @@ std_msgs/Header.h
 std_msgs/Int32.h
 -
 
-/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h
+/home/shaede/vrx_amore/devel/include/amore/usv_pose_msg.h
 string
 -
 vector
@@ -88,7 +88,7 @@ std_msgs/Float64.h
 std_msgs/Float64.h
 -
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/Task.h
+/home/shaede/vrx_amore/devel/include/vrx_gazebo/Task.h
 string
 -
 vector
@@ -104,61 +104,59 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/vrx_amore/src/amore/src/perception_array.cpp
+/home/shaede/vrx_amore/src/amore/src/perception_array.cpp
 ros/ros.h
-/home/brad/vrx_amore/src/amore/src/ros/ros.h
+/home/shaede/vrx_amore/src/amore/src/ros/ros.h
 image_transport/image_transport.h
-/home/brad/vrx_amore/src/amore/src/image_transport/image_transport.h
+/home/shaede/vrx_amore/src/amore/src/image_transport/image_transport.h
 sensor_msgs/Image.h
-/home/brad/vrx_amore/src/amore/src/sensor_msgs/Image.h
+/home/shaede/vrx_amore/src/amore/src/sensor_msgs/Image.h
 sensor_msgs/PointCloud2.h
-/home/brad/vrx_amore/src/amore/src/sensor_msgs/PointCloud2.h
+/home/shaede/vrx_amore/src/amore/src/sensor_msgs/PointCloud2.h
 sensor_msgs/PointCloud.h
-/home/brad/vrx_amore/src/amore/src/sensor_msgs/PointCloud.h
+/home/shaede/vrx_amore/src/amore/src/sensor_msgs/PointCloud.h
 sensor_msgs/point_cloud_conversion.h
-/home/brad/vrx_amore/src/amore/src/sensor_msgs/point_cloud_conversion.h
+/home/shaede/vrx_amore/src/amore/src/sensor_msgs/point_cloud_conversion.h
 opencv2/highgui/highgui.hpp
-/home/brad/vrx_amore/src/amore/src/opencv2/highgui/highgui.hpp
+/home/shaede/vrx_amore/src/amore/src/opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
-/home/brad/vrx_amore/src/amore/src/opencv2/imgproc/imgproc.hpp
+/home/shaede/vrx_amore/src/amore/src/opencv2/imgproc/imgproc.hpp
 opencv2/imgcodecs.hpp
-/home/brad/vrx_amore/src/amore/src/opencv2/imgcodecs.hpp
+/home/shaede/vrx_amore/src/amore/src/opencv2/imgcodecs.hpp
 iostream
-/home/brad/vrx_amore/src/amore/src/iostream
+/home/shaede/vrx_amore/src/amore/src/iostream
 stdio.h
-/home/brad/vrx_amore/src/amore/src/stdio.h
+/home/shaede/vrx_amore/src/amore/src/stdio.h
 cv_bridge/cv_bridge.h
-/home/brad/vrx_amore/src/amore/src/cv_bridge/cv_bridge.h
+/home/shaede/vrx_amore/src/amore/src/cv_bridge/cv_bridge.h
 opencv2/opencv.hpp
-/home/brad/vrx_amore/src/amore/src/opencv2/opencv.hpp
+/home/shaede/vrx_amore/src/amore/src/opencv2/opencv.hpp
 geometry_msgs/PointStamped.h
-/home/brad/vrx_amore/src/amore/src/geometry_msgs/PointStamped.h
+/home/shaede/vrx_amore/src/amore/src/geometry_msgs/PointStamped.h
 geographic_msgs/GeoPoseStamped.h
-/home/brad/vrx_amore/src/amore/src/geographic_msgs/GeoPoseStamped.h
+/home/shaede/vrx_amore/src/amore/src/geographic_msgs/GeoPoseStamped.h
 nav_msgs/Odometry.h
-/home/brad/vrx_amore/src/amore/src/nav_msgs/Odometry.h
+/home/shaede/vrx_amore/src/amore/src/nav_msgs/Odometry.h
 time.h
-/home/brad/vrx_amore/src/amore/src/time.h
+/home/shaede/vrx_amore/src/amore/src/time.h
 vector
 -
 string
 -
 std_msgs/Float32.h
-/home/brad/vrx_amore/src/amore/src/std_msgs/Float32.h
+/home/shaede/vrx_amore/src/amore/src/std_msgs/Float32.h
 std_msgs/Bool.h
-/home/brad/vrx_amore/src/amore/src/std_msgs/Bool.h
+/home/shaede/vrx_amore/src/amore/src/std_msgs/Bool.h
 vrx_gazebo/Task.h
-/home/brad/vrx_amore/src/amore/src/vrx_gazebo/Task.h
+/home/shaede/vrx_amore/src/amore/src/vrx_gazebo/Task.h
 amore/NED_waypoints.h
-/home/brad/vrx_amore/src/amore/src/amore/NED_waypoints.h
+/home/shaede/vrx_amore/src/amore/src/amore/NED_waypoints.h
 amore/state_msg.h
-/home/brad/vrx_amore/src/amore/src/amore/state_msg.h
+/home/shaede/vrx_amore/src/amore/src/amore/state_msg.h
 amore/usv_pose_msg.h
-/home/brad/vrx_amore/src/amore/src/amore/usv_pose_msg.h
-amore/NED_buoys.h
-/home/brad/vrx_amore/src/amore/src/amore/NED_buoys.h
-geometry_msgs/PoseArray.h
-/home/brad/vrx_amore/src/amore/src/geometry_msgs/PoseArray.h
+/home/shaede/vrx_amore/src/amore/src/amore/usv_pose_msg.h
+amore/NED_objects.h
+/home/shaede/vrx_amore/src/amore/src/amore/NED_objects.h
 
 /opt/ros/noetic/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h
@@ -304,26 +302,6 @@ ros/message_operations.h
 geometry_msgs/Point.h
 -
 geometry_msgs/Quaternion.h
--
-
-/opt/ros/noetic/include/geometry_msgs/PoseArray.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-std_msgs/Header.h
--
-geometry_msgs/Pose.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/PoseWithCovariance.h

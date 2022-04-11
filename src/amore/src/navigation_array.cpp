@@ -33,10 +33,12 @@
 #include "amore/NED_waypoints.h"										// message created to hold an array of the converted WF goal waypoints w/ headings and the number of goal poses
 #include "geographic_msgs/GeoPoseStamped.h"				// message type published by VRX Task 1
 #include "geographic_msgs/GeoPath.h"								// message type published by VRX Task 2
-#include "geometry_msgs/Point.h"										// message type used to hold the goal waypoints w/headings
+//#include "geometry_msgs/Point.h"										// message type used to hold the goal waypoints w/headings
+#include "geometry_msgs/PointStamped.h"
 #include "sensor_msgs/NavSatFix.h"									// message type of lat and long coordinates given by the GPS
 #include "sensor_msgs/Imu.h"												// message type of orientation quaternion and angular velocities given by the GPS
 #include "geometry_msgs/Vector3Stamped.h"						// message type of linear velocities given by the IMU
+#include "amore/NED_objects.h"
 //...........................................End of Included Libraries and Message Types....................................
 
 
@@ -116,6 +118,10 @@ ros::Publisher nav_ned_pub;																		// "nav_ned" publisher
 
 amore::NED_waypoints NED_waypoints_msg;										// "waypoints_NED" message
 ros::Publisher waypoints_ned_pub;															// "waypoints_NED" publisher
+
+std::string Animal[100];																			// string array to hold the names of the animals
+amore::NED_objects NED_animals_msg;								// message used to hold and publish animal locations
+ros::Publisher NED_animals_pub;											// "ned_animals" publisher
 
 ros::Time current_time, last_time;															// creates time variables
 //........................................................End of Global Variables........................................................
@@ -378,6 +384,64 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 		ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
 	}	
 } // END OF VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
+
+// THIS FUNCTION SUBSCRIBES TO "/vrx/wildlife/animals" TO GET THE WF GOAL POSES IN LAT/LONG
+void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
+{
+	if (!lat_lon_goal_recieved)
+	{
+		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+		{
+			Animal[i] = goal->poses[i].header.frame_id;                              //Getting which is the 1st animal
+			goal_lat[i] = goal->poses[i].pose.position.latitude;
+			goal_long[i] = goal->poses[i].pose.position.longitude;
+			qx_goal[i] = goal->poses[i].pose.orientation.x;
+			qy_goal[i] = goal->poses[i].pose.orientation.y;
+			qz_goal[i] = goal->poses[i].pose.orientation.z;
+			qw_goal[i] = goal->poses[i].pose.orientation.w;
+		}
+		lat_lon_goal_recieved = true;
+		goal_poses_quantity = (int)sizeof(goal->poses)/8;
+		
+		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+		ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 4 WAYPOINTS NODE. -- NA");
+		ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
+		/* for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+		{
+			ROS_INFO("Animal: %s		lat: %4.9f			long: %4.9f", Animal[i].c_str(), goal_lat[i], goal_long[i]);
+		} */
+	}	
+} // END OF VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
+
+// THIS FUNCTION: 	Publishes the current animal poses w/ IDs in local NED convention to "ned_animals"
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+// =============================================================================
+void animals_publish()
+{
+	// VARIABLES FOR SELF CREATED OBJECT ARRAY MESSAGE CONTAINING OBJECTS WITH THEIR RESPECTIVE NED POSITIONS AND IDs
+	NED_animals_msg.objects.clear();
+	
+	for (int i=0; i<goal_poses_quantity; i++)
+	{
+		current_time = ros::Time::now(); 							// time update		
+		geometry_msgs::PointStamped animal; //publisher message type
+		animal.header.seq +=1;												// sequence number
+		animal.header.stamp = current_time;						// sets stamp to current time
+		animal.header.frame_id = Animal[i].c_str(); 	// header frame
+		animal.point.x = NED_x_goal[i];
+		animal.point.y = NED_y_goal[i];
+		NED_animals_msg.objects.push_back(animal);
+	}
+	ROS_INFO("Printing array of animals wrt USV -- NA");
+	for (int j=0; j<goal_poses_quantity; j++)
+	{
+		ROS_INFO("Animal: %s		x: %4.2f			y: %4.2f", NED_animals_msg.objects[j].header.frame_id.c_str(), NED_animals_msg.objects[j].point.x, NED_animals_msg.objects[j].point.y);
+	}
+	NED_animals_msg.quantity = goal_poses_quantity;				// publish quantity of poses so the path planner knows
+	NED_animals_pub.publish(NED_animals_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
+} // end of animals_publish()
+
 //............................................................End of goal pose conversion functions............................................................
 
 //...............................................................Main Program..............................................................
@@ -389,7 +453,7 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info);
   
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13, nh14;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13, nh14, nh15;
   
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
@@ -402,6 +466,7 @@ int main(int argc, char **argv)
 	ros::Subscriber geonav_odom_sub = nh8.subscribe("geonav_odom", 100, NED_Func);
 	ros::Subscriber VRX_T1_goal_sub; // = nh9.subscribe("/vrx/station_keeping/goal", 1, VRX_T1_goal_update);				// subscriber for goal pose given by Task1_SK
 	ros::Subscriber VRX_T2_goal_sub; // = nh9.subscribe("/vrx/wayfinding/waypoints", 100, VRX_T2_goal_update);			// subscriber for goal waypoints given by Task2_WF
+	ros::Subscriber VRX_T4_goal_sub;  // = nh9.subscribre("vrx/wildlife/animals/poses",100, VRX_T4_goal_update);
 	
 	// Publishers
 	na_initialization_state_pub = nh10.advertise<std_msgs::Bool>("na_initialization_state", 1);											// publisher for state of initialization
@@ -409,6 +474,7 @@ int main(int argc, char **argv)
 	nav_odom_pub = nh12.advertise<nav_msgs::Odometry>("nav_odom", 100); 																// USV state publisher, this sends the current state to nav_odom, so geonav_transform package can publish the ENU conversion to geonav_odom
 	waypoints_ned_pub = nh13.advertise<amore::NED_waypoints>("waypoints_ned", 100); 											// goal poses converted to NED publisher
 	goal_waypoints_publish_state_pub = nh14.advertise<std_msgs::Bool>("goal_waypoints_publish_state", 1);				// "goal_waypoints_publish_state" publisher for whether NED converted waypoints have been published
+	NED_animals_pub = nh15.advertise<amore::NED_objects>("ned_animals", 100);					// current animal IDs with respective locations for planner to use to generate path
 	
 	// Initialize global variables
 	goal_waypoints_publish_status.data = false;
@@ -417,7 +483,7 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
 	  
 	// Set the loop sleep rate
-	ros::Rate loop_rate(200);															// {Hz} GPS update rate: 20, IMU update rate: 100
+	ros::Rate loop_rate(100);															// {Hz} GPS update rate: 20, IMU update rate: 100
 
 	while(ros::ok())
 	{		
@@ -427,8 +493,8 @@ int main(int argc, char **argv)
 		
 		if (NA_state == 0)
 		{
-			goal_waypoints_publish_status.data = false;
-		}			
+			//goal_waypoints_publish_status.data = false;
+		}
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		else if (NA_state == 1)																	// standard USV Pose Conversion mode
@@ -466,7 +532,7 @@ int main(int argc, char **argv)
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF GOAL POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		else if ((!NED_waypoints_converted) && ((NA_state == 2) || (NA_state == 3)))						// if Goal Pose Conversion mode 
+		else if ((!NED_waypoints_converted) && ((NA_state == 2) || (NA_state == 3) || (NA_state == 4)))						// if Goal Pose Conversion mode 
 		{
 			// first subscribe to goal poses dependent upon which task
 			if (!lat_lon_goal_recieved)
@@ -480,6 +546,10 @@ int main(int argc, char **argv)
 				else if (NA_state == 3)				// TASK 2: WAYFINDING
 				{
 					VRX_T2_goal_sub = nh9.subscribe("/vrx/wayfinding/waypoints", 1, VRX_T2_goal_update);             	// subscriber for goal waypoints given by Task2_WF
+				}
+				else if (NA_state == 4)				// TASK 2: WAYFINDING
+				{
+					VRX_T4_goal_sub = nh9.subscribe("/vrx/wildlife/animals/poses", 1, VRX_T4_goal_update);             			// subscriber for goal waypoints given by Task2_WF
 				}
 				ros::spinOnce();
 				loop_rate.sleep();
@@ -517,33 +587,48 @@ int main(int argc, char **argv)
 			
 		if ((NED_waypoints_converted) && (!goal_waypoints_publish_status.data))
 		{
-			NED_waypoints_msg.points.clear();
-			
-			NED_waypoints_msg.quantity = goal_poses_quantity;        // publish quantity of poses so the high level control knows
-			
-			for (int i = 0; i < goal_poses_quantity; i++)
+			if ((NA_state == 2) || (NA_state == 3))
 			{
-				geometry_msgs::Point point;
-				point.x = NED_x_goal[i];
-				point.y = NED_y_goal[i];
-				point.z = NED_psi_goal[i];
-				NED_waypoints_msg.points.push_back(point);
-				ROS_INFO("point: %i -- NA", i);
-				ROS_INFO("x: %f -- NA", NED_x_goal[i]);
-				ROS_INFO("y: %f -- NA", NED_y_goal[i]);
-				ROS_INFO("psi: %f -- NA", NED_psi_goal[i]);
+				NED_waypoints_msg.points.clear();
+			
+				NED_waypoints_msg.quantity = goal_poses_quantity;        // publish quantity of poses so the high level control knows
+				
+				for (int i = 0; i < goal_poses_quantity; i++)
+				{
+					geometry_msgs::Point point;
+					point.x = NED_x_goal[i];
+					point.y = NED_y_goal[i];
+					point.z = NED_psi_goal[i];
+					NED_waypoints_msg.points.push_back(point);
+					ROS_INFO("point: %i -- NA", i);
+					ROS_INFO("x: %f -- NA", NED_x_goal[i]);
+					ROS_INFO("y: %f -- NA", NED_y_goal[i]);
+					ROS_INFO("psi: %f -- NA", NED_psi_goal[i]);
+				}
+				waypoints_ned_pub.publish(NED_waypoints_msg);
 			}
-			waypoints_ned_pub.publish(NED_waypoints_msg);
+			else if (NA_state == 4)
+			{
+				animals_publish();
+			}
 			goal_waypoints_publish_status.data = true;
 			ROS_INFO("WAYPOINTS HAVE BEEN PUBLISHED -- NA");
 		} // if ((NED_waypoints_converted) && (!goal_waypoints_publish_status.data))
 		
 		if (goal_waypoints_publish_status.data)
 		{
-			waypoints_ned_pub.publish(NED_waypoints_msg);
+			if ((PP_state == 1) || (PP_state == 2))
+			{
+				waypoints_ned_pub.publish(NED_waypoints_msg);
+			}
+			else if (PP_state == 4)
+			{
+				animals_publish();
+			}
 			// reset for next times conversion
 			lat_lon_goal_recieved = false;
 			NED_waypoints_converted = false;
+			goal_waypoints_publish_status.data = false;
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF WF GOAL POSES CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		

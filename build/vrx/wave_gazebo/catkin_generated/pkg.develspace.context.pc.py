@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "xacro".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "wave_gazebo"
-PROJECT_SPACE_DIR = "/home/brad/vrx_amore/devel"
+PROJECT_SPACE_DIR = "/home/shaede/vrx_amore/devel"
 PROJECT_VERSION = "1.3.0"

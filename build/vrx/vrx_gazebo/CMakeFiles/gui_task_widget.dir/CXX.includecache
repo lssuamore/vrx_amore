@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/UVLADIE3JM/moc_gui_task_widget.cpp
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/UVLADIE3JM/moc_gui_task_widget.cpp
 ../../../../../src/vrx/vrx_gazebo/src/gui_task_widget.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh
 QtCore/qbytearray.h
 -
 QtCore/qmetatype.h
 -
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/mocs_compilation.cpp
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/mocs_compilation.cpp
 UVLADIE3JM/moc_gui_task_widget.cpp
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/UVLADIE3JM/moc_gui_task_widget.cpp
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/gui_task_widget_autogen/UVLADIE3JM/moc_gui_task_widget.cpp
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/Contact.h
+/home/shaede/vrx_amore/devel/include/vrx_gazebo/Contact.h
 string
 -
 vector
@@ -36,7 +36,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/Task.h
+/home/shaede/vrx_amore/devel/include/vrx_gazebo/Task.h
 string
 -
 vector
@@ -52,7 +52,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.cc
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.cc
 tf/tf.h
 -
 math.h
@@ -64,9 +64,9 @@ gazebo/msgs/msgs.hh
 sstream
 -
 gui_task_widget.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gui_task_widget.hh
 ros/ros.h
 -
 vrx_gazebo/Task.h
@@ -84,9 +84,9 @@ gazebo/gui/GuiPlugin.hh
 gazebo/transport/transport.hh
 -
 std_msgs/Float64.h
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/std_msgs/Float64.h
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/std_msgs/Float64.h
 gazebo_msgs/LinkStates.h
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/gazebo_msgs/LinkStates.h
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/gazebo_msgs/LinkStates.h
 
 /opt/ros/noetic/include/gazebo_msgs/LinkStates.h
 string

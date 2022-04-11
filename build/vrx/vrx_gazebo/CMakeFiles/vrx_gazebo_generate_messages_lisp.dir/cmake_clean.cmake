@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/msg/Contact.lisp"
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/msg/Task.lisp"
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/srv/BallShooter.lisp"
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/srv/ColorSequence.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/msg/Contact.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/msg/Task.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/srv/BallShooter.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/vrx_gazebo/srv/ColorSequence.lisp"
   "CMakeFiles/vrx_gazebo_generate_messages_lisp"
 )
 

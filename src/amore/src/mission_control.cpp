@@ -75,7 +75,6 @@ int PA_state = 0;
 //	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = Task 6: Scan and Dock and Deliver
 
-int point = 0;                     		    							// number of points on trajectory reached 
 int goal_poses;              											// total number of poses to reach 
 int loop_goal_published;         								// this is kept in order to ensure propulsion_system doesn't start until the goal is published by path_planner
 
@@ -292,6 +291,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 	//	1 = USV NED pose converter
 	//	2 = Station-Keeping NED goal pose converter
 	//	3 = Wayfinding NED goal pose converter
+	//	4 = Wildlife NED animals converter
 
 	//	STATES CONCERNED WITH "path_planner"
 	PP_state = 0;
@@ -351,7 +351,6 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				PA_state = 0;
 				// reset task statuses as long as task is in "initial" or "finished" state
 				NED_waypoints_published = false;
-				point = 0;
 			}
 		} // (msg->name == "station_keeping")
 		else if (msg->name == "wayfinding")
@@ -387,7 +386,6 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				PA_state = 0;
 				// reset task statuses as long as task is in "initial" or "finished" state
 				NED_waypoints_published = false;
-				point = 0;
 			}
 		} // (msg->name == "wayfinding")
 		else if (msg->name == "perception")
@@ -397,21 +395,41 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		} // (msg->name == "perception")
 		
 		// 	INTEGRATED TASK CODES FOLLOW
-		// else if (msg->name == "wildlife")
-		// {
-			// if ()
-			// {
-				// NA_state = 0;
-				// PS_state = 0;
-				// PP_state = 0;
-			// }
-			// else
-			// {
-				// NA_state = 0;
-				// PS_state = 0;
-				// PP_state = 0;
-			// }
-		// } // (msg->name == "wildlife")
+		else if (msg->name == "wildlife")
+		{
+			if ((msg->state == "ready") || (msg->state == "running"))
+			{
+				PP_state = 4;										// Task 4: Wildlife Encounter and Avoid
+				if (NED_waypoints_published)				// if the goal pose has been converted from lat/long and published by navigation_array
+				{
+					NA_state = 1;										// USV NED pose converter
+					if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+					{
+						PS_state = 1;									// Propulsion system ON
+					}
+					else
+					{
+						PS_state = 0;									// Propulsion system on standby
+					}	// if (NED_goal_pose_published)
+				}	// if (NED_waypoints_published)
+				else
+				{
+					NA_state = 4;										// Wildlife NED animals converter
+					PS_state = 0;										// Propulsion system on standby
+				}
+			}
+			else
+			{
+				// ALL CODES ON STANDBY
+				NA_state = 0;
+				PP_state = 0;
+				PS_state = 0;
+				PA_state = 0;
+				// reset task statuses as long as task is in "initial" or "finished" state
+				NED_waypoints_published = false;
+				NED_goal_pose_published = false;
+			}
+		} // (msg->name == "wildlife")
 		else if (msg->name == "gymkhana")
 		{
 			if ((msg->state == "ready") || (msg->state == "running"))

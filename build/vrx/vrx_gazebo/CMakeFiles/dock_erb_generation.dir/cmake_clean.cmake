@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016/model.sdf"
-  "/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_dynamic/model.sdf"
-  "/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018/model.sdf"
-  "/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_dynamic/model.sdf"
-  "/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022/model.sdf"
-  "/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_dynamic/model.sdf"
+  "/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016/model.sdf"
+  "/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_dynamic/model.sdf"
+  "/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018/model.sdf"
+  "/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_dynamic/model.sdf"
+  "/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022/model.sdf"
+  "/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_dynamic/model.sdf"
   "CMakeFiles/dock_erb_generation"
 )
 

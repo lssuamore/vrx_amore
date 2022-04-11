@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_buoys.lisp"
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp"
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state_msg.lisp"
-  "/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose_msg.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_waypoints.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/amore/msg/state_msg.lisp"
+  "/home/shaede/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose_msg.lisp"
   "CMakeFiles/amore_generate_messages_lisp"
 )
 

@@ -1,4 +1,4 @@
-prefix=/home/brad/vrx_amore/install
+prefix=/home/shaede/vrx_amore/install
 
 Name: vrx_2019
 Description: Description of vrx_2019

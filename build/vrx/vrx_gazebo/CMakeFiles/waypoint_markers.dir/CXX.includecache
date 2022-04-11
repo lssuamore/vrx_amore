@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/waypoint_markers_autogen/mocs_compilation.cpp
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/waypoint_markers_autogen/mocs_compilation.cpp
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/waypoint_markers.hh
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/waypoint_markers.hh
 string
 -
 sdf/sdf.hh
@@ -22,9 +22,9 @@ ignition/msgs.hh
 ignition/transport.hh
 -
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/waypoint_markers.cc
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/waypoint_markers.cc
 vrx_gazebo/waypoint_markers.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/waypoint_markers.hh
+/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/waypoint_markers.hh
 
 /usr/include/gazebo-11/gazebo/Master.hh
 string

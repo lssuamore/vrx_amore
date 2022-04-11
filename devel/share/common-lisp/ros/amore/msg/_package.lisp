@@ -1,8 +1,8 @@
 (cl:defpackage amore-msg
   (:use )
   (:export
-   "<NED_BUOYS>"
-   "NED_BUOYS"
+   "<NED_OBJECTS>"
+   "NED_OBJECTS"
    "<NED_WAYPOINTS>"
    "NED_WAYPOINTS"
    "<STATE_MSG>"

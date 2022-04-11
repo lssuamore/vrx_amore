@@ -43,52 +43,52 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
+CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
 
 # Utility rule file for wamv_gazebo__xacro_auto_generate_to_devel_space_.
 
 # Include the progress variables for this target.
 include vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/progress.make
 
-vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_: /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf
+vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_: /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf
 
 
-/home/brad/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf
-/home/brad/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf: vrx/wamv_gazebo/urdf/wamv_gazebo.urdf
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Copying to devel space: /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf"
-	cd /home/brad/vrx_amore/build/vrx/wamv_gazebo && /usr/bin/cmake -E copy_if_different /home/brad/vrx_amore/build/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf
+/home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf
+/home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf: vrx/wamv_gazebo/urdf/wamv_gazebo.urdf
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Copying to devel space: /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf"
+	cd /home/shaede/vrx_amore/build/vrx/wamv_gazebo && /usr/bin/cmake -E copy_if_different /home/shaede/vrx_amore/build/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf
 
-/home/brad/vrx_amore/devel/share/wamv_gazebo/urdf:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "creating dir /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf"
-	cd /home/brad/vrx_amore/build/vrx/wamv_gazebo && /usr/bin/cmake -E make_directory /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf
+/home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "creating dir /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf"
+	cd /home/shaede/vrx_amore/build/vrx/wamv_gazebo && /usr/bin/cmake -E make_directory /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf
 
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_pinger.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_aft_thrusters.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_camera.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/dynamics/wamv_gazebo_dynamics_plugin.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_p3d.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_description/urdf/thrusters/engine.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/macros.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/wamv_gazebo.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_planar_lidar.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_3d_lidar.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_gazebo_thruster_config.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_gps.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/ball_shooter.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_description/urdf/wamv_base.urdf.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/lidar.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_imu.xacro
-vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/brad/vrx_amore/src/vrx/wamv_description/urdf/battery.xacro
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "xacro: generating urdf/wamv_gazebo.urdf from urdf/wamv_gazebo.urdf.xacro"
-	cd /home/brad/vrx_amore/src/vrx/wamv_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf urdf/wamv_gazebo.urdf.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_p3d.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_description/urdf/battery.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_description/urdf/thrusters/engine.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_camera.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_planar_lidar.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_aft_thrusters.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/dynamics/wamv_gazebo_dynamics_plugin.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_pinger.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/wamv_gazebo.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/macros.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/ball_shooter.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_3d_lidar.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_gps.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/lidar.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/thruster_layouts/wamv_gazebo_thruster_config.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_gazebo/urdf/components/wamv_imu.xacro
+vrx/wamv_gazebo/urdf/wamv_gazebo.urdf: /home/shaede/vrx_amore/src/vrx/wamv_description/urdf/wamv_base.urdf.xacro
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "xacro: generating urdf/wamv_gazebo.urdf from urdf/wamv_gazebo.urdf.xacro"
+	cd /home/shaede/vrx_amore/src/vrx/wamv_gazebo && /home/shaede/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/shaede/vrx_amore/build/vrx/wamv_gazebo/urdf/wamv_gazebo.urdf urdf/wamv_gazebo.urdf.xacro
 
 wamv_gazebo__xacro_auto_generate_to_devel_space_: vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_
-wamv_gazebo__xacro_auto_generate_to_devel_space_: /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf
-wamv_gazebo__xacro_auto_generate_to_devel_space_: /home/brad/vrx_amore/devel/share/wamv_gazebo/urdf
+wamv_gazebo__xacro_auto_generate_to_devel_space_: /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf/wamv_gazebo.urdf
+wamv_gazebo__xacro_auto_generate_to_devel_space_: /home/shaede/vrx_amore/devel/share/wamv_gazebo/urdf
 wamv_gazebo__xacro_auto_generate_to_devel_space_: vrx/wamv_gazebo/urdf/wamv_gazebo.urdf
 wamv_gazebo__xacro_auto_generate_to_devel_space_: vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/build.make
 
@@ -100,10 +100,10 @@ vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/
 .PHONY : vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/build
 
 vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/clean:
-	cd /home/brad/vrx_amore/build/vrx/wamv_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/cmake_clean.cmake
+	cd /home/shaede/vrx_amore/build/vrx/wamv_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/cmake_clean.cmake
 .PHONY : vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/clean
 
 vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/depend:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/wamv_gazebo /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/wamv_gazebo /home/brad/vrx_amore/build/vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/vrx/wamv_gazebo /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/vrx/wamv_gazebo /home/shaede/vrx_amore/build/vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/wamv_gazebo/CMakeFiles/wamv_gazebo__xacro_auto_generate_to_devel_space_.dir/depend
 

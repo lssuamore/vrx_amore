@@ -1,4 +1,4 @@
-prefix=/home/brad/vrx_amore/devel
+prefix=/home/shaede/vrx_amore/devel
 
 Name: vrx_2019
 Description: Description of vrx_2019
