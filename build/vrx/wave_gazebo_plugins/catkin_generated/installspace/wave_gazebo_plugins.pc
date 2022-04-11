@@ -1,4 +1,4 @@
-prefix=/home/shaede/vrx_amore/install
+prefix=/home/brad/vrx_amore/install
 
 Name: wave_gazebo_plugins
 Description: Description of wave_gazebo_plugins

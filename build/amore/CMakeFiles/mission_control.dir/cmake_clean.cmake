@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/shaede/vrx_amore/devel/lib/amore/mission_control"
-  "/home/shaede/vrx_amore/devel/lib/amore/mission_control.pdb"
+  "/home/brad/vrx_amore/devel/lib/amore/mission_control"
+  "/home/brad/vrx_amore/devel/lib/amore/mission_control.pdb"
   "CMakeFiles/mission_control.dir/src/mission_control.cpp.o"
 )
 

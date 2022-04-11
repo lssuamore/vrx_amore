@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/shaede/vrx_amore/devel/share/roseus/ros/usv_msgs/manifest.l"
-  "/home/shaede/vrx_amore/devel/share/roseus/ros/usv_msgs/msg/RangeBearing.l"
+  "/home/brad/vrx_amore/devel/share/roseus/ros/usv_msgs/manifest.l"
+  "/home/brad/vrx_amore/devel/share/roseus/ros/usv_msgs/msg/RangeBearing.l"
   "CMakeFiles/usv_msgs_generate_messages_eus"
 )
 

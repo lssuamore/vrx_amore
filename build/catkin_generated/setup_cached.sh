@@ -7,10 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/shaede/vrx_amore/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/shaede/vrx_amore/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/shaede/vrx_amore/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PWD='/home/shaede/vrx_amore/build'
-export PYTHONPATH="/home/shaede/vrx_amore/devel/lib/python3/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/shaede/vrx_amore/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/shaede/vrx_amore/src:$ROS_PACKAGE_PATH"
+export PWD='/home/brad/vrx_amore/build'
+export ROS_PACKAGE_PATH='/home/brad/vrx_amore/src:/opt/ros/noetic/share'

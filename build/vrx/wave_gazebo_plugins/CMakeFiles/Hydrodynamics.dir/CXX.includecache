@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Gazebo.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Gazebo.hh
 string
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Geometry.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Geometry.hh
 ignition/math/Vector2.hh
 -
 ignition/math/Vector3.hh
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/PhysicalConstants.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/PhysicalConstants.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Physics.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Physics.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Utilities.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Utilities.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -34,7 +34,7 @@ ignition/math/Vector3.hh
 string
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -50,7 +50,7 @@ memory
 vector
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
 memory
 -
 string
@@ -60,7 +60,7 @@ gazebo/gazebo.hh
 gazebo/physics/Base.hh
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/Gazebo.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/Gazebo.cc
 array
 -
 iostream
@@ -76,9 +76,9 @@ gazebo/common/common.hh
 gazebo/rendering/rendering.hh
 -
 wave_gazebo_plugins/Gazebo.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Gazebo.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Gazebo.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/Geometry.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/Geometry.cc
 cmath
 -
 ignition/math/config.hh
@@ -88,21 +88,21 @@ ignition/math/Vector2.hh
 ignition/math/Vector3.hh
 -
 wave_gazebo_plugins/Geometry.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Geometry.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Geometry.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/PhysicalConstants.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/PhysicalConstants.cc
 wave_gazebo_plugins/PhysicalConstants.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/PhysicalConstants.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/PhysicalConstants.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/Physics.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/Physics.cc
 cmath
 -
 wave_gazebo_plugins/Physics.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Physics.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Physics.hh
 wave_gazebo_plugins/PhysicalConstants.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/PhysicalConstants.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/PhysicalConstants.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/Utilities.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/Utilities.cc
 algorithm
 -
 iostream
@@ -120,9 +120,9 @@ ignition/math/Vector3.hh
 sdf/sdf.hh
 -
 wave_gazebo_plugins/Utilities.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/Wavefield.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/Wavefield.cc
 Eigen/Dense
 -
 array
@@ -146,15 +146,15 @@ ignition/math/Vector2.hh
 ignition/math/Vector3.hh
 -
 wave_gazebo_plugins/Geometry.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Geometry.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Geometry.hh
 wave_gazebo_plugins/Physics.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Physics.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Physics.hh
 wave_gazebo_plugins/Utilities.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
 wave_gazebo_plugins/Wavefield.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/WavefieldEntity.cc
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/WavefieldEntity.cc
 iostream
 -
 string
@@ -166,11 +166,11 @@ gazebo/physics/physics.hh
 ignition/math/Vector2.hh
 -
 wave_gazebo_plugins/WavefieldEntity.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldEntity.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldEntity.hh
 wave_gazebo_plugins/Wavefield.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
 wave_gazebo_plugins/Utilities.hh
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Utilities.hh
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

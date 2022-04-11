@@ -43,61 +43,61 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
+CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 
 # Utility rule file for dock_base_erb_generation.
 
 # Include the progress variables for this target.
 include vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/progress.make
 
-vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf
-vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf
-vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf
-vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf
-vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf
-vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf
+vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf
+vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf
+vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf
+vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf
+vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf
+vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf
 
 
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf.erb
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf"
-	cd /home/shaede/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2016_base/model.sdf.erb > /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf.erb
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf"
+	cd /home/brad/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2016_base/model.sdf.erb > /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf
 
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf.erb
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf"
-	cd /home/shaede/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2018_base/model.sdf.erb > /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf.erb
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf"
+	cd /home/brad/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2018_base/model.sdf.erb > /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf
 
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf.erb
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf"
-	cd /home/shaede/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2022_base/model.sdf.erb > /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf.erb
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf"
+	cd /home/brad/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2022_base/model.sdf.erb > /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf
 
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf.erb
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf"
-	cd /home/shaede/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2016_base_dynamic/model.sdf.erb > /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf.erb
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf"
+	cd /home/brad/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2016_base_dynamic/model.sdf.erb > /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf
 
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf.erb
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf"
-	cd /home/shaede/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2018_base_dynamic/model.sdf.erb > /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf.erb
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf"
+	cd /home/brad/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2018_base_dynamic/model.sdf.erb > /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf
 
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf.erb
-/home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf"
-	cd /home/shaede/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2022_base_dynamic/model.sdf.erb > /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf.erb
+/home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf: /home/brad/vrx_amore/src/vrx/vrx_gazebo/dock_generator.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf"
+	cd /home/brad/vrx_amore/src/vrx/vrx_gazebo && /usr/bin/erb models/dock_2022_base_dynamic/model.sdf.erb > /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf
 
 dock_base_erb_generation: vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation
-dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf
-dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf
-dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf
-dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf
-dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf
-dock_base_erb_generation: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf
+dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base/model.sdf
+dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base/model.sdf
+dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base/model.sdf
+dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2016_base_dynamic/model.sdf
+dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2018_base_dynamic/model.sdf
+dock_base_erb_generation: /home/brad/vrx_amore/src/vrx/vrx_gazebo/models/dock_2022_base_dynamic/model.sdf
 dock_base_erb_generation: vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build.make
 
 .PHONY : dock_base_erb_generation
@@ -108,10 +108,10 @@ vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build: dock_base_erb_gene
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/build
 
 vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/clean:
-	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/dock_base_erb_generation.dir/cmake_clean.cmake
+	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/dock_base_erb_generation.dir/cmake_clean.cmake
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/clean
 
 vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/depend:
-	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/vrx/vrx_gazebo /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/vrx/vrx_gazebo /home/shaede/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/vrx_gazebo /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/vrx_gazebo /home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/vrx_gazebo/CMakeFiles/dock_base_erb_generation.dir/depend
 

@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "wamv_description;usv_gazebo_plugins;xacro".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "wamv_gazebo"
-PROJECT_SPACE_DIR = "/home/shaede/vrx_amore/install"
+PROJECT_SPACE_DIR = "/home/brad/vrx_amore/install"
 PROJECT_VERSION = "1.3.0"

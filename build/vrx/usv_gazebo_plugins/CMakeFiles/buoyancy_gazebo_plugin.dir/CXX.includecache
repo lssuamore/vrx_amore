@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/buoyancy_gazebo_plugin.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/buoyancy_gazebo_plugin.hh
 map
 -
 string
@@ -26,15 +26,15 @@ ignition/math/Pose3.hh
 ignition/math/Vector3.hh
 -
 usv_gazebo_plugins/shape_volume.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/usv_gazebo_plugins/shape_volume.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/usv_gazebo_plugins/shape_volume.hh
 wave_gazebo_plugins/Wavefield.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/Wavefield.hh
 wave_gazebo_plugins/WavefieldEntity.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldEntity.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldEntity.hh
 wave_gazebo_plugins/WavefieldModelPlugin.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldModelPlugin.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/wave_gazebo_plugins/WavefieldModelPlugin.hh
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/polyhedron_volume.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/polyhedron_volume.hh
 cassert
 -
 vector
@@ -46,7 +46,7 @@ ignition/math/Vector3.hh
 ignition/math/Quaternion.hh
 -
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/shape_volume.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/shape_volume.hh
 cmath
 -
 exception
@@ -60,9 +60,9 @@ ignition/math/Pose3.hh
 sdf/sdf.hh
 -
 usv_gazebo_plugins/polyhedron_volume.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/usv_gazebo_plugins/polyhedron_volume.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include/usv_gazebo_plugins/usv_gazebo_plugins/polyhedron_volume.hh
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/buoyancy_gazebo_plugin.cc
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/buoyancy_gazebo_plugin.cc
 functional
 -
 string
@@ -72,17 +72,17 @@ gazebo/common/Assert.hh
 gazebo/common/Events.hh
 -
 usv_gazebo_plugins/buoyancy_gazebo_plugin.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/buoyancy_gazebo_plugin.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/buoyancy_gazebo_plugin.hh
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/polyhedron_volume.cc
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/polyhedron_volume.cc
 usv_gazebo_plugins/polyhedron_volume.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/polyhedron_volume.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/polyhedron_volume.hh
 
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/shape_volume.cc
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/shape_volume.cc
 usv_gazebo_plugins/shape_volume.hh
-/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/shape_volume.hh
+/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/src/usv_gazebo_plugins/shape_volume.hh
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -98,7 +98,7 @@ memory
 vector
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
 memory
 -
 string
@@ -108,7 +108,7 @@ gazebo/gazebo.hh
 gazebo/physics/Base.hh
 -
 
-/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldModelPlugin.hh
+/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldModelPlugin.hh
 memory
 -
 string
