@@ -66,6 +66,7 @@ add_message_files(
   usv_pose_msg.msg
   state_msg.msg
   NED_objects.msg
+  NED_acoustic.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -147,6 +148,7 @@ add_executable(PID_HP_controller src/PID_HP_controller.cpp)
 add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(path_planner src/path_planner.cpp)
+add_executable(acoustics src/acoustics.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -176,6 +178,7 @@ target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
 target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(path_planner ${catkin_LIBRARIES})
+target_link_libraries(acoustics ${catkin_LIBRARIES})
 
 #]]
 

@@ -75,6 +75,11 @@ int PA_state = 0;
 //	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = Task 6: Scan and Dock and Deliver
 
+// STATES CONCERNED WITH "acoustics" 
+int A_state = 0;
+// 0 = On standby
+// 1 = Navigating to acoustic source
+
 int goal_poses;              											// total number of poses to reach 
 int loop_goal_published;         								// this is kept in order to ensure propulsion_system doesn't start until the goal is published by path_planner
 
@@ -91,6 +96,8 @@ bool navigation_array_initialized = false;
 bool path_planner_initialized = false;
 bool propulsion_system_initialized = false;
 bool perception_array_initialized = false;
+bool acoustic_initialized = false;
+
 
 // STATE MESSAGES AND PUBLISHERS
 amore::state_msg na_state_msg;						// "na_state" message
@@ -101,6 +108,8 @@ amore::state_msg ps_state_msg;						// "ps_state" message
 ros::Publisher ps_state_pub;									// "ps_state" publisher
 amore::state_msg pa_state_msg;						// "pa_state" message
 ros::Publisher pa_state_pub;									// "pa_state" publisher
+amore::state_msg a_state_msg;						// "a_state" message
+ros::Publisher a_state_pub;									// "a_state" publisher
 
 ros::Time current_time, last_time;						// creates time variables
 //..............................................................End of Global Variables..........................................................
@@ -116,7 +125,7 @@ void MISSION_CONTROL_inspector()
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
 	//ROS_INFO("Loop count = %i", loop_count);
-	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized))
+	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized)&& (acoustic_initialized))
 	{
 		system_initialized = true;
 		//ROS_INFO("mission_control_initialized");
@@ -208,6 +217,22 @@ void PERCEPTION_ARRAY_inspector(const std_msgs::Bool status)
 		perception_array_initialized = false;
 	}
 } // END OF PERCEPTION_ARRAY_inspector()
+
+// THIS FUNCTION: Subscribes to acoustic to check initialization status
+// ACCEPTS: Initialization status from "a_initialization_state"
+// RETURNS: (VOID)
+// =============================================================================
+void ACOUSTIC_inspector(const std_msgs::Bool status)
+{
+	if (status.data)
+	{
+		acoustic_initialized = true;
+	}
+	else
+	{
+		acoustic_initialized = false;
+	}
+} // END OF ACOUSTIC_inspector()
 // END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // THIS FUNCTION: Updates when NED waypoints have been converted and published to "waypoints_ned" to know when to tell path_planner to subscribe
@@ -315,6 +340,11 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 	//	4 = Task 4: Wildlife Encounter and Avoid
 	//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 	//	6 = Task 6: Scan and Dock and Deliver
+	
+	// STATES CONCERNED WITH "acoustics" 
+	A_state = 0;
+	// 0 = On standby
+	// 1 = Navigating to acoustic source
 	
 	if (system_initialized)											// Do not begin subsytem activity until system is initialized
 	{
@@ -436,6 +466,8 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 			{
 				NA_state = 1;										// USV NED pose converter
 				PP_state = 5;										// Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance path planner
+				PA_state = 5;
+				A_state = 1; 											// Navigating to acoustic source
 				if (NED_goal_pose_published)	// if the goal pose has been published to propulsion_system
 				{
 					PS_state = 1;									// Propulsion system ON
@@ -452,6 +484,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				PP_state = 0;
 				PS_state = 0;
 				PA_state = 0;
+				A_state = 0;
 			}
 		} // (msg->name == "gymkhana")
 		// else if (msg->name == "scan_dock_deliver")
@@ -476,6 +509,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 			PP_state = 0;
 			PS_state = 0;
 			PA_state = 0;
+			A_state = 0;
 		}
 		
 		// PUBLISH EACH SUBSYTEMS STATE
@@ -507,6 +541,13 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		pa_state_msg.state.data = PA_state;								// set perception_array_state
 		pa_state_pub.publish(pa_state_msg);								// publish pa_state_msg to "pa_state"
 		
+		// SEND STATE TO PERCEPTION_ARRAY
+		a_state_msg.header.seq +=1;											// sequence number
+		a_state_msg.header.stamp = current_time;					// set stamp to current time
+		a_state_msg.header.frame_id = "mission_control";		// header frame
+		a_state_msg.state.data = A_state;								// set acoustics_state
+		a_state_pub.publish(a_state_msg);								// publish a_state_msg to "a_state"
+		
 		// UPDATE USER OF EACH CODES STATE
 		ROS_DEBUG("----------------- CURRENT STATES --------------------");
 		ROS_DEBUG("NA_state: %i --MC", NA_state);
@@ -532,22 +573,25 @@ int main(int argc, char **argv)
 	ros::Subscriber pp_initialization_state_sub = nh2.subscribe("pp_initialization_state", 1, PATH_PLANNER_inspector);										// initialization status of path_planner
 	ros::Subscriber ps_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);							// initialization status of propulsion_system
 	ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);								// initialization status of perception_array
-	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
-	ros::Subscriber task_status_sub = nh6.subscribe("/vrx/task/info", 1, state_update);																								// VRX task topic
-	ros::Subscriber goal_waypoints_publish_state_sub = nh7.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
-	ros::Subscriber goal_pose_publish_state_sub = nh8.subscribe("goal_pose_publish_state", 1, NED_goal_pose_published_update);					// whether or not goal pose has been published to propulsion_system yet 
+	ros::Subscriber a_initialization_state_sub = nh5.subscribe("a_initialization_state", 1, ACOUSTIC_inspector);													// initialization status of acoustic
+	ros::Subscriber nav_NED_sub = nh6.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
+	ros::Subscriber task_status_sub = nh7.subscribe("/vrx/task/info", 1, state_update);																								// VRX task topic
+	ros::Subscriber goal_waypoints_publish_state_sub = nh8.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
+	ros::Subscriber goal_pose_publish_state_sub = nh9.subscribe("goal_pose_publish_state", 1, NED_goal_pose_published_update);					// whether or not goal pose has been published to propulsion_system yet 
 
 	// Publishers
-	na_state_pub = nh11.advertise<amore::state_msg>("na_state", 1);													// current navigation_array state
-	pp_state_pub = nh12.advertise<amore::state_msg>("pp_state", 1);													// current path_planner state
-	ps_state_pub = nh13.advertise<amore::state_msg>("ps_state", 1);													// current propulsion_system state
-	pa_state_pub = nh14.advertise<amore::state_msg>("pa_state", 1);													// current perception_array state
+	na_state_pub = nh10.advertise<amore::state_msg>("na_state", 1);													// current navigation_array state
+	pp_state_pub = nh11.advertise<amore::state_msg>("pp_state", 1);													// current path_planner state
+	ps_state_pub = nh12.advertise<amore::state_msg>("ps_state", 1);													// current propulsion_system state
+	pa_state_pub = nh13.advertise<amore::state_msg>("pa_state", 1);													// current perception_array state
+	a_state_pub = nh14.advertise<amore::state_msg>("a_state", 1);														// current acoustic state
 
 	// initialize header sequences
 	na_state_msg.header.seq = 0;
 	pp_state_msg.header.seq = 0;
 	ps_state_msg.header.seq = 0;
 	pa_state_msg.header.seq = 0;
+	a_state_msg.header.seq = 0;
 
 	// Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize simulation time

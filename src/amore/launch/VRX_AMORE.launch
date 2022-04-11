@@ -26,5 +26,7 @@
   </node>
   <node pkg="amore" type="perception_array" name="perception_array" output="screen">
   </node>
+  <node pkg="amore" type="acoustics" name="acoustics" output="screen">
+  </node>
   
 </launch>

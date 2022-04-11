@@ -31,6 +31,7 @@
 #include "std_msgs/Bool.h"							// message used to communicate publish state to propulsion_system
 #include "amore/usv_pose_msg.h"				// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
 #include "amore/NED_waypoints.h"				// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
+#include "amore/NED_acoustic.h"					// message that holds position of beacon
 #include "amore/NED_objects.h"
 //#include "geometry_msgs/PoseArray.h"		// message type used to get buoy locations from navigation_array
 //...........................................End of Included Libraries and Message Types....................................
@@ -74,6 +75,11 @@ int PA_state = 0;
 //	4 = Task 4: Wildlife Encounter and Avoid
 //	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = Task 6: Scan and Dock and Deliver
+
+// STATES CONCERNED WITH "acoustics" 
+int A_state = 0;
+// 0 = On standby
+// 1 = Navigating to acoustic source
 
 int point = 0;                     		    							// number of points on trajectory reached 
 int goal_poses;              											// total number of poses to reach 
@@ -236,6 +242,18 @@ void pa_state_update(const amore::state_msg::ConstPtr& msg)
 		PA_state = msg->state.data;
 	}
 } // END OF pa_state_update()
+
+// THIS FUNCTION: Updates the state of "acoustics" given by "mission_control"
+// ACCEPTS: acoustics state_msg from "a_state"
+// RETURNS: (VOID) Updates global variable
+// =============================================================================
+void a_state_update(const amore::state_msg::ConstPtr& msg) 
+{
+	if (system_initialized)
+	{
+		A_state = msg->state.data;
+	}
+} // END OF a_state_update()
 //////////////////////////////////////////////////////////////		STATE UPDATERS END		///////////////////////////////////////////////////////////////////
 
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
@@ -293,6 +311,34 @@ void goal_NED_waypoints_update(const amore::NED_waypoints::ConstPtr& goal)
 		} // if (!NA_goal_recieved)
 	}
 } // END OF goal_NED_waypoints_update()
+
+// THIS FUNCTION: Updates the NED acoustic source point
+// ACCEPTS: NED acoustic source point from "acoustic_source_location"
+// RETURNS: (VOID)
+// =============================================================================
+void goal_NED_acoustic_update(const amore::NED_acoustic::ConstPtr& sourceloc) 
+{
+	if ((system_initialized) && (PP_state == 5))	// if the system is initialized and gymkhana task (task 5)
+	{
+		if (!NA_goal_recieved)				// if the NED goal waypoints have been published but not recieved yet
+		{
+			goal_poses = sourceloc->quantity;
+			for (int i = 0; i < goal_poses; i++)
+			{
+				x_goal[i] = sourceloc->points[i].x;
+				y_goal[i] = sourceloc->points[i].y;
+				psi_goal[i] = sourceloc->points[i].z;
+				//ROS_INFO("Point x: %4.2f		Point y: %4.2f --PP", x_goal[i], y_goal[i]);
+			}
+			NA_goal_recieved = true;
+			loop_goal_recieved = loop_count;
+			
+			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+			ROS_INFO("GOAL POSES ACQUIRED BY PLANNER. --MC");
+			ROS_INFO("Quantity of goal poses: %i --MC", goal_poses);
+		} // if (!NA_goal_recieved)
+	}
+} // END OF goal_NED_acoustic_update() 
 
 // THIS FUNCTION: Updates the local NED positions of the animals converted through the navigation_array
 // ACCEPTS: Goal NED animals from "NED_animals"
@@ -569,21 +615,23 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
 
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11,nh12;
 
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
 	ros::Subscriber pp_state_sub = nh2.subscribe("pp_state", 1, pp_state_update);
 	ros::Subscriber ps_state_sub = nh3.subscribe("ps_state", 1, ps_state_update);
 	ros::Subscriber pa_state_sub = nh4.subscribe("pa_state", 1, pa_state_update);
-	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
-	ros::Subscriber waypoints_NED_sub = nh6.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);				// goal waypoints converted to NED
-	ros::Subscriber ned_animals_sub = nh7.subscribe("ned_animals", 1, goal_NED_animals_update);				// goal animal locations converted to NED
+	ros::Subscriber a_state_sub = nh5.subscribe("a_state", 1, a_state_update);
+	ros::Subscriber nav_NED_sub = nh6.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
+	ros::Subscriber waypoints_NED_sub = nh7.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);				// goal waypoints converted to NED
+	ros::Subscriber acousticsource_NED_sub = nh8.subscribe("acoustic_source_location", 1, goal_NED_acoustic_update);		// acoustic pinger converted to NED
+	ros::Subscriber ned_animals_sub = nh9.subscribe("ned_animals", 1, goal_NED_animals_update);				// goal animal locations converted to NED
 	
 	// Publishers
-	pp_initialization_state_pub = nh8.advertise<std_msgs::Bool>("pp_initialization_state", 1);						// publisher for state of initialization
-	current_goal_pose_pub = nh9.advertise<amore::usv_pose_msg>("current_goal_pose", 1);						// current goal for low level controller (propulsion_system)
-	goal_pose_publish_state_pub = nh10.advertise<std_msgs::Bool>("goal_pose_publish_state", 1);			// "goal_pose_publish_state" publisher for whether NED converted waypoints have been published
+	pp_initialization_state_pub = nh10.advertise<std_msgs::Bool>("pp_initialization_state", 1);						// publisher for state of initialization
+	current_goal_pose_pub = nh11.advertise<amore::usv_pose_msg>("current_goal_pose", 1);						// current goal for low level controller (propulsion_system)
+	goal_pose_publish_state_pub = nh12.advertise<std_msgs::Bool>("goal_pose_publish_state", 1);			// "goal_pose_publish_state" publisher for whether NED converted waypoints have been published
 
 	// Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize simulation time
@@ -645,7 +693,7 @@ int main(int argc, char **argv)
 			e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
 			e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
 		}
-		else if ((PP_state == 1) || (PP_state == 2))	// TASK 1: STATION_KEEPING OR TASK 2: WAYFINDING
+			else if ((PP_state == 1) || (PP_state == 2)|| (PP_state == 5))	// TASK 1: STATION_KEEPING, TASK 2: WAYFINDING, TASK 5: GYMKHANA
 		{
 			if ((loop_count > (loop_goal_recieved)) && (NA_goal_recieved))
 			{
@@ -678,7 +726,7 @@ int main(int argc, char **argv)
 				} // if (PP_state == 2)
 				current_goal_pose_publish();
 			} // if (loop_count > loop_goal_recieved)
-		} // if ((PP_state == 1) || (PP_state == 2))
+		} // if ((PP_state == 1) || (PP_state == 2))||(PP_state == 5)
 		else if (PP_state == 4)	// TASK 4: Wildlife Encounter and Avoid
 		{
 			if ((loop_count > (loop_goal_recieved)) && (NA_goal_recieved))
