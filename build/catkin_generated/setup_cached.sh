@@ -8,4 +8,3 @@
 
 # modified environment variables
 export PWD='/home/brad/vrx_amore/build'
-export ROS_PACKAGE_PATH='/home/brad/vrx_amore/src:/opt/ros/noetic/share'

@@ -6,8 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp
-
 /home/brad/vrx_amore/devel/include/vrx_gazebo/ColorSequence.h
 ros/service_traits.h
 -

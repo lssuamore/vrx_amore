@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 include amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/progress.make
 
 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg:
-	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py amore /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg geometry_msgs/Point:std_msgs/Header:std_msgs/Float64
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py amore /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg std_msgs/Header:std_msgs/Float64:geometry_msgs/Point
 
 _amore_generate_messages_check_deps_usv_pose_msg: amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg
 _amore_generate_messages_check_deps_usv_pose_msg: amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build.make
