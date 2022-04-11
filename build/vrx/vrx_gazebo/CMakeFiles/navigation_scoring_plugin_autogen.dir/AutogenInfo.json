@@ -1,14 +1,14 @@
 {
-	"BUILD_DIR" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen",
-	"CMAKE_BINARY_DIR" : "/home/brad/vrx_amore/build",
-	"CMAKE_CURRENT_BINARY_DIR" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/home/brad/vrx_amore/src/vrx/vrx_gazebo",
+	"BUILD_DIR" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen",
+	"CMAKE_BINARY_DIR" : "/home/shaede/vrx_amore/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/shaede/vrx_amore/src/vrx/vrx_gazebo",
 	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
-	"CMAKE_SOURCE_DIR" : "/home/brad/vrx_amore/src",
+	"CMAKE_SOURCE_DIR" : "/home/shaede/vrx_amore/src",
 	"HEADERS" : [],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"BOOST_ALL_NO_LIB",
@@ -37,10 +37,10 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/home/brad/vrx_amore/devel/include",
-		"/home/brad/vrx_amore/src/vrx/vrx_gazebo/include",
-		"/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include",
-		"/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include",
+		"/home/shaede/vrx_amore/devel/include",
+		"/home/shaede/vrx_amore/src/vrx/vrx_gazebo/include",
+		"/home/shaede/vrx_amore/src/vrx/usv_gazebo_plugins/include",
+		"/home/shaede/vrx_amore/src/vrx/wave_gazebo_plugins/include",
 		"/opt/ros/noetic/include",
 		"/opt/ros/noetic/include/xmlrpcpp",
 		"/usr/include/gazebo-11",
@@ -52,7 +52,7 @@
 		"/usr/include/x86_64-linux-gnu/qt5",
 		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
 		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
-		"/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs",
+		"/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs",
 		"/usr/include/simbody",
 		"/usr/include/ignition/math6",
 		"/usr/include/ignition/transport8",
@@ -82,20 +82,20 @@
 		"-c",
 		"/usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/navigation_scoring_plugin_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 6,
-	"PARSE_CACHE_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/ParseCache.txt",
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "/usr/lib/qt5/bin/uic",
 	"QT_VERSION_MAJOR" : 5,
-	"SETTINGS_FILE" : "/home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/shaede/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/navigation_scoring_plugin_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/navigation_scoring_plugin.cc",
+			"/home/shaede/vrx_amore/src/vrx/vrx_gazebo/src/navigation_scoring_plugin.cc",
 			"MU"
 		]
 	],

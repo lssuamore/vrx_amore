@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard.pb.cc
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard.pb.cc
 dock_placard.pb.h
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard.pb.h
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -28,9 +28,9 @@ google/protobuf/reflection_ops.h
 google/protobuf/wire_format.h
 -
 third_party/protobuf/version.h
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/third_party/protobuf/version.h
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/third_party/protobuf/version.h
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard.pb.h
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard.pb.h
 string
 -
 google/protobuf/stubs/common.h
@@ -58,5 +58,5 @@ google/protobuf/extension_set.h
 google/protobuf/unknown_field_set.h
 -
 
-/home/brad/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard_msgs_autogen/mocs_compilation.cpp
+/home/shaede/vrx_amore/build/vrx/vrx_gazebo/msgs/dock_placard_msgs_autogen/mocs_compilation.cpp
 

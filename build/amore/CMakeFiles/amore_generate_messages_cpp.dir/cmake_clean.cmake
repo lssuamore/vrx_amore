@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/include/amore/NED_buoys.h"
-  "/home/brad/vrx_amore/devel/include/amore/NED_waypoints.h"
-  "/home/brad/vrx_amore/devel/include/amore/state_msg.h"
-  "/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h"
+  "/home/shaede/vrx_amore/devel/include/amore/NED_objects.h"
+  "/home/shaede/vrx_amore/devel/include/amore/NED_waypoints.h"
+  "/home/shaede/vrx_amore/devel/include/amore/state_msg.h"
+  "/home/shaede/vrx_amore/devel/include/amore/usv_pose_msg.h"
   "CMakeFiles/amore_generate_messages_cpp"
 )
 

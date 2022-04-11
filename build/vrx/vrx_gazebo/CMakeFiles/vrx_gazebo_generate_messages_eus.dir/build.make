@@ -43,54 +43,54 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/shaede/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
+CMAKE_BINARY_DIR = /home/shaede/vrx_amore/build
 
 # Utility rule file for vrx_gazebo_generate_messages_eus.
 
 # Include the progress variables for this target.
 include vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/progress.make
 
-vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l
-vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l
-vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l
-vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l
-vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l
+vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l
+vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l
+vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l
+vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l
+vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l
 
 
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l: /home/brad/vrx_amore/src/vrx/vrx_gazebo/msg/Task.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from vrx_gazebo/Task.msg"
-	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/vrx/vrx_gazebo/msg/Task.msg -Ivrx_gazebo:/home/brad/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg/Task.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from vrx_gazebo/Task.msg"
+	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg/Task.msg -Ivrx_gazebo:/home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg
 
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l: /home/brad/vrx_amore/src/vrx/vrx_gazebo/msg/Contact.msg
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from vrx_gazebo/Contact.msg"
-	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/vrx/vrx_gazebo/msg/Contact.msg -Ivrx_gazebo:/home/brad/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg/Contact.msg
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from vrx_gazebo/Contact.msg"
+	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg/Contact.msg -Ivrx_gazebo:/home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg
 
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l: /home/brad/vrx_amore/src/vrx/vrx_gazebo/srv/ColorSequence.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from vrx_gazebo/ColorSequence.srv"
-	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/vrx/vrx_gazebo/srv/ColorSequence.srv -Ivrx_gazebo:/home/brad/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/srv/ColorSequence.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from vrx_gazebo/ColorSequence.srv"
+	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/shaede/vrx_amore/src/vrx/vrx_gazebo/srv/ColorSequence.srv -Ivrx_gazebo:/home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv
 
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l: /home/brad/vrx_amore/src/vrx/vrx_gazebo/srv/BallShooter.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from vrx_gazebo/BallShooter.srv"
-	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/brad/vrx_amore/src/vrx/vrx_gazebo/srv/BallShooter.srv -Ivrx_gazebo:/home/brad/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l: /home/shaede/vrx_amore/src/vrx/vrx_gazebo/srv/BallShooter.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from vrx_gazebo/BallShooter.srv"
+	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/shaede/vrx_amore/src/vrx/vrx_gazebo/srv/BallShooter.srv -Ivrx_gazebo:/home/shaede/vrx_amore/src/vrx/vrx_gazebo/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p vrx_gazebo -o /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv
 
-/home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for vrx_gazebo"
-	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo vrx_gazebo std_msgs
+/home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/shaede/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for vrx_gazebo"
+	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo vrx_gazebo std_msgs
 
 vrx_gazebo_generate_messages_eus: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus
-vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l
-vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l
-vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l
-vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l
-vrx_gazebo_generate_messages_eus: /home/brad/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l
+vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Task.l
+vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/msg/Contact.l
+vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/ColorSequence.l
+vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/srv/BallShooter.l
+vrx_gazebo_generate_messages_eus: /home/shaede/vrx_amore/devel/share/roseus/ros/vrx_gazebo/manifest.l
 vrx_gazebo_generate_messages_eus: vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build.make
 
 .PHONY : vrx_gazebo_generate_messages_eus
@@ -101,10 +101,10 @@ vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build: vrx_gazebo
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/build
 
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/clean:
-	cd /home/brad/vrx_amore/build/vrx/vrx_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/vrx_gazebo_generate_messages_eus.dir/cmake_clean.cmake
+	cd /home/shaede/vrx_amore/build/vrx/vrx_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/vrx_gazebo_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/clean
 
 vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/depend:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/vrx_gazebo /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/vrx_gazebo /home/brad/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/shaede/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/shaede/vrx_amore/src /home/shaede/vrx_amore/src/vrx/vrx_gazebo /home/shaede/vrx_amore/build /home/shaede/vrx_amore/build/vrx/vrx_gazebo /home/shaede/vrx_amore/build/vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/vrx_gazebo/CMakeFiles/vrx_gazebo_generate_messages_eus.dir/depend
 

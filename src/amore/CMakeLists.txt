@@ -65,7 +65,7 @@ add_message_files(
   NED_waypoints.msg
   usv_pose_msg.msg
   state_msg.msg
-  NED_buoys.msg
+  NED_objects.msg
 )
 
 ## Generate services in the 'srv' folder

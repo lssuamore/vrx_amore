@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/include/usv_msgs/RangeBearing.h"
+  "/home/shaede/vrx_amore/devel/include/usv_msgs/RangeBearing.h"
   "CMakeFiles/usv_msgs_generate_messages_cpp"
 )
 

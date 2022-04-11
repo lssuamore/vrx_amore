@@ -67,14 +67,14 @@ set(vrx_gazebo_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(vrx_gazebo_SOURCE_PREFIX /home/brad/vrx_amore/src/vrx/vrx_gazebo)
-  set(vrx_gazebo_DEVEL_PREFIX /home/brad/vrx_amore/devel)
+  set(vrx_gazebo_SOURCE_PREFIX /home/shaede/vrx_amore/src/vrx/vrx_gazebo)
+  set(vrx_gazebo_DEVEL_PREFIX /home/shaede/vrx_amore/devel)
   set(vrx_gazebo_INSTALL_PREFIX "")
   set(vrx_gazebo_PREFIX ${vrx_gazebo_DEVEL_PREFIX})
 else()
   set(vrx_gazebo_SOURCE_PREFIX "")
   set(vrx_gazebo_DEVEL_PREFIX "")
-  set(vrx_gazebo_INSTALL_PREFIX /home/brad/vrx_amore/install)
+  set(vrx_gazebo_INSTALL_PREFIX /home/shaede/vrx_amore/install)
   set(vrx_gazebo_PREFIX ${vrx_gazebo_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/brad/vrx_amore/install/lib;/home/brad/vrx_amore/devel/lib;/home/brad/RobotX2022/devel/lib;/home/brad/vrx_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/shaede/vrx_amore/install/lib;/home/shaede/catkin_ws/devel/lib;/home/shaede/vrx_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

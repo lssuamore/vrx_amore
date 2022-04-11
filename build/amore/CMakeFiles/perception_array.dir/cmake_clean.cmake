@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/amore/perception_array"
-  "/home/brad/vrx_amore/devel/lib/amore/perception_array.pdb"
+  "/home/shaede/vrx_amore/devel/lib/amore/perception_array"
+  "/home/shaede/vrx_amore/devel/lib/amore/perception_array.pdb"
   "CMakeFiles/perception_array.dir/src/perception_array.cpp.o"
 )
 

@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/navigation_scoring_plugin_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/navigation_scoring_plugin_autogen.dir/ParseCache.txt"
   "navigation_scoring_plugin_autogen"
-  "/home/brad/vrx_amore/devel/lib/libnavigation_scoring_plugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libnavigation_scoring_plugin.so"
+  "/home/shaede/vrx_amore/devel/lib/libnavigation_scoring_plugin.pdb"
+  "/home/shaede/vrx_amore/devel/lib/libnavigation_scoring_plugin.so"
   "CMakeFiles/navigation_scoring_plugin.dir/navigation_scoring_plugin_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/navigation_scoring_plugin.dir/src/navigation_scoring_plugin.cc.o"
 )

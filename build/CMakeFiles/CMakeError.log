@@ -1,21 +1,21 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/brad/vrx_amore/build/CMakeFiles/CMakeTmp
+Change Dir: /home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_5f2dc/fast && /usr/bin/make -f CMakeFiles/cmTC_5f2dc.dir/build.make CMakeFiles/cmTC_5f2dc.dir/build
-make[1]: Entering directory '/home/brad/vrx_amore/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_5f2dc.dir/src.c.o
-/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_5f2dc.dir/src.c.o   -c /home/brad/vrx_amore/build/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_5f2dc
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5f2dc.dir/link.txt --verbose=1
-/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_5f2dc.dir/src.c.o  -o cmTC_5f2dc 
-/usr/bin/ld: CMakeFiles/cmTC_5f2dc.dir/src.c.o: in function `main':
+Run Build Command(s):/usr/bin/make cmTC_b79b4/fast && /usr/bin/make -f CMakeFiles/cmTC_b79b4.dir/build.make CMakeFiles/cmTC_b79b4.dir/build
+make[1]: Entering directory '/home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b79b4.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_b79b4.dir/src.c.o   -c /home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_b79b4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b79b4.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_b79b4.dir/src.c.o  -o cmTC_b79b4 
+/usr/bin/ld: CMakeFiles/cmTC_b79b4.dir/src.c.o: in function `main':
 src.c:(.text+0x46): undefined reference to `pthread_create'
 /usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
 /usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_5f2dc.dir/build.make:87: cmTC_5f2dc] Error 1
-make[1]: Leaving directory '/home/brad/vrx_amore/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_5f2dc/fast] Error 2
+make[1]: *** [CMakeFiles/cmTC_b79b4.dir/build.make:87: cmTC_b79b4] Error 1
+make[1]: Leaving directory '/home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_b79b4/fast] Error 2
 
 
 Source file was:
@@ -39,20 +39,20 @@ int main(void)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/brad/vrx_amore/build/CMakeFiles/CMakeTmp
+Change Dir: /home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_6fc90/fast && /usr/bin/make -f CMakeFiles/cmTC_6fc90.dir/build.make CMakeFiles/cmTC_6fc90.dir/build
-make[1]: Entering directory '/home/brad/vrx_amore/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_6fc90.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_6fc90.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
-Linking C executable cmTC_6fc90
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6fc90.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_6fc90.dir/CheckFunctionExists.c.o  -o cmTC_6fc90  -lpthreads 
+Run Build Command(s):/usr/bin/make cmTC_81a6b/fast && /usr/bin/make -f CMakeFiles/cmTC_81a6b.dir/build.make CMakeFiles/cmTC_81a6b.dir/build
+make[1]: Entering directory '/home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_81a6b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_81a6b.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_81a6b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81a6b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_81a6b.dir/CheckFunctionExists.c.o  -o cmTC_81a6b  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_6fc90.dir/build.make:87: cmTC_6fc90] Error 1
-make[1]: Leaving directory '/home/brad/vrx_amore/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_6fc90/fast] Error 2
+make[1]: *** [CMakeFiles/cmTC_81a6b.dir/build.make:87: cmTC_81a6b] Error 1
+make[1]: Leaving directory '/home/shaede/vrx_amore/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_81a6b/fast] Error 2
 
 
 

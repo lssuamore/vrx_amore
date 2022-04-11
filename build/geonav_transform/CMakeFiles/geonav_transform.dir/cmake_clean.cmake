@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/libgeonav_transform.pdb"
-  "/home/brad/vrx_amore/devel/lib/libgeonav_transform.so"
+  "/home/shaede/vrx_amore/devel/lib/libgeonav_transform.pdb"
+  "/home/shaede/vrx_amore/devel/lib/libgeonav_transform.so"
   "CMakeFiles/geonav_transform.dir/src/geonav_transform.cpp.o"
   "CMakeFiles/geonav_transform.dir/src/geonav_utilities.cpp.o"
 )

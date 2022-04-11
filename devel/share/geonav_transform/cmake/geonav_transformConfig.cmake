@@ -67,14 +67,14 @@ set(geonav_transform_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(geonav_transform_SOURCE_PREFIX /home/brad/vrx_amore/src/geonav_transform)
-  set(geonav_transform_DEVEL_PREFIX /home/brad/vrx_amore/devel)
+  set(geonav_transform_SOURCE_PREFIX /home/shaede/vrx_amore/src/geonav_transform)
+  set(geonav_transform_DEVEL_PREFIX /home/shaede/vrx_amore/devel)
   set(geonav_transform_INSTALL_PREFIX "")
   set(geonav_transform_PREFIX ${geonav_transform_DEVEL_PREFIX})
 else()
   set(geonav_transform_SOURCE_PREFIX "")
   set(geonav_transform_DEVEL_PREFIX "")
-  set(geonav_transform_INSTALL_PREFIX /home/brad/vrx_amore/install)
+  set(geonav_transform_INSTALL_PREFIX /home/shaede/vrx_amore/install)
   set(geonav_transform_PREFIX ${geonav_transform_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(geonav_transform_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/brad/vrx_amore/src/geonav_transform/include;/usr/include/eigen3 " STREQUAL " ")
+if(NOT "/home/shaede/vrx_amore/src/geonav_transform/include;/usr/include/eigen3 " STREQUAL " ")
   set(geonav_transform_INCLUDE_DIRS "")
-  set(_include_dirs "/home/brad/vrx_amore/src/geonav_transform/include;/usr/include/eigen3")
+  set(_include_dirs "/home/shaede/vrx_amore/src/geonav_transform/include;/usr/include/eigen3")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "https://github.com/bsb808/geonav_transform " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/brad/vrx_amore/src/geonav_transform/include;/usr/include/eigen3 " 
         message(FATAL_ERROR "Project 'geonav_transform' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'geonav_transform' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/brad/vrx_amore/src/geonav_transform/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'geonav_transform' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/shaede/vrx_amore/src/geonav_transform/${idir}'.  ${_report}")
     endif()
     _list_append_unique(geonav_transform_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/brad/vrx_amore/devel/lib;/home/brad/vrx_amore/devel/lib;/home/brad/RobotX2022/devel/lib;/home/brad/vrx_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/shaede/vrx_amore/devel/lib;/home/shaede/catkin_ws/devel/lib;/home/shaede/vrx_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
