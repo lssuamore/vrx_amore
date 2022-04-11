@@ -131,16 +131,8 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/brad/vrx_amore/build/gtest/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/usv_msgs/cmake_install.cmake")
   include("/home/brad/vrx_amore/build/amore/cmake_install.cmake")
   include("/home/brad/vrx_amore/build/geonav_transform/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/wave_gazebo_plugins/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/usv_gazebo_plugins/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/wamv_description/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/wamv_gazebo/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/wave_gazebo/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/vrx_gazebo/cmake_install.cmake")
-  include("/home/brad/vrx_amore/build/vrx/vrx_2019/cmake_install.cmake")
 
 endif()
 
