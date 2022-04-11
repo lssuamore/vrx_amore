@@ -49,6 +49,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;

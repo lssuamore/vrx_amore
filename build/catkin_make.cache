@@ -1,2 +1,2 @@
-amore:geonav_transform
+amore:geonav_transform:vrx/usv_gazebo_plugins:vrx/usv_msgs:vrx/vrx_2019:vrx/vrx_gazebo:vrx/wamv_description:vrx/wamv_gazebo:vrx/wave_gazebo:vrx/wave_gazebo_plugins
 -DCATKIN_DEVEL_PREFIX=/home/brad/vrx_amore/devel -DCMAKE_INSTALL_PREFIX=/home/brad/vrx_amore/install -G Unix Makefiles

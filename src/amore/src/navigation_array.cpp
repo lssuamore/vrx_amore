@@ -58,6 +58,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -344,7 +345,7 @@ void goal_convert_update()
 // THIS FUNCTION SUBSCRIBES TO "/vrx/station_keeping/goal" TO GET THE SK GOAL POSE IN LAT/LONG
 void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal) 
 {
-	if (!lat_lon_goal_recieved)
+	if ((!lat_lon_goal_recieved) && (NA_state == 2))
 	{
 		goal_lat[point_num] = goal->pose.position.latitude;
 		goal_long[point_num] = goal->pose.position.longitude;
@@ -365,7 +366,7 @@ void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
 // THIS FUNCTION SUBSCRIBES TO "/vrx/wayfinding/waypoints" TO GET THE WF GOAL POSES IN LAT/LONG
 void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)
+	if ((!lat_lon_goal_recieved) && (NA_state == 3))
 	{
 		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
 		{
@@ -388,7 +389,7 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 // THIS FUNCTION SUBSCRIBES TO "/vrx/wildlife/animals" TO GET THE WF GOAL POSES IN LAT/LONG
 void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)
+	if ((!lat_lon_goal_recieved) && (NA_state == 4))
 	{
 		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
 		{

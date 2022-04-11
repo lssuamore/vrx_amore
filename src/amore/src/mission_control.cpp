@@ -51,6 +51,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -373,17 +374,17 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				else
 				{
 					NA_state = 3;										// Wayfinding NED goal pose converter
-					PP_state = 0;										// Path planner on standby
-					PS_state = 0;										// Propulsion system on standby
+					//PP_state = 0;										// Path planner on standby
+					//PS_state = 0;										// Propulsion system on standby
 				}
 			}
 			else
 			{
 				// ALL CODES ON STANDBY
-				NA_state = 0;
-				PP_state = 0;
-				PS_state = 0;
-				PA_state = 0;
+				//NA_state = 0;
+				//PP_state = 0;
+				//PS_state = 0;
+				//PA_state = 0;
 				// reset task statuses as long as task is in "initial" or "finished" state
 				NED_waypoints_published = false;
 			}
@@ -420,8 +421,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 			}
 			else
 			{
-				// ALL CODES ON STANDBY
-				NA_state = 0;
+				NA_state = 1;
 				PP_state = 0;
 				PS_state = 0;
 				PA_state = 0;
