@@ -493,7 +493,7 @@ void buoys_publish()
 		}
 		
 		// LUT made to for buoys within [7 - 15] m in front (NORTH) of the USV and [-9 - 9] m to the side of the USV (WEST OR EAST)
-		if (((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0) && (PA_state == 3))				// if calculated values are within expected range, put into buoy array 
+		if (((PA_state == 3) || (PA_state == 5)))				// if calculated values are within expected range, put into buoy array ((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0) && 
 		{
 			geometry_msgs::PointStamped buoy;						//publisher message type
 			buoy.header.seq +=1;												// sequence number
@@ -506,9 +506,11 @@ void buoys_publish()
 		}
 		color_type_buoy = " ";
 	}
-	if (PA_state == 3)
+	if ((PA_state == 3)||(PA_state == 5))
 	{
 		ROS_INFO("Printing array of buoys locations wrt USV -- PA");
+		ROS_INFO("true_size: %2i", true_size);
+		
 		for (int j=0; j<true_size; j++)
 		{
 			ROS_INFO("Buoy: %s		number: %2i			x: %4.2f			y: %4.2f", NED_buoys_msg.objects[j].header.frame_id.c_str(), j, NED_buoys_msg.objects[j].point.x, NED_buoys_msg.objects[j].point.y);

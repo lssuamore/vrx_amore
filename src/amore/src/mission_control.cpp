@@ -29,6 +29,7 @@
 #include "nav_msgs/Odometry.h"					// message type used for receiving NED USV state from navigation_array
 #include "amore/state_msg.h"												// message type used to communicate state for rudimentary codes
 #include "std_msgs/Bool.h"
+#include "std_msgs/Int64.h"
 #include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
 #include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
 #include "amore/NED_waypoints.h"										// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
@@ -78,10 +79,14 @@ int PA_state = 0;
 // STATES CONCERNED WITH "acoustics" 
 int A_state = 0;
 // 0 = On standby
-// 1 = Navigating to acoustic source
+// 1 = Finding entrance gate (white buoy)
+// 2 = Navigating between red and green buoys
+// 3 = Finding exit gate (black buoy)
+// 4 = Navigating to acoustic source
 
 int goal_poses;              											// total number of poses to reach 
 int loop_goal_published;         								// this is kept in order to ensure propulsion_system doesn't start until the goal is published by path_planner
+int acoustic_task_status; 										// status of the acoustic system (subsribed value)
 
 float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
 float x_usv_NED, y_usv_NED, psi_NED; 			// vehicle position and heading (pose) in NED
@@ -235,6 +240,22 @@ void ACOUSTIC_inspector(const std_msgs::Bool status)
 } // END OF ACOUSTIC_inspector()
 // END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// THIS FUNCTION: Subscribes to acoustic to check initialization status
+// ACCEPTS: Initialization status from "a_initialization_state"
+// RETURNS: (VOID)
+// =============================================================================
+void acoustic_system_state_update(const std_msgs::Int64 status)
+{
+	// Status;
+	// 1 = entrance gate has been traversed
+	// 2 = buoy channel has been traversed
+	// 3 = exit gate has been traversed
+	
+	acoustic_task_status  = status.data; 
+	
+} // END OF acoustic_system_state_update()
+// END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // THIS FUNCTION: Updates when NED waypoints have been converted and published to "waypoints_ned" to know when to tell path_planner to subscribe
 // ACCEPTS: Goal publish status from "goal_waypoints_publish_state"
 // RETURNS: (VOID)
@@ -344,7 +365,10 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 	// STATES CONCERNED WITH "acoustics" 
 	A_state = 0;
 	// 0 = On standby
-	// 1 = Navigating to acoustic source
+	// 1 = Finding entrance gate (white buoy)
+	// 2 = Navigating between red and green buoys
+	// 3 = Finding exit gate (black buoy)
+	// 4 = Navigating to acoustic source
 	
 	if (system_initialized)											// Do not begin subsytem activity until system is initialized
 	{
@@ -466,8 +490,22 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 			{
 				NA_state = 1;										// USV NED pose converter
 				PP_state = 5;										// Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance path planner
-				PA_state = 5;
-				A_state = 1; 											// Navigating to acoustic source
+				PA_state = 5;										// Task 5 Perception
+				A_state = 1; 										// 1 = Finding entrance gate (white buoy)
+				
+				if(acoustic_task_status == 1)
+				{
+					A_state = 2; // 2 = Navigating between red and green buoys
+				}
+				else if (acoustic_task_status == 2)
+				{
+					A_state = 3; // 3 = Finding exit gate (black buoy)
+				}
+				else if (acoustic_task_status == 3)
+				{
+					A_state = 4; // 4 = Navigating to acoustic source
+				}
+				
 				if (NED_goal_pose_published)	// if the goal pose has been published to propulsion_system
 				{
 					PS_state = 1;									// Propulsion system ON
@@ -578,6 +616,8 @@ int main(int argc, char **argv)
 	ros::Subscriber task_status_sub = nh7.subscribe("/vrx/task/info", 1, state_update);																								// VRX task topic
 	ros::Subscriber goal_waypoints_publish_state_sub = nh8.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
 	ros::Subscriber goal_pose_publish_state_sub = nh9.subscribe("goal_pose_publish_state", 1, NED_goal_pose_published_update);					// whether or not goal pose has been published to propulsion_system yet 
+	ros::Subscriber acoustic_system_state_sub = nh9.subscribe("acoustic_system_state", 1, acoustic_system_state_update);									// "acoustic_system_state" subscriber for status of acoustic program
+
 
 	// Publishers
 	na_state_pub = nh10.advertise<amore::state_msg>("na_state", 1);													// current navigation_array state
