@@ -377,6 +377,7 @@ void animal_distances_calculate()
 	dt_USV = sqrt(pow(x_usv_NED - x_t_NED, 2.0)+pow(y_usv_NED - y_t_NED, 2.0));							//Distance from USV to turtle
 	dt_c = sqrt(pow(x_t_NED - x_c_NED, 2.0)+pow(y_t_NED - y_c_NED, 2.0));										//Distance from turtle to crocodile
 	dp_c  = sqrt(pow(x_p_NED - x_c_NED, 2.0)+pow(y_p_NED - y_c_NED, 2.0));									//Distance from platypus to crocodile
+	ROS_INFO("dp_USV: %4.2f			dt_USV: %4.2f", dp_USV, dt_USV);
 } // end of animal_distances_calculate()
 
 // THIS FUNCTION: Generates the updated array of poses to accomplish the task
@@ -385,98 +386,102 @@ void animal_distances_calculate()
 // =============================================================================
 void update_animal_path()
 {
-	if (!calculations_done)
+	if ((!calculations_done) && (NA_state == 1))
 	{
 		r = 5;
 		//Making the circle ccw
-		x_turt_g[0] = x_t_NED-r;                                    
+		x_turt_g[0] = x_t_NED - r;
 		y_turt_g[0] = y_t_NED;
-		psi_turt_g[0] = 180.0 * (PI/180);
+		psi_turt_g[0] = 90.0 * (PI/180);
 		x_turt_g[1] = x_t_NED - sqrt(2)/2*r;
-		y_turt_g[1] = y_t_NED - sqrt(2)/2*r;
-		psi_turt_g[1] = -135.0 * (PI/180);
+		y_turt_g[1] = y_t_NED + sqrt(2)/2*r;
+		psi_turt_g[1] = 45.0 * (PI/180);
 		x_turt_g[2] = x_t_NED;
-		y_turt_g[2] = y_t_NED - r;
-		psi_turt_g[2] = -90.0 * (PI/180);
+		y_turt_g[2] = y_t_NED + r;
+		psi_turt_g[2] = 0.0 * (PI/180);
 		x_turt_g[3] = x_t_NED + sqrt(2)/2*r;
-		y_turt_g[3] = y_t_NED - sqrt(2)/2*r;
+		y_turt_g[3] = y_t_NED + sqrt(2)/2*r;
 		psi_turt_g[3] = -45.0 * (PI/180);
 		x_turt_g[4] = x_t_NED + r;
 		y_turt_g[4] = y_t_NED;
-		psi_turt_g[4] = 0.0 * (PI/180);
+		psi_turt_g[4] = -90.0 * (PI/180);
 		x_turt_g[5] = x_t_NED + sqrt(2)/2*r;
-		y_turt_g[5] = y_t_NED + sqrt(2)/2*r;
-		psi_turt_g[5] = 45.0 * (PI/180);
+		y_turt_g[5] = y_t_NED - sqrt(2)/2*r;
+		psi_turt_g[5] = -135.0 * (PI/180);
 		x_turt_g[6] = x_t_NED;
-		y_turt_g[6] = y_t_NED + r;
-		psi_turt_g[6] = 90.0 * (PI/180);
+		y_turt_g[6] = y_t_NED - r;
+		psi_turt_g[6] = 180.0 * (PI/180);
 		x_turt_g[7] = x_t_NED - sqrt(2)/2*r;
-		y_turt_g[7] = y_t_NED + sqrt(2)/2*r;
+		y_turt_g[7] = y_t_NED - sqrt(2)/2*r;
 		psi_turt_g[7] = 135.0 * (PI/180);
-		x_turt_g[8] = x_t_NED-r;
+		x_turt_g[8] = x_t_NED - r;
 		y_turt_g[8] = y_t_NED;
-		psi_turt_g[8] = 180.0 * (PI/180);
+		psi_turt_g[8] = 90.0 * (PI/180);
 
 		//Making the circle cw
-		x_plat_g[0] = x_p_NED-r;
+		x_plat_g[0] = x_p_NED + r;
 		y_plat_g[0] = y_p_NED;
-		psi_plat_g[0] = 0.0 * (PI/180);
-		x_plat_g[1] = x_p_NED - sqrt(2)/2*r;
+		psi_plat_g[0] = 90.0 * (PI/180);
+		x_plat_g[1] = x_p_NED + sqrt(2)/2*r;
 		y_plat_g[1] = y_p_NED + sqrt(2)/2*r;
-		psi_plat_g[1] = -45.0 * (PI/180);
+		psi_plat_g[1] = 135.0 * (PI/180);
 		x_plat_g[2] = x_p_NED;
 		y_plat_g[2] = y_p_NED + r;
-		psi_plat_g[2] = -90.0 * (PI/180);
-		x_plat_g[3] = x_p_NED + sqrt(2)/2*r;
+		psi_plat_g[2] = 180.0 * (PI/180);
+		x_plat_g[3] = x_p_NED - sqrt(2)/2*r;
 		y_plat_g[3] = y_p_NED + sqrt(2)/2*r;
 		psi_plat_g[3] = -135.0 * (PI/180);
-		x_plat_g[4] = x_p_NED + r;
+		x_plat_g[4] = x_p_NED - r;
 		y_plat_g[4] = y_p_NED;
-		psi_plat_g[4] = 180.0 * (PI/180);
-		x_plat_g[5] = x_p_NED + sqrt(2)/2*r;
+		psi_plat_g[4] = -90.0 * (PI/180);
+		x_plat_g[5] = x_p_NED - sqrt(2)/2*r;
 		y_plat_g[5] = y_p_NED - sqrt(2)/2*r;
-		psi_plat_g[5] = 135.0 * (PI/180);
+		psi_plat_g[5] = -45.0 * (PI/180);
 		x_plat_g[6] = x_p_NED;
 		y_plat_g[6] = y_p_NED - r;
-		psi_plat_g[6] = 90.0 * (PI/180);
-		x_plat_g[7] = x_p_NED - sqrt(2)/2*r;
+		psi_plat_g[6] = 0.0 * (PI/180);
+		x_plat_g[7] = x_p_NED + sqrt(2)/2*r;
 		y_plat_g[7] = y_p_NED - sqrt(2)/2*r;
 		psi_plat_g[7] = 45.0 * (PI/180);
-		x_plat_g[8] = x_p_NED-r;
+		x_plat_g[8] = x_p_NED + r;
 		y_plat_g[8] = y_p_NED;
-		psi_plat_g[8] = 0.0 * (PI/180);
+		psi_plat_g[8] = 90.0 * (PI/180);
+		
 		animal_distances_calculate();			// updates distances from USV to each animal 
-		if (dt_USV <= dp_USV)
-		{
+		// if (dt_USV <= dp_USV)
+		// {
+			// for (int i=0; i<9; i++)
+			// {
+				// x_goal[i] = x_turt_g[i];
+				// y_goal[i] = y_turt_g[i];
+				// psi_goal[i] = psi_turt_g[i];
+			// }
+			// ROS_INFO("x_t_NED: %4.2f			y_t_NED: %4.2f			x_p_NED: %4.2f			y_p_NED: %4.2f", x_t_NED, y_t_NED, x_p_NED, y_p_NED);
+			
+			// for (int i=9; i<18; i++)
+			// {
+				// x_goal[i] = x_plat_g[i-9];
+				// y_goal[i] = y_plat_g[i-9];
+				// psi_goal[i] = psi_plat_g[i-9];
+			// }
+		// }
+		//else
+		//{
 			for (int i=0; i<9; i++)
-			{
-				x_goal[i] = x_turt_g[i];
-				y_goal[i] = y_turt_g[i];
-				psi_goal[i] = psi_turt_g[i];
-			}
-			for (int i=9; i<18; i++)
 			{
 				x_goal[i] = x_plat_g[i];
 				y_goal[i] = y_plat_g[i];
 				psi_goal[i] = psi_plat_g[i];
 			}
-		}
-		else
-		{
-			for (int i=0; i<9; i++)
-			{
-				x_goal[i] = x_plat_g[i];
-				y_goal[i] = y_plat_g[i];
-				psi_goal[i] = psi_plat_g[i];
-			}
 			for (int i=9; i<18; i++)
 			{
-				x_goal[i] = x_turt_g[i];
-				y_goal[i] = y_turt_g[i];
-				psi_goal[i] = psi_turt_g[i];
+				x_goal[i] = x_turt_g[i-9];
+				y_goal[i] = y_turt_g[i-9];
+				psi_goal[i] = psi_turt_g[i-9];
 			}
-		}
+		//}
 		calculations_done = true;
+		goal_poses = 18;
 	}
 	
 } // end of update_animal_path()
@@ -737,10 +742,10 @@ int main(int argc, char **argv)
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 						e_psi = psi_goal[point] - psi_NED;
 
-						if ((e_xy < 1.0) && (e_psi < e_psi_allowed) && (!E_reached))
+						if ((e_xy < 1.2) && (e_psi < 0.6) && (!E_reached))
 						{
 							point += 1;
-							ROS_INFO("Point %i reached. --MC", point);
+							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
 							if (point==goal_poses)
 							{
 							  E_reached = true;
