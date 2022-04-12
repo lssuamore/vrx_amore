@@ -79,7 +79,10 @@ int PA_state = 0;
 // STATES CONCERNED WITH "acoustics" 
 int A_state = 0;
 // 0 = On standby
-// 1 = Navigating to acoustic source
+// 1 = Finding entrance gate (white buoy)
+// 2 = Navigating between red and green buoys
+// 3 = Finding exit gate (black buoy)
+// 4 = Navigating to acoustic source
 
 int point = 0;                     		    							// number of points on trajectory reached 
 int goal_poses;              											// total number of poses to reach 
