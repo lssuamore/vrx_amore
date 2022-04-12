@@ -234,7 +234,6 @@ ros::Time current_time, last_time;										// creates time variables
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
-
 // THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "pa_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
@@ -243,7 +242,7 @@ void PERCEPTION_ARRAY_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	if (loop_count > 10)
+	if (loop_count > 5)
 	{
 		system_initialized = true;
 		//ROS_INFO("navigation_array_initialized -- NA");
@@ -513,7 +512,6 @@ void buoys_publish()
 	}
 } // end of buoys_publish()
 
-
 // THIS FUNCTION: Fills out the global buoy camera image centroids, as well as the buoy IDs (color and type)
 // ACCEPTS: A counter, a color identifier, and an identifier for which camera is using the function 
 // RETURNS: The counter input but updated. Updates global variables
@@ -557,12 +555,12 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 			cv::Rect boundRect = cv::boundingRect(contours[i]);													// Finds and saves locations of bounding rectangles
 			if ((boundRect.area() > 100) && (boundRect.width < 1000))											// Filter out small noise
 			{
-				// Draws the bounding rectangles on the image
+				/* // Draws the bounding rectangles on the image
 				if (ckey == 1)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);			}
 				if (ckey == 2)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 255, 0), 3);			}
 				if (ckey == 3)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(255, 255, 255), 3);	}
 				if (ckey == 4)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 179, 255), 3);		}
-				if (ckey == 5)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3);				}
+				if (ckey == 5)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3);				} */
 				
 				mu[i] = cv::moments(contours[i], false);																	// This calculates the moments of the contours, but these change depeding on scaling
 				pts = contours[i];
@@ -900,7 +898,7 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 			}
 			
 			// NOTE: comment the following line out for the docker image, but uncomment for user display of cameras and detected buoys
-			cv::imshow("Left Camera Updated", background);
+			//cv::imshow("Left Camera Updated", background);
 			cv::waitKey(30);			// Wait 30 milliseconds
 		} // try 
 		catch (cv_bridge::Exception& e) // looks for errors 
@@ -995,7 +993,7 @@ int main(int argc, char **argv)
 	
 	// Initializations
 	// NOTE: comment the following line out for the docker image, but uncomment for user display of cameras and detected buoys
-	cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);					
+	//cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);					
 	//cv::namedWindow("Left Camera Features", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Updated", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Features", cv::WINDOW_AUTOSIZE);
@@ -1036,7 +1034,7 @@ int main(int argc, char **argv)
 	loop_rate.sleep();
 	
 	// NOTE: comment the following line out for the docker image, but uncomment for user display of cameras and detected buoys
-	cv::destroyWindow("Left Camera Updated");
+	//cv::destroyWindow("Left Camera Updated");
 	//cv::destroyWindow("Left Camera Features");
 	//cv::destroyWindow("Right Camera Updated");
 	//cv::destroyWindow("Right Camera Features");

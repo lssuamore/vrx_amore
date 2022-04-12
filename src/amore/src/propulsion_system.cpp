@@ -77,10 +77,8 @@ int PA_state = 0;
 //float duration = 1000;										// amount of time to finish the path 
 float dt = 0.25;														// [s] used for differential term
 
-float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
-
 float x_goal, y_goal, psi_goal;							// [m, m, radians] desired position and heading
-
+float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
 float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
 
 // initialize accumulated total errors for integral term
@@ -166,7 +164,7 @@ void PROPULSION_SYSTEM_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	if (loop_count > 10)
+	if (loop_count > 5)
 	{
 		system_initialized = true;
 		//ROS_INFO("propulsion_system_initialized -- PS");
@@ -236,7 +234,7 @@ void pa_state_update(const amore::state_msg::ConstPtr& msg)
 // =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if (NA_state == 1) // if navigation_array is in standard USV NED pose converter mode 
+	if (NA_state == 1)		// if navigation_array is in standard USV NED pose converter mode 
 	{
 		// Update NED USV pose 
 		x_usv_NED = odom->pose.pose.position.x;
@@ -251,8 +249,8 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 // =============================================================================
 void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal) 
 {
-	if (PS_state == 1)						// if the propulsion_system is ON
-	{												// update NED goal position and orientation
+	if (PS_state == 1)		// if the propulsion_system is ON
+	{	// update NED goal position and orientation
 		x_goal = goal->position.x;		
 		y_goal = goal->position.y;
 		psi_goal = goal->psi.data;

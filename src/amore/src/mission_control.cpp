@@ -96,6 +96,7 @@ float e_x, e_y, e_xy, e_psi;									// current errors between goal pose and usv
 
 bool NED_waypoints_published = false;				// false means the NED poses have not yet been calculated and published by navigation_array
 bool NED_goal_pose_published = false;				// false means the NED goal pose has not yet been published to the propulsion_system by the path_planner 
+bool usv_NED_pose_updated = false;					// false means usv NED pose has not been acquired from navigation_array by the path_planner
 
 // THE FOLLOWING FIVE BOOLS ARE USED TO DETERMINE IF MISSION_CONTROL AND SUBSYTEMS HAVE BEEN INITIALIZED
 bool navigation_array_initialized = false;
@@ -130,7 +131,7 @@ void MISSION_CONTROL_inspector()
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
 	//ROS_INFO("Loop count = %i", loop_count);
-	if ((loop_count > 10) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized)&& (acoustic_initialized))
+	if ((loop_count > 5) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized)&& (acoustic_initialized))
 	{
 		system_initialized = true;
 		//ROS_INFO("mission_control_initialized");
@@ -274,13 +275,23 @@ void NED_waypoints_published_update(const std_msgs::Bool status)
 	} // if (status.data)
 } // END OF NED_waypoints_published_update()
 
+// THIS FUNCTION: Checks to see if the path_planner has got the updated usv pose 
+// ACCEPTS: Status from "pp_USV_pose_update_state"
+// RETURNS: (VOID)
+// =============================================================================
+void pp_USV_pose_update_state_update(const std_msgs::Bool status)
+{
+	usv_NED_pose_updated = status.data;
+} // END OF pp_USV_pose_update_state_update()
+
 // THIS FUNCTION: Updates when NED goal pose has been published to propulsion_system by path_planner
 // ACCEPTS: Goal pose publish status from "goal_waypoints_publish_state"
 // RETURNS: (VOID)
 // =============================================================================
 void NED_goal_pose_published_update(const std_msgs::Bool status)
 {
-	if (status.data)
+	NED_goal_pose_published = status.data;
+	/* if (status.data)
 	{
 		if (!NED_goal_pose_published)			// if the goal pose has been published and hasn't been updated
 		{
@@ -293,7 +304,7 @@ void NED_goal_pose_published_update(const std_msgs::Bool status)
 	{
 		NED_goal_pose_published = false;
 		//ROS_INFO("GOAL POSE NOT PUBLISHED TO PROPULSION_SYSTEM");
-	} // if (status.data)
+	} // if (status.data) */
 } // END OF NED_goal_pose_published_update()
 
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
@@ -332,7 +343,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 {
 	// FIRST RESET STATES TO BE SET ACCORDINGLY TO CURRENT SYSTEM STATUSES
 	//	STATES CONCERNED WITH "navigation_array"
-	NA_state = 0;
+	NA_state = 1;
 	//	0 = On standby
 	//	1 = USV NED pose converter
 	//	2 = Station-Keeping NED goal pose converter
@@ -451,31 +462,36 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		// 	INTEGRATED TASK CODES FOLLOW
 		else if (msg->name == "wildlife")
 		{
+			//NA_state = 1;												// USV NED pose converter
 			if ((msg->state == "ready") || (msg->state == "running"))
 			{
-				PP_state = 4;										// Task 4: Wildlife Encounter and Avoid
-				if (NED_waypoints_published)				// if the goal pose has been converted from lat/long and published by navigation_array
+				PP_state = 4;											// Task 4: Wildlife Encounter and Avoid
+				if (!usv_NED_pose_updated)				// if the goal pose has been converted from lat/long and published by navigation_array
 				{
 					NA_state = 1;										// USV NED pose converter
-					if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
-					{
-						PS_state = 1;									// Propulsion system ON
-					}
-					else
-					{
-						PS_state = 0;									// Propulsion system on standby
-					}	// if (NED_goal_pose_published)
-				}	// if (NED_waypoints_published)
+					NED_waypoints_published = false;	
+				}
 				else
 				{
 					NA_state = 4;										// Wildlife NED animals converter
-					//PS_state = 0;										// Propulsion system on standby
+					if (NED_waypoints_published)		// if the goal pose has been converted from lat/long and published by navigation_array
+					{
+						NA_state = 1;										// USV NED pose converter
+					}
+				}
+				if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
+				{
+					PS_state = 1;										// Propulsion system ON
+				}
+				else
+				{
+					PS_state = 0;										// Propulsion system on standby
 				}
 			}
 			else
 			{
 				// ALL CODES ON STANDBY
-				//NA_state = 0;
+				//NA_state = 1;
 				//PP_state = 0;
 				//PS_state = 0;
 				//PA_state = 0;
@@ -604,7 +620,7 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
 
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13, nh14;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13, nh14, nh15;
 
 	// Subscribers
 	ros::Subscriber na_initialization_state_sub = nh1.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);								// initialization status of navigation_array
@@ -617,14 +633,14 @@ int main(int argc, char **argv)
 	ros::Subscriber goal_waypoints_publish_state_sub = nh8.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
 	ros::Subscriber goal_pose_publish_state_sub = nh9.subscribe("goal_pose_publish_state", 1, NED_goal_pose_published_update);					// whether or not goal pose has been published to propulsion_system yet 
 	ros::Subscriber acoustic_system_state_sub = nh9.subscribe("acoustic_system_state", 1, acoustic_system_state_update);									// "acoustic_system_state" subscriber for status of acoustic program
-
+	ros::Subscriber pp_USV_pose_update_state_sub = nh10.subscribe("pp_USV_pose_update_state", 1, pp_USV_pose_update_state_update);				// topic containing the status of whether or not the USV pose has been updated in path_planner
 
 	// Publishers
-	na_state_pub = nh10.advertise<amore::state_msg>("na_state", 1);													// current navigation_array state
-	pp_state_pub = nh11.advertise<amore::state_msg>("pp_state", 1);													// current path_planner state
-	ps_state_pub = nh12.advertise<amore::state_msg>("ps_state", 1);													// current propulsion_system state
-	pa_state_pub = nh13.advertise<amore::state_msg>("pa_state", 1);													// current perception_array state
-	a_state_pub = nh14.advertise<amore::state_msg>("a_state", 1);														// current acoustic state
+	na_state_pub = nh11.advertise<amore::state_msg>("na_state", 1);													// current navigation_array state
+	pp_state_pub = nh12.advertise<amore::state_msg>("pp_state", 1);													// current path_planner state
+	ps_state_pub = nh13.advertise<amore::state_msg>("ps_state", 1);													// current propulsion_system state
+	pa_state_pub = nh14.advertise<amore::state_msg>("pa_state", 1);													// current perception_array state
+	a_state_pub = nh15.advertise<amore::state_msg>("a_state", 1);														// current acoustic state
 
 	// initialize header sequences
 	na_state_msg.header.seq = 0;
@@ -642,7 +658,7 @@ int main(int argc, char **argv)
 	last_time = current_time;								// sets last time to the time it is now
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(200);
+	ros::Rate loop_rate(100);
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
