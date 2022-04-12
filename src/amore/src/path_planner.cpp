@@ -90,13 +90,12 @@ int goal_poses;              											// total number of poses to reach
 int loop_goal_recieved;         									// this is kept in order to ensure planner doesn't start controller until the goal is published
 
 float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
+float x_usv_NED, y_usv_NED, psi_NED; 			// vehicle position and heading (pose) in NED
+float e_x, e_y, e_xy, e_psi;									// current errors between goal pose and usv pose
 std::string Animal[10];										// string array to hold the names of the animals
 float x_animals_NED[10], y_animals_NED[10];	// arrays to hold animal locations
-float x_usv_NED, y_usv_NED, psi_NED; 			// vehicle position and heading (pose) in NED
 
-float e_x, e_y, e_xy, e_psi;									// current errors between goal pose and usv pose
-
-bool NA_goal_recieved = false;				// false means NED goal poses have not been acquired from navigation_array for task 1 or 2
+bool NA_goal_recieved = false;							// false means NED goal poses have not been acquired from navigation_array
 bool E_reached = false;        									// false means the last point has not been reached
 
 float e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
@@ -159,14 +158,18 @@ float y_E_CL;			// y-coord. of exit point wrt left buoy
 float s_M;				// slope of of line from CL to CR 
 float alpha;				// angle of frame CL wrt global frame
 
+bool NED_waypoints_published = false;				// false means the NED poses have not yet been calculated and published by navigation_array
 bool NED_buoys_recieved = false;			// false means the NED_buoys array has not yet been acquired
 bool calculations_done = false; 				// true means ... intermediate approach, mid-, and exit points have been calculated and updated globally if PP_state = 5, if PP_state = 4 then this means the path has been made
 
 std_msgs::Bool pp_initialization_status;							// "pp_initialization_state" message
 ros::Publisher pp_initialization_state_pub;						// "pp_initialization_state" publisher
 
+std_msgs::Bool pp_USV_pose_update_status;				// "pp_USV_pose_update_state" message; false means NED usv pose has not been updated 
+ros::Publisher pp_USV_pose_update_state_pub;			// "pp_USV_pose_update_state" publisher
+
 std_msgs::Bool goal_pose_publish_status;						// "goal_pose_publish_state" message; false means goal NED pose has not been published
-ros::Publisher goal_pose_publish_state_pub;					// "goal_pose_publish_state" publisher for whether goal NED pose has been published
+ros::Publisher goal_pose_publish_state_pub;					// "goal_pose_publish_state" publisher
 
 amore::usv_pose_msg current_goal_pose_msg;			// "current_goal_pose" message
 ros::Publisher current_goal_pose_pub;							// "current_goal_pose" publisher
@@ -184,7 +187,7 @@ void PATH_PLANNER_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	if (loop_count > 10)
+	if (loop_count > 5)
 	{
 		system_initialized = true;
 		//ROS_INFO("path_planner_initialized -- PP");
@@ -195,7 +198,9 @@ void PATH_PLANNER_inspector()
 		ROS_INFO("!path_planner_initialized -- PP");
 	}
 	pp_initialization_status.data = system_initialized;
-	pp_initialization_state_pub.publish(pp_initialization_status);		// publish the initialization status of the path_planner to "pp_initialization_state"
+	pp_initialization_state_pub.publish(pp_initialization_status);								// publish the initialization status of the path_planner to "pp_initialization_state"
+	goal_pose_publish_state_pub.publish(goal_pose_publish_status);					// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON
+	pp_USV_pose_update_state_pub.publish(pp_USV_pose_update_status);	// publish whether or not NED usv pose has been updated 
 } // END OF PATH_PLANNER_inspector()
 
 /////////////////////////////////////////////////////////////////		STATE UPDATERS		///////////////////////////////////////////////////////////////////
@@ -272,8 +277,31 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 		x_usv_NED = odom->pose.pose.position.x;
 		y_usv_NED = odom->pose.pose.position.y;
 		psi_NED = odom->pose.pose.orientation.z;
+		pp_USV_pose_update_status.data = true;
+	}
+	else if ((NA_state == 4) && (NA_goal_recieved) && (calculations_done))
+	{
+		pp_USV_pose_update_status.data = false;
 	}
 } // END OF pose_update()
+
+// THIS FUNCTION: Updates when NED waypoints have been converted and published to "waypoints_ned" to know when to tell path_planner to subscribe
+// ACCEPTS: Goal publish status from "goal_waypoints_publish_state"
+// RETURNS: (VOID)
+// =============================================================================
+void NED_waypoints_published_update(const std_msgs::Bool status)
+{
+	if (status.data)
+	{
+		NED_waypoints_published = true;
+		//ROS_INFO("WF POINT CONVERTER FINISHED");
+	}
+	else
+	{
+		NED_waypoints_published = false;
+		//ROS_INFO("WF POINT CONVERTER NOT FINISHED");
+	} // if (status.data)
+} // END OF NED_waypoints_published_update()
 
 // THIS FUNCTION: Updates the goal NED waypoints converted through the navigation_array
 // ACCEPTS: Goal NED waypoints from "waypoints_NED"
@@ -337,10 +365,10 @@ void goal_NED_acoustic_update(const amore::NED_acoustic::ConstPtr& sourceloc)
 // =============================================================================
 void goal_NED_animals_update(const amore::NED_objects::ConstPtr& object)
 {
-	if ((system_initialized) && (PP_state == 4))		// if the system is initialized and wildlife task
+	if ((system_initialized) && (PP_state == 4) && (NED_waypoints_published))		// if the system is initialized and wildlife task
 	{
-		if (!NA_goal_recieved)				// if the NED goal waypoints have been published but not recieved yet
-		{
+		//if (!NA_goal_recieved)				// if the NED goal waypoints have been published but not recieved yet
+		//{
 			ROS_INFO("Subscribing to NED animals positions");
 			for (int i = 0; i < object->quantity; i++)
 			{
@@ -366,7 +394,7 @@ void goal_NED_animals_update(const amore::NED_objects::ConstPtr& object)
 			}
 			NA_goal_recieved = true;
 			loop_goal_recieved = loop_count;
-		}
+		//}
 	}
 } // end of goal_NED_animals_update()
 
@@ -378,6 +406,7 @@ void animal_distances_calculate()
 	dt_c = sqrt(pow(x_t_NED - x_c_NED, 2.0)+pow(y_t_NED - y_c_NED, 2.0));										//Distance from turtle to crocodile
 	dp_c  = sqrt(pow(x_p_NED - x_c_NED, 2.0)+pow(y_p_NED - y_c_NED, 2.0));									//Distance from platypus to crocodile
 	ROS_INFO("dp_USV: %4.2f			dt_USV: %4.2f", dp_USV, dt_USV);
+	ROS_INFO("x_USV: %4.2f			y_USV: %4.2f", x_usv_NED, y_usv_NED);
 } // end of animal_distances_calculate()
 
 // THIS FUNCTION: Generates the updated array of poses to accomplish the task
@@ -386,87 +415,87 @@ void animal_distances_calculate()
 // =============================================================================
 void update_animal_path()
 {
-	if ((!calculations_done) && (NA_state == 1))
+	if ((!calculations_done) && (pp_USV_pose_update_status.data) && (NA_goal_recieved))
 	{
 		r = 5;
 		//Making the circle ccw
 		x_turt_g[0] = x_t_NED - r;
 		y_turt_g[0] = y_t_NED;
 		psi_turt_g[0] = 90.0 * (PI/180);
-		x_turt_g[1] = x_t_NED - sqrt(2)/2*r;
-		y_turt_g[1] = y_t_NED + sqrt(2)/2*r;
+		x_turt_g[1] = x_t_NED - sqrt(2.0)/2.0*r;
+		y_turt_g[1] = y_t_NED + sqrt(2.0)/2.0*r;
 		psi_turt_g[1] = 45.0 * (PI/180);
 		x_turt_g[2] = x_t_NED;
 		y_turt_g[2] = y_t_NED + r;
 		psi_turt_g[2] = 0.0 * (PI/180);
-		x_turt_g[3] = x_t_NED + sqrt(2)/2*r;
-		y_turt_g[3] = y_t_NED + sqrt(2)/2*r;
+		x_turt_g[3] = x_t_NED +sqrt(2.0)/2.0*r;
+		y_turt_g[3] = y_t_NED + sqrt(2.0)/2.0*r;
 		psi_turt_g[3] = -45.0 * (PI/180);
 		x_turt_g[4] = x_t_NED + r;
 		y_turt_g[4] = y_t_NED;
 		psi_turt_g[4] = -90.0 * (PI/180);
-		x_turt_g[5] = x_t_NED + sqrt(2)/2*r;
-		y_turt_g[5] = y_t_NED - sqrt(2)/2*r;
+		x_turt_g[5] = x_t_NED + sqrt(2.0)/2.0*r;
+		y_turt_g[5] = y_t_NED - sqrt(2.0)/2.0*r;
 		psi_turt_g[5] = -135.0 * (PI/180);
 		x_turt_g[6] = x_t_NED;
 		y_turt_g[6] = y_t_NED - r;
 		psi_turt_g[6] = 180.0 * (PI/180);
-		x_turt_g[7] = x_t_NED - sqrt(2)/2*r;
-		y_turt_g[7] = y_t_NED - sqrt(2)/2*r;
+		x_turt_g[7] = x_t_NED - sqrt(2.0)/2.0*r;
+		y_turt_g[7] = y_t_NED - sqrt(2.0)/2.0*r;
 		psi_turt_g[7] = 135.0 * (PI/180);
 		x_turt_g[8] = x_t_NED - r;
 		y_turt_g[8] = y_t_NED;
-		psi_turt_g[8] = 90.0 * (PI/180);
+		psi_turt_g[8] = 90.0 * (PI/180);					// change to point away from animal 
 
 		//Making the circle cw
 		x_plat_g[0] = x_p_NED + r;
 		y_plat_g[0] = y_p_NED;
-		psi_plat_g[0] = 90.0 * (PI/180);
-		x_plat_g[1] = x_p_NED + sqrt(2)/2*r;
-		y_plat_g[1] = y_p_NED + sqrt(2)/2*r;
+		psi_plat_g[0] = 90.0 * (PI/180.0);
+		x_plat_g[1] = x_p_NED + sqrt(2.0)/2.0*r;
+		y_plat_g[1] = y_p_NED + sqrt(2.0)/2.0*r;
 		psi_plat_g[1] = 135.0 * (PI/180);
 		x_plat_g[2] = x_p_NED;
 		y_plat_g[2] = y_p_NED + r;
-		psi_plat_g[2] = 180.0 * (PI/180);
-		x_plat_g[3] = x_p_NED - sqrt(2)/2*r;
-		y_plat_g[3] = y_p_NED + sqrt(2)/2*r;
+		psi_plat_g[2] = -180.0 * (PI/180);
+		x_plat_g[3] = x_p_NED - sqrt(2.0)/2.0*r;
+		y_plat_g[3] = y_p_NED + sqrt(2.0)/2.0*r;
 		psi_plat_g[3] = -135.0 * (PI/180);
 		x_plat_g[4] = x_p_NED - r;
 		y_plat_g[4] = y_p_NED;
 		psi_plat_g[4] = -90.0 * (PI/180);
-		x_plat_g[5] = x_p_NED - sqrt(2)/2*r;
-		y_plat_g[5] = y_p_NED - sqrt(2)/2*r;
+		x_plat_g[5] = x_p_NED - sqrt(2.0)/2.0*r;
+		y_plat_g[5] = y_p_NED - sqrt(2.0)/2.0*r;
 		psi_plat_g[5] = -45.0 * (PI/180);
 		x_plat_g[6] = x_p_NED;
 		y_plat_g[6] = y_p_NED - r;
 		psi_plat_g[6] = 0.0 * (PI/180);
-		x_plat_g[7] = x_p_NED + sqrt(2)/2*r;
-		y_plat_g[7] = y_p_NED - sqrt(2)/2*r;
+		x_plat_g[7] = x_p_NED + sqrt(2.0)/2.0*r;
+		y_plat_g[7] = y_p_NED - sqrt(2.0)/2.0*r;
 		psi_plat_g[7] = 45.0 * (PI/180);
 		x_plat_g[8] = x_p_NED + r;
 		y_plat_g[8] = y_p_NED;
 		psi_plat_g[8] = 90.0 * (PI/180);
 		
 		animal_distances_calculate();			// updates distances from USV to each animal 
-		// if (dt_USV <= dp_USV)
-		// {
-			// for (int i=0; i<9; i++)
-			// {
-				// x_goal[i] = x_turt_g[i];
-				// y_goal[i] = y_turt_g[i];
-				// psi_goal[i] = psi_turt_g[i];
-			// }
-			// ROS_INFO("x_t_NED: %4.2f			y_t_NED: %4.2f			x_p_NED: %4.2f			y_p_NED: %4.2f", x_t_NED, y_t_NED, x_p_NED, y_p_NED);
+		if (dt_USV <= dp_USV)
+		{
+			for (int i=0; i<9; i++)
+			{
+				x_goal[i] = x_turt_g[i];
+				y_goal[i] = y_turt_g[i];
+				psi_goal[i] = psi_turt_g[i];
+			}
+			ROS_INFO("x_t_NED: %4.2f			y_t_NED: %4.2f			x_p_NED: %4.2f			y_p_NED: %4.2f", x_t_NED, y_t_NED, x_p_NED, y_p_NED);
 			
-			// for (int i=9; i<18; i++)
-			// {
-				// x_goal[i] = x_plat_g[i-9];
-				// y_goal[i] = y_plat_g[i-9];
-				// psi_goal[i] = psi_plat_g[i-9];
-			// }
-		// }
-		//else
-		//{
+			for (int i=9; i<18; i++)
+			{
+				x_goal[i] = x_plat_g[i-9];
+				y_goal[i] = y_plat_g[i-9];
+				psi_goal[i] = psi_plat_g[i-9];
+			}
+		}
+		else
+		{
 			for (int i=0; i<9; i++)
 			{
 				x_goal[i] = x_plat_g[i];
@@ -479,7 +508,7 @@ void update_animal_path()
 				y_goal[i] = y_turt_g[i-9];
 				psi_goal[i] = psi_turt_g[i-9];
 			}
-		//}
+		}
 		calculations_done = true;
 		goal_poses = 18;
 	}
@@ -616,7 +645,7 @@ int main(int argc, char **argv)
 	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
 
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11,nh12;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11,nh12, nh13, nh14, nh15;
 
 	// Subscribers
 	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
@@ -628,11 +657,13 @@ int main(int argc, char **argv)
 	ros::Subscriber waypoints_NED_sub = nh7.subscribe("waypoints_ned", 1, goal_NED_waypoints_update);				// goal waypoints converted to NED
 	ros::Subscriber acousticsource_NED_sub = nh8.subscribe("acoustic_source_location", 1, goal_NED_acoustic_update);		// acoustic pinger converted to NED
 	ros::Subscriber ned_animals_sub = nh9.subscribe("ned_animals", 1, goal_NED_animals_update);				// goal animal locations converted to NED
+	ros::Subscriber goal_waypoints_publish_state_sub = nh10.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
 	
 	// Publishers
-	pp_initialization_state_pub = nh10.advertise<std_msgs::Bool>("pp_initialization_state", 1);						// publisher for state of initialization
-	current_goal_pose_pub = nh11.advertise<amore::usv_pose_msg>("current_goal_pose", 1);						// current goal for low level controller (propulsion_system)
-	goal_pose_publish_state_pub = nh12.advertise<std_msgs::Bool>("goal_pose_publish_state", 1);			// "goal_pose_publish_state" publisher for whether NED converted waypoints have been published
+	pp_initialization_state_pub = nh12.advertise<std_msgs::Bool>("pp_initialization_state", 1);								// publisher for state of initialization
+	current_goal_pose_pub = nh13.advertise<amore::usv_pose_msg>("current_goal_pose", 1);							// current goal for low level controller (propulsion_system)
+	goal_pose_publish_state_pub = nh14.advertise<std_msgs::Bool>("goal_pose_publish_state", 1);					// "goal_pose_publish_state" publisher for whether NED converted waypoints have been published
+	pp_USV_pose_update_state_pub = nh15.advertise<std_msgs::Bool>("pp_USV_pose_update_state", 1);		// publisher for whether usv NED pose has been updated or not
 
 	// Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize simulation time
@@ -640,6 +671,7 @@ int main(int argc, char **argv)
 
 	// Initialize global variables
 	goal_pose_publish_status.data = false;
+	pp_USV_pose_update_status.data = false;
 	pp_initialization_status.data = false;
 	current_time = ros::Time::now();							// sets current time to the time it is now
 	last_time = current_time;										// sets last time to the current_time
@@ -651,7 +683,6 @@ int main(int argc, char **argv)
 	while(ros::ok())
 	{
 		PATH_PLANNER_inspector();															// check that entire system is initialized before starting calculations
-		goal_pose_publish_state_pub.publish(goal_pose_publish_status);	// publish whether NED goal pose has been published to propulsion_system for mission_control to know when to turn propulsion_system ON
 		
 		//	0 = On standby
 		//	1 = Station-Keeping
@@ -730,8 +761,8 @@ int main(int argc, char **argv)
 		} // if ((PP_state == 1) || (PP_state == 2))||(PP_state == 5)
 		else if (PP_state == 4)	// TASK 4: Wildlife Encounter and Avoid
 		{
-			if ((loop_count > (loop_goal_recieved)) && (NA_goal_recieved))
-			{
+			//if ((loop_count > (loop_goal_recieved)) && (NA_goal_recieved))
+			//{
 				if (calculations_done)
 				{
 					if ((NA_state == 1) && (PS_state == 1))		// if the navigation_array is providing NED USV state, and the propulsion_system is ON
@@ -765,11 +796,11 @@ int main(int argc, char **argv)
 				}
 				else
 				{
-					animal_distances_calculate();			// updates distances from USV to each animal 
 					update_animal_path();																// this function will generate the updated array of poses to accomplish task
+					//goal_pose_publish_status.data = false;
 				}
-			} // if (loop_count > loop_goal_recieved)
-		} // if ((PP_state == 1) || (PP_state == 2))
+			//}
+		} // if (PP_state == 4)	// TASK 4: Wildlife Encounter and Avoid
 
 		ros::spinOnce();										// update subscribers
 		loop_rate.sleep();									// sleep for set loop_rate

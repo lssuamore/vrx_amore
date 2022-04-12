@@ -124,6 +124,8 @@ amore::NED_objects NED_animals_msg;								// message used to hold and publish a
 ros::Publisher NED_animals_pub;											// "ned_animals" publisher
 
 ros::Time current_time, last_time;															// creates time variables
+
+bool trigger_goal_publish = false;																// false to start out not triggering a publish 
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
@@ -135,7 +137,7 @@ void NAVIGATION_ARRAY_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	if (loop_count > 10)
+	if (loop_count > 5)
 	{
 		system_initialized = true;
 		//ROS_INFO("navigation_array_initialized -- NA");
@@ -394,8 +396,8 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 // THIS FUNCTION SUBSCRIBES TO "/vrx/wildlife/animals" TO GET THE WF GOAL POSES IN LAT/LONG
 void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (NA_state == 4)		// if navigation_array is in Wildlife NED animals converter mode
-	{
+	//if (NA_state == 4)		// if navigation_array is in Wildlife NED animals converter mode
+	//{
 		if (!lat_lon_goal_recieved)
 		{
 			for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
@@ -419,7 +421,7 @@ void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 				ROS_INFO("Animal: %s		lat: %4.9f			long: %4.9f", Animal[i].c_str(), goal_lat[i], goal_long[i]);
 			} */
 		}
-	}
+	//}
 } // END OF VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 
 // THIS FUNCTION: 	Publishes the current task converted waypoints to "waypoints_ned"
@@ -619,30 +621,32 @@ int main(int argc, char **argv)
 		} // if Goal Pose Conversion mode
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF GOAL POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			
-		if ((NED_waypoints_converted) && (!goal_waypoints_publish_status.data))
+		if ((NED_waypoints_converted) && (!trigger_goal_publish))
 		{
-			if ((NA_state == 2) || (NA_state == 3))
+			/* if ((NA_state == 2) || (NA_state == 3))
 			{
 				waypoints_publish();
 			}
 			else if (NA_state == 4)
 			{
 				animals_publish();
-			}
-			goal_waypoints_publish_status.data = true;
-			ROS_INFO("WAYPOINTS HAVE BEEN PUBLISHED -- NA");
+			} */
+			trigger_goal_publish = true;
+			ROS_INFO("WAYPOINTS SHOULD BE PUBLISHED NEXT -- NA");
 		} // if ((NED_waypoints_converted) && (!goal_waypoints_publish_status.data))
 		
-		if (goal_waypoints_publish_status.data)
+		if (trigger_goal_publish)
 		{
+			ROS_INFO("PUBLISHING CONVERTED GOAL WAYPOINTS -- NA");
 			if ((PP_state == 1) || (PP_state == 2))
 			{
-				waypoints_ned_pub.publish(NED_waypoints_msg);		// waypoints_publish();
+				waypoints_publish(); //waypoints_ned_pub.publish(NED_waypoints_msg);		// 
 			}
 			else if (PP_state == 4)
 			{
-				NED_animals_pub.publish(NED_animals_msg);				// animals_publish();
+				animals_publish(); //NED_animals_pub.publish(NED_animals_msg);				// 
 			}
+			goal_waypoints_publish_status.data = true;
 			// reset for next times conversion
 			lat_lon_goal_recieved = false;
 			NED_waypoints_converted = false;
