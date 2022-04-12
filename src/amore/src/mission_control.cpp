@@ -469,16 +469,16 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 				else
 				{
 					NA_state = 4;										// Wildlife NED animals converter
-					PS_state = 0;										// Propulsion system on standby
+					//PS_state = 0;										// Propulsion system on standby
 				}
 			}
 			else
 			{
 				// ALL CODES ON STANDBY
-				NA_state = 0;
-				PP_state = 0;
-				PS_state = 0;
-				PA_state = 0;
+				//NA_state = 0;
+				//PP_state = 0;
+				//PS_state = 0;
+				//PA_state = 0;
 				// reset task statuses as long as task is in "initial" or "finished" state
 				NED_waypoints_published = false;
 				NED_goal_pose_published = false;
