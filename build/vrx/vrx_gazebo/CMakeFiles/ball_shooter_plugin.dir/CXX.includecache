@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/brad/vrx_amore/build/vrx/vrx_gazebo/ball_shooter_plugin_autogen/mocs_compilation.cpp
+
 /home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/ball_shooter_plugin.hh
 ros/ros.h
 -

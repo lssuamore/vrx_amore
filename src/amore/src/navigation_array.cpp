@@ -33,7 +33,6 @@
 #include "amore/NED_waypoints.h"										// message created to hold an array of the converted WF goal waypoints w/ headings and the number of goal poses
 #include "geographic_msgs/GeoPoseStamped.h"				// message type published by VRX Task 1
 #include "geographic_msgs/GeoPath.h"								// message type published by VRX Task 2
-//#include "geometry_msgs/Point.h"										// message type used to hold the goal waypoints w/headings
 #include "geometry_msgs/PointStamped.h"
 #include "sensor_msgs/NavSatFix.h"									// message type of lat and long coordinates given by the GPS
 #include "sensor_msgs/Imu.h"												// message type of orientation quaternion and angular velocities given by the GPS
@@ -58,6 +57,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -340,77 +340,86 @@ void goal_convert_update()
 	omega_y = 0.0;
 	omega_z = 0.0;
 } // END OF goal_convert_update()
-
+//.....................................................................goal pose conversion functions...................................................................
 // THIS FUNCTION SUBSCRIBES TO "/vrx/station_keeping/goal" TO GET THE SK GOAL POSE IN LAT/LONG
 void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal) 
 {
-	if (!lat_lon_goal_recieved)
+	if (NA_state == 2)		// if navigation_array is in Station-Keeping NED goal pose converter mode
 	{
-		goal_lat[point_num] = goal->pose.position.latitude;
-		goal_long[point_num] = goal->pose.position.longitude;
-		qx_goal[point_num] = goal->pose.orientation.x;
-		qy_goal[point_num] = goal->pose.orientation.y;
-		qz_goal[point_num] = goal->pose.orientation.z;
-		qw_goal[point_num] = goal->pose.orientation.w;
-		lat_lon_goal_recieved = true;
-		goal_poses_quantity = 1;
-		
-		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-		ROS_INFO("GOAL POSE ACQUIRED FROM VRX TASK 1 GOAL POSE NODE. -- NA");
-		//ROS_DEBUG("goal_lat: %.2f", SK_goal_lat);
-		//ROS_DEBUG("goal_long: %.2f", SK_goal_long);
+		if (!lat_lon_goal_recieved)
+		{
+			goal_lat[point_num] = goal->pose.position.latitude;
+			goal_long[point_num] = goal->pose.position.longitude;
+			qx_goal[point_num] = goal->pose.orientation.x;
+			qy_goal[point_num] = goal->pose.orientation.y;
+			qz_goal[point_num] = goal->pose.orientation.z;
+			qw_goal[point_num] = goal->pose.orientation.w;
+			lat_lon_goal_recieved = true;
+			goal_poses_quantity = 1;
+			
+			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+			ROS_INFO("GOAL POSE ACQUIRED FROM VRX TASK 1 GOAL POSE NODE. -- NA");
+			//ROS_DEBUG("goal_lat: %.2f", SK_goal_lat);
+			//ROS_DEBUG("goal_long: %.2f", SK_goal_long);
+		}
 	}
 } // END OF VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
 
 // THIS FUNCTION SUBSCRIBES TO "/vrx/wayfinding/waypoints" TO GET THE WF GOAL POSES IN LAT/LONG
 void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)
+	if (NA_state == 3)		// if navigation_array is in Wayfinding NED goal pose converter mode
 	{
-		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+		if (!lat_lon_goal_recieved)
 		{
-			goal_lat[i] = goal->poses[i].pose.position.latitude;
-			goal_long[i] = goal->poses[i].pose.position.longitude;
-			qx_goal[i] = goal->poses[i].pose.orientation.x;
-			qy_goal[i] = goal->poses[i].pose.orientation.y;
-			qz_goal[i] = goal->poses[i].pose.orientation.z;
-			qw_goal[i] = goal->poses[i].pose.orientation.w;
+			for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+			{
+				goal_lat[i] = goal->poses[i].pose.position.latitude;
+				goal_long[i] = goal->poses[i].pose.position.longitude;
+				qx_goal[i] = goal->poses[i].pose.orientation.x;
+				qy_goal[i] = goal->poses[i].pose.orientation.y;
+				qz_goal[i] = goal->poses[i].pose.orientation.z;
+				qw_goal[i] = goal->poses[i].pose.orientation.w;
+			}
+			lat_lon_goal_recieved = true;
+			goal_poses_quantity = (int)sizeof(goal->poses)/8;
+			
+			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+			ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 2 WAYPOINTS NODE. -- NA");
+			ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
 		}
-		lat_lon_goal_recieved = true;
-		goal_poses_quantity = (int)sizeof(goal->poses)/8;
-		
-		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-		ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 2 WAYPOINTS NODE. -- NA");
-		ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
-	}	
+	}
 } // END OF VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 
 // THIS FUNCTION SUBSCRIBES TO "/vrx/wildlife/animals" TO GET THE WF GOAL POSES IN LAT/LONG
 void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)
+	if (NA_state == 4)		// if navigation_array is in Wildlife NED animals converter mode
 	{
-		for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+		if (!lat_lon_goal_recieved)
 		{
-			Animal[i] = goal->poses[i].header.frame_id;                              //Getting which is the 1st animal
-			goal_lat[i] = goal->poses[i].pose.position.latitude;
-			goal_long[i] = goal->poses[i].pose.position.longitude;
-			qx_goal[i] = goal->poses[i].pose.orientation.x;
-			qy_goal[i] = goal->poses[i].pose.orientation.y;
-			qz_goal[i] = goal->poses[i].pose.orientation.z;
-			qw_goal[i] = goal->poses[i].pose.orientation.w;
+			for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+			{
+				Animal[i] = goal->poses[i].header.frame_id;                              //Getting which is the 1st animal
+				goal_lat[i] = goal->poses[i].pose.position.latitude;
+				goal_long[i] = goal->poses[i].pose.position.longitude;
+				qx_goal[i] = goal->poses[i].pose.orientation.x;
+				qy_goal[i] = goal->poses[i].pose.orientation.y;
+				qz_goal[i] = goal->poses[i].pose.orientation.z;
+				qw_goal[i] = goal->poses[i].pose.orientation.w;
+			}
+			lat_lon_goal_recieved = true;
+			goal_poses_quantity = (int)sizeof(goal->poses)/8;
+			
+			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
+			ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 4 WAYPOINTS NODE. -- NA");
+			ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
+			/* for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+			{
+				ROS_INFO("Animal: %s		lat: %4.9f			long: %4.9f", Animal[i].c_str(), goal_lat[i], goal_long[i]);
+			} */
 		}
-		lat_lon_goal_recieved = true;
-		goal_poses_quantity = (int)sizeof(goal->poses)/8;
-		
-		// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-		ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 4 WAYPOINTS NODE. -- NA");
-		ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
-		/* for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
-		{
-			ROS_INFO("Animal: %s		lat: %4.9f			long: %4.9f", Animal[i].c_str(), goal_lat[i], goal_long[i]);
-		} */
-	}	
+	}
 } // END OF VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 
 // THIS FUNCTION: 	Publishes the current task converted waypoints to "waypoints_ned"
@@ -518,7 +527,7 @@ int main(int argc, char **argv)
 		
 		if (NA_state == 0)
 		{
-			//goal_waypoints_publish_status.data = false;
+			goal_waypoints_publish_status.data = false;
 		}
 		
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -637,7 +646,6 @@ int main(int argc, char **argv)
 			// reset for next times conversion
 			lat_lon_goal_recieved = false;
 			NED_waypoints_converted = false;
-			//goal_waypoints_publish_status.data = false;
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF WF GOAL POSES CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		

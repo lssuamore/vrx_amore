@@ -52,6 +52,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -265,26 +266,13 @@ void a_state_update(const amore::state_msg::ConstPtr& msg)
 // =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if (PP_state != 0) // if path_planner is ON
+	if (NA_state == 1) // if navigation_array is in standard USV NED pose converter mode 
 	{
 		// Update NED USV pose 
 		x_usv_NED = odom->pose.pose.position.x;
 		y_usv_NED = odom->pose.pose.position.y;
 		psi_NED = odom->pose.pose.orientation.z;
-		
-		/* printf("the x is: %f\n", odom->pose.pose.position.x); //extracts x coor from nav_odometery
-		printf("the y is: %f\n", odom->pose.pose.position.y); //extracts y coor from nav_odometery
-		printf("the x orientation is: %f\n", odom->pose.pose.orientation.x); //extracts x orientation
-		printf("the y orientation is: %f\n", odom->pose.pose.orientation.y); //extracts y orientation
-		printf("the z orientation is: %f\n", odom->pose.pose.orientation.z); //extracts z orientation
-		printf("the w orientation is: %f\n", odom->pose.pose.orientation.w); //extracts w orientation
-		printf("the velocity x is: %f\n", odom-> twist.twist.linear.x);//prints velocity x
-		printf("the velocity y is: %f\n", odom-> twist.twist.linear.y);//prints velocity y
-		printf("the velocity z is: %f\n", odom-> twist.twist.linear.z);//prints velocity z
-		printf("the angular velocity x is: %f\n", odom-> twist.twist.angular.x);//prints velocity x
-		printf("the angular velocity y is: %f\n", odom-> twist.twist.angular.y);//prints velocity x
-		printf("the angular velocity z is: %f\n", odom-> twist.twist.angular.z);//prints velocity x */
-	} // if navigation_array is in standard USV Pose Conversion mode
+	}
 } // END OF pose_update()
 
 // THIS FUNCTION: Updates the goal NED waypoints converted through the navigation_array
@@ -376,19 +364,20 @@ void goal_NED_animals_update(const amore::NED_objects::ConstPtr& object)
 			   y_animals_NED[i] = object->objects[i].point.y;						//Getting y position of animals
 			   ROS_INFO("Animal: %s		x: %4.2f			y: %4.2f", Animal[i].c_str(), x_animals_NED[i], y_animals_NED[i]);
 			}
-			
+			NA_goal_recieved = true;
+			loop_goal_recieved = loop_count;
 		}
 	}
 } // end of goal_NED_animals_update()
 
-void distance_count()
+void animal_distances_calculate()
 {
 	dc_USV = sqrt(pow(x_usv_NED - x_c_NED, 2.0)+pow(y_usv_NED - y_c_NED, 2.0));							//Distance from USV to crocodile
 	dp_USV = sqrt(pow(x_usv_NED - x_p_NED, 2.0)+pow(y_usv_NED - y_p_NED, 2.0));							//Distance from USV to platypus
 	dt_USV = sqrt(pow(x_usv_NED - x_t_NED, 2.0)+pow(y_usv_NED - y_t_NED, 2.0));							//Distance from USV to turtle
 	dt_c = sqrt(pow(x_t_NED - x_c_NED, 2.0)+pow(y_t_NED - y_c_NED, 2.0));										//Distance from turtle to crocodile
 	dp_c  = sqrt(pow(x_p_NED - x_c_NED, 2.0)+pow(y_p_NED - y_c_NED, 2.0));									//Distance from platypus to crocodile
-} // end of distance_count()
+} // end of animal_distances_calculate()
 
 // THIS FUNCTION: Generates the updated array of poses to accomplish the task
 // ACCEPTS: (VOID)
@@ -402,72 +391,74 @@ void update_animal_path()
 		//Making the circle ccw
 		x_turt_g[0] = x_t_NED-r;                                    
 		y_turt_g[0] = y_t_NED;
-		psi_turt_g[0] = 180.0;
+		psi_turt_g[0] = 180.0 * (PI/180);
 		x_turt_g[1] = x_t_NED - sqrt(2)/2*r;
 		y_turt_g[1] = y_t_NED - sqrt(2)/2*r;
-		psi_turt_g[1] = 225.0;
+		psi_turt_g[1] = -135.0 * (PI/180);
 		x_turt_g[2] = x_t_NED;
 		y_turt_g[2] = y_t_NED - r;
-		psi_turt_g[2] = 270.0;
+		psi_turt_g[2] = -90.0 * (PI/180);
 		x_turt_g[3] = x_t_NED + sqrt(2)/2*r;
 		y_turt_g[3] = y_t_NED - sqrt(2)/2*r;
-		psi_turt_g[3] = 315.0;
+		psi_turt_g[3] = -45.0 * (PI/180);
 		x_turt_g[4] = x_t_NED + r;
 		y_turt_g[4] = y_t_NED;
-		psi_turt_g[4] = 0.0;
+		psi_turt_g[4] = 0.0 * (PI/180);
 		x_turt_g[5] = x_t_NED + sqrt(2)/2*r;
 		y_turt_g[5] = y_t_NED + sqrt(2)/2*r;
-		psi_turt_g[5] = 45.0;
+		psi_turt_g[5] = 45.0 * (PI/180);
 		x_turt_g[6] = x_t_NED;
 		y_turt_g[6] = y_t_NED + r;
-		psi_turt_g[6] = 90.0;
+		psi_turt_g[6] = 90.0 * (PI/180);
 		x_turt_g[7] = x_t_NED - sqrt(2)/2*r;
 		y_turt_g[7] = y_t_NED + sqrt(2)/2*r;
-		psi_turt_g[7] = 135.0;
+		psi_turt_g[7] = 135.0 * (PI/180);
 		x_turt_g[8] = x_t_NED-r;
 		y_turt_g[8] = y_t_NED;
-		psi_turt_g[8] = 180.0;
+		psi_turt_g[8] = 180.0 * (PI/180);
 
 		//Making the circle cw
 		x_plat_g[0] = x_p_NED-r;
 		y_plat_g[0] = y_p_NED;
-		psi_plat_g[0] = 0.0;
+		psi_plat_g[0] = 0.0 * (PI/180);
 		x_plat_g[1] = x_p_NED - sqrt(2)/2*r;
 		y_plat_g[1] = y_p_NED + sqrt(2)/2*r;
-		psi_plat_g[1] = 315.0;
+		psi_plat_g[1] = -45.0 * (PI/180);
 		x_plat_g[2] = x_p_NED;
 		y_plat_g[2] = y_p_NED + r;
-		psi_plat_g[2] = 270.0;
+		psi_plat_g[2] = -90.0 * (PI/180);
 		x_plat_g[3] = x_p_NED + sqrt(2)/2*r;
 		y_plat_g[3] = y_p_NED + sqrt(2)/2*r;
-		psi_plat_g[3] = 225.0;
+		psi_plat_g[3] = -135.0 * (PI/180);
 		x_plat_g[4] = x_p_NED + r;
 		y_plat_g[4] = y_p_NED;
-		psi_plat_g[4] = 180.0;
+		psi_plat_g[4] = 180.0 * (PI/180);
 		x_plat_g[5] = x_p_NED + sqrt(2)/2*r;
 		y_plat_g[5] = y_p_NED - sqrt(2)/2*r;
-		psi_plat_g[5] = 135.0;
+		psi_plat_g[5] = 135.0 * (PI/180);
 		x_plat_g[6] = x_p_NED;
 		y_plat_g[6] = y_p_NED - r;
-		psi_plat_g[6] = 90.0;
+		psi_plat_g[6] = 90.0 * (PI/180);
 		x_plat_g[7] = x_p_NED - sqrt(2)/2*r;
 		y_plat_g[7] = y_p_NED - sqrt(2)/2*r;
-		psi_plat_g[7] = 45.0;
+		psi_plat_g[7] = 45.0 * (PI/180);
 		x_plat_g[8] = x_p_NED-r;
 		y_plat_g[8] = y_p_NED;
-		psi_plat_g[8] = 0.0;
-		distance_count();			// updates distances from USV to each animal 
+		psi_plat_g[8] = 0.0 * (PI/180);
+		animal_distances_calculate();			// updates distances from USV to each animal 
 		if (dt_USV <= dp_USV)
 		{
 			for (int i=0; i<9; i++)
 			{
 				x_goal[i] = x_turt_g[i];
 				y_goal[i] = y_turt_g[i];
+				psi_goal[i] = psi_turt_g[i];
 			}
 			for (int i=9; i<18; i++)
 			{
 				x_goal[i] = x_plat_g[i];
 				y_goal[i] = y_plat_g[i];
+				psi_goal[i] = psi_plat_g[i];
 			}
 		}
 		else
@@ -476,11 +467,13 @@ void update_animal_path()
 			{
 				x_goal[i] = x_plat_g[i];
 				y_goal[i] = y_plat_g[i];
+				psi_goal[i] = psi_plat_g[i];
 			}
 			for (int i=9; i<18; i++)
 			{
 				x_goal[i] = x_turt_g[i];
 				y_goal[i] = y_turt_g[i];
+				psi_goal[i] = psi_turt_g[i];
 			}
 		}
 		calculations_done = true;
@@ -696,7 +689,7 @@ int main(int argc, char **argv)
 			e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
 			e_psi_allowed = 0.4;      								// heading error tolerance threshold; NOTE: make as small as possible
 		}
-			else if ((PP_state == 1) || (PP_state == 2)|| (PP_state == 5))	// TASK 1: STATION_KEEPING, TASK 2: WAYFINDING, TASK 5: GYMKHANA
+		else if ((PP_state == 1) || (PP_state == 2)|| (PP_state == 5))	// TASK 1: STATION_KEEPING, TASK 2: WAYFINDING, TASK 5: GYMKHANA
 		{
 			if ((loop_count > (loop_goal_recieved)) && (NA_goal_recieved))
 			{
@@ -734,7 +727,6 @@ int main(int argc, char **argv)
 		{
 			if ((loop_count > (loop_goal_recieved)) && (NA_goal_recieved))
 			{
-				update_animal_path();																// this function will generate the updated array of poses to accomplish task
 				if (calculations_done)
 				{
 					if ((NA_state == 1) && (PS_state == 1))		// if the navigation_array is providing NED USV state, and the propulsion_system is ON
@@ -745,7 +737,7 @@ int main(int argc, char **argv)
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 						e_psi = psi_goal[point] - psi_NED;
 
-						if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
+						if ((e_xy < 1.0) && (e_psi < e_psi_allowed) && (!E_reached))
 						{
 							point += 1;
 							ROS_INFO("Point %i reached. --MC", point);
@@ -765,6 +757,11 @@ int main(int argc, char **argv)
 						}
 					} // if ((NA_state == 1) && (PS_state == 1))
 					current_goal_pose_publish();
+				}
+				else
+				{
+					animal_distances_calculate();			// updates distances from USV to each animal 
+					update_animal_path();																// this function will generate the updated array of poses to accomplish task
 				}
 			} // if (loop_count > loop_goal_recieved)
 		} // if ((PP_state == 1) || (PP_state == 2))

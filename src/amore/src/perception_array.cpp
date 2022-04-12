@@ -51,7 +51,6 @@
 #include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
 #include "amore/usv_pose_msg.h"
 #include "amore/NED_objects.h"
-//#include "geometry_msgs/PoseArray.h"
 //...........................................End of Included Libraries and Message Types....................................
 
 
@@ -100,6 +99,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -141,10 +141,7 @@ cv::Scalar fog_background_low, fog_background_high;
 cv::Scalar fog_background1_low, fog_background1_high;
 cv::Scalar am_background_low, am_background_high;
 
-
-cv::Mat mask;
-cv::Mat mask_new;
-cv::Mat mask_new1;
+cv::Mat mask, mask_new, mask_new1;
 
 Mat background, background1;
 
@@ -192,13 +189,7 @@ float x_orange, y_orange;
 float x_black, y_black;
 float x_white, y_white;
 
-int size_red = 0;
-int size_green = 0;
-int size_orange = 0;
-int size_black = 0;
-int size_white = 0;
-int size_mask_t = 0;
-int size_mask_t1 = 0;
+int size_red, size_green, size_orange, size_black, size_white, size_mask_t, size_mask_t1;
 
 // Two vectors to hold the centroids of the BLOBs
 vector<Point2f> MC(100);			// For left image
@@ -243,6 +234,7 @@ ros::Time current_time, last_time;										// creates time variables
 //........................................................End of Global Variables........................................................
 
 //..................................................................Functions.................................................................
+
 // THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "pa_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
@@ -492,8 +484,9 @@ void buoys_publish()
 			task3_pub.publish(task3_message);
 		}
 		
+		
 		// LUT made to for buoys within [7 - 15] m in front (NORTH) of the USV and [-9 - 9] m to the side of the USV (WEST OR EAST)
-		if (((PA_state == 3) || (PA_state == 5)))				// if calculated values are within expected range, put into buoy array ((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0) && 
+		if ((PA_state == 5) || (PA_state == 3))				// if calculated values are within expected range, put into buoy array  // ((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0)
 		{
 			geometry_msgs::PointStamped buoy;						//publisher message type
 			buoy.header.seq +=1;												// sequence number
@@ -506,7 +499,7 @@ void buoys_publish()
 		}
 		color_type_buoy = " ";
 	}
-	if ((PA_state == 3)||(PA_state == 5))
+	if ((PA_state == 5) || (PA_state == 3))
 	{
 		ROS_INFO("Printing array of buoys locations wrt USV -- PA");
 		ROS_INFO("true_size: %2i", true_size);
@@ -519,6 +512,7 @@ void buoys_publish()
 		NED_buoys_pub.publish(NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
 	}
 } // end of buoys_publish()
+
 
 // THIS FUNCTION: Fills out the global buoy camera image centroids, as well as the buoy IDs (color and type)
 // ACCEPTS: A counter, a color identifier, and an identifier for which camera is using the function 
@@ -583,8 +577,6 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 		// fill out the buoy shape type
 		for( int i = 0; i<contours.size(); i++ )
 		{
-			/* typers[cunter] = 'm';		// 'm' = mb_marker_buoy_					SET TO mb_marker_buoy_ IF NEITHER TYPE WAS DETECTED
-			cunter += 1;																												// Counter for the number of BLOBs */
 			cv::Rect boundRect = cv::boundingRect(contours[i]);													// Finds and saves locations of bounding rectangles
 			if ((boundRect.area() > 100) && (boundRect.width < 1000))											// Filter out small noise
 			{
@@ -829,6 +821,7 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 			size_black = 0;
 			size_white = 0;
 			size_mask_t = 0;
+			
 			// Convert original image to bgr8-type and make a copy in HSV color space
 			org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		// Converts message camera_msg into bgr8 type image
 			org_img.copyTo(background);																// Copies the original image to background image
@@ -885,8 +878,8 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 			}
 			else 
 			{
-				//if (buoy_total_L == size_mask_t)
-				//{
+				if (buoy_total_L == size_mask_t)
+				{
 					for (int i = 0; i < buoy_total_L; i++)
 					{
 						MC[i].x = u_x[i];
@@ -902,9 +895,8 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 							USVtoECEF(x_offset[i], y_offset[i], N_USV, E_USV, D_USV, PSI_USV, i);
 						}
 					}
-					
 					buoys_publish();			// publish desired identified objects
-				//}
+				}
 			}
 			
 			// NOTE: comment the following line out for the docker image, but uncomment for user display of cameras and detected buoys
@@ -931,6 +923,7 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 		try 
 		{		
 			int counter_R = 0;																										// Used for placement in arrays
+			buoy_total_R = 0;
 			size_mask_t1 = 0;
 			// Convert original image to bgr8-type and make a copy in HSV color space
 			org_img1 = cv_bridge::toCvShare(camera_msg1, "bgr8") -> image;					// Converts message camera_msg into bgr8 type image
@@ -972,7 +965,7 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 			buoy_total_R = counter_R;
 			//size_mask_t1 = size_red + size_green + size_white + size_orange + size_black;
 			
-			if (counter_R == 0) // Nothing was found
+			if (buoy_total_R == 0) // Nothing was found
 			{
 				//ROS_INFO("No Object Detected by Right Camera. {perception_array}");
 			}
