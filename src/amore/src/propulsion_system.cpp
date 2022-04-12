@@ -49,6 +49,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -235,13 +236,13 @@ void pa_state_update(const amore::state_msg::ConstPtr& msg)
 // =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if (PS_state == 1) // if the propulsion_system is ON
+	if (NA_state == 1) // if navigation_array is in standard USV NED pose converter mode 
 	{
 		// Update NED USV pose 
 		x_usv_NED = odom->pose.pose.position.x;
 		y_usv_NED = odom->pose.pose.position.y;
 		psi_NED = odom->pose.pose.orientation.z;
-	} // if (PS_state == 1)
+	}
 } // END OF pose_update()
 
 // THIS FUNCTION: Updates the goal pose for the propulsion_system given by mission_control
@@ -385,7 +386,7 @@ int main(int argc, char **argv)
 	last_time = current_time;												// sets last time to the time it is now
 
 	//sets the frequency for which the program sleeps at 100 = 1/100 second
-	ros::Rate loop_rate(4);
+	ros::Rate loop_rate(3);
 
 	//rosk::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())

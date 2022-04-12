@@ -52,6 +52,7 @@ int NA_state = 0;
 //	1 = USV NED pose converter
 //	2 = Station-Keeping NED goal pose converter
 //	3 = Wayfinding NED goal pose converter
+//	4 = Wildlife NED animals converter
 
 //	STATES CONCERNED WITH "path_planner"
 int PP_state = 0;
@@ -103,7 +104,6 @@ bool propulsion_system_initialized = false;
 bool perception_array_initialized = false;
 bool acoustic_initialized = false;
 
-
 // STATE MESSAGES AND PUBLISHERS
 amore::state_msg na_state_msg;						// "na_state" message
 ros::Publisher na_state_pub;									// "na_state" publisher
@@ -113,7 +113,7 @@ amore::state_msg ps_state_msg;						// "ps_state" message
 ros::Publisher ps_state_pub;									// "ps_state" publisher
 amore::state_msg pa_state_msg;						// "pa_state" message
 ros::Publisher pa_state_pub;									// "pa_state" publisher
-amore::state_msg a_state_msg;						// "a_state" message
+amore::state_msg a_state_msg;							// "a_state" message
 ros::Publisher a_state_pub;									// "a_state" publisher
 
 ros::Time current_time, last_time;						// creates time variables
@@ -302,7 +302,7 @@ void NED_goal_pose_published_update(const std_msgs::Bool status)
 // =============================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
 {
-	if (NA_state == 1) // if navigation_array is in standard USV Pose Conversion mode 
+	if (NA_state == 1) // if navigation_array is in standard USV NED pose converter mode 
 	{
 		// Update NED USV pose 
 		x_usv_NED = odom->pose.pose.position.x;
