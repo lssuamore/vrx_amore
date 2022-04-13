@@ -360,7 +360,7 @@ void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
 			goal_poses_quantity = 1;
 			
 			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-			ROS_INFO("GOAL POSE ACQUIRED FROM VRX TASK 1 GOAL POSE NODE. -- NA");
+			//ROS_INFO("GOAL POSE ACQUIRED FROM VRX TASK 1 GOAL POSE NODE. -- NA");
 			//ROS_DEBUG("goal_lat: %.2f", SK_goal_lat);
 			//ROS_DEBUG("goal_long: %.2f", SK_goal_long);
 		}
@@ -374,7 +374,9 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 	{
 		if (!lat_lon_goal_recieved)
 		{
-			for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+			current_time = goal->header.stamp;						// used to check to see if there are more poses in message
+			int i = 0;
+			while ((goal->poses[i].header.stamp == current_time))
 			{
 				goal_lat[i] = goal->poses[i].pose.position.latitude;
 				goal_long[i] = goal->poses[i].pose.position.longitude;
@@ -382,13 +384,14 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 				qy_goal[i] = goal->poses[i].pose.orientation.y;
 				qz_goal[i] = goal->poses[i].pose.orientation.z;
 				qw_goal[i] = goal->poses[i].pose.orientation.w;
+				i++;
 			}
 			lat_lon_goal_recieved = true;
-			goal_poses_quantity = (int)sizeof(goal->poses)/8;
+			goal_poses_quantity = i;
 			
 			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-			ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 2 WAYPOINTS NODE. -- NA");
-			ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
+			// ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 2 WAYPOINTS NODE. -- NA");
+			// ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
 		}
 	}
 } // END OF VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
@@ -396,11 +399,13 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 // THIS FUNCTION SUBSCRIBES TO "/vrx/wildlife/animals" TO GET THE WF GOAL POSES IN LAT/LONG
 void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	//if (NA_state == 4)		// if navigation_array is in Wildlife NED animals converter mode
-	//{
+	if (NA_state == 4)		// if navigation_array is in Wildlife NED animals converter mode
+	{
 		if (!lat_lon_goal_recieved)
 		{
-			for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+			current_time = goal->header.stamp;						// used to check to see if there are more poses in message
+			int i = 0;
+			while ((goal->poses[i].header.stamp == current_time))
 			{
 				Animal[i] = goal->poses[i].header.frame_id;                              //Getting which is the 1st animal
 				goal_lat[i] = goal->poses[i].pose.position.latitude;
@@ -409,19 +414,20 @@ void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 				qy_goal[i] = goal->poses[i].pose.orientation.y;
 				qz_goal[i] = goal->poses[i].pose.orientation.z;
 				qw_goal[i] = goal->poses[i].pose.orientation.w;
+				i++;
 			}
 			lat_lon_goal_recieved = true;
-			goal_poses_quantity = (int)sizeof(goal->poses)/8;
+			goal_poses_quantity = i;
 			
 			// UPDATES STATUSES TO USER ///////////////////////////////////////////////
-			ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 4 WAYPOINTS NODE. -- NA");
-			ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity);
-			/* for (int i = 0; i < (int)sizeof(goal->poses)/8; i++)
+			/* ROS_INFO("GOAL POSES ACQUIRED FROM VRX TASK 4 WAYPOINTS NODE. -- NA");
+			ROS_INFO("Quantity of goal poses: %i -- NA", goal_poses_quantity); */
+			/* for (int i = 0; i < goal_poses_quantity; i++)
 			{
 				ROS_INFO("Animal: %s		lat: %4.9f			long: %4.9f", Animal[i].c_str(), goal_lat[i], goal_long[i]);
 			} */
 		}
-	//}
+	}
 } // END OF VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 
 // THIS FUNCTION: 	Publishes the current task converted waypoints to "waypoints_ned"
@@ -441,10 +447,10 @@ void waypoints_publish()
 		point.y = NED_y_goal[i];
 		point.z = NED_psi_goal[i];
 		NED_waypoints_msg.points.push_back(point);
-		ROS_INFO("point: %i -- NA", i);
+		/* ROS_INFO("point: %i -- NA", i);
 		ROS_INFO("x: %f -- NA", NED_x_goal[i]);
 		ROS_INFO("y: %f -- NA", NED_y_goal[i]);
-		ROS_INFO("psi: %f -- NA", NED_psi_goal[i]);
+		ROS_INFO("psi: %f -- NA", NED_psi_goal[i]); */
 	}
 	waypoints_ned_pub.publish(NED_waypoints_msg);
 } // end of waypoints_publish()
@@ -469,13 +475,14 @@ void animals_publish()
 		animal.point.y = NED_y_goal[i];
 		NED_animals_msg.objects.push_back(animal);
 	}
-	ROS_INFO("Printing array of animals wrt USV -- NA");
+	/* ROS_INFO("Printing array of animals wrt USV -- NA");
 	for (int j=0; j<goal_poses_quantity; j++)
 	{
 		ROS_INFO("Animal: %s		x: %4.2f			y: %4.2f", NED_animals_msg.objects[j].header.frame_id.c_str(), NED_animals_msg.objects[j].point.x, NED_animals_msg.objects[j].point.y);
-	}
+	} */
 	NED_animals_msg.quantity = goal_poses_quantity;				// publish quantity of poses so the path planner knows
 	NED_animals_pub.publish(NED_animals_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
+	lat_lon_goal_recieved = false;
 } // end of animals_publish()
 
 //............................................................End of goal pose conversion functions............................................................
@@ -519,7 +526,7 @@ int main(int argc, char **argv)
 	last_time = ros::Time::now();        											// sets last time to the time it is now
 	  
 	// Set the loop sleep rate
-	ros::Rate loop_rate(100);															// {Hz} GPS update rate: 20, IMU update rate: 100
+	ros::Rate loop_rate(100);															// {Hz} GPS update rate: 20, IMU update rate: 100										// WAS 100
 
 	while(ros::ok())
 	{		
@@ -564,6 +571,11 @@ int main(int argc, char **argv)
 		
 			// publish the NED USV state
 			nav_ned_pub.publish(nav_ned_msg);
+			if (PP_state == 4)
+			{
+				goal_waypoints_publish_status.data = false;
+				lat_lon_goal_recieved = false;
+			}
 		} // if USV Pose Conversion mode
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF STANDARD USV POSE CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
@@ -637,19 +649,24 @@ int main(int argc, char **argv)
 		
 		if (trigger_goal_publish)
 		{
-			ROS_INFO("PUBLISHING CONVERTED GOAL WAYPOINTS -- NA");
+			//ROS_INFO("PUBLISHING CONVERTED GOAL WAYPOINTS -- NA");
 			if ((PP_state == 1) || (PP_state == 2))
 			{
-				waypoints_publish(); //waypoints_ned_pub.publish(NED_waypoints_msg);		// 
+				waypoints_publish(); //waypoints_ned_pub.publish(NED_waypoints_msg);
 			}
 			else if (PP_state == 4)
 			{
-				animals_publish(); //NED_animals_pub.publish(NED_animals_msg);				// 
+				animals_publish(); //NED_animals_pub.publish(NED_animals_msg);
 			}
 			goal_waypoints_publish_status.data = true;
 			// reset for next times conversion
 			lat_lon_goal_recieved = false;
 			NED_waypoints_converted = false;
+			
+			if (PP_state == 4)
+			{
+				trigger_goal_publish = false;						// NEW
+			}
 		}
 		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END OF WF GOAL POSES CONVERSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		

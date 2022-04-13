@@ -462,14 +462,14 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)						// NOTE: To simpli
 		// 	INTEGRATED TASK CODES FOLLOW
 		else if (msg->name == "wildlife")
 		{
-			//NA_state = 1;												// USV NED pose converter
 			if ((msg->state == "ready") || (msg->state == "running"))
 			{
 				PP_state = 4;											// Task 4: Wildlife Encounter and Avoid
-				if (!usv_NED_pose_updated)				// if the goal pose has been converted from lat/long and published by navigation_array
+				//if (!usv_NED_pose_updated)				// if the goal pose has been converted from lat/long and published by navigation_array				// COMMENTED OUT THIS
+				if ((NA_state == 4) && (!NED_waypoints_published))																																	// NEW
 				{
 					NA_state = 1;										// USV NED pose converter
-					NED_waypoints_published = false;	
+					//NED_waypoints_published = false;	
 				}
 				else
 				{
@@ -658,7 +658,7 @@ int main(int argc, char **argv)
 	last_time = current_time;								// sets last time to the time it is now
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(100);
+	ros::Rate loop_rate(100);																						// WAS 100
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())

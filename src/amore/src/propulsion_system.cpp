@@ -164,7 +164,7 @@ void PROPULSION_SYSTEM_inspector()
 {
 	current_time = ros::Time::now();   		// sets current_time to the time it is now
 	loop_count += 1;									// increment loop counter
-	if (loop_count > 5)
+	if (loop_count > 3)
 	{
 		system_initialized = true;
 		//ROS_INFO("propulsion_system_initialized -- PS");
