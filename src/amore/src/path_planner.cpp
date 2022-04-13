@@ -97,8 +97,9 @@ float x_animals_NED[10], y_animals_NED[10];	// arrays to hold animal locations
 
 bool NA_goal_recieved = false;							// false means NED goal poses have not been acquired from navigation_array
 bool E_reached = false;        									// false means the last point has not been reached
+bool calculations_distance = false;						// false means the distances between the usv and the turtle and platypus have not been calculated
 
-float e_xy_allowed = 0.4;       								// positional error tolerance threshold; NOTE: make as small as possible
+float e_xy_allowed = 1.0;       								// positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = 0.4;      									// heading error tolerance threshold; NOTE: make as small as possible
 
 float x_c_NED, y_c_NED, psi_c_NED; 				// crocodile position and heading (pose) in NED
@@ -405,6 +406,7 @@ void animal_distances_calculate()
 	dt_USV = sqrt(pow(x_usv_NED - x_t_NED, 2.0)+pow(y_usv_NED - y_t_NED, 2.0));							//Distance from USV to turtle
 	dt_c = sqrt(pow(x_t_NED - x_c_NED, 2.0)+pow(y_t_NED - y_c_NED, 2.0));										//Distance from turtle to crocodile
 	dp_c  = sqrt(pow(x_p_NED - x_c_NED, 2.0)+pow(y_p_NED - y_c_NED, 2.0));									//Distance from platypus to crocodile
+	calculations_distance = true;
 	ROS_INFO("dp_USV: %4.2f			dt_USV: %4.2f", dp_USV, dt_USV);
 	ROS_INFO("x_USV: %4.2f			y_USV: %4.2f", x_usv_NED, y_usv_NED);
 } // end of animal_distances_calculate()
@@ -476,7 +478,10 @@ void update_animal_path()
 		y_plat_g[8] = y_p_NED;
 		psi_plat_g[8] = 90.0 * (PI/180);
 		
-		animal_distances_calculate();			// updates distances from USV to each animal 
+		if (!calculations_distance)
+		{
+			animal_distances_calculate();			// updates distances from USV to each animal 
+		}
 		if (dt_USV <= dp_USV)
 		{
 			for (int i=0; i<9; i++)
@@ -677,7 +682,7 @@ int main(int argc, char **argv)
 	last_time = current_time;										// sets last time to the current_time
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(50);
+	ros::Rate loop_rate(50);																												// WAS 50
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
@@ -740,7 +745,7 @@ int main(int argc, char **argv)
 					if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))
 					{
 						point += 1;
-						ROS_INFO("Point %i reached. --MC", point);
+						ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
 						if (point==goal_poses)
 						{
 						  E_reached = true;
@@ -751,8 +756,11 @@ int main(int argc, char **argv)
 					if (E_reached)		// reset and go to points again once last point has been reached with a smaller tolerance threshold
 					{
 						point = 0;
+						//e_xy_allowed = e_xy_allowed - 0.1;
 						e_xy_allowed /= 2;
-						e_psi_allowed /= 2;
+						
+						e_psi_allowed = e_psi_allowed - 0.1;
+						//e_psi_allowed /= 2;
 						E_reached = false;
 					}
 				} // if (PP_state == 2)
@@ -773,7 +781,7 @@ int main(int argc, char **argv)
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 						e_psi = psi_goal[point] - psi_NED;
 
-						if ((e_xy < 1.2) && (e_psi < 0.6) && (!E_reached))
+						if ((e_xy < 1.4) && (e_psi < 0.4) && (!E_reached))						// WAS 1.2 and 0.6
 						{
 							point += 1;
 							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
@@ -793,10 +801,12 @@ int main(int argc, char **argv)
 						}
 					} // if ((NA_state == 1) && (PS_state == 1))
 					current_goal_pose_publish();
+					calculations_done = false;
 				}
 				else
 				{
 					update_animal_path();																// this function will generate the updated array of poses to accomplish task
+					
 					//goal_pose_publish_status.data = false;
 				}
 			//}
