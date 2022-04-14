@@ -781,7 +781,7 @@ int main(int argc, char **argv)
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));                            // calculate magnitude of positional error
 						e_psi = psi_goal[point] - psi_NED;
 
-						if ((e_xy < 1.4) && (e_psi < 0.4) && (!E_reached))						// WAS 1.2 and 0.6
+						if ((e_xy < 1.4) && (e_psi < 0.4) && (!E_reached))						// WAS 1.2 and 0.6				1.4	0.4
 						{
 							point += 1;
 							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses);
