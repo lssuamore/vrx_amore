@@ -249,7 +249,7 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 // =============================================================================
 void goal_pose_update(const amore::usv_pose_msg::ConstPtr& goal) 
 {
-	if (PS_state == 1)		// if the propulsion_system is ON
+	if ((PS_state == 1) && (NA_state == 1))		// if the propulsion_system is ON
 	{	// update NED goal position and orientation
 		x_goal = goal->position.x;		
 		y_goal = goal->position.y;
