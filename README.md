@@ -27,7 +27,26 @@ Step 3: Delete the devel and build folders from the vrx_amore repository downloa
 ```
 catkin_make
 ```
-
+After catkin_make, update amore folder CMakelist by uncommenting the commented out programs (add_executable and target_link_libraries). If CMake error below occurs:
+```
+CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:75 (find_package):
+  Could not find a package configuration file provided by ""
+  with any of the following names:
+```
+Download the appropriate packages by finding the download on Google usually in the form:
+```
+sudo apt install ros-noetic-""
+```
+Download the following libraries if necessary...
+```
+sudo apt-get install ros-noetic-xacro
+sudo apt-get install ros-noetic-gazebo_ros
+sudo apt-get install ros-noetic-geographic-msgs
+sudo apt-get install ros-noetic-cv-bridge
+sudo apt-get install ros-noetic-image-transport
+sudo apt-get install ros-noetic-pcl-ros
+sudo apt-get install ros-noetic-tf2-geometry-msgs
+```
 ## Update Local Machine with Git Repository
 Step 1: Change local directory to vrx_amore.
 ```
