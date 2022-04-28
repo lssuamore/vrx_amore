@@ -8,6 +8,8 @@ username: ```lssuamore```
 password: ```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```
 
 ## Install Git Repository to Local Machine
+NOTE: Beware that this repository was made to interface with the osrf/vrx git repository, which was made to work with ROS NOETIC. ROS NOETIC is meant to be used with Ubuntu 20.04. Go to this link to follow tuturials for setiing up and working with the vrx simulation: https://github.com/osrf/vrx/wiki/tutorials
+
 Step 1: ```git clone``` the vrx_amore repository
 ```
 git clone https://github.com/lssuamore/vrx_amore.git
