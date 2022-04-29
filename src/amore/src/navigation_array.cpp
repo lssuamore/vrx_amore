@@ -1,19 +1,19 @@
-// Filename:                     	new_gps_imu.cpp
-// Creation Date:					01/22/2022
-// Last Revision Date:			03/24/2022
-// Author(s) [email]:				Taylor Lamorie [tlamorie@lssu.edu]
+// Filename:			navigation_array.cpp
+// Creation Date:		01/22/2022
+// Last Revision Date:		03/24/2022
+// Author(s) [email]:		Taylor Lamorie [tlamorie@lssu.edu]
 // Revisor(s) {Date}:        	Shaede Perzanowski [sperzanowski1@lssu.edu] {01/22/2022}
-//											Brad Hacker [bhacker@lssu.edu] {03/24/2022}
+//				Brad Hacker [bhacker@lssu.edu] {03/24/2022}
 // Organization/Institution:	Lake Superior State University
 
-//...................................................About new_gps_imu.cpp.....................................................................
+//...................................................About navigation_array.cpp.....................................................................
 // Used to interact with the geonav_transform package. This package is used to convert lat/long coordinates
 // to a NED (North-x East-y Down-z) coordinate system that is more user friendly to work with. This code
 // subscribes to all sensors to get information to fill message needed for geonav_transform package. It's purposes 
 // are to provide the system with NED pose information, as well as to subscribe to task goal poses and convert
 // them to NED to be published for planner to subscribe to.
 
-// Inputs and Outputs of the new_gps_imu.cpp file
+// Inputs and Outputs of the navigation_array.cpp file
 //				Inputs: vrx/task/info, GPS and IMU sensor data, task 1 and 2 goal poses
 //				Outputs: USV_NED pose, WF_poses, SK_pose
 
