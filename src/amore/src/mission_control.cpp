@@ -33,7 +33,7 @@
 #include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
 #include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
 #include "amore/NED_waypoints.h"										// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
-#include "geometry_msgs/PoseArray.h"			// message type used to get buoy locations from navigation_array
+//#include "geometry_msgs/PoseArray.h"			// message type used to get buoy locations from navigation_array
 //...........................................End of Included Libraries and Message Types....................................
 
 
