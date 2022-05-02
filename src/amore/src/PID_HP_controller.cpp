@@ -1,9 +1,9 @@
 //  Filename:						        PID_HP_controller.cpp
 //  Creation Date:						12/4/2021
-//  Last Revision Date:                
+//  Last Revision Date:				4/15/2022
 //  Author(s) [email]:					Brad Hacker [bhacker@lssu.edu]
 //                                                  Shaede Perzanowksi [sperzanowski1@lssu.edu]
-//  Revisor(s) [Revision Date]:    
+//  Revisor(s) [Revision Date]:
 //  Organization/Institution:			Lake Superior State University
 // 
 // ...........................PID_HP_controller.cpp.......................
@@ -40,7 +40,6 @@
 
 //..............................................................Global Variables............................................................
 int loop_count = 0;                                    			// loop counter, first 10 loops used to intitialize subscribers
-//float duration = 1000;										// amount of time to finish the path 
 float dt = 0.25;														// [s] used for differential term
 
 float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in NED
@@ -48,9 +47,6 @@ float x_usv_NED, y_usv_NED, psi_NED; 		// vehicle position and heading (pose) in
 int PS_state = 0;      											// 0 = On Standby, 1 = LL controller ON
 
 float x_goal, y_goal, psi_goal;							// [m, m, radians] desired position and heading
-/* // harcoded goal
-float x_goal = 29.85;                  // this variable is updated as the WAM-V x goal position through the PID_pub
-float y_goal = 8.975;                  // this variable is updated as the WAM-V y goal position through the PID_pub */
 
 float e_x, e_y, e_xy, e_psi;								// current errors between goal pose and usv pose
 

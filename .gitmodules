@@ -1,0 +1,3 @@
+[submodule "vrx"]
+	path = src/vrx
+	url = https://github.com/osrf/vrx.git

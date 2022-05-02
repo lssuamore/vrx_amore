@@ -115,8 +115,6 @@ vrx_gazebo/Task.h
 /home/brad/vrx_amore/src/amore/src/vrx_gazebo/Task.h
 amore/NED_waypoints.h
 /home/brad/vrx_amore/src/amore/src/amore/NED_waypoints.h
-geometry_msgs/PoseArray.h
-/home/brad/vrx_amore/src/amore/src/geometry_msgs/PoseArray.h
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string
@@ -152,26 +150,6 @@ ros/message_operations.h
 geometry_msgs/Point.h
 -
 geometry_msgs/Quaternion.h
--
-
-/opt/ros/noetic/include/geometry_msgs/PoseArray.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-std_msgs/Header.h
--
-geometry_msgs/Pose.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/PoseWithCovariance.h
