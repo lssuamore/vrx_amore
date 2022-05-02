@@ -18,14 +18,14 @@ Step 2: change directory to vrx_amore
 ```
 cd vrx_amore/
 ```
-Initialize and update submodules. If submodule commands don't work, delete empty folders and git clone the correct packages from github in their place. CURRENTLY, THERE ARE NO SUBMODULES AND THE NEXT TWO COMMANDS CAN BE SKIPPED.
+Initialize and update submodules with the following two commands. If submodule commands don't work, delete empty folders and git clone the correct packages from github in their place.
 ```
 git submodule init
 ```
 ```
 git submodule update
 ```
-Step 3: Delete the devel and build folders from the vrx_amore repository downloaded to local machine through ```git clone```
+This step should be able to be skipped now! Step 3: Delete the devel and build folders from the vrx_amore repository downloaded to local machine through ```git clone```
 ```
 catkin_make
 ```
