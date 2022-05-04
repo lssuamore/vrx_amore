@@ -1,14 +1,13 @@
 # vrx_amore Repository introduction
-This repository holds all of the codes and necessary packages for Team AMORE's VRX solution. The setup of the code uses one ROS .launch file to launch the geonav_transform package, and 5 .cpp executables. The geonav_transform package is used for converting ECEF latitude longitude coordinates to a local NED fixed frame to work out of. The 5 .cpp executables include mission_control, path_planner, navigation_array, perception_array, and propulsion_system. The mission_control monitors the state of the current VRX task and sets the states of the other executables. path_planner was designed to handle computing trajectories and feeding them to the propulsion_system. navigation_array publishes ECEF states to nav_odom so that geonav_transform is able to subscribe and publish its conversion to a local ENU frame to "geonav_odom". navigation_array subscribes to all the VRX task topics because the units of objects and poses given by VRX are in ECEF units and need conversion to the local NED working frame. All conversions happen in navigation_array because conversions have to be done by publishing to the "nav_odom" node and this can't be done from multiple executables unless perhaps different namespaces are used. perception_array uses OpenCV to do image processing through the use of two singular lense cameras placed on the USV payload tray. propulsion_system handles outputting the angles and thrusts to the motors. Currently, the propulsion_system is only using a station-keeping controller designed for a dual-azimuthing controller. 
+This repository holds all of the codes and necessary packages for Team AMORE's VRX solution. The setup of the code uses one ROS .launch file to launch the geonav_transform package, and 5 .cpp executables. The geonav_transform package is used for converting ECEF latitude longitude coordinates to a local ENU fixed frame that allows easy conversion to a NED frame to work out of. The 5 .cpp executables include mission_control, path_planner, navigation_array, perception_array, and propulsion_system. The mission_control monitors the state of the current VRX task and sets the states of the other executables based on the overall system status. path_planner was designed to handle computing trajectories and feeding them to the propulsion_system. navigation_array publishes ECEF states to nav_odom so that geonav_transform is able to subscribe and publish its conversion to a local ENU frame to "geonav_odom". navigation_array then converts the ENU pose to a NED pose. navigation_array also subscribes to all the VRX task topics that give important positions in ECEF because conversions have to be done by publishing to the "nav_odom" node and this can't be done from multiple executables unless perhaps different namespaces are used for each executable. perception_array uses OpenCV to do image processing through the use of two singular lense cameras placed on the USV payload tray. propulsion_system handles outputting the angles and thrusts to the motors. Currently, the propulsion_system is only using a PID heading position dual-azimuthing station-keeping controller. In the future, it is imagined to have a LL_state that tells which type of controller to use. Different options could use PID control theory to calculate control efforts for either heading position or heading speed and then use allocation to convert these efforts into thruster angles and thrust outputs dependent on the drive configuration. Possible drive configurations include differential, dual-azimuthing, and Ackermann.
 
 For permission purposes when installing, pulling, and pushing code to this repository:
-
 username: ```lssuamore```
-
 password: ```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```
 
+
 ## Install Git Repository to Local Machine
-NOTE: Beware that this repository was made to interface with the osrf/vrx git repository, which was made to work with ROS NOETIC. ROS NOETIC is meant to be used with Ubuntu 20.04. Go to this link to follow tuturials for setiing up and working with the vrx simulation: https://github.com/osrf/vrx/wiki/tutorials
+NOTE: Beware that this repository was made to interface with the osrf/vrx git repository, which was made to work with ROS NOETIC. ROS NOETIC is meant to be used with Ubuntu 20.04. Go to this link to follow tuturials for setiing up your host machine for working with the vrx simulation: https://github.com/osrf/vrx/wiki/tutorials. After setting up your machine with ROS NOETIC, Gazebo, and the vrx package, you are ready to install the vrx_amore solution.
 
 Step 1: ```git clone``` the vrx_amore repository
 ```
@@ -25,11 +24,17 @@ git submodule init
 ```
 git submodule update
 ```
-This step should be able to be skipped now! Step 3: Delete the devel and build folders from the vrx_amore repository downloaded to local machine through ```git clone```
+Step 3: Delete the devel and build folders from the vrx_amore repository cloned to local machine through ```git clone``` if they came through while cloning.
+
+Before catkin_make, update amore package CMakeLists.txt by commenting out all the programs (add_executable and target_link_libraries). This will allow the first catkin_make to build all the amore message types so that errors while catkin_makeing are avoided.
 ```
 catkin_make
 ```
-After catkin_make, update amore folder CMakelist by uncommenting the commented out programs (add_executable and target_link_libraries). If CMake error below occurs:
+After catkin_make, update amore package CMakeLists.txt by uncommenting all the programs (add_executable and target_link_libraries). This will allow the next catkin_make to build all the programs then.
+```
+catkin_make
+```
+While using catkin_make, if the following error comes up:
 ```
 CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:75 (find_package):
   Could not find a package configuration file provided by ""
@@ -37,24 +42,37 @@ CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:75 (find_pa
 ```
 Download the appropriate packages by finding the download on Google usually in the form:
 ```
-sudo apt install ros-noetic-""
+sudo apt install ros-noetic-<>
 ```
 Download the following libraries if necessary...
 ```
 sudo apt-get install ros-noetic-xacro
+```
+```
 sudo apt-get install ros-noetic-gazebo_ros
+```
+```
 sudo apt-get install ros-noetic-geographic-msgs
+```
+```
 sudo apt-get install ros-noetic-cv-bridge
+```
+```
 sudo apt-get install ros-noetic-image-transport
+```
+```
 sudo apt-get install ros-noetic-pcl-ros
+```
+```
 sudo apt-get install ros-noetic-tf2-geometry-msgs
 ```
+
 ## Update Local Machine with Git Repository
 Step 1: Change local directory to vrx_amore.
 ```
 cd vrx_amore/
 ```
-Step 2: Make sure you are on the master branch to ensure you pull the master code.
+Step 2: Make sure you are on the branch master using ```git status``` to ensure you pull the master code. If you are not on the branch master, run the following:
 ```
 git checkout master
 ```
