@@ -1,10 +1,10 @@
 
 "use strict";
 
-let BallShooter = require('./BallShooter.js')
 let ColorSequence = require('./ColorSequence.js')
+let BallShooter = require('./BallShooter.js')
 
 module.exports = {
-  BallShooter: BallShooter,
   ColorSequence: ColorSequence,
+  BallShooter: BallShooter,
 };

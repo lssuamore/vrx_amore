@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ball_shooter_plugin_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/ball_shooter_plugin_autogen.dir/ParseCache.txt"
   "ball_shooter_plugin_autogen"
-  "/home/brad/vrx_amore/devel/lib/libball_shooter_plugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libball_shooter_plugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libball_shooter_plugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libball_shooter_plugin.so"
   "CMakeFiles/ball_shooter_plugin.dir/ball_shooter_plugin_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/ball_shooter_plugin.dir/src/ball_shooter_plugin.cc.o"
 )

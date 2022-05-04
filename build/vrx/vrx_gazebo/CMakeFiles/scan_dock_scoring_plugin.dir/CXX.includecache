@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/ColorSequence.h
+/home/taylor/vrx_amore/build/vrx/vrx_gazebo/scan_dock_scoring_plugin_autogen/mocs_compilation.cpp
+
+/home/taylor/vrx_amore/devel/include/vrx_gazebo/ColorSequence.h
 ros/service_traits.h
 -
 vrx_gazebo/ColorSequenceRequest.h
@@ -14,7 +16,7 @@ vrx_gazebo/ColorSequenceRequest.h
 vrx_gazebo/ColorSequenceResponse.h
 -
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/ColorSequenceRequest.h
+/home/taylor/vrx_amore/devel/include/vrx_gazebo/ColorSequenceRequest.h
 string
 -
 vector
@@ -30,7 +32,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/ColorSequenceResponse.h
+/home/taylor/vrx_amore/devel/include/vrx_gazebo/ColorSequenceResponse.h
 string
 -
 vector
@@ -46,7 +48,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/Contact.h
+/home/taylor/vrx_amore/devel/include/vrx_gazebo/Contact.h
 string
 -
 vector
@@ -64,7 +66,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/brad/vrx_amore/devel/include/vrx_gazebo/Task.h
+/home/taylor/vrx_amore/devel/include/vrx_gazebo/Task.h
 string
 -
 vector
@@ -80,7 +82,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/scan_dock_scoring_plugin.hh
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/scan_dock_scoring_plugin.hh
 ros/ros.h
 -
 std_msgs/String.h
@@ -102,11 +104,11 @@ ignition/transport/Node.hh
 sdf/sdf.hh
 -
 vrx_gazebo/ColorSequence.h
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/ColorSequence.h
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/ColorSequence.h
 vrx_gazebo/scoring_plugin.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/scoring_plugin.hh
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/scoring_plugin.hh
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
 ros/ros.h
 -
 gazebo/msgs/gz_string.pb.h
@@ -132,11 +134,11 @@ sdf/sdf.hh
 gazebo/transport/transport.hh
 -
 vrx_gazebo/Task.h
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Task.h
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Task.h
 vrx_gazebo/Contact.h
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Contact.h
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/vrx_gazebo/Contact.h
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/scan_dock_scoring_plugin.cc
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/scan_dock_scoring_plugin.cc
 algorithm
 -
 cmath
@@ -144,7 +146,7 @@ cmath
 gazebo/common/Console.hh
 -
 vrx_gazebo/scan_dock_scoring_plugin.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/scan_dock_scoring_plugin.hh
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/scan_dock_scoring_plugin.hh
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h

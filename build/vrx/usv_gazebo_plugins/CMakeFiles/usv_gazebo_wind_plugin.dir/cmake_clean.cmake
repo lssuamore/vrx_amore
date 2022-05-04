@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/libusv_gazebo_wind_plugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libusv_gazebo_wind_plugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libusv_gazebo_wind_plugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libusv_gazebo_wind_plugin.so"
   "CMakeFiles/usv_gazebo_wind_plugin.dir/src/usv_gazebo_wind_plugin.cc.o"
 )
 

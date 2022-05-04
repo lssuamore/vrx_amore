@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
+  "/home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
   "CMakeFiles/wave_gazebo__xacro_auto_generate"
   "worlds/ocean.world"
   "worlds/ocean_buoys.world"

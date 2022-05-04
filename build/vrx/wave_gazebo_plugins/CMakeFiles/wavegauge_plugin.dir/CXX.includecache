@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/Wavefield.hh
 gazebo/gazebo.hh
 -
 gazebo/common/common.hh
@@ -22,7 +22,7 @@ memory
 vector
 -
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldEntity.hh
 memory
 -
 string
@@ -32,7 +32,7 @@ gazebo/gazebo.hh
 gazebo/physics/Base.hh
 -
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldModelPlugin.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/WavefieldModelPlugin.hh
 memory
 -
 string
@@ -44,7 +44,7 @@ gazebo/common/Plugin.hh
 gazebo/physics/physics.hh
 -
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/wavegauge_plugin.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/include/wave_gazebo_plugins/wavegauge_plugin.hh
 map
 -
 string
@@ -62,7 +62,7 @@ ignition/math/Vector3.hh
 sdf/sdf.hh
 -
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wavegauge_plugin.cc
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/src/wavegauge_plugin.cc
 functional
 -
 string
@@ -74,13 +74,13 @@ gazebo/common/Events.hh
 ignition/math/Pose3.hh
 -
 wave_gazebo_plugins/wavegauge_plugin.hh
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/wavegauge_plugin.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/wavegauge_plugin.hh
 wave_gazebo_plugins/Wavefield.hh
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/Wavefield.hh
 wave_gazebo_plugins/WavefieldEntity.hh
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldEntity.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldEntity.hh
 wave_gazebo_plugins/WavefieldModelPlugin.hh
-/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldModelPlugin.hh
+/home/taylor/vrx_amore/src/vrx/wave_gazebo_plugins/src/wave_gazebo_plugins/WavefieldModelPlugin.hh
 
 /usr/include/gazebo-11/gazebo/Master.hh
 string

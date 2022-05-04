@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/lib/amore/acoustics"
-  "/home/brad/vrx_amore/devel/lib/amore/acoustics.pdb"
+  "/home/taylor/vrx_amore/devel/lib/amore/acoustics"
+  "/home/taylor/vrx_amore/devel/lib/amore/acoustics.pdb"
   "CMakeFiles/acoustics.dir/src/acoustics.cpp.o"
 )
 

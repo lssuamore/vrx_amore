@@ -67,14 +67,14 @@ set(wamv_description_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(wamv_description_SOURCE_PREFIX /home/brad/vrx_amore/src/vrx/wamv_description)
-  set(wamv_description_DEVEL_PREFIX /home/brad/vrx_amore/devel)
+  set(wamv_description_SOURCE_PREFIX /home/taylor/vrx_amore/src/vrx/wamv_description)
+  set(wamv_description_DEVEL_PREFIX /home/taylor/vrx_amore/devel)
   set(wamv_description_INSTALL_PREFIX "")
   set(wamv_description_PREFIX ${wamv_description_DEVEL_PREFIX})
 else()
   set(wamv_description_SOURCE_PREFIX "")
   set(wamv_description_DEVEL_PREFIX "")
-  set(wamv_description_INSTALL_PREFIX /home/brad/vrx_amore/install)
+  set(wamv_description_INSTALL_PREFIX /home/taylor/vrx_amore/install)
   set(wamv_description_PREFIX ${wamv_description_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/brad/vrx_amore/install/lib;/home/brad/vrx_amore/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/taylor/vrx_amore/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

@@ -3,10 +3,10 @@
 
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/scoring_plugin_autogen/mocs_compilation.cpp.o: vrx/vrx_gazebo/scoring_plugin_autogen/mocs_compilation.cpp
 
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/vrx_amore/devel/include/vrx_gazebo/Contact.h
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/vrx_amore/devel/include/vrx_gazebo/Task.h
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
-vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/brad/vrx_amore/src/vrx/vrx_gazebo/src/scoring_plugin.cc
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/vrx_amore/devel/include/vrx_gazebo/Contact.h
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/vrx_amore/devel/include/vrx_gazebo/Task.h
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/scoring_plugin.hh
+vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/scoring_plugin.cc
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /opt/ros/noetic/include/ros/advertise_options.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /opt/ros/noetic/include/ros/advertise_service_options.h
 vrx/vrx_gazebo/CMakeFiles/scoring_plugin.dir/src/scoring_plugin.cc.o: /opt/ros/noetic/include/ros/assert.h

@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/placard_plugin.hh
+/home/taylor/vrx_amore/build/vrx/vrx_gazebo/placard_plugin_autogen/mocs_compilation.cpp
+
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/placard_plugin.hh
 ros/ros.h
 -
 std_msgs/ColorRGBA.h
@@ -32,11 +34,11 @@ gazebo/gazebo.hh
 sdf/sdf.hh
 -
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/placard_plugin.cc
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/placard_plugin.cc
 gazebo/rendering/Scene.hh
 -
 vrx_gazebo/placard_plugin.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/placard_plugin.hh
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/placard_plugin.hh
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h

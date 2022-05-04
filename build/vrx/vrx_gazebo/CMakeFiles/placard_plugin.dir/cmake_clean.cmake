@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/placard_plugin_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/placard_plugin_autogen.dir/ParseCache.txt"
   "placard_plugin_autogen"
-  "/home/brad/vrx_amore/devel/lib/libplacard_plugin.pdb"
-  "/home/brad/vrx_amore/devel/lib/libplacard_plugin.so"
+  "/home/taylor/vrx_amore/devel/lib/libplacard_plugin.pdb"
+  "/home/taylor/vrx_amore/devel/lib/libplacard_plugin.so"
   "CMakeFiles/placard_plugin.dir/placard_plugin_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/placard_plugin.dir/src/placard_plugin.cc.o"
 )

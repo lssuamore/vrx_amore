@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/usv_msgs/msg/RangeBearing.js"
+  "/home/taylor/vrx_amore/devel/share/gennodejs/ros/usv_msgs/msg/RangeBearing.js"
   "CMakeFiles/usv_msgs_generate_messages_nodejs"
 )
 

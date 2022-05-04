@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
-  "/home/brad/vrx_amore/devel/include/amore/NED_acoustic.h"
-  "/home/brad/vrx_amore/devel/include/amore/NED_objects.h"
-  "/home/brad/vrx_amore/devel/include/amore/NED_waypoints.h"
-  "/home/brad/vrx_amore/devel/include/amore/state_msg.h"
-  "/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h"
+  "/home/taylor/vrx_amore/devel/include/amore/NED_acoustic.h"
+  "/home/taylor/vrx_amore/devel/include/amore/NED_objects.h"
+  "/home/taylor/vrx_amore/devel/include/amore/NED_waypoints.h"
+  "/home/taylor/vrx_amore/devel/include/amore/state_msg.h"
+  "/home/taylor/vrx_amore/devel/include/amore/usv_pose_msg.h"
   "CMakeFiles/amore_generate_messages_cpp"
 )
 

@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/ball_shooter_plugin.hh
+/home/taylor/vrx_amore/build/vrx/vrx_gazebo/ball_shooter_plugin_autogen/mocs_compilation.cpp
+
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/include/vrx_gazebo/ball_shooter_plugin.hh
 ros/ros.h
 -
 std_msgs/Empty.h
@@ -20,7 +22,7 @@ gazebo/gazebo.hh
 sdf/sdf.hh
 -
 
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/ball_shooter_plugin.cc
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/ball_shooter_plugin.cc
 string
 -
 gazebo/physics/Link.hh
@@ -32,7 +34,7 @@ gazebo/physics/PhysicsIface.hh
 gazebo/physics/World.hh
 -
 vrx_gazebo/ball_shooter_plugin.hh
-/home/brad/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/ball_shooter_plugin.hh
+/home/taylor/vrx_amore/src/vrx/vrx_gazebo/src/vrx_gazebo/ball_shooter_plugin.hh
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h

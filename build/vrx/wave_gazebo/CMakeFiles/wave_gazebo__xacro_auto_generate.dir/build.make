@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/brad/vrx_amore/src
+CMAKE_SOURCE_DIR = /home/taylor/vrx_amore/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
+CMAKE_BINARY_DIR = /home/taylor/vrx_amore/build
 
 # Utility rule file for wave_gazebo__xacro_auto_generate.
 
@@ -58,30 +58,30 @@ vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/wor
 vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/worlds/ocean_wamv.world
 
 
-vrx/wave_gazebo/worlds/ocean.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/worlds/ocean.world.xacro
-vrx/wave_gazebo/worlds/ocean.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "xacro: generating worlds/ocean.world from worlds/ocean.world.xacro"
-	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wave_gazebo/worlds/ocean.world worlds/ocean.world.xacro
+vrx/wave_gazebo/worlds/ocean.world: /home/taylor/vrx_amore/src/vrx/wave_gazebo/worlds/ocean.world.xacro
+vrx/wave_gazebo/worlds/ocean.world: /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "xacro: generating worlds/ocean.world from worlds/ocean.world.xacro"
+	cd /home/taylor/vrx_amore/src/vrx/wave_gazebo && /home/taylor/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/taylor/vrx_amore/build/vrx/wave_gazebo/worlds/ocean.world worlds/ocean.world.xacro
 
-vrx/wave_gazebo/worlds/ocean_buoys.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/worlds/ocean_buoys.world.xacro
-vrx/wave_gazebo/worlds/ocean_buoys.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "xacro: generating worlds/ocean_buoys.world from worlds/ocean_buoys.world.xacro"
-	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wave_gazebo/worlds/ocean_buoys.world worlds/ocean_buoys.world.xacro
+vrx/wave_gazebo/worlds/ocean_buoys.world: /home/taylor/vrx_amore/src/vrx/wave_gazebo/worlds/ocean_buoys.world.xacro
+vrx/wave_gazebo/worlds/ocean_buoys.world: /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "xacro: generating worlds/ocean_buoys.world from worlds/ocean_buoys.world.xacro"
+	cd /home/taylor/vrx_amore/src/vrx/wave_gazebo && /home/taylor/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/taylor/vrx_amore/build/vrx/wave_gazebo/worlds/ocean_buoys.world worlds/ocean_buoys.world.xacro
 
-vrx/wave_gazebo/worlds/ocean_wamv.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/worlds/ocean_wamv.world.xacro
-vrx/wave_gazebo/worlds/ocean_wamv.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "xacro: generating worlds/ocean_wamv.world from worlds/ocean_wamv.world.xacro"
-	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wave_gazebo/worlds/ocean_wamv.world worlds/ocean_wamv.world.xacro
+vrx/wave_gazebo/worlds/ocean_wamv.world: /home/taylor/vrx_amore/src/vrx/wave_gazebo/worlds/ocean_wamv.world.xacro
+vrx/wave_gazebo/worlds/ocean_wamv.world: /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "xacro: generating worlds/ocean_wamv.world from worlds/ocean_wamv.world.xacro"
+	cd /home/taylor/vrx_amore/src/vrx/wave_gazebo && /home/taylor/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/taylor/vrx_amore/build/vrx/wave_gazebo/worlds/ocean_wamv.world worlds/ocean_wamv.world.xacro
 
-/home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro.erb
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
-	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /usr/bin/erb world_models/ocean_waves/model.xacro.erb > /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+/home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro: /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/taylor/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
+	cd /home/taylor/vrx_amore/src/vrx/wave_gazebo && /usr/bin/erb world_models/ocean_waves/model.xacro.erb > /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 
 wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate
 wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/worlds/ocean.world
 wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/worlds/ocean_buoys.world
 wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/worlds/ocean_wamv.world
-wave_gazebo__xacro_auto_generate: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+wave_gazebo__xacro_auto_generate: /home/taylor/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 wave_gazebo__xacro_auto_generate: vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/build.make
 
 .PHONY : wave_gazebo__xacro_auto_generate
@@ -92,10 +92,10 @@ vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/build: wave_gaze
 .PHONY : vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/build
 
 vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/clean:
-	cd /home/brad/vrx_amore/build/vrx/wave_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/wave_gazebo__xacro_auto_generate.dir/cmake_clean.cmake
+	cd /home/taylor/vrx_amore/build/vrx/wave_gazebo && $(CMAKE_COMMAND) -P CMakeFiles/wave_gazebo__xacro_auto_generate.dir/cmake_clean.cmake
 .PHONY : vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/clean
 
 vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/depend:
-	cd /home/brad/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/brad/vrx_amore/src /home/brad/vrx_amore/src/vrx/wave_gazebo /home/brad/vrx_amore/build /home/brad/vrx_amore/build/vrx/wave_gazebo /home/brad/vrx_amore/build/vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/taylor/vrx_amore/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/taylor/vrx_amore/src /home/taylor/vrx_amore/src/vrx/wave_gazebo /home/taylor/vrx_amore/build /home/taylor/vrx_amore/build/vrx/wave_gazebo /home/taylor/vrx_amore/build/vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate.dir/depend
 

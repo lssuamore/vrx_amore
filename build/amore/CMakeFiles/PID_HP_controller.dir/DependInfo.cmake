@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/brad/vrx_amore/src/amore/src/PID_HP_controller.cpp" "/home/brad/vrx_amore/build/amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.o"
+  "/home/taylor/vrx_amore/src/amore/src/PID_HP_controller.cpp" "/home/taylor/vrx_amore/build/amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,7 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/brad/vrx_amore/devel/include"
+  "/home/taylor/vrx_amore/devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/opencv4"
