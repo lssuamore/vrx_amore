@@ -62,11 +62,13 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  NED_waypoints.msg
-  usv_pose_msg.msg
-  state_msg.msg
+  usv_pose.msg
+  state.msg
+  NED_poses.msg
   NED_objects.msg
   NED_acoustic.msg
+  propulsion_system.msg
+  control_efforts.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -149,6 +151,7 @@ add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
 add_executable(path_planner src/path_planner.cpp)
 add_executable(acoustics src/acoustics.cpp)
+add_executable(coordinate_converter src/coordinate_converter.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -179,6 +182,7 @@ target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
 target_link_libraries(path_planner ${catkin_LIBRARIES})
 target_link_libraries(acoustics ${catkin_LIBRARIES})
+target_link_libraries(coordinate_converter ${catkin_LIBRARIES})
 
 #]]
 

@@ -39,11 +39,13 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/amore/msg" TYPE FILE FILES
-    "/home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg"
-    "/home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg"
-    "/home/brad/vrx_amore/src/amore/msg/state_msg.msg"
+    "/home/brad/vrx_amore/src/amore/msg/usv_pose.msg"
+    "/home/brad/vrx_amore/src/amore/msg/state.msg"
+    "/home/brad/vrx_amore/src/amore/msg/NED_poses.msg"
     "/home/brad/vrx_amore/src/amore/msg/NED_objects.msg"
     "/home/brad/vrx_amore/src/amore/msg/NED_acoustic.msg"
+    "/home/brad/vrx_amore/src/amore/msg/propulsion_system.msg"
+    "/home/brad/vrx_amore/src/amore/msg/control_efforts.msg"
     )
 endif()
 

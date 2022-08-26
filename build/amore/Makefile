@@ -228,6 +228,21 @@ PID_HP_controller/fast:
 .PHONY : PID_HP_controller/fast
 
 # Convenience name for target.
+amore/CMakeFiles/navigation_array.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/navigation_array.dir/rule
+.PHONY : amore/CMakeFiles/navigation_array.dir/rule
+
+# Convenience name for target.
+navigation_array: amore/CMakeFiles/navigation_array.dir/rule
+
+.PHONY : navigation_array
+
+# fast build rule for target.
+navigation_array/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/build
+.PHONY : navigation_array/fast
+
+# Convenience name for target.
 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
@@ -333,49 +348,19 @@ _amore_generate_messages_check_deps_NED_objects/fast:
 .PHONY : _amore_generate_messages_check_deps_NED_objects/fast
 
 # Convenience name for target.
-amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+amore/CMakeFiles/_amore_generate_messages_check_deps_control_efforts.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_control_efforts.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_control_efforts.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_eus: amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+_amore_generate_messages_check_deps_control_efforts: amore/CMakeFiles/_amore_generate_messages_check_deps_control_efforts.dir/rule
 
-.PHONY : roscpp_generate_messages_eus
+.PHONY : _amore_generate_messages_check_deps_control_efforts
 
 # fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/roscpp_generate_messages_eus.dir/build.make amore/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
-
-# Convenience name for target.
-amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
-.PHONY : amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-uuid_msgs_generate_messages_eus: amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
-
-.PHONY : uuid_msgs_generate_messages_eus
-
-# fast build rule for target.
-uuid_msgs_generate_messages_eus/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build.make amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build
-.PHONY : uuid_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
-.PHONY : amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-uuid_msgs_generate_messages_cpp: amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : uuid_msgs_generate_messages_cpp
-
-# fast build rule for target.
-uuid_msgs_generate_messages_cpp/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build.make amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build
-.PHONY : uuid_msgs_generate_messages_cpp/fast
+_amore_generate_messages_check_deps_control_efforts/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_control_efforts.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_control_efforts.dir/build
+.PHONY : _amore_generate_messages_check_deps_control_efforts/fast
 
 # Convenience name for target.
 amore/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule:
@@ -513,36 +498,6 @@ amore_gencpp/fast:
 .PHONY : amore_gencpp/fast
 
 # Convenience name for target.
-amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-.PHONY : amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_lisp: amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_lisp
-
-# fast build rule for target.
-sensor_msgs_generate_messages_lisp/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
-.PHONY : sensor_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-.PHONY : amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_eus: amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_eus
-
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
 amore/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : amore/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
@@ -663,21 +618,6 @@ uuid_msgs_generate_messages_lisp/fast:
 .PHONY : uuid_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule
-.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule
-
-# Convenience name for target.
-_amore_generate_messages_check_deps_state_msg: amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/rule
-
-.PHONY : _amore_generate_messages_check_deps_state_msg
-
-# fast build rule for target.
-_amore_generate_messages_check_deps_state_msg/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_state_msg.dir/build
-.PHONY : _amore_generate_messages_check_deps_state_msg/fast
-
-# Convenience name for target.
 amore/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : amore/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
@@ -706,21 +646,6 @@ geometry_msgs_generate_messages_lisp: amore/CMakeFiles/geometry_msgs_generate_me
 geometry_msgs_generate_messages_lisp/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make amore/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
 .PHONY : geometry_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule
-.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule
-
-# Convenience name for target.
-_amore_generate_messages_check_deps_NED_waypoints: amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/rule
-
-.PHONY : _amore_generate_messages_check_deps_NED_waypoints
-
-# fast build rule for target.
-_amore_generate_messages_check_deps_NED_waypoints/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_waypoints.dir/build
-.PHONY : _amore_generate_messages_check_deps_NED_waypoints/fast
 
 # Convenience name for target.
 amore/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
@@ -888,6 +813,51 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+.PHONY : amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_lisp: amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : sensor_msgs_generate_messages_lisp
+
+# fast build rule for target.
+sensor_msgs_generate_messages_lisp/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make amore/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+.PHONY : sensor_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+.PHONY : amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+sensor_msgs_generate_messages_eus: amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+
+.PHONY : sensor_msgs_generate_messages_eus
+
+# fast build rule for target.
+sensor_msgs_generate_messages_eus/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make amore/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+.PHONY : sensor_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_NED_poses.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_NED_poses.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_NED_poses.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_NED_poses: amore/CMakeFiles/_amore_generate_messages_check_deps_NED_poses.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_NED_poses
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_NED_poses/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_NED_poses.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_NED_poses.dir/build
+.PHONY : _amore_generate_messages_check_deps_NED_poses/fast
+
+# Convenience name for target.
 amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 .PHONY : amore/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
@@ -916,21 +886,6 @@ nav_msgs_generate_messages_lisp: amore/CMakeFiles/nav_msgs_generate_messages_lis
 nav_msgs_generate_messages_lisp/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make amore/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
 .PHONY : nav_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule
-.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule
-
-# Convenience name for target.
-_amore_generate_messages_check_deps_usv_pose_msg: amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/rule
-
-.PHONY : _amore_generate_messages_check_deps_usv_pose_msg
-
-# fast build rule for target.
-_amore_generate_messages_check_deps_usv_pose_msg/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose_msg.dir/build
-.PHONY : _amore_generate_messages_check_deps_usv_pose_msg/fast
 
 # Convenience name for target.
 amore/CMakeFiles/amore_genpy.dir/rule:
@@ -993,6 +948,81 @@ actionlib_msgs_generate_messages_nodejs/fast:
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_usv_pose: amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_usv_pose
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_usv_pose/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_usv_pose.dir/build
+.PHONY : _amore_generate_messages_check_deps_usv_pose/fast
+
+# Convenience name for target.
+amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_eus: amore/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+.PHONY : roscpp_generate_messages_eus
+
+# fast build rule for target.
+roscpp_generate_messages_eus/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/roscpp_generate_messages_eus.dir/build.make amore/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+
+# Convenience name for target.
+amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
+.PHONY : amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+uuid_msgs_generate_messages_eus: amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
+
+.PHONY : uuid_msgs_generate_messages_eus
+
+# fast build rule for target.
+uuid_msgs_generate_messages_eus/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build.make amore/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build
+.PHONY : uuid_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
+.PHONY : amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+uuid_msgs_generate_messages_cpp: amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : uuid_msgs_generate_messages_cpp
+
+# fast build rule for target.
+uuid_msgs_generate_messages_cpp/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build.make amore/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build
+.PHONY : uuid_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_state.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_state.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_state.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_state: amore/CMakeFiles/_amore_generate_messages_check_deps_state.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_state
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_state/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_state.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_state.dir/build
+.PHONY : _amore_generate_messages_check_deps_state/fast
+
+# Convenience name for target.
 amore/CMakeFiles/amore_geneus.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_geneus.dir/rule
 .PHONY : amore/CMakeFiles/amore_geneus.dir/rule
@@ -1053,6 +1083,21 @@ amore_generate_messages_lisp/fast:
 .PHONY : amore_generate_messages_lisp/fast
 
 # Convenience name for target.
+amore/CMakeFiles/coordinate_converter.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/coordinate_converter.dir/rule
+.PHONY : amore/CMakeFiles/coordinate_converter.dir/rule
+
+# Convenience name for target.
+coordinate_converter: amore/CMakeFiles/coordinate_converter.dir/rule
+
+.PHONY : coordinate_converter
+
+# fast build rule for target.
+coordinate_converter/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/coordinate_converter.dir/build.make amore/CMakeFiles/coordinate_converter.dir/build
+.PHONY : coordinate_converter/fast
+
+# Convenience name for target.
 amore/CMakeFiles/amore_genlisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/amore_genlisp.dir/rule
 .PHONY : amore/CMakeFiles/amore_genlisp.dir/rule
@@ -1066,6 +1111,21 @@ amore_genlisp: amore/CMakeFiles/amore_genlisp.dir/rule
 amore_genlisp/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/amore_genlisp.dir/build.make amore/CMakeFiles/amore_genlisp.dir/build
 .PHONY : amore_genlisp/fast
+
+# Convenience name for target.
+amore/CMakeFiles/_amore_generate_messages_check_deps_propulsion_system.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/_amore_generate_messages_check_deps_propulsion_system.dir/rule
+.PHONY : amore/CMakeFiles/_amore_generate_messages_check_deps_propulsion_system.dir/rule
+
+# Convenience name for target.
+_amore_generate_messages_check_deps_propulsion_system: amore/CMakeFiles/_amore_generate_messages_check_deps_propulsion_system.dir/rule
+
+.PHONY : _amore_generate_messages_check_deps_propulsion_system
+
+# fast build rule for target.
+_amore_generate_messages_check_deps_propulsion_system/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/_amore_generate_messages_check_deps_propulsion_system.dir/build.make amore/CMakeFiles/_amore_generate_messages_check_deps_propulsion_system.dir/build
+.PHONY : _amore_generate_messages_check_deps_propulsion_system/fast
 
 # Convenience name for target.
 amore/CMakeFiles/amore_generate_messages_nodejs.dir/rule:
@@ -1111,21 +1171,6 @@ mission_control: amore/CMakeFiles/mission_control.dir/rule
 mission_control/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
 .PHONY : mission_control/fast
-
-# Convenience name for target.
-amore/CMakeFiles/navigation_array.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/navigation_array.dir/rule
-.PHONY : amore/CMakeFiles/navigation_array.dir/rule
-
-# Convenience name for target.
-navigation_array: amore/CMakeFiles/navigation_array.dir/rule
-
-.PHONY : navigation_array
-
-# fast build rule for target.
-navigation_array/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/navigation_array.dir/build.make amore/CMakeFiles/navigation_array.dir/build
-.PHONY : navigation_array/fast
 
 src/PID_HP_controller.o: src/PID_HP_controller.cpp.o
 
@@ -1207,6 +1252,33 @@ src/acoustics.s: src/acoustics.cpp.s
 src/acoustics.cpp.s:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.s
 .PHONY : src/acoustics.cpp.s
+
+src/coordinate_converter.o: src/coordinate_converter.cpp.o
+
+.PHONY : src/coordinate_converter.o
+
+# target to build an object file
+src/coordinate_converter.cpp.o:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/coordinate_converter.dir/build.make amore/CMakeFiles/coordinate_converter.dir/src/coordinate_converter.cpp.o
+.PHONY : src/coordinate_converter.cpp.o
+
+src/coordinate_converter.i: src/coordinate_converter.cpp.i
+
+.PHONY : src/coordinate_converter.i
+
+# target to preprocess a source file
+src/coordinate_converter.cpp.i:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/coordinate_converter.dir/build.make amore/CMakeFiles/coordinate_converter.dir/src/coordinate_converter.cpp.i
+.PHONY : src/coordinate_converter.cpp.i
+
+src/coordinate_converter.s: src/coordinate_converter.cpp.s
+
+.PHONY : src/coordinate_converter.s
+
+# target to generate assembly for a file
+src/coordinate_converter.cpp.s:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/coordinate_converter.dir/build.make amore/CMakeFiles/coordinate_converter.dir/src/coordinate_converter.cpp.s
+.PHONY : src/coordinate_converter.cpp.s
 
 src/mission_control.o: src/mission_control.cpp.o
 
@@ -1358,6 +1430,7 @@ help:
 	@echo "... path_planner"
 	@echo "... PID_HS_controller"
 	@echo "... PID_HP_controller"
+	@echo "... navigation_array"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_cpp"
@@ -1365,9 +1438,7 @@ help:
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... _amore_generate_messages_check_deps_NED_objects"
-	@echo "... roscpp_generate_messages_eus"
-	@echo "... uuid_msgs_generate_messages_eus"
-	@echo "... uuid_msgs_generate_messages_cpp"
+	@echo "... _amore_generate_messages_check_deps_control_efforts"
 	@echo "... geographic_msgs_generate_messages_py"
 	@echo "... _amore_generate_messages_check_deps_NED_acoustic"
 	@echo "... geographic_msgs_generate_messages_nodejs"
@@ -1377,8 +1448,6 @@ help:
 	@echo "... geographic_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... amore_gencpp"
-	@echo "... sensor_msgs_generate_messages_lisp"
-	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_cpp"
@@ -1387,10 +1456,8 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... acoustics"
 	@echo "... uuid_msgs_generate_messages_lisp"
-	@echo "... _amore_generate_messages_check_deps_state_msg"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_lisp"
-	@echo "... _amore_generate_messages_check_deps_NED_waypoints"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_py"
@@ -1402,24 +1469,32 @@ help:
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... sensor_msgs_generate_messages_lisp"
+	@echo "... sensor_msgs_generate_messages_eus"
+	@echo "... _amore_generate_messages_check_deps_NED_poses"
 	@echo "... install/local"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_lisp"
-	@echo "... _amore_generate_messages_check_deps_usv_pose_msg"
 	@echo "... amore_genpy"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
+	@echo "... _amore_generate_messages_check_deps_usv_pose"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... uuid_msgs_generate_messages_eus"
+	@echo "... uuid_msgs_generate_messages_cpp"
+	@echo "... _amore_generate_messages_check_deps_state"
 	@echo "... amore_geneus"
 	@echo "... amore_generate_messages_eus"
 	@echo "... perception_array"
 	@echo "... amore_generate_messages_lisp"
+	@echo "... coordinate_converter"
 	@echo "... amore_genlisp"
+	@echo "... _amore_generate_messages_check_deps_propulsion_system"
 	@echo "... amore_generate_messages_nodejs"
 	@echo "... edit_cache"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... mission_control"
-	@echo "... navigation_array"
 	@echo "... src/PID_HP_controller.o"
 	@echo "... src/PID_HP_controller.i"
 	@echo "... src/PID_HP_controller.s"
@@ -1429,6 +1504,9 @@ help:
 	@echo "... src/acoustics.o"
 	@echo "... src/acoustics.i"
 	@echo "... src/acoustics.s"
+	@echo "... src/coordinate_converter.o"
+	@echo "... src/coordinate_converter.i"
+	@echo "... src/coordinate_converter.s"
 	@echo "... src/mission_control.o"
 	@echo "... src/mission_control.i"
 	@echo "... src/mission_control.s"

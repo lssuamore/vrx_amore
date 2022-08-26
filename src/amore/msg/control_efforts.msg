@@ -1,0 +1,12 @@
+std_msgs/Float32 t_x
+	std_msgs/Float32 t_x_P
+	std_msgs/Float32 t_x_I
+	std_msgs/Float32 t_x_D
+std_msgs/Float32 t_y
+	std_msgs/Float32 t_y_P
+	std_msgs/Float32 t_y_I
+	std_msgs/Float32 t_y_D
+std_msgs/Float32 m_z
+	std_msgs/Float32 m_z_P
+	std_msgs/Float32 m_z_I
+	std_msgs/Float32 m_z_D

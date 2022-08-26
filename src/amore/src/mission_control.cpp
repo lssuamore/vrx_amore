@@ -1,23 +1,24 @@
-//  Filename:				mission_control.cpp
-//  Creation Date:			03/25/2022
-//  Last Revision Date:			04/04/2022
-//  Author(s) [email]:			Bradley Hacker [bhacker@lssu.edu]
-//  Revisor(s) [email] {Revision Date}:	Bradley Hacker [bhacker@lssu.edu] {04/04/2022}
-//  Organization/Institution:		Lake Superior State University - Team AMORE
+//  Filename:  mission_control.cpp
+//  Creation Date:  3/25/2022
+//  Last Revision Date:  8/23/2022
+//  Author [email]:  Brad Hacker [bhacker@lssu.edu]
+//  Revisor(s) [Revision Date]:
+//  Organization/Institution:  Lake Superior State University RobotX Team AMORE
 // 
+//  Notes from author: PLEASE MAKE ANY PRINTOUTS START WITH "MISSION_CONTROL: " TO KNOW THAT IT IS FROM MISSION_CONTROL
+//		PERHAPS ONLY USE ROS_DEBUG SO ALL MISSION_CONTROL PRINTOUTS ARE GREEN
+//
 // ...............................About mission_control.cpp......................................
 //  This code acts as the autonomous state machine of the WAM-V USV.
-//  It will subscribe to the vrx/task/info to control the state of the system.
+//  It will subscribe to the "vrx/task/info" to control the state of the system.
 //  This code will subscribe to goal poses given from the navigation_array.
 //  Dependent on the current task state and system state, mission_control
 //  will publish whether or not the low level controllers should be on.
 //
-//  Inputs and Outputs of the mission_control.cpp file
 //		Inputs [subscribers]: "waypoints_NED" (converted goal pose array), "/vrx/task/info", "initialization_states"
 //		Outputs [publishers]: states of all other executables
 
-
-//................................................Included Libraries and Message Types..........................................
+//...............................................................................................Included Libraries and Message Types.........................................................................................
 #include "ros/ros.h"
 #include "ros/console.h"
 #include "time.h"
@@ -25,652 +26,467 @@
 #include <iostream>
 #include "math.h"
 #include "stdio.h"
-#include "nav_msgs/Odometry.h"		// message type used for receiving NED USV state from navigation_array
-#include "amore/state_msg.h"		// message type used to communicate state for rudimentary codes
-#include "std_msgs/Bool.h"
-#include "std_msgs/Int64.h"
+#include "amore/state.h"  // message type used to communicate state for rudimentary codes
+#include "std_msgs/Bool.h"  // message type used for communicating initialization status to mission_control
+#include "std_msgs/Int64.h"  // message type used for acoustic status feedback
+#include "vrx_gazebo/Task.h" // message type published by VRX detailing current task and state
+//......................................................................................End of Included Libraries and Message Types.....................................................................................
 
-#include "amore/usv_pose_msg.h"										// message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
-#include "vrx_gazebo/Task.h"												// message published by VRX detailing current task and state
-#include "amore/NED_waypoints.h"										// message that holds array of converted WF goal waypoints w/ headings and number of waypoints
-//#include "geometry_msgs/PoseArray.h"			// message type used to get buoy locations from navigation_array
-//...........................................End of Included Libraries and Message Types....................................
-
-
-//.................................................................Constants....................................................................
+//.......................................................................................................................Constants.....................................................................................................................
 #define PI 3.14159265
-//............................................................End of Constants.............................................................
+//................................................................................................................End of Constants...............................................................................................................
 
+//.................................................................................................................Global Variables..............................................................................................................
+int loop_count = 0;  // loop counter
+// initialization bools
+bool system_initialized = false;  // false means the system has not been initialized
+// THE FOLLOWING SIX BOOLS ARE USED TO DETERMINE IF SUBSYTEMS HAVE BEEN INITIALIZED
+bool navigation_array_initialized = false;
+bool coordinate_converter_initialized = false;
+bool path_planner_initialized = false;
+bool propulsion_system_initialized = false;
+bool perception_array_initialized = false;
+bool acoustic_initialized = false;
+bool CC_goal_poses_published = false;  // false means the NED poses have not yet been calculated and published by navigation_array
+int acoustic_task_status;  // status feedback from the acoustic system (subscribed value)
+ros::Time current_time, last_time;  // creates time variables
 
-//..............................................................Global Variables............................................................
-int loop_count = 0;			// loop counter, first 10 loops used to intitialize subscribers
-bool system_initialized = false;	// false means the system has not been initialized
-
+//=====STATE MESSAGES AND PUBLISHERS=====
 //	STATES CONCERNED WITH "navigation_array"
-int NA_state = 0;
 //	0 = On standby
-//	1 = USV NED pose converter
-//	2 = Station-Keeping NED goal pose converter
-//	3 = Wayfinding NED goal pose converter
-//	4 = Wildlife NED animals converter
+//	1 = USV NED state converter
+amore::state MC_na_state_msg;  // "MC_na_state" message
+ros::Publisher MC_na_state_pub;  // "MC_na_state" publisher
+
+//	STATES CONCERNED WITH "coordinate_converter"
+//	0 = On standby
+//	1 = VRX1: Station-Keeping NED goal pose converter
+//	2 = VRX2: Wayfinding NED goal pose converter
+//	4 = VRX4: Wildlife NED animals converter
+amore::state MC_cc_state_msg;  // "MC_cc_state" message
+ros::Publisher MC_cc_state_pub;  // "MC_cc_state" publisher
 
 //	STATES CONCERNED WITH "path_planner"
-int PP_state = 0;
 //	0 = On standby
-//	1 = Task 1: Station-Keeping
-//	2 = Task 2: Wayfinding
-//	4 = Task 4: Wildlife Encounter and Avoid
-//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = Task 6: Scan and Dock and Deliver
-	
+//	1 = VRX1: Station-Keeping
+//	2 = VRX2: Wayfinding
+//	4 = VRX4: Wildlife Encounter and Avoid
+//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = VRX6: Scan and Dock and Deliver
+amore::state MC_pp_state_msg;  // "MC_pp_state" message
+ros::Publisher MC_pp_state_pub;  // "MC_pp_state" publisher
+
 //	STATES CONCERNED WITH "propulsion_system"
-int PS_state = 0;
 //	0 = On standby
 //	1 = Propulsion system ON
+amore::state MC_ps_state_msg;  // "MC_ps_state" message
+ros::Publisher MC_ps_state_pub;  // "MC_ps_state" publisher
 
 //	STATES CONCERNED WITH "perception_array"
-int PA_state = 0;
 //	0 = On standby
 //	1 = General State
-//	3 = Task 3: Landmark Localization and Characterization
-//	4 = Task 4: Wildlife Encounter and Avoid
-//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = Task 6: Scan and Dock and Deliver
+//	3 = VRX3: Landmark Localization and Characterization
+//	4 = VRX4: Wildlife Encounter and Avoid
+//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = VRX6: Scan and Dock and Deliver
+amore::state MC_pa_state_msg;  // "MC_pa_state" message
+ros::Publisher MC_pa_state_pub;  // "MC_pa_state" publisher
 
 // STATES CONCERNED WITH "acoustics" 
-int A_state = 0;
 // 0 = On standby
 // 1 = Finding entrance gate (white buoy)
 // 2 = Navigating between red and green buoys
 // 3 = Finding exit gate (black buoy)
 // 4 = Navigating to acoustic source
+amore::state MC_a_state_msg;  // "MC_a_state" message
+ros::Publisher MC_a_state_pub;  // "MC_a_state" publisher
+//..........................................................................................................End of Global Variables........................................................................................................
 
-int goal_poses;              				// total number of poses to reach 
-int loop_goal_published;         			// this is kept in order to ensure propulsion_system doesn't start until the goal is published by path_planner
-int acoustic_task_status; 				// status of the acoustic system (subsribed value)
-
-float x_goal[100], y_goal[100], psi_goal[100];		// arrays to hold the NED goal poses
-float x_usv_NED, y_usv_NED, psi_NED; 			// vehicle position and heading (pose) in NED
-
-float e_x, e_y, e_xy, e_psi;				// current errors between goal pose and usv pose
-
-bool NED_waypoints_published = false;			// false means the NED poses have not yet been calculated and published by navigation_array
-bool NED_goal_pose_published = false;			// false means the NED goal pose has not yet been published to the propulsion_system by the path_planner 
-bool usv_NED_pose_updated = false;			// false means usv NED pose has not been acquired from navigation_array by the path_planner
-
-// THE FOLLOWING FIVE BOOLS ARE USED TO DETERMINE IF MISSION_CONTROL AND SUBSYTEMS HAVE BEEN INITIALIZED
-bool navigation_array_initialized = false;
-bool path_planner_initialized = false;
-bool propulsion_system_initialized = false;
-bool perception_array_initialized = false;
-bool acoustic_initialized = false;
-
-// STATE MESSAGES AND PUBLISHERS
-amore::state_msg na_state_msg;				// "na_state" message
-ros::Publisher na_state_pub;				// "na_state" publisher
-amore::state_msg pp_state_msg;				// "pp_state" message
-ros::Publisher pp_state_pub;				// "pp_state" publisher
-amore::state_msg ps_state_msg;				// "ps_state" message
-ros::Publisher ps_state_pub;				// "ps_state" publisher
-amore::state_msg pa_state_msg;				// "pa_state" message
-ros::Publisher pa_state_pub;				// "pa_state" publisher
-amore::state_msg a_state_msg;				// "a_state" message
-ros::Publisher a_state_pub;				// "a_state" publisher
-
-ros::Time current_time, last_time;			// creates time variables
-//..............................................................End of Global Variables..........................................................
-
-//..................................................................Functions...........................................................................
-// SYSTEM INITIALIZATION CHECK FUNCTIONS /////////////////////////////////////////////////////////////////////////////////
+//.....................................................................................................................Functions.......................................................................................................................
 // THIS FUNCTION: Checks initialization status of entire system using global variable initialization statuses
 // ACCEPTS: (VOID) 
 // RETURNS: (VOID) 
-// =============================================================================
+//=============================================================================================================
 void MISSION_CONTROL_inspector()
 {
-	current_time = ros::Time::now();   		// sets current_time to the time it is now
-	loop_count += 1;				// increment loop counter
-	//ROS_INFO("Loop count = %i", loop_count);
-	if ((loop_count > 5) && (navigation_array_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized)&& (acoustic_initialized))
+	current_time = ros::Time::now();  // sets current_time to the time it is now
+	loop_count += 1;  // increment loop counter
+	if ((loop_count > 3) && (navigation_array_initialized) && (coordinate_converter_initialized) && (path_planner_initialized) && (propulsion_system_initialized) && (perception_array_initialized)&& (acoustic_initialized))
 	{
 		system_initialized = true;
-		//ROS_INFO("mission_control_initialized");
 	}
 	else
 	{
 		system_initialized = false;
-		ROS_INFO("!mission_control_initialized --MC");
 	}
-	/* // UPDATE USER OF INITIALIZATION STATUSES
-	if (navigation_array_initialized)
-	{
-		ROS_INFO("navigation_array_initialized");
-	}
-	if (path_planner_initialized)
-	{
-		ROS_INFO("path_planner_initialized");
-	}
-	if (propulsion_system_initialized)
-	{
-		ROS_INFO("propulsion_system_initialized");
-	}
-	if (perception_array_initialized)
-	{
-		ROS_INFO("perception_array_initialized");
-	} */
-} // END OF MISSION_CONTROL_inspector()
+	// UPDATE USER OF INITIALIZATION STATUSES
+	//ROS_DEBUG("MISSION_CONTROL: Loop count = %i", loop_count);
+	// if (system_initialized)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: mission_control_initialized");
+	// }
+	// if (navigation_array_initialized)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: navigation_array_initialized");
+	// }
+	// if (coordinate_converter_initialized)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: coordinate_converter_initialized");
+	// }
+	// if (path_planner_initialized)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: path_planner_initialized");
+	// }
+	// if (propulsion_system_initialized)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: propulsion_system_initialized");
+	// }
+	// if (perception_array_initialized)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: perception_array_initialized");
+	// }
+}  // END OF MISSION_CONTROL_inspector()
 
 // THIS FUNCTION: Subscribes to the navigation_array to check initialization status
-// ACCEPTS: Initialization status from "na_initialization_state"
+// ACCEPTS: std_msgs::Bool from "NA_initialization_state"
 // RETURNS: (VOID)
-// =============================================================================
-void NAVIGATION_ARRAY_inspector(const std_msgs::Bool status)
+//=============================================================================================================
+void NA_initialization_state_update(const std_msgs::Bool status)
 {
-	if (status.data)
-	{
-		navigation_array_initialized = true;
-	}
-	else
-	{
-		navigation_array_initialized = false;
-	}
-} // END OF NAVIGATION_ARRAY_inspector()
+	navigation_array_initialized = status.data;
+}  // END OF NA_initialization_state_update()
+
+// THIS FUNCTION: Subscribes to the coordinate_converter to check initialization status
+// ACCEPTS: std_msgs::Bool from "CC_initialization_state"
+// RETURNS: (VOID)
+//=============================================================================================================
+void CC_initialization_state_update(const std_msgs::Bool status)
+{
+	coordinate_converter_initialized = status.data;
+}  // END OF CC_initialization_state_update()
 
 // THIS FUNCTION: Subscribes to the path_planner to check initialization status
-// ACCEPTS: Initialization status from "pp_initialization_state"
+// ACCEPTS: std_msgs::Bool from "PP_initialization_state"
 // RETURNS: (VOID)
-// =============================================================================
-void PATH_PLANNER_inspector(const std_msgs::Bool status)
+//=============================================================================================================
+void PP_initialization_state_update(const std_msgs::Bool status)
 {
-	if (status.data)
-	{
-		path_planner_initialized = true;
-	}
-	else
-	{
-		path_planner_initialized = false;
-	}
-} // END OF PROPULSION_SYSTEM_inspector()
+	path_planner_initialized = status.data;
+}  // END OF PP_initialization_state_update()
 
 // THIS FUNCTION: Subscribes to the propulsion_system to check initialization status
-// ACCEPTS: Initialization status from "ps_initialization_state"
+// ACCEPTS: std_msgs::Bool from "PS_initialization_state"
 // RETURNS: (VOID)
-// =============================================================================
-void PROPULSION_SYSTEM_inspector(const std_msgs::Bool status)
+//=============================================================================================================
+void PS_initialization_state_update(const std_msgs::Bool status)
 {
-	if (status.data)
-	{
-		propulsion_system_initialized = true;
-	}
-	else
-	{
-		propulsion_system_initialized = false;
-	}
-} // END OF PROPULSION_SYSTEM_inspector()
+	propulsion_system_initialized = status.data;
+}  // END OF PS_initialization_state_update()
 
 // THIS FUNCTION: Subscribes to the perception_array to check initialization status
-// ACCEPTS: Initialization status from "pa_initialization_state"
+// ACCEPTS: std_msgs::Bool from "PA_initialization_state"
 // RETURNS: (VOID)
-// =============================================================================
-void PERCEPTION_ARRAY_inspector(const std_msgs::Bool status)
+//=============================================================================================================
+void PA_initialization_state_update(const std_msgs::Bool status)
 {
-	if (status.data)
-	{
-		perception_array_initialized = true;
-	}
-	else
-	{
-		perception_array_initialized = false;
-	}
-} // END OF PERCEPTION_ARRAY_inspector()
+	perception_array_initialized = status.data;
+}  // END OF PA_initialization_state_update()
 
-// THIS FUNCTION: Subscribes to acoustic to check initialization status
-// ACCEPTS: Initialization status from "a_initialization_state"
+// THIS FUNCTION: Subscribes to acoustics to check initialization status
+// ACCEPTS:std_msgs::Bool from "A_initialization_state"
 // RETURNS: (VOID)
-// =============================================================================
-void ACOUSTIC_inspector(const std_msgs::Bool status)
+//=============================================================================================================
+void A_initialization_state_update(const std_msgs::Bool status)
 {
-	if (status.data)
-	{
-		acoustic_initialized = true;
-	}
-	else
-	{
-		acoustic_initialized = false;
-	}
-} // END OF ACOUSTIC_inspector()
-// END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	acoustic_initialized = status.data;
+}  // END OF A_initialization_state_update()
 
-// THIS FUNCTION: Subscribes to acoustic to check initialization status
-// ACCEPTS: Initialization status from "a_initialization_state"
+// THIS FUNCTION: Subscribes to acoustics to check status
+// ACCEPTS: std_msgs::Int64 from "A_system_state"
 // RETURNS: (VOID)
-// =============================================================================
-void acoustic_system_state_update(const std_msgs::Int64 status)
+//=============================================================================================================
+void A_system_state_update(const std_msgs::Int64 status)
 {
 	// Status;
 	// 1 = entrance gate has been traversed
 	// 2 = buoy channel has been traversed
 	// 3 = exit gate has been traversed
-	
 	acoustic_task_status  = status.data; 
-	
-} // END OF acoustic_system_state_update()
-// END OF SYSTEM INITIALIZATION CHECK FUNCTIONS ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}  // END OF A_system_state_update()
 
-// THIS FUNCTION: Updates when NED waypoints have been converted and published to "waypoints_ned" to know when to tell path_planner to subscribe
-// ACCEPTS: Goal publish status from "goal_waypoints_publish_state"
+// THIS FUNCTION: Updates when VRX Task goal poses have been converted and published
+// ACCEPTS: std_msgs::Bool from "CC_goal_poses_publish_state"
 // RETURNS: (VOID)
-// =============================================================================
-void NED_waypoints_published_update(const std_msgs::Bool status)
+//=============================================================================================================
+void CC_goal_poses_publish_state_update(const std_msgs::Bool status)
 {
-	if (status.data)
-	{
-		NED_waypoints_published = true;
-		//ROS_INFO("WF POINT CONVERTER FINISHED");
-	}
-	else
-	{
-		NED_waypoints_published = false;
-		//ROS_INFO("WF POINT CONVERTER NOT FINISHED");
-	} // if (status.data)
-} // END OF NED_waypoints_published_update()
-
-// THIS FUNCTION: Checks to see if the path_planner has got the updated usv pose 
-// ACCEPTS: Status from "pp_USV_pose_update_state"
-// RETURNS: (VOID)
-// =============================================================================
-void pp_USV_pose_update_state_update(const std_msgs::Bool status)
-{
-	usv_NED_pose_updated = status.data;
-} // END OF pp_USV_pose_update_state_update()
-
-// THIS FUNCTION: Updates when NED goal pose has been published to propulsion_system by path_planner
-// ACCEPTS: Goal pose publish status from "goal_waypoints_publish_state"
-// RETURNS: (VOID)
-// =============================================================================
-void NED_goal_pose_published_update(const std_msgs::Bool status)
-{
-	NED_goal_pose_published = status.data;
-	/* if (status.data)
-	{
-		if (!NED_goal_pose_published)			// if the goal pose has been published and hasn't been updated
-		{
-			NED_goal_pose_published = true;
-			//ROS_INFO("GOAL POSE PUBLISHED TO PROPULSION_SYSTEM");
-			loop_goal_published = loop_count;
-		}
-	}
-	else
-	{
-		NED_goal_pose_published = false;
-		//ROS_INFO("GOAL POSE NOT PUBLISHED TO PROPULSION_SYSTEM");
-	} // if (status.data) */
-} // END OF NED_goal_pose_published_update()
-
-// THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
-// ACCEPTS: Current NED USV pose and velocities from "nav_ned"
-// RETURNS: (VOID)
-// =============================================================================
-void pose_update(const nav_msgs::Odometry::ConstPtr& odom) 
-{
-	if (NA_state == 1) // if navigation_array is in standard USV NED pose converter mode 
-	{
-		// Update NED USV pose 
-		x_usv_NED = odom->pose.pose.position.x;
-		y_usv_NED = odom->pose.pose.position.y;
-		psi_NED = odom->pose.pose.orientation.z;
-		
-		/* printf("the x is: %f\n", odom->pose.pose.position.x); //extracts x coor from nav_odometery
-		printf("the y is: %f\n", odom->pose.pose.position.y); //extracts y coor from nav_odometery
-		printf("the x orientation is: %f\n", odom->pose.pose.orientation.x); //extracts x orientation
-		printf("the y orientation is: %f\n", odom->pose.pose.orientation.y); //extracts y orientation
-		printf("the z orientation is: %f\n", odom->pose.pose.orientation.z); //extracts z orientation
-		printf("the w orientation is: %f\n", odom->pose.pose.orientation.w); //extracts w orientation
-		printf("the velocity x is: %f\n", odom-> twist.twist.linear.x);//prints velocity x
-		printf("the velocity y is: %f\n", odom-> twist.twist.linear.y);//prints velocity y
-		printf("the velocity z is: %f\n", odom-> twist.twist.linear.z);//prints velocity z
-		printf("the angular velocity x is: %f\n", odom-> twist.twist.angular.x);//prints velocity x
-		printf("the angular velocity y is: %f\n", odom-> twist.twist.angular.y);//prints velocity x
-		printf("the angular velocity z is: %f\n", odom-> twist.twist.angular.z);//prints velocity x */
-	} // if navigation_array is in standard USV Pose Conversion mode
-} // END OF pose_update()
+	CC_goal_poses_published = status.data;
+	// UPDATE USER OF COORDINATE_CONVERTER STATUS
+	// if (CC_goal_poses_published)
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: COORDINATE CONVERTER FINISHED");
+	// }
+	// else
+	// {
+		// ROS_DEBUG("MISSION_CONTROL: COORDINATE CONVERTER NOT FINISHED");
+	// }
+}  // END OF CC_goal_poses_publish_state_update()
 
 // THIS FUNCTION: Updates and publishes all subsytem states, as well as mission_control state dependent on current system statuses
-// ACCEPTS: Current vrx task info from "vrx/task/info"
+// ACCEPTS: vrx_gazebo::Task from "vrx/task/info"
 // RETURNS: (VOID)
-// =============================================================================
-void state_update(const vrx_gazebo::Task::ConstPtr& msg)	// NOTE: To simplify, use just message variables !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//=============================================================================================================
+void state_update(const vrx_gazebo::Task::ConstPtr& msg)  // NOTE: To simplify, use just message variables !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 {
 	// FIRST RESET STATES TO BE SET ACCORDINGLY TO CURRENT SYSTEM STATUSES
 	//	STATES CONCERNED WITH "navigation_array"
-	NA_state = 1;
 	//	0 = On standby
-	//	1 = USV NED pose converter
-	//	2 = Station-Keeping NED goal pose converter
-	//	3 = Wayfinding NED goal pose converter
-	//	4 = Wildlife NED animals converter
+	//	1 = USV NED state converter
+	MC_na_state_msg.state.data = 0;
+
+	//	STATES CONCERNED WITH "coordinate_converter"
+	//	0 = On standby
+	//	1 = VRX1: Station-Keeping NED goal pose converter
+	//	2 = VRX2: Wayfinding NED goal pose converter
+	//	4 = VRX4: Wildlife NED animals converter
+	MC_cc_state_msg.state.data = 0;
 
 	//	STATES CONCERNED WITH "path_planner"
-	PP_state = 0;
 	//	0 = On standby
-	//	1 = Task 1: Station-Keeping
-	//	2 = Task 2: Wayfinding
-	//	4 = Task 4: Wildlife Encounter and Avoid
-	//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-	//	6 = Task 6: Scan and Dock and Deliver
-		
+	//	1 = VRX1: Station-Keeping
+	//	2 = VRX2: Wayfinding
+	//	4 = VRX4: Wildlife Encounter and Avoid
+	//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+	//	6 = VRX6: Scan and Dock and Deliver
+	MC_pp_state_msg.state.data = 0;
+
 	//	STATES CONCERNED WITH "propulsion_system"
-	PS_state = 0;
 	//	0 = On standby
 	//	1 = Propulsion system ON
+	MC_ps_state_msg.state.data = 0;
 
 	//	STATES CONCERNED WITH "perception_array"
-	PA_state = 0;
 	//	0 = On standby
 	//	1 = General State
-	//	3 = Task 3: Landmark Localization and Characterization
-	//	4 = Task 4: Wildlife Encounter and Avoid
-	//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-	//	6 = Task 6: Scan and Dock and Deliver
-	
-	// STATES CONCERNED WITH "acoustics" 
-	A_state = 0;
+	//	3 = VRX3: Landmark Localization and Characterization
+	//	4 = VRX4: Wildlife Encounter and Avoid
+	//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+	//	6 = VRX6: Scan and Dock and Deliver
+	MC_pa_state_msg.state.data = 0;
+
+	// STATES CONCERNED WITH "acoustics"
 	// 0 = On standby
 	// 1 = Finding entrance gate (white buoy)
 	// 2 = Navigating between red and green buoys
 	// 3 = Finding exit gate (black buoy)
 	// 4 = Navigating to acoustic source
-	
-	if (system_initialized)					// Do not begin subsytem activity until system is initialized
+	MC_a_state_msg.state.data = 0;
+
+	if (system_initialized)  // Do not begin subsytem activity until system is initialized
 	{
-		if (msg->name == "station_keeping")
+		if ((msg->name == "station_keeping") && ((msg->state == "ready") || (msg->state == "running")))  // if the station_keeping task is ready or running
 		{
-			if ((msg->state == "ready") || (msg->state == "running"))
+			MC_pp_state_msg.state.data = 1;  // set path_planner to VRX1: Station-Keeping
+			if (CC_goal_poses_published)  // if the goal pose has been converted from lat/long to NED and published by coordinate_converter
 			{
-				if (NED_waypoints_published)	// if the goal pose has been converted from lat/long and published by navigation_array
-				{
-					NA_state = 1;		// USV NED pose converter
-					PP_state = 1;		// Station-Keeping path planner
-					if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
-					{
-						PS_state = 1;	// Propulsion system ON
-					}
-					else
-					{
-						PS_state = 0;	// Propulsion system on standby
-					}	// if (NED_goal_pose_published)
-				}	// if (NED_waypoints_published)
-				else
-				{
-					NA_state = 2;		// Station-Keeping NED goal pose converter
-					PP_state = 0;		// Path planner on standby
-					PS_state = 0;		// Propulsion system on standby
-				}
+				MC_na_state_msg.state.data = 1;  // set navigation_array to USV NED state converter
+				MC_ps_state_msg.state.data = 1;  // set propulsion_system to Propulsion system ON
 			}
 			else
 			{
-				// ALL CODES ON STANDBY
-				NA_state = 0;
-				PP_state = 0;
-				PS_state = 0;
-				PA_state = 0;
-				// reset task statuses as long as task is in "initial" or "finished" state
-				NED_waypoints_published = false;
+				MC_cc_state_msg.state.data = 1;  // set coordinate_converter to VRX1: Station-Keeping NED goal pose converter
 			}
-		} // (msg->name == "station_keeping")
-		else if (msg->name == "wayfinding")
+		}  // END OF if ((msg->name == "station_keeping") && ((msg->state == "ready") || (msg->state == "running")))
+
+		else if ((msg->name == "wayfinding") && ((msg->state == "ready") || (msg->state == "running")))  // if the wayfinding task is ready or running
 		{
-			if ((msg->state == "ready") || (msg->state == "running"))
+			MC_pp_state_msg.state.data = 2;  // set path_planner to VRX2: Wayfinding
+			if (CC_goal_poses_published)  // if the goal poses have been converted from lat/long to NED and published by coordinate_converter
 			{
-				if (NED_waypoints_published)	// if the goal pose has been converted from lat/long and published by navigation_array
-				{
-					NA_state = 1;		// USV NED pose converter
-					PP_state = 2;		// Wayfinding path planner
-					if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
-					{
-						PS_state = 1;	// Propulsion system ON
-					}
-					else
-					{
-						PS_state = 0;	// Propulsion system on standby
-					}	// if (NED_goal_pose_published)
-				}	// if (NED_waypoints_published)
-				else
-				{
-					NA_state = 3;		// Wayfinding NED goal pose converter
-					PP_state = 0;		// Path planner on standby
-					PS_state = 0;		// Propulsion system on standby
-				}
+				MC_na_state_msg.state.data = 1;  // set navigation_array to USV NED state converter
+				MC_ps_state_msg.state.data = 1;  // set propulsion_system to Propulsion system ON
 			}
 			else
 			{
-				// ALL CODES ON STANDBY
-				NA_state = 0;
-				PP_state = 0;
-				PS_state = 0;
-				PA_state = 0;
-				// reset task statuses as long as task is in "initial" or "finished" state
-				NED_waypoints_published = false;
+				MC_cc_state_msg.state.data = 2;  // set coordinate_converter to VRX2: Wayfinding NED goal pose converter
 			}
-		} // (msg->name == "wayfinding")
+		}  // END OF else if ((msg->name == "wayfinding") && ((msg->state == "ready") || (msg->state == "running")))
+
+		// 	NEEDS WORK
 		else if (msg->name == "perception")
 		{
-			NA_state = 1;				// USV NED pose converter
-			PA_state = 3;				// Task 3: Landmark Localization and Characterization
-		} // (msg->name == "perception")
-		
-		// 	INTEGRATED TASK CODES FOLLOW
-		else if (msg->name == "wildlife")
+			MC_na_state_msg.state.data = 1;  // set navigation_array to USV NED state converter
+			MC_pa_state_msg.state.data = 3;  // set perception_array to VRX3: Landmark Localization and Characterization
+		}  // END OF else if (msg->name == "perception")
+
+		// INTEGRATED TASK CODES FOLLOW
+		// FOR TASK 4, NEEDS WORK
+		else if ((msg->name == "wildlife") && ((msg->state == "ready") || (msg->state == "running")))  // if the wildlife task is ready or running
 		{
-			if ((msg->state == "ready") || (msg->state == "running"))
+			MC_pp_state_msg.state.data = 4;  // set path_planner to VRX4: Wildlife Encounter and Avoid
+			MC_ps_state_msg.state.data = 1;  // set propulsion_system to Propulsion system ON
+			if (!CC_goal_poses_published)  // if the goal poses have not been converted and published to path_planner from navigation_array
 			{
-				PP_state = 4;			// Task 4: Wildlife Encounter and Avoid
-				//if (!usv_NED_pose_updated)	// if the goal pose has been converted from lat/long and published by navigation_array				// COMMENTED OUT THIS
-				if ((NA_state == 4) && (!NED_waypoints_published))																																	// NEW
-				{
-					NA_state = 1;		// USV NED pose converter
-					//NED_waypoints_published = false;	
-				}
-				else
-				{
-					NA_state = 4;		// Wildlife NED animals converter
-					if (NED_waypoints_published)	// if the goal pose has been converted from lat/long and published by navigation_array
-					{
-						NA_state = 1;		// USV NED pose converter
-					}
-				}
-				if ((NED_goal_pose_published) && (loop_count > loop_goal_published))	// if the goal pose has been published to propulsion_system and time has been given for goal and usv states to be attained by subsytems
-				{
-					PS_state = 1;			// Propulsion system ON
-				}
-				else
-				{
-					PS_state = 0;			// Propulsion system on standby
-				}
+				MC_cc_state_msg.state.data = 4;  // set coordinate_converter to VRX4: Wildlife NED animals converter
 			}
 			else
 			{
-				// ALL CODES ON STANDBY
-				//NA_state = 1;
-				//PP_state = 0;
-				//PS_state = 0;
-				//PA_state = 0;
-				// reset task statuses as long as task is in "initial" or "finished" state
-				NED_waypoints_published = false;
-				NED_goal_pose_published = false;
+				MC_na_state_msg.state.data = 1;  // set navigation_array to USV NED state converter
 			}
-		} // (msg->name == "wildlife")
-		else if (msg->name == "gymkhana")
+		}  // END OF else if ((msg->name == "wildlife") && ((msg->state == "ready") || (msg->state == "running")))
+
+		// NEEDS WORK
+		else if ((msg->name == "gymkhana") && ((msg->state == "ready") || (msg->state == "running")))  // if the gymkhana task is ready or running
 		{
-			if ((msg->state == "ready") || (msg->state == "running"))
+			MC_na_state_msg.state.data = 1;  // set navigation_array to USV NED state converter
+			MC_pp_state_msg.state.data = 5;  // set path_planner to VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+			MC_pa_state_msg.state.data = 5;  // set perception_array to VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+			MC_a_state_msg.state.data = 1;  // set acoustics to Finding entrance gate (white buoy)
+			
+			if(acoustic_task_status == 1)
 			{
-				NA_state = 1;				// USV NED pose converter
-				PP_state = 5;				// Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance path planner
-				PA_state = 5;				// Task 5 Perception
-				A_state = 1; 				// 1 = Finding entrance gate (white buoy)
-				
-				if(acoustic_task_status == 1)
-				{
-					A_state = 2; // 2 = Navigating between red and green buoys
-				}
-				else if (acoustic_task_status == 2)
-				{
-					A_state = 3; // 3 = Finding exit gate (black buoy)
-				}
-				else if (acoustic_task_status == 3)
-				{
-					A_state = 4; // 4 = Navigating to acoustic source
-				}
-				
-				if (NED_goal_pose_published)	// if the goal pose has been published to propulsion_system
-				{
-					PS_state = 1;			// Propulsion system ON
-				}
-				else
-				{
-					PS_state = 0;			// Propulsion system on standby
-				}
+				MC_a_state_msg.state.data = 2;  // set acoustics to Navigating between red and green buoys
+			}
+			else if (acoustic_task_status == 2)
+			{
+				MC_a_state_msg.state.data = 3;  // set acoustics to Finding exit gate (black buoy)
+			}
+			else if (acoustic_task_status == 3)
+			{
+				MC_a_state_msg.state.data = 4;  // set acoustics to Navigating to acoustic source
+			}
+		}  // END OF else if ((msg->name == "gymkhana") && ((msg->state == "ready") || (msg->state == "running")))
+
+		else if ((msg->state == "initial") || (msg->state == "finished"))  // if the task is initial or finished
+		{
+			CC_goal_poses_published = false;  // reset task statuses as long as task is in "initial" or "finished" state
+		}  // END OF else if ((msg->state == "initial") || (msg->state == "finished"))
+
+		/* else if (msg->name == "scan_dock_deliver")
+		{
+			if ()
+			{
+				MC_na_state_msg.state.data = 0;  // set navigation_array to...
+				MC_ps_state_msg.state.data = 0;  // set propulsion_system to...
+				MC_pp_state_msg.state.data = 0;  // set path_planner to...
 			}
 			else
 			{
-				// ALL CODES ON STANDBY
-				NA_state = 0;
-				PP_state = 0;
-				PS_state = 0;
-				PA_state = 0;
-				A_state = 0;
+				MC_na_state_msg.state.data = 0;  // set navigation_array to...
+				MC_ps_state_msg.state.data = 0;  // set propulsion_system to...
+				MC_pp_state_msg.state.data = 0;  // set path_planner to...
 			}
-		} // (msg->name == "gymkhana")
-		// else if (msg->name == "scan_dock_deliver")
-		// {
-			// if ()
-			// {
-				// NA_state = 0;
-				// PS_state = 0;
-				// PP_state = 0;
-			// }
-			// else
-			// {
-				// NA_state = 0;
-				// PS_state = 0;
-				// PP_state = 0;
-			// }
-		// } // (msg->name == "scan_dock_deliver")
-		else
-		{
-			// ALL CODES ON STANDBY
-			NA_state = 0;
-			PP_state = 0;
-			PS_state = 0;
-			PA_state = 0;
-			A_state = 0;
-		}
-		
+		}  // END OF else if (msg->name == "scan_dock_deliver") */
+
 		// PUBLISH EACH SUBSYTEMS STATE
 		// SEND STATE TO NAVIGATION_ARRAY
-		na_state_msg.header.seq +=1;				// sequence number
-		na_state_msg.header.stamp = current_time;		// set stamp to current time
-		na_state_msg.header.frame_id = "mission_control";	// header frame
-		na_state_msg.state.data = NA_state;			// set navigation_array_state
-		na_state_pub.publish(na_state_msg);			// publish na_state_msg to "na_state"
-		
+		MC_na_state_msg.header.seq +=1;  // sequence number
+		MC_na_state_msg.header.stamp = current_time;  // set stamp to current time
+		MC_na_state_msg.header.frame_id = "mission_control";  // header frame
+		MC_na_state_pub.publish(MC_na_state_msg);  // publish MC_na_state_msg to "MC_na_state"
+
+		// SEND STATE TO COORDINATE_CONVERTER
+		MC_cc_state_msg.header.seq +=1;  // sequence number
+		MC_cc_state_msg.header.stamp = current_time;  // set stamp to current time
+		MC_cc_state_msg.header.frame_id = "mission_control";  // header frame
+		MC_cc_state_pub.publish(MC_cc_state_msg);  // publish MC_cc_state_msg to "MC_cc_state"
+
 		// SEND STATE TO PATH_PLANNER
-		pp_state_msg.header.seq +=1;				// sequence number
-		pp_state_msg.header.stamp = current_time;		// set stamp to current time
-		pp_state_msg.header.frame_id = "mission_control";	// header frame
-		pp_state_msg.state.data = PP_state;			// set path_planner_state
-		pp_state_pub.publish(pp_state_msg);			// publish pp_state_msg to "pp_state"
-		
+		MC_pp_state_msg.header.seq +=1;  // sequence number
+		MC_pp_state_msg.header.stamp = current_time;  // set stamp to current time
+		MC_pp_state_msg.header.frame_id = "mission_control";  // header frame
+		MC_pp_state_pub.publish(MC_pp_state_msg);  // publish MC_pp_state_msg to "MC_pp_state"
+
 		// SEND STATE TO PROPULSION_SYSTEM
-		ps_state_msg.header.seq +=1;				// sequence number
-		ps_state_msg.header.stamp = current_time;		// set stamp to current time
-		ps_state_msg.header.frame_id = "mission_control";	// header frame
-		ps_state_msg.state.data = PS_state;			// set propulsion_system_state
-		ps_state_pub.publish(ps_state_msg);			// publish ps_state_msg to "ps_state"		
+		MC_ps_state_msg.header.seq +=1;  // sequence number
+		MC_ps_state_msg.header.stamp = current_time;  // set stamp to current time
+		MC_ps_state_msg.header.frame_id = "mission_control";  // header frame
+		MC_ps_state_pub.publish(MC_ps_state_msg);  // publish MC_ps_state_msg to "MC_ps_state"		
 
 		// SEND STATE TO PERCEPTION_ARRAY
-		pa_state_msg.header.seq +=1;				// sequence number
-		pa_state_msg.header.stamp = current_time;		// set stamp to current time
-		pa_state_msg.header.frame_id = "mission_control";	// header frame
-		pa_state_msg.state.data = PA_state;			// set perception_array_state
-		pa_state_pub.publish(pa_state_msg);			// publish pa_state_msg to "pa_state"
-		
+		MC_pa_state_msg.header.seq +=1;  // sequence number
+		MC_pa_state_msg.header.stamp = current_time;  // set stamp to current time
+		MC_pa_state_msg.header.frame_id = "mission_control";  // header frame
+		MC_pa_state_pub.publish(MC_pa_state_msg);  // publish MC_pa_state_msg to "MC_pa_state"
+
 		// SEND STATE TO PERCEPTION_ARRAY
-		a_state_msg.header.seq +=1;				// sequence number
-		a_state_msg.header.stamp = current_time;		// set stamp to current time
-		a_state_msg.header.frame_id = "mission_control";	// header frame
-		a_state_msg.state.data = A_state;			// set acoustics_state
-		a_state_pub.publish(a_state_msg);			// publish a_state_msg to "a_state"
-		
+		MC_a_state_msg.header.seq +=1;  // sequence number
+		MC_a_state_msg.header.stamp = current_time;  // set stamp to current time
+		MC_a_state_msg.header.frame_id = "mission_control";  // header frame
+		MC_a_state_pub.publish(MC_a_state_msg);  // publish MC_a_state_msg to "MC_a_state"
+
 		// UPDATE USER OF EACH CODES STATE
-		ROS_DEBUG("----------------- CURRENT STATES --------------------");
-		ROS_DEBUG("NA_state: %i --MC", NA_state);
-		ROS_DEBUG("PP_state: %i --MC", PP_state);
-		ROS_DEBUG("PS_state: %i --MC", PS_state);
-		ROS_DEBUG("PA_state: %i --MC", PA_state);
-	} // if (system_initialized)
-} // END OF state_update()
-//............................................................End of Functions............................................................
+		ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----");
+		ROS_INFO("MISSION_CONTROL:      NA_state: %i", MC_na_state_msg.state.data);
+		ROS_INFO("MISSION_CONTROL:      CC_state: %i", MC_cc_state_msg.state.data);
+		ROS_INFO("MISSION_CONTROL:      PP_state: %i", MC_pp_state_msg.state.data);
+		ROS_INFO("MISSION_CONTROL:      PS_state: %i", MC_ps_state_msg.state.data);
+		ROS_INFO("MISSION_CONTROL:      PA_state: %i", MC_pa_state_msg.state.data);
+		ROS_INFO("MISSION_CONTROL:------------------------\n");
+	}  // END OF if (system_initialized)
+}  // END OF state_update()
+//.............................................................................................................END OF Functions...............................................................................................................
 
+//..................................................................................................................Main Program..................................................................................................................
 int main(int argc, char **argv)
 {
 	// names the program for visual purposes
 	ros::init(argc, argv, "mission_control");
 
-	ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);
-
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11, nh12, nh13, nh14, nh15;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh11;
 
 	// Subscribers
-	ros::Subscriber na_initialization_state_sub = nh1.subscribe("na_initialization_state", 1, NAVIGATION_ARRAY_inspector);								// initialization status of navigation_array
-	ros::Subscriber pp_initialization_state_sub = nh2.subscribe("pp_initialization_state", 1, PATH_PLANNER_inspector);										// initialization status of path_planner
-	ros::Subscriber ps_initialization_state_sub = nh3.subscribe("ps_initialization_state", 1, PROPULSION_SYSTEM_inspector);							// initialization status of propulsion_system
-	ros::Subscriber pa_initialization_state_sub = nh4.subscribe("pa_initialization_state", 1, PERCEPTION_ARRAY_inspector);								// initialization status of perception_array
-	ros::Subscriber a_initialization_state_sub = nh5.subscribe("a_initialization_state", 1, ACOUSTIC_inspector);													// initialization status of acoustic
-	ros::Subscriber nav_NED_sub = nh6.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
-	ros::Subscriber task_status_sub = nh7.subscribe("/vrx/task/info", 1, state_update);																								// VRX task topic
-	ros::Subscriber goal_waypoints_publish_state_sub = nh8.subscribe("goal_waypoints_publish_state", 1, NED_waypoints_published_update);	// whether or not goal waypoints have been converted and published yet
-	ros::Subscriber goal_pose_publish_state_sub = nh9.subscribe("goal_pose_publish_state", 1, NED_goal_pose_published_update);					// whether or not goal pose has been published to propulsion_system yet 
-	ros::Subscriber acoustic_system_state_sub = nh9.subscribe("acoustic_system_state", 1, acoustic_system_state_update);									// "acoustic_system_state" subscriber for status of acoustic program
-	ros::Subscriber pp_USV_pose_update_state_sub = nh10.subscribe("pp_USV_pose_update_state", 1, pp_USV_pose_update_state_update);				// topic containing the status of whether or not the USV pose has been updated in path_planner
+	ros::Subscriber NA_initialization_state_sub = nh1.subscribe("NA_initialization_state", 1, NA_initialization_state_update);  // initialization status of navigation_array
+	ros::Subscriber CC_initialization_state_sub = nh2.subscribe("CC_initialization_state", 1, CC_initialization_state_update);  // initialization status of coordinate_converter
+	ros::Subscriber PP_initialization_state_sub = nh3.subscribe("PP_initialization_state", 1, PP_initialization_state_update);  // initialization status of path_planner
+	ros::Subscriber PS_initialization_state_sub = nh4.subscribe("PS_initialization_state", 1, PS_initialization_state_update);  // initialization status of propulsion_system
+	ros::Subscriber PA_initialization_state_sub = nh5.subscribe("PA_initialization_state", 1, PA_initialization_state_update);  // initialization status of perception_array
+	ros::Subscriber A_initialization_state_sub = nh6.subscribe("A_initialization_state", 1, A_initialization_state_update);  // initialization status of acoustic
+	ros::Subscriber task_status_sub = nh7.subscribe("/vrx/task/info", 1, state_update);  // VRX task topic
+	ros::Subscriber CC_goal_poses_publish_state_sub = nh8.subscribe("CC_goal_poses_publish_state", 1, CC_goal_poses_publish_state_update);  // whether or not goal waypoints have been converted and published yet
+	ros::Subscriber A_system_state_sub = nh9.subscribe("A_system_state", 1, A_system_state_update);  // subscriber for status of acoustic program
 
 	// Publishers
-	na_state_pub = nh11.advertise<amore::state_msg>("na_state", 1);													// current navigation_array state
-	pp_state_pub = nh12.advertise<amore::state_msg>("pp_state", 1);													// current path_planner state
-	ps_state_pub = nh13.advertise<amore::state_msg>("ps_state", 1);													// current propulsion_system state
-	pa_state_pub = nh14.advertise<amore::state_msg>("pa_state", 1);													// current perception_array state
-	a_state_pub = nh15.advertise<amore::state_msg>("a_state", 1);														// current acoustic state
+	// these publishers publish all the state topics off all the other programs so that mission_control can tell them all how to operate
+	MC_na_state_pub = nh11.advertise<amore::state>("MC_na_state", 1);  // current navigation_array state
+	MC_cc_state_pub = nh11.advertise<amore::state>("MC_cc_state", 1);  // current coordinate_converter state
+	MC_pp_state_pub = nh11.advertise<amore::state>("MC_pp_state", 1);  // current path_planner state
+	MC_ps_state_pub = nh11.advertise<amore::state>("MC_ps_state", 1);  // current propulsion_system state
+	MC_pa_state_pub = nh11.advertise<amore::state>("MC_pa_state", 1);  // current perception_array state
+	MC_a_state_pub = nh11.advertise<amore::state>("MC_a_state", 1);  // current acoustic state
 
 	// initialize header sequences
-	na_state_msg.header.seq = 0;
-	pp_state_msg.header.seq = 0;
-	ps_state_msg.header.seq = 0;
-	pa_state_msg.header.seq = 0;
-	a_state_msg.header.seq = 0;
+	MC_na_state_msg.header.seq = 0;
+	MC_cc_state_msg.header.seq = 0;
+	MC_pp_state_msg.header.seq = 0;
+	MC_ps_state_msg.header.seq = 0;
+	MC_pa_state_msg.header.seq = 0;
+	MC_a_state_msg.header.seq = 0;
 
 	// Timers ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Initialize simulation time
 	ros::Time::init();
 
 	// Initialize global variables
-	current_time = ros::Time::now();				// sets current time to the time it is now
-	last_time = current_time;					// sets last time to the time it is now
+	current_time = ros::Time::now();  // sets current time to the time it is now
+	last_time = current_time;  // sets last time to the time it is now
 
 	//sets the frequency for which the program sleeps at. 10=1/10 second
-	ros::Rate loop_rate(100);																						// WAS 100
+	ros::Rate loop_rate(1);
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
 	{
-		MISSION_CONTROL_inspector();		// check that entire system is initialized before starting calculations
-		ros::spinOnce();			// update subscribers
-		loop_rate.sleep();			// sleep for set loop_rate
-		last_time = current_time;		// update last_time
-	} // while(ros::ok())
+		MISSION_CONTROL_inspector();  // check that entire system is initialized before starting calculations
+		ros::spinOnce();  // update subscribers
+		loop_rate.sleep();  // sleep to accomplish set loop_rate
+		last_time = current_time;  // update last_time
+	}  // END OF while(ros::ok())
 
 	ros::spinOnce();
 	loop_rate.sleep();
 
 	return 0;
-}
+}  // END OF main()
+//.........................................................................................................END OF Main Program...........................................................................................................
