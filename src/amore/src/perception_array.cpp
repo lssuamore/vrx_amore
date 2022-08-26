@@ -1,11 +1,11 @@
-// Filename:									perception_array.cpp
-// Creation Date:							03/25/2022
-// Last Revision Date:
-// Author(s) [email]:						Shaede Perzanowski [sperzanowski1@lssu.edu]	Taylor Lamorie [tlamorie@lssu]
-//													Brad Hacker [bhacker@lssu.edu]
-// Revisor(s) [Revision Date]:		Brad Hacker [04/07/22]
-// Organization/Institution:			Team AMORE / RobotX Club - Lake Superior State University
-
+//  Filename:  perception_array.cpp
+//  Creation Date:  3/25/2022
+//  Last Revision Date:  4/07/22
+//  Author(s) [email]:  Shaede Perzanowski [sperzanowski1@lssu.edu], Taylor Lamorie [tlamorie@lssu], Brad Hacker [bhacker@lssu.edu]
+//                                                  
+//  Revisor(s) [Revision Date]:
+//  Organization/Institution:  Lake Superior State University RobotX Team AMORE
+//
 //...................................................About perception_array.cpp.....................................................................
 // The perception_array.cpp file is used to access image data from the on-board camera sensors of the USV. 
 // The program uses OpenCV. 
@@ -23,8 +23,7 @@
 // LiDAR: Single, 16-beam LiDAR sensor. FoV is ____. Update rate is 10 Hz. The LiDAR frame is ___ relative to
 //				the USV frame.
 
-
-//................................................Included Libraries and Message Types..........................................
+//...............................................................................................Included Libraries and Message Types.........................................................................................
 #include "ros/ros.h"
 #include "image_transport/image_transport.h"
 #include "sensor_msgs/Image.h"
@@ -45,86 +44,67 @@
 #include <vector>
 #include <string>
 #include "std_msgs/Float32.h"
-#include "std_msgs/Bool.h"
-#include "vrx_gazebo/Task.h"
-#include "amore/NED_waypoints.h"
-#include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
+#include "std_msgs/Bool.h"  // message type used for communicating initialization status to mission_control
+#include "amore/state.h"  // message type used to recieve state of operation from mission_control
 #include "amore/usv_pose_msg.h"
 #include "amore/NED_objects.h"
-//...........................................End of Included Libraries and Message Types....................................
+//......................................................................................End of Included Libraries and Message Types.....................................................................................
 
 
-//..............................................................Namespaces................................................................
+//....................................................................................................................Namespaces...................................................................................................................
 using namespace cv;
 using namespace std;
-//........................................................End of Namespaces...........................................................
+//.............................................................................................................End of Namespaces.............................................................................................................
 
+//.......................................................................................................................Constants.....................................................................................................................
+#define BASELINE 0.2  // baseline between camera sensors [m]
+#define Umax 1279.0  // maximum pixel index for u (a pictures's x)
+#define Umin 0.0  // minimum pixel index for u (a pictures's x)
+#define PHI -33.724223  // latitude of ENU origin
+#define LAMBDA 150.679736  // longitude of ENU origin
+ // The rotation matrix from ENU to ECEF
+#define R11 -0.489690849 
+#define	R12 -0.484073338
+#define	R13 -0.725172997
+#define	R21 -0.871896136
+#define	R22 0.271874452
+#define	R23 0.407285416
+#define	R31 0.0
+#define	R32 0.831719476
+#define	R33 -0.555196104
+#define PI 3.14159265  // Our pi, 8 decimal places
+#define MbCMIN 0.01942425  // Marker buoy minimum compactness value
+#define MbCMAX 0.03975825  // Marker buoy maximum compactness value
+#define MbRMIN 1.50754025  // Marker buoy minimum extreme point ratio
+#define MbRMAX 1.74948625  // Marker buoy maximum extreme point ratio
+#define MbHead "mb_marker_buoy_"  // Marker buoy ID header
+#define RbCMIN 0.065152  // Round buoy minimum compactness value
+#define RbCMAX 0.071328  // Round buoy maximum compactness value
+#define RbRMIN 1.016995375  // Round buoy minimum extreme point ratio
+#define RbRMAX 1.342738375  // Round buoy maximum extreme point ratio
+#define RbHead "mb_round_buoy_"  // Round buoy ID header
+//................................................................................................................End of Constants...............................................................................................................
 
-//.................................................................Constants..................................................................
-#define BASELINE 0.2							// baseline between camera sensors [m]
-#define Umax 1279.0								// maximum pixel index for u (a pictures's x)
-#define Umin 0.0									// minimum pixel index for u (a pictures's x)
-#define PHI -33.724223							// latitude of ENU origin
-#define LAMBDA 150.679736					// longitude of ENU origin
-#define R11 -0.489690849						//_	The rotation matrix from ENU to ECEF
-#define	R12 -0.484073338						//  |
-#define	R13 -0.725172997						//	|
-#define	R21 -0.871896136						//	|
-#define	R22 0.271874452						//	|
-#define	R23 0.407285416						//	|		
-#define	R31 0.0										//	|
-#define	R32 0.831719476						//	|
-#define	R33 -0.555196104						//_|
-#define PI 3.14159265							// Our pi, 8 decimal places
-#define MbCMIN 0.01942425					// Marker buoy minimum compactness value
-#define MbCMAX 0.03975825					// Marker buoy maximum compactness value
-#define MbRMIN 1.50754025					// Marker buoy minimum extreme point ratio
-#define MbRMAX 1.74948625					// Marker buoy maximum extreme point ratio
-#define MbHead "mb_marker_buoy_"		// Marker buoy ID header
-#define RbCMIN 0.065152						// Round buoy minimum compactness value
-#define RbCMAX 0.071328						// Round buoy maximum compactness value
-#define RbRMIN 1.016995375					// Round buoy minimum extreme point ratio
-#define RbRMAX 1.342738375				// Round buoy maximum extreme point ratio
-#define RbHead "mb_round_buoy_"			// Round buoy ID header
-//............................................................End of Constants.............................................................
-
-
-//..............................................................Global Variables............................................................
-int loop_count = 0;                                    				// loop counter, first 10 loops used to intitialize subscribers
-bool system_initialized = false;								// false means the system has not been initialized
-
-//	STATES CONCERNED WITH "navigation_array"
-int NA_state = 0;
-//	0 = On standby
-//	1 = USV NED pose converter
-//	2 = Station-Keeping NED goal pose converter
-//	3 = Wayfinding NED goal pose converter
-//	4 = Wildlife NED animals converter
-
-//	STATES CONCERNED WITH "path_planner"
-int PP_state = 0;
-//	0 = On standby
-//	1 = Task 1: Station-Keeping
-//	2 = Task 2: Wayfinding
-//	4 = Task 4: Wildlife Encounter and Avoid
-//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = Task 6: Scan and Dock and Deliver
-//	STATES CONCERNED WITH "propulsion_system"
-int PS_state = 0;
-//	0 = On standby
-//	1 = Propulsion system ON
+//.................................................................................................................Global Variables..............................................................................................................
+int loop_count = 0;  // loop counter
+bool system_initialized = false;  // false means the system has not been initialized
 
 //	STATES CONCERNED WITH "perception_array"
-int PA_state = 0;
 //	0 = On standby
 //	1 = General State
-//	3 = Task 3: Landmark Localization and Characterization
-//	4 = Task 4: Wildlife Encounter and Avoid
-//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = Task 6: Scan and Dock and Deliver
+//	3 = VRX3: Landmark Localization and Characterization
+//	4 = VRX4: Wildlife Encounter and Avoid
+//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = VRX6: Scan and Dock and Deliver
+int PA_state = 0;
 
-geographic_msgs::GeoPoseStamped task3_message; //publisher message type
-ros::Publisher task3_pub; //publisher for judges topic
+//	STATES CONCERNED WITH "navigation_array"
+//	0 = On standby
+//	1 = USV NED state converter
+int NA_state = 0;
+
+geographic_msgs::GeoPoseStamped VRX3_landmark_msg;  // message type for VRX Task 3 judges topic, "/vrx/perception/landmark"
+ros::Publisher VRX3_landmark_pub;  // publisher for VRX Task 3 judges topic, "/vrx/perception/landmark"
 
 //below is the hsv ranges for each color default lighting
 // Color limits used in blob detection
@@ -168,7 +148,7 @@ float height, width;
 // Buoy classification variables
 float compactness, area, perimeter;
 float compactness1, area1, perimeter1;
-float Ry, Ry1;																// Ratio of extreme points of object
+float Ry, Ry1;  // Ratio of extreme points of object
 
 // Buoy types
 int reg_buoy, circle_buoy, buoy_total_L, buoy_total_R; 
@@ -192,15 +172,15 @@ float x_white, y_white;
 int size_red, size_green, size_orange, size_black, size_white, size_mask_t, size_mask_t1;
 
 // Two vectors to hold the centroids of the BLOBs
-vector<Point2f> MC(100);			// For left image
-vector<Point2f> MC1(100);		// For right image
+vector<Point2f> MC(100);  // For left image
+vector<Point2f> MC1(100);  // For right image
 
 // Look-up-table for finding accurate lateral translation of buoy from the USV
 float lat_scale_LUT[10][9] =	{// 7m     8m     9m     10m    11m    12m   13m    14m    15m
 												{1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000}, // 0m
-												{1.838, 1.610, 1.439, 1.290, 1.176, 1.075, 1.000, 0.930, 0.735}, // 1m		columns are forward, longitudinal translation
+												{1.838, 1.610, 1.439, 1.290, 1.176, 1.075, 1.000, 0.930, 0.735}, // 1m	columns are forward, longitudinal translation
 												{0.947, 0.826, 0.727, 0.658, 0.597, 0.543, 1.000, 0.468, 0.431}, // 2m
-												{0.624, 0.544, 0.489, 0.438, 0.397, 0.365, 1.000, 0.313, 0.287}, // 3m		rows are lateral translation, either direction
+												{0.624, 0.544, 0.489, 0.438, 0.397, 0.365, 1.000, 0.313, 0.287}, // 3m	rows are lateral translation, either direction
 												{0.472, 0.410, 0.363, 0.325, 0.295, 0.273, 1.000, 0.233, 0.218}, // 4m
 												{1.000, 0.331, 0.291, 0.261, 0.236, 0.214, 1.000, 0.186, 0.175}, // 5m
 												{1.000, 1.000, 0.245, 0.218, 0.196, 0.181, 1.000, 0.153, 0.143}, // 6m
@@ -209,107 +189,82 @@ float lat_scale_LUT[10][9] =	{// 7m     8m     9m     10m    11m    12m   13m   
 												{1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 0.101, 0.097}  // 9m
 };
 
-amore::state_msg state_pa;													// The state command from mission_control
+amore::state state_pa;  // The state command from mission_control
 
-float u_x[100], u_x1[100];														// The x-coordinates of the BLOBs [pixels]
-float v_y[100], v_y1[100];														// The y-coordinates of the BLOBs [pixels]
-float x_offset[100], y_offset[100];											// Arrays for the centroids of detected objects [m]
-int colors[100];																		// Array for buoy color IDs - 1: RED; 2: GREEN; 3: ORANGE; 4: WHITE; 5: BLACK
-char typers[100];																	// Array for buoy type IDs - 'm' = mb_marker_buoy_; 'r' = mb_round_buoy_
-float N_USV, E_USV, D_USV, PSI_USV;							// USV position and heading in NED
-float O_N[100], O_E[100], O_D[100];									// Object global NED position
-float new_lat[100], new_long[100];										// Determined lat and long
-int right_blob_cnt = 0;																// Holds the count of BLOBs from left camera
-bool my_key = true;                           									// If my_key = false, this means according to the current task status, conversion shouldn't be done
+float u_x[100], u_x1[100];  // The x-coordinates of the BLOBs [pixels]
+float v_y[100], v_y1[100];  // The y-coordinates of the BLOBs [pixels]
+float x_offset[100], y_offset[100];  // Arrays for the centroids of detected objects [m]
+int colors[100];  // Array for buoy color IDs - 1: RED; 2: GREEN; 3: ORANGE; 4: WHITE; 5: BLACK
+char typers[100];  // Array for buoy type IDs - 'm' = mb_marker_buoy_; 'r' = mb_round_buoy_
+float N_USV, E_USV, D_USV, PSI_USV;  // USV position and heading in NED
+float O_N[100], O_E[100], O_D[100];  // Object global NED position
+float new_lat[100], new_long[100];  // Determined lat and long
+int right_blob_cnt = 0;  // Holds the count of BLOBs from left camera
+bool my_key = true;  // If my_key = false, this means according to the current task status, conversion shouldn't be done
 
-float LX, LY, RX, RY;																// Variables for the coordinates of the buoys w.r.t USV
+float LX, LY, RX, RY;  // Variables for the coordinates of the buoys w.r.t USV
 
-std_msgs::Bool pa_initialization_status;								// "pa_initialization_state" message
-ros::Publisher pa_initialization_state_pub;							// "pa_initialization_state" publisher
+std_msgs::Bool PA_initialization_state_msg;  // "PA_initialization_state" message
+ros::Publisher PA_initialization_state_pub;  // "PA_initialization_state" publisher
 
-amore::NED_objects NED_buoys_msg;								// message used to hold and publish buoy locations
-ros::Publisher NED_buoys_pub;											// "NED_buoys" publisher
+amore::NED_objects PA_NED_buoys_msg;  // "PA_NED_buoys" message used to hold and publish buoy locations
+ros::Publisher PA_NED_buoys_pub;  // "PA_NED_buoys" publisher
 
-ros::Time current_time, last_time;										// creates time variables
-//........................................................End of Global Variables........................................................
+ros::Time current_time, last_time;  // creates time variables
+//..........................................................................................................End of Global Variables........................................................................................................
 
-//..................................................................Functions.................................................................
-// THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "pa_initialization_state"
+//.....................................................................................................................Functions.......................................................................................................................
+// THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "PA_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
-// =============================================================================
+//=============================================================================================================
 void PERCEPTION_ARRAY_inspector()
 {
-	current_time = ros::Time::now();   		// sets current_time to the time it is now
-	loop_count += 1;									// increment loop counter
-	if (loop_count > 5)
+	current_time = ros::Time::now();  // sets current_time to the time it is now
+	loop_count += 1;  // increment loop counter
+	if (loop_count > 3)
 	{
 		system_initialized = true;
-		//ROS_INFO("navigation_array_initialized -- NA");
+		//ROS_INFO("PERCEPTION_ARRAY: perception_array_intialized");
 	}
 	else
 	{
 		system_initialized = false;
-		ROS_INFO("!navigation_array_initialized -- NA");
+		//ROS_INFO("PERCEPTION_ARRAY: !perception_array_intialized");
 	}
-	pa_initialization_status.data = system_initialized;
-	pa_initialization_state_pub.publish(pa_initialization_status);						// publish the initialization status of the perception_array to "pa_initialization_state"
+	PA_initialization_state_msg.data = system_initialized;
+	PA_initialization_state_pub.publish(PA_initialization_state_msg);  // publish the initialization status of the perception_array to "PA_initialization_state"
 } // END OF PERCEPTION_ARRAY_inspector()
 
-/////////////////////////////////////////////////////////////////		STATE UPDATERS		///////////////////////////////////////////////////////////////////
+// THIS FUNCTION: Updates the state of "perception_array" given by "mission_control"
+// ACCEPTS: amore::state from "MC_pa_state"
+// RETURNS: (VOID)
+//=============================================================================================================
+void MC_pa_state_update(const amore::state::ConstPtr& msg) 
+{
+	if (system_initialized)
+	{
+		PA_state = msg->state.data;
+		//ROS_INFO("PERCEPTION_ARRAY: PA_state = %i", PA_state);
+	}
+}  // END OF MC_pa_state_update()
+
 // THIS FUNCTION: Updates the state of "navigation_array" given by "mission_control"
-// ACCEPTS: navigation_array state_msg from "na_state"
-// RETURNS: (VOID)		Updates global variables
-// =============================================================================
-void na_state_update(const amore::state_msg::ConstPtr& msg)
+// ACCEPTS: amore::state from "MC_na_state"
+// RETURNS: (VOID)
+//=============================================================================================================
+void MC_na_state_update(const amore::state::ConstPtr& msg)
 {
 	if (system_initialized)
 	{
 		NA_state = msg->state.data;
 	}
-} // END OF na_state_update()
-
-// THIS FUNCTION: Updates the state of "path_planner" given by "mission_control"
-// ACCEPTS: path_planner state_msg from "pp_state"
-// RETURNS: (VOID)		Updates global variables
-// =============================================================================
-void pp_state_update(const amore::state_msg::ConstPtr& msg)
-{
-	if (system_initialized)
-	{
-		PP_state = msg->state.data;
-	}
-} // END OF pp_state_update()
-
-// THIS FUNCTION: Updates the state of "propulsion_system" given by "mission_control"
-// ACCEPTS: propulsion_system state_msg from "ps_state"
-// RETURNS: (VOID)
-// =============================================================================
-void ps_state_update(const amore::state_msg::ConstPtr& msg) 
-{
-	if (system_initialized)
-	{
-		PS_state = msg->state.data;
-	}
-} // END OF ps_state_update()
-
-// THIS FUNCTION: Updates the state of "perception_array" given by "mission_control"
-// ACCEPTS: perception_array state_msg from "pa_state"
-// RETURNS: (VOID) Updates global variable
-// =============================================================================
-void pa_state_update(const amore::state_msg::ConstPtr& msg) 
-{
-	if (system_initialized)
-	{
-		PA_state = msg->state.data;
-	}
-} // END OF pa_state_update()
-//////////////////////////////////////////////////////////////		STATE UPDATERS END		///////////////////////////////////////////////////////////////////
+}  // END OF MC_na_state_update()
 
 // THIS FUNCTION: Obtains the USV NED pose
 // ACCEPTS: The USV pose
-// RETURNS: Nothing. Updates the global variables N_USV, E_USV, D_USV, PSI_USV
-// =============================================================================
+// RETURNS: (VOID) Updates the global variables N_USV, E_USV, D_USV, PSI_USV
+//=============================================================================================================
 void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 {
 	if (NA_state == 1) // if navigation_array is in USV NED pose converter mode 
@@ -325,7 +280,7 @@ void pose_update(const nav_msgs::Odometry::ConstPtr& odom)
 // THIS FUNCTION: Converts from the relative USV frame to spherical ECEF
 // ACCEPTS: The centroid of an object and the pose of the USV
 // RETURNS: Nothing. Updates the global variables new_lat and new_long
-// =============================================================================
+//=============================================================================================================
 void USVtoECEF(float Bn, float Be, float Un, float Ue, float Ud, float Upsi, int t)
 {
 	// Variables
@@ -367,7 +322,7 @@ void USVtoECEF(float Bn, float Be, float Un, float Ue, float Ud, float Upsi, int
 // THIS FUNCTION: Uses the disturbance limits and the HSV image to set new color limits and find the blobs
 // ACCEPTS: An image in the HSV color space (imgHSV)
 // RETURNS: Nothing. Updates global variables of color limits and of contours
-// =============================================================================
+//=============================================================================================================
 void HSVFunc(cv::Mat imgHSV)
 {
 	// Set color limits
@@ -426,18 +381,18 @@ void HSVFunc(cv::Mat imgHSV)
 	}
 	} // end of HSVFunc()
 
-// THIS FUNCTION: 	Performs iteritive buoy ID concatination using the colors and typers ID arrays
-//									Publishes the buoy IDs with ECEF locations of the buoys to "/vrx/perception/landmark"
-//									Publishes the buoy IDs with local NED locations of the buoys to "NED_buoys"
+// THIS FUNCTION: Performs iteritive buoy ID concatination using the colors and typers ID arrays
+//                                  Publishes the buoy IDs with ECEF locations of the buoys to "/vrx/perception/landmark"
+//                                  Publishes the buoy IDs with local NED locations of the buoys to "PA_NED_buoys"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
-// =============================================================================
+//=============================================================================================================
 void buoys_publish()
 {
 	int true_size = 0;
 	string buoy_id = " ";
 	// VARIABLES FOR SELF CREATED OBJECT ARRAY MESSAGE CONTAINING OBJECTS WITH THEIR RESPECTIVE NED POSITIONS AND IDs
-	NED_buoys_msg.objects.clear();
+	PA_NED_buoys_msg.objects.clear();
 	
 	for (int i=0; i<buoy_total_L; i++)
 	{
@@ -475,12 +430,12 @@ void buoys_publish()
 		
 		if (PA_state == 3)
 		{
-			task3_message.header.seq +=1;												// sequence number
-			task3_message.header.stamp = current_time;						// sets stamp to current time
-			task3_message.header.frame_id = color_type_buoy.c_str(); 	// header frame
-			task3_message.pose.position.latitude = new_lat[i];
-			task3_message.pose.position.longitude = new_long[i];
-			task3_pub.publish(task3_message);
+			VRX3_landmark_msg.header.seq +=1;												// sequence number
+			VRX3_landmark_msg.header.stamp = current_time;						// sets stamp to current time
+			VRX3_landmark_msg.header.frame_id = color_type_buoy.c_str(); 	// header frame
+			VRX3_landmark_msg.pose.position.latitude = new_lat[i];
+			VRX3_landmark_msg.pose.position.longitude = new_long[i];
+			VRX3_landmark_pub.publish(VRX3_landmark_msg);
 		}
 		
 		
@@ -493,7 +448,7 @@ void buoys_publish()
 			buoy.header.frame_id = color_type_buoy.c_str(); 	// header frame
 			buoy.point.x = x_offset[i];
 			buoy.point.y = y_offset[i];
-			NED_buoys_msg.objects.push_back(buoy);
+			PA_NED_buoys_msg.objects.push_back(buoy);
 			true_size += 1;
 		}
 		color_type_buoy = " ";
@@ -505,17 +460,17 @@ void buoys_publish()
 		
 		for (int j=0; j<true_size; j++)
 		{
-			ROS_INFO("Buoy: %s		number: %2i			x: %4.2f			y: %4.2f", NED_buoys_msg.objects[j].header.frame_id.c_str(), j, NED_buoys_msg.objects[j].point.x, NED_buoys_msg.objects[j].point.y);
+			ROS_INFO("Buoy: %s		number: %2i			x: %4.2f			y: %4.2f", PA_NED_buoys_msg.objects[j].header.frame_id.c_str(), j, PA_NED_buoys_msg.objects[j].point.x, PA_NED_buoys_msg.objects[j].point.y);
 		}
-		NED_buoys_msg.quantity = true_size;				// publish quantity of poses so the path planner knows
-		NED_buoys_pub.publish(NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "NED_buoys"
+		PA_NED_buoys_msg.quantity = true_size;				// publish quantity of poses so the path planner knows
+		PA_NED_buoys_pub.publish(PA_NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "PA_NED_buoys"
 	}
 } // end of buoys_publish()
 
 // THIS FUNCTION: Fills out the global buoy camera image centroids, as well as the buoy IDs (color and type)
 // ACCEPTS: A counter, a color identifier, and an identifier for which camera is using the function 
 // RETURNS: The counter input but updated. Updates global variables
-// =============================================================================
+//=============================================================================================================
 int ClassLocFunc(int cunter, int ckey, int keyer)
 {
 	float y1, y2;																																		// Hold the distance values from centroid to extreme point [pixels]
@@ -630,7 +585,7 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 // THIS FUNCTION: Finds the best focal length of the camera sensors, based off a LUT
 // ACCEPTS: the estimated longitudinal translation to the object (zz)
 // RETURNS: the corrected focal length (focal_length)
-// =============================================================================
+//=============================================================================================================
 float fpLUT(float zz)
 {
 	float focal_length;
@@ -676,7 +631,7 @@ float fpLUT(float zz)
 // THIS FUNCTION: Determines the initial lateral gain to multiply the first lateral disparity calculation by, based off a LUT
 // ACCEPTS: the approximated lateral translation to the buoy (latzz)
 // RETURNS: the lateral gain (gainer)
-// =============================================================================
+//=============================================================================================================
 float lateral_gainLUT(float latzz)
 {
 	float gainer;
@@ -723,7 +678,7 @@ float lateral_gainLUT(float latzz)
 // THIS FUNCTION: Determines the final lateral gain to multiply the lateral disparity calculation by, based off a LUT (lat_scale_LUT)
 // ACCEPTS: the approximated lateral translation (lat_z) and longitudinal (long_z) translation to the buoy
 // RETURNS: final lateral gain (lats)
-// =============================================================================
+//=============================================================================================================
 float lateral_scale(float lat_z, float long_z)
 {
 	float lats = 1.0, lat_z_prev, error_s;
@@ -757,7 +712,7 @@ float lateral_scale(float lat_z, float long_z)
 // THIS FUNCTION: Uses disparity to find the centroids of detected objects wrt local NED
 // ACCEPTS: Nothing. Uses the global variables left_blob_cnt and MC
 // RETURNS: Nothing. Updates the global variables
-// =============================================================================
+//=============================================================================================================
 void DisparityFunc()
 {
 	float d[buoy_total_L];																// The disparity between camera images [pixels]
@@ -802,7 +757,7 @@ void DisparityFunc()
 // THIS FUNCTION: Finds the BLOBs of interest and their centroids for the left camera sensor
 // ACCEPTS: The image from the left camera sensor
 // RETURNS: Nothing. Manipulates many global variables
-// =============================================================================
+//=============================================================================================================
 void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 {
 	if (PA_state != 0) // as long as perception_array is not on standby
@@ -911,7 +866,7 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 // THIS FUNCTION: Finds the BLOBs of interest and their centroids for the right camera sensor
 // ACCEPTS: The image from the left camera sensor
 // RETURNS: Nothing. Manipulates many global variables
-// =============================================================================
+//=============================================================================================================
 void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 {
 	if (PA_state != 0) // as long as perception_array is not on standby
@@ -983,52 +938,46 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 		}
 	} // if (PA_state != 0) 
 } // end of RightCamFunc()
-//............................................................End of funcs............................................................
+//.............................................................................................................END OF Functions...............................................................................................................
 
-
-//...............................................................Main Program..............................................................
+//..................................................................................................................Main Program..................................................................................................................
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "perception_array");
-	
+
 	// Initializations
 	// NOTE: comment the following line out for the docker image, but uncomment for user display of cameras and detected buoys
 	//cv::namedWindow("Left Camera Updated", cv::WINDOW_AUTOSIZE);					
 	//cv::namedWindow("Left Camera Features", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Updated", cv::WINDOW_AUTOSIZE);
 	//cv::namedWindow("Right Camera Features", cv::WINDOW_AUTOSIZE);
-  
-	// Subscriber NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7;
-	
+
+	// NodeHandles
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6;
+
 	// Subscribers
-	ros::Subscriber na_state_sub = nh1.subscribe("na_state", 1, na_state_update);
-	ros::Subscriber pp_state_sub = nh2.subscribe("pp_state", 1, pp_state_update);
-	ros::Subscriber ps_state_sub = nh3.subscribe("ps_state", 1, ps_state_update);
-	ros::Subscriber pa_state_sub = nh4.subscribe("pa_state", 1, pa_state_update);
-	ros::Subscriber nav_NED_sub = nh5.subscribe("nav_ned", 1, pose_update);														// Obtains the USV pose in global NED from mission_control
-	image_transport::ImageTransport it1(nh6);		// transports the images from published node to subscriber
-	image_transport::ImageTransport it2(nh7);
-	image_transport::Subscriber camera_sub = it1.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, LeftCamFunc);				// Analyzes left camera image
-	image_transport::Subscriber camera_sub1 = it2.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, RightCamFunc);	// Analyzes right camera image
-	
-	// Publisher NodeHandles
-	ros::NodeHandle nh8, nh9, nh10, nh11, nh12;
-	
+	ros::Subscriber MC_pa_state_sub = nh1.subscribe("MC_pa_state", 1, MC_pa_state_update);
+	ros::Subscriber MC_na_state_sub = nh2.subscribe("MC_na_state", 1, MC_na_state_update);
+	ros::Subscriber NA_nav_ned_sub = nh3.subscribe("NA_nav_ned", 1, pose_update);  // Obtains the USV pose in global NED from mission_control
+	image_transport::ImageTransport it1(nh4);  // transports the images from published node to subscriber
+	image_transport::ImageTransport it2(nh5);
+	image_transport::Subscriber camera_sub = it1.subscribe("/wamv/sensors/cameras/front_left_camera/image_raw", 1, LeftCamFunc);  // Analyzes left camera image
+	image_transport::Subscriber camera_sub1 = it2.subscribe("/wamv/sensors/cameras/front_right_camera/image_raw", 1, RightCamFunc);  // Analyzes right camera image
+
 	// Publishers
-	task3_pub = nh8.advertise<geographic_msgs::GeoPoseStamped>("/vrx/perception/landmark", 100);
-	ros::Publisher objects_pub = nh9.advertise<std_msgs::Float32>("/objects", 10);					// For publishing object information to mission_control
-	ros::Publisher target_pub = nh10.advertise<std_msgs::Float32>("/target", 10);						// For publishing a target to the weapon_system
-	pa_initialization_state_pub = nh11.advertise<std_msgs::Bool>("pa_initialization_state", 1);	// state of initialization
-	NED_buoys_pub = nh12.advertise<amore::NED_objects>("NED_buoys", 100);					// current buoy IDs with respective locations for planner to use to generate path
-	
+	VRX3_landmark_pub = nh6.advertise<geographic_msgs::GeoPoseStamped>("/vrx/perception/landmark", 100);
+	ros::Publisher objects_pub = nh6.advertise<std_msgs::Float32>("/objects", 10);  // For publishing object information to mission_control
+	ros::Publisher target_pub = nh6.advertise<std_msgs::Float32>("/target", 10);  // For publishing a target to the weapon_system
+	PA_initialization_state_pub = nh6.advertise<std_msgs::Bool>("PA_initialization_state", 1);  // state of initialization
+	PA_NED_buoys_pub = nh6.advertise<amore::NED_objects>("PA_NED_buoys", 100);  // current buoy IDs with respective locations for planner to use to generate path
+
 	// Initialize global variables
-	pa_initialization_status.data = false;
-	current_time = ros::Time::now();   											// sets current time to the time it is now
-	last_time = ros::Time::now();        											// sets last time to the time it is now
+	PA_initialization_state_msg.data = false;
+	current_time = ros::Time::now();  // sets current time to the time it is now
+	last_time = current_time;  // sets last time to the time it is now
   
-	// Set the loop sleep rate
-	ros::Rate loop_rate(50);																// {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
+	// set the frequency for which the program loops at
+	ros::Rate loop_rate(10);																// {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
 
 	ros::spinOnce();
 	loop_rate.sleep();
@@ -1071,12 +1020,11 @@ int main(int argc, char **argv)
 			default:
 				break;
 		} */
-		ros::spinOnce();										// update subscribers
-		loop_rate.sleep();									// sleep for set loop_rate
-		last_time = current_time;						// update last_time
-		//loop_count += 1;									// increment loop counter
-	}
+		ros::spinOnce();  // update subscribers
+		loop_rate.sleep();  // sleep to accomplish set loop_rate
+		last_time = current_time;  // update last_time
+	}  // END OF while(ros::ok())
 	
 	return 0;
-} // end of main()
-//............................................................End of Main Program...........................................................
+}  // END OF main()
+//.........................................................................................................END OF Main Program...........................................................................................................

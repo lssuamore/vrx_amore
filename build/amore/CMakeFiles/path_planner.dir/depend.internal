@@ -4,8 +4,9 @@
 amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o
  /home/brad/vrx_amore/devel/include/amore/NED_acoustic.h
  /home/brad/vrx_amore/devel/include/amore/NED_objects.h
- /home/brad/vrx_amore/devel/include/amore/NED_waypoints.h
- /home/brad/vrx_amore/devel/include/amore/state_msg.h
+ /home/brad/vrx_amore/devel/include/amore/NED_poses.h
+ /home/brad/vrx_amore/devel/include/amore/propulsion_system.h
+ /home/brad/vrx_amore/devel/include/amore/state.h
  /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h
  /home/brad/vrx_amore/src/amore/src/path_planner.cpp
  /opt/ros/noetic/include/geometry_msgs/Point.h

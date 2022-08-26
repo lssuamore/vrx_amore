@@ -1,9 +1,11 @@
 file(REMOVE_RECURSE
   "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_acoustic.js"
   "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js"
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_waypoints.js"
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state_msg.js"
-  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose_msg.js"
+  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_poses.js"
+  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/control_efforts.js"
+  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js"
+  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js"
+  "/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js"
   "CMakeFiles/amore_generate_messages_nodejs"
 )
 

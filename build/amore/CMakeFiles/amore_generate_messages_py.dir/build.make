@@ -53,40 +53,42 @@ CMAKE_BINARY_DIR = /home/brad/vrx_amore/build
 # Include the progress variables for this target.
 include amore/CMakeFiles/amore_generate_messages_py.dir/progress.make
 
-amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py
-amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py
-amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py
+amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py
+amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py
+amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_poses.py
 amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py
 amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_acoustic.py
+amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py
+amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_control_efforts.py
 amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py
 
 
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py: /home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG amore/NED_waypoints"
-	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/NED_waypoints.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py: /home/brad/vrx_amore/src/amore/msg/usv_pose.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG amore/usv_pose"
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/usv_pose.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
 
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py: /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG amore/usv_pose_msg"
-	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/usv_pose_msg.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py: /home/brad/vrx_amore/src/amore/msg/state.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG amore/state"
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/state.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
 
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py: /home/brad/vrx_amore/src/amore/msg/state_msg.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG amore/state_msg"
-	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/state_msg.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_poses.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_poses.py: /home/brad/vrx_amore/src/amore/msg/NED_poses.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_poses.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG amore/NED_poses"
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/NED_poses.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
 
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py: /home/brad/vrx_amore/src/amore/msg/NED_objects.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG amore/NED_objects"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/NED_objects.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
 
@@ -96,21 +98,39 @@ amore/CMakeFiles/amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/pyth
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python from MSG amore/NED_acoustic"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/NED_acoustic.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
 
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py: /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python from MSG amore/propulsion_system"
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
+
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_control_efforts.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_control_efforts.py: /home/brad/vrx_amore/src/amore/msg/control_efforts.msg
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_control_efforts.py: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python from MSG amore/control_efforts"
+	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/brad/vrx_amore/src/amore/msg/control_efforts.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg
+
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py
-/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_poses.py
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py
 /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_acoustic.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python msg __init__.py for amore"
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py
+/home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_control_efforts.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python msg __init__.py for amore"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg --initpy
 
 amore_generate_messages_py: amore/CMakeFiles/amore_generate_messages_py
-amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_waypoints.py
-amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose_msg.py
-amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state_msg.py
+amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_usv_pose.py
+amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_state.py
+amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_poses.py
 amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_objects.py
 amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_NED_acoustic.py
+amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_propulsion_system.py
+amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/_control_efforts.py
 amore_generate_messages_py: /home/brad/vrx_amore/devel/lib/python3/dist-packages/amore/msg/__init__.py
 amore_generate_messages_py: amore/CMakeFiles/amore_generate_messages_py.dir/build.make
 

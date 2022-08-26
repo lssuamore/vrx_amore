@@ -3,8 +3,9 @@
 
 amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/NED_acoustic.h
 amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/NED_objects.h
-amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/NED_waypoints.h
-amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/state_msg.h
+amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/NED_poses.h
+amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/propulsion_system.h
+amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/state.h
 amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h
 amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /home/brad/vrx_amore/src/amore/src/path_planner.cpp
 amore/CMakeFiles/path_planner.dir/src/path_planner.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point.h
