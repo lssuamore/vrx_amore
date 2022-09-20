@@ -157,7 +157,7 @@ UNIT_Wavefield_TEST_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.2
 /home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.6.0
 /home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.10.0
-/home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.12.0
+/home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 /home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.2
 /home/brad/vrx_amore/devel/lib/wave_gazebo_plugins/UNIT_Wavefield_TEST: /usr/lib/x86_64-linux-gnu/libuuid.so

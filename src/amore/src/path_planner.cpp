@@ -29,7 +29,7 @@
 #include "amore/state.h"  // message type used to recieve state of operation from mission_control
 #include "std_msgs/Bool.h"  // message type used for communicating initialization status to mission_control
 #include "amore/propulsion_system.h"  // message type that holds all needed operation information from path_planner for propulsion_system to function
-#include "amore/usv_pose_msg.h"  // message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64
+#include "amore/usv_pose.h"  // message that holds usv position as a geometry_msgs/Point and heading in radians as a Float64 // CURRENTLY NOT USED
 #include "amore/NED_poses.h"  // message type that holds array of converted goal poses with quantity of poses
 #include "amore/NED_acoustic.h"  // message type that holds position of beacon
 #include "amore/NED_objects.h"  // message type that has an array of pointstamped
@@ -59,17 +59,17 @@ int loop_count = 0;  // loop counter
 //	4 = VRX4: Wildlife Encounter and Avoid
 //	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = VRX6: Scan and Dock and Deliver
-int PP_state = 0;
+int PP_state;
 
 //	STATES CONCERNED WITH "navigation_array"
 //	0 = On standby
 //	1 = USV NED state converter
-int NA_state = 0;
+int NA_state;
 
 //	STATES CONCERNED WITH "propulsion_system"
 //	0 = On standby
 //	1 = Propulsion system ON
-int PS_state = 0;
+int PS_state;
 
 //	STATES CONCERNED WITH "perception_array"
 //	0 = On standby
@@ -78,7 +78,7 @@ int PS_state = 0;
 //	4 = VRX4: Wildlife Encounter and Avoid
 //	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = VRX6: Scan and Dock and Deliver
-int PA_state = 0;
+int PA_state;
 
 // STATES CONCERNED WITH "acoustics" 
 // 0 = On standby
@@ -86,7 +86,7 @@ int PA_state = 0;
 // 2 = Navigating between red and green buoys
 // 3 = Finding exit gate (black buoy)
 // 4 = Navigating to acoustic source
-int A_state = 0;
+int A_state;
 
 int point = 0;  // number of points on trajectory reached
 int goal_poses_quantity;  // total number of poses to reach
@@ -96,6 +96,7 @@ float x_goal_poses[100], y_goal_poses[100], psi_goal_poses[100];  // arrays to h
 float x_goal_pose, y_goal_pose, psi_goal_pose;  // current goal pose to be published to propulsion_system
 float x_usv_NED, y_usv_NED, psi_usv_NED;  // vehicle position and heading (pose) in NED
 float e_x, e_y, e_xy, e_psi;  // current errors between goal pose and usv pose
+
 std::string Animal[3];  // string array to hold the names of the animals
 float x_animals_NED[3], y_animals_NED[3];  // arrays to hold animal locations
 
@@ -106,26 +107,24 @@ bool E_never_reached = true;  // true means the last point has never been reache
 float e_xy_allowed = default_position_error_allowed;  // positional error tolerance threshold; NOTE: make as small as possible
 float e_psi_allowed = default_heading_error_allowed;  // heading error tolerance threshold; NOTE: make as small as possible
 
+bool calculations_done = false;  // true means the path has been made
+bool propulsion_system_topic_published = false;  // false means current PP_propulsion_system_topic_msg has not been published
+
+// VRX4: Wildlife Encounter and Avoid variables
 float x_c_NED, y_c_NED, psi_c_NED;  // crocodile position and heading (pose) in NED
 float x_p_NED, y_p_NED, psi_p_NED;  // platypus position and heading (pose) in NED
 float x_t_NED, y_t_NED, psi_t_NED;  // turtle position and heading (pose) in NED
-float r;  // Radius for the circles
-
-// Array of poses for making the circle for the turtle
+float dc_USV, dt_USV, dp_USV , dp_c, dt_c;  // [m] distances between animals and USV
+bool animal_usv_distances_calculated = false;  // false means the distances between the usv and the turtle and platypus have not been calculated
+float r;  // [m] radius for the circle paths around the animals
+// Array of poses for making the turtle circle
 float x_turt_g[9];
 float y_turt_g[9];
 float psi_turt_g[9];
-
-// Array of poses for making the circle for the platypus
+// Array of poses for making the platypus circle
 float x_plat_g[9];
 float y_plat_g[9];
 float psi_plat_g[9];
-
-float dc_USV, dt_USV, dp_USV , dp_c, dt_c;  // [m] distances between animals and USV
-
-bool calculations_done = false;  // true means ... intermediate approach, mid-, and exit points have been calculated and updated globally if PP_state = 5, if PP_state = 4 then this means the path has been made
-bool animal_usv_distances_calculated = false;  // false means the distances between the usv and the turtle and platypus have not been calculated
-bool propulsion_system_topic_published = false;  // false means current PP_propulsion_system_topic_msg has not been published
 
 /* // possible Task 5 variables
 // VARIABLES FOR THE BUOY NAVIGATION CALCULATIONS
@@ -338,6 +337,9 @@ void propulsion_system_topic_publish()
 	PP_propulsion_system_topic_msg.usv_position.y = y_usv_NED;  // sets current USV y-location
 	PP_propulsion_system_topic_msg.usv_position.z = 0.0;  // sets current USV z-location
 	PP_propulsion_system_topic_msg.usv_psi.data = psi_usv_NED;  // sets current USV psi
+	// fill pose error tolerance
+	PP_propulsion_system_topic_msg.e_xy_allowed.data = e_xy_allowed;  // sets position error tolerance
+	PP_propulsion_system_topic_msg.e_psi_allowed.data = e_psi_allowed;  // sets heading error tolerance
 
 	// ROS_INFO("PATH_PLANNER:------PUBLISHING POINT-----");  // UPDATE USER
 	// ROS_INFO("PATH_PLANNER: Point x: %4.2f    Point y: %4.2f\n", x_goal_poses[point], y_goal_poses[point]);  // UPDATE USER
@@ -379,7 +381,10 @@ void CC_animals_ned_update(const amore::NED_objects::ConstPtr& object)
 		   //ROS_INFO("PATH_PLANNER: Animal: %s    x: %4.2f    y: %4.2f", Animal[i].c_str(), x_animals_NED[i], y_animals_NED[i]);  // UPDATE USER
 		}
 		loop_goal_recieved = loop_count;
-		CC_goal_recieved = true;  // true means NED goal poses have been acquired from coordinate_converter
+		if ((x_t_NED != y_t_NED) || (x_t_NED != y_p_NED) || (x_t_NED != x_p_NED))
+		{
+			CC_goal_recieved = true;  // true means NED goal poses have been acquired from coordinate_converter
+		}
 	}  // END OF if (!CC_goal_recieved)
 }  // END OF CC_animals_ned_update()
 
@@ -394,8 +399,13 @@ void animal_distances_calculate()
 	dt_USV = sqrt(pow(x_usv_NED - x_t_NED, 2.0)+pow(y_usv_NED - y_t_NED, 2.0));  // Distance from USV to turtle
 	dt_c = sqrt(pow(x_t_NED - x_c_NED, 2.0)+pow(y_t_NED - y_c_NED, 2.0));  // Distance from turtle to crocodile
 	dp_c  = sqrt(pow(x_p_NED - x_c_NED, 2.0)+pow(y_p_NED - y_c_NED, 2.0));  // Distance from platypus to crocodile
-	ROS_INFO("dp_USV: %4.2f     dt_USV: %4.2f", dp_USV, dt_USV);
-	//ROS_INFO("x_USV: %4.2f     y_USV: %4.2f", x_usv_NED, y_usv_NED);
+	
+	ROS_INFO("PATH_PLANNER:----DISTANCES CALCULATED----");
+	ROS_INFO("PATH_PLANNER: x_USV: %4.2f     y_USV: %4.2f", x_usv_NED, y_usv_NED);
+	ROS_INFO("PATH_PLANNER: x_plat: %4.2f    y_plat: %4.2f", x_p_NED, y_p_NED);
+	ROS_INFO("PATH_PLANNER: x_turt: %4.2f    y_turt: %4.2f", x_t_NED, y_t_NED);
+	ROS_INFO("PATH_PLANNER: dp_USV: %4.2f     dt_USV: %4.2f", dp_USV, dt_USV);
+	ROS_INFO("PATH_PLANNER:----DISTANCES CALCULATED----\n");
 	animal_usv_distances_calculated = true;  // true means the distances between the usv and the turtle and platypus have been calculated
 }  // END OF animal_distances_calculate()
 
@@ -405,109 +415,111 @@ void animal_distances_calculate()
 //=============================================================================================================
 void update_animal_path()
 {
-	r = 5;
-	// Making the circle ccw around turtle
-	// NOTE: currently there is 3.83 [m] between each point
-	x_turt_g[0] = x_t_NED - r;
-	y_turt_g[0] = y_t_NED;
-	psi_turt_g[0] = 90.0 * (PI/180);
-	x_turt_g[1] = x_t_NED - (sqrt(2.0)/2.0)*r;
-	y_turt_g[1] = y_t_NED + (sqrt(2.0)/2.0)*r;
-	psi_turt_g[1] = 45.0 * (PI/180);
-	x_turt_g[2] = x_t_NED;
-	y_turt_g[2] = y_t_NED + r;
-	psi_turt_g[2] = 0.0 * (PI/180);
-	x_turt_g[3] = x_t_NED + (sqrt(2.0)/2.0)*r;
-	y_turt_g[3] = y_t_NED + (sqrt(2.0)/2.0)*r;
-	psi_turt_g[3] = -45.0 * (PI/180);
-	x_turt_g[4] = x_t_NED + r;
-	y_turt_g[4] = y_t_NED;
-	psi_turt_g[4] = -90.0 * (PI/180);
-	x_turt_g[5] = x_t_NED + (sqrt(2.0)/2.0)*r;
-	y_turt_g[5] = y_t_NED - (sqrt(2.0)/2.0)*r;
-	psi_turt_g[5] = -135.0 * (PI/180);
-	x_turt_g[6] = x_t_NED;
-	y_turt_g[6] = y_t_NED - r;
-	psi_turt_g[6] = 180.0 * (PI/180);
-	x_turt_g[7] = x_t_NED - (sqrt(2.0)/2.0)*r;
-	y_turt_g[7] = y_t_NED - (sqrt(2.0)/2.0)*r;
-	psi_turt_g[7] = 135.0 * (PI/180);
-	x_turt_g[8] = x_t_NED - r;
-	y_turt_g[8] = y_t_NED;
-	psi_turt_g[8] = 90.0 * (PI/180);  // change to point away from animal 
-
-	// Making the circle cw around platypus
-	x_plat_g[0] = x_p_NED + r;
-	y_plat_g[0] = y_p_NED;
-	psi_plat_g[0] = 90.0 * (PI/180.0);
-	x_plat_g[1] = x_p_NED + (sqrt(2.0)/2.0)*r;
-	y_plat_g[1] = y_p_NED + (sqrt(2.0)/2.0)*r;
-	psi_plat_g[1] = 135.0 * (PI/180);
-	x_plat_g[2] = x_p_NED;
-	y_plat_g[2] = y_p_NED + r;
-	psi_plat_g[2] = -180.0 * (PI/180);
-	x_plat_g[3] = x_p_NED - (sqrt(2.0)/2.0)*r;
-	y_plat_g[3] = y_p_NED + (sqrt(2.0)/2.0)*r;
-	psi_plat_g[3] = -135.0 * (PI/180);
-	x_plat_g[4] = x_p_NED - r;
-	y_plat_g[4] = y_p_NED;
-	psi_plat_g[4] = -90.0 * (PI/180);
-	x_plat_g[5] = x_p_NED - (sqrt(2.0)/2.0)*r;
-	y_plat_g[5] = y_p_NED - (sqrt(2.0)/2.0)*r;
-	psi_plat_g[5] = -45.0 * (PI/180);
-	x_plat_g[6] = x_p_NED;
-	y_plat_g[6] = y_p_NED - r;
-	psi_plat_g[6] = 0.0 * (PI/180);
-	x_plat_g[7] = x_p_NED + (sqrt(2.0)/2.0)*r;
-	y_plat_g[7] = y_p_NED - (sqrt(2.0)/2.0)*r;
-	psi_plat_g[7] = 45.0 * (PI/180);
-	x_plat_g[8] = x_p_NED + r;
-	y_plat_g[8] = y_p_NED;
-	psi_plat_g[8] = 90.0 * (PI/180);
-
 	if (!animal_usv_distances_calculated)  // if the distances between the USV and the animals has not yet been calculated
 	{
 		animal_distances_calculate();  // updates distances from USV to each animal
 	}
-
-	if (dt_USV <= dp_USV)  // if the distance between the USV and turtle is less than or equal to the distance between the USV and the platypus
+	else if (animal_usv_distances_calculated)
 	{
-		for (int i=0; i<9; i++)
-		{
-			// go to the turtle first
-			x_goal_poses[i] = x_turt_g[i];
-			y_goal_poses[i] = y_turt_g[i];
-			psi_goal_poses[i] = psi_turt_g[i];
-		}
-		//ROS_INFO("x_t_NED: %4.2f    y_t_NED: %4.2f    x_p_NED: %4.2f    y_p_NED: %4.2f", x_t_NED, y_t_NED, x_p_NED, y_p_NED);
+		r = 5;
+		// Making the circle ccw around turtle
+		// NOTE: currently there is 3.83 [m] between each point
+		x_turt_g[0] = x_t_NED - r;
+		y_turt_g[0] = y_t_NED;
+		psi_turt_g[0] = 90.0 * (PI/180);
+		x_turt_g[1] = x_t_NED - (sqrt(2.0)/2.0)*r;
+		y_turt_g[1] = y_t_NED + (sqrt(2.0)/2.0)*r;
+		psi_turt_g[1] = 45.0 * (PI/180);
+		x_turt_g[2] = x_t_NED;
+		y_turt_g[2] = y_t_NED + r;
+		psi_turt_g[2] = 0.0 * (PI/180);
+		x_turt_g[3] = x_t_NED + (sqrt(2.0)/2.0)*r;
+		y_turt_g[3] = y_t_NED + (sqrt(2.0)/2.0)*r;
+		psi_turt_g[3] = -45.0 * (PI/180);
+		x_turt_g[4] = x_t_NED + r;
+		y_turt_g[4] = y_t_NED;
+		psi_turt_g[4] = -90.0 * (PI/180);
+		x_turt_g[5] = x_t_NED + (sqrt(2.0)/2.0)*r;
+		y_turt_g[5] = y_t_NED - (sqrt(2.0)/2.0)*r;
+		psi_turt_g[5] = -135.0 * (PI/180);
+		x_turt_g[6] = x_t_NED;
+		y_turt_g[6] = y_t_NED - r;
+		psi_turt_g[6] = 180.0 * (PI/180);
+		x_turt_g[7] = x_t_NED - (sqrt(2.0)/2.0)*r;
+		y_turt_g[7] = y_t_NED - (sqrt(2.0)/2.0)*r;
+		psi_turt_g[7] = 135.0 * (PI/180);
+		x_turt_g[8] = x_t_NED - r;
+		y_turt_g[8] = y_t_NED;
+		psi_turt_g[8] = 90.0 * (PI/180);  // change to point away from animal 
 
-		for (int i=9; i<18; i++)
+		// Making the circle cw around platypus
+		x_plat_g[0] = x_p_NED + r;
+		y_plat_g[0] = y_p_NED;
+		psi_plat_g[0] = 90.0 * (PI/180.0);
+		x_plat_g[1] = x_p_NED + (sqrt(2.0)/2.0)*r;
+		y_plat_g[1] = y_p_NED + (sqrt(2.0)/2.0)*r;
+		psi_plat_g[1] = 135.0 * (PI/180);
+		x_plat_g[2] = x_p_NED;
+		y_plat_g[2] = y_p_NED + r;
+		psi_plat_g[2] = -180.0 * (PI/180);
+		x_plat_g[3] = x_p_NED - (sqrt(2.0)/2.0)*r;
+		y_plat_g[3] = y_p_NED + (sqrt(2.0)/2.0)*r;
+		psi_plat_g[3] = -135.0 * (PI/180);
+		x_plat_g[4] = x_p_NED - r;
+		y_plat_g[4] = y_p_NED;
+		psi_plat_g[4] = -90.0 * (PI/180);
+		x_plat_g[5] = x_p_NED - (sqrt(2.0)/2.0)*r;
+		y_plat_g[5] = y_p_NED - (sqrt(2.0)/2.0)*r;
+		psi_plat_g[5] = -45.0 * (PI/180);
+		x_plat_g[6] = x_p_NED;
+		y_plat_g[6] = y_p_NED - r;
+		psi_plat_g[6] = 0.0 * (PI/180);
+		x_plat_g[7] = x_p_NED + (sqrt(2.0)/2.0)*r;
+		y_plat_g[7] = y_p_NED - (sqrt(2.0)/2.0)*r;
+		psi_plat_g[7] = 45.0 * (PI/180);
+		x_plat_g[8] = x_p_NED + r;
+		y_plat_g[8] = y_p_NED;
+		psi_plat_g[8] = 90.0 * (PI/180);
+
+		if (dt_USV <= dp_USV)  // if the distance between the USV and turtle is less than or equal to the distance between the USV and the platypus
 		{
-			// go to the platypus second
-			x_goal_poses[i] = x_plat_g[i-9];
-			y_goal_poses[i] = y_plat_g[i-9];
-			psi_goal_poses[i] = psi_plat_g[i-9];
+			for (int i=0; i<9; i++)
+			{
+				// go to the turtle first
+				x_goal_poses[i] = x_turt_g[i];
+				y_goal_poses[i] = y_turt_g[i];
+				psi_goal_poses[i] = psi_turt_g[i];
+			}
+			//ROS_INFO("x_t_NED: %4.2f    y_t_NED: %4.2f    x_p_NED: %4.2f    y_p_NED: %4.2f", x_t_NED, y_t_NED, x_p_NED, y_p_NED);
+
+			for (int i=9; i<18; i++)
+			{
+				// go to the platypus second
+				x_goal_poses[i] = x_plat_g[i-9];
+				y_goal_poses[i] = y_plat_g[i-9];
+				psi_goal_poses[i] = psi_plat_g[i-9];
+			}
 		}
+		else  // if the distance between the USV and turtle is greater than the distance between the USV and the platypus
+		{
+			for (int i=0; i<9; i++)
+			{
+				// go to the platypus first
+				x_goal_poses[i] = x_plat_g[i];
+				y_goal_poses[i] = y_plat_g[i];
+				psi_goal_poses[i] = psi_plat_g[i];
+			}
+			for (int i=9; i<18; i++)
+			{
+				// go to the turtle second
+				x_goal_poses[i] = x_turt_g[i-9];
+				y_goal_poses[i] = y_turt_g[i-9];
+				psi_goal_poses[i] = psi_turt_g[i-9];
+			}
+		}
+		calculations_done = true;
+		goal_poses_quantity = 18;
 	}
-	else  // if the distance between the USV and turtle is greater than the distance between the USV and the platypus
-	{
-		for (int i=0; i<9; i++)
-		{
-			// go to the platypus first
-			x_goal_poses[i] = x_plat_g[i];
-			y_goal_poses[i] = y_plat_g[i];
-			psi_goal_poses[i] = psi_plat_g[i];
-		}
-		for (int i=9; i<18; i++)
-		{
-			// go to the turtle second
-			x_goal_poses[i] = x_turt_g[i-9];
-			y_goal_poses[i] = y_turt_g[i-9];
-			psi_goal_poses[i] = psi_turt_g[i-9];
-		}
-	}
-	calculations_done = true;
-	goal_poses_quantity = 18;
 }  // END OF update_animal_path()
 
 // VRX TASK 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance path planner
@@ -675,7 +687,7 @@ int main(int argc, char **argv)
 	PP_initialization_state_msg.data = false;
 
 	// sets the frequency for which the program loops at 10 = 1/10 second
-	ros::Rate loop_rate(5);  // [Hz] WAS 50
+	ros::Rate loop_rate(20);  // [Hz] WAS 50
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
@@ -704,6 +716,9 @@ int main(int argc, char **argv)
 				{
 					if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
 					{
+						x_goal_pose = x_goal_poses[point];
+						y_goal_pose = y_goal_poses[point];
+						psi_goal_pose = psi_goal_poses[point];
 						propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
 					}
 				}
@@ -715,8 +730,6 @@ int main(int argc, char **argv)
 					e_xy_allowed = VRX2_position_error_allowed;  // default VRX2 positional error tolerance threshold
 					e_psi_allowed = VRX2_heading_error_allowed;  // default VRX2 heading error tolerance threshold
 				}
-				e_xy_allowed = VRX2_position_error_allowed;  // VRX2 positional error tolerance threshold
-				e_psi_allowed = VRX2_heading_error_allowed;  // VRX2 heading error tolerance threshold
 				if ((loop_count > (loop_goal_recieved)) && (CC_goal_recieved))  // if the goal poses have been recieved
 				{
 					if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
@@ -729,12 +742,36 @@ int main(int argc, char **argv)
 						e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
 						e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
-						
+						while ((e_psi < -PI) || (e_psi > PI))
+						{
+							// Adjust e_psi back within -PI and PI
+							if (e_psi < -PI)
+							{
+								e_psi = e_psi + 2.0*PI;
+							}
+							if (e_psi > PI)
+							{
+								e_psi = e_psi - 2.0*PI;
+							}
+						}
+						// UPDATE USER OF POSE ERRORS WHEN CLOSE TO A GOAL POSE
+						if (e_xy < 1.0)
+						{
+							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
+							ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
+							ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
+							ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
+							ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
+							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+						}
 						// dependent on whether or not USV is within pose error tolerance of next goal feed or skip next goal
-						if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
+						if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
 						{
 							point += 1;  // increment the point place keeper
-							ROS_INFO("PATH_PLANNER: Point %i of %i reached.", point, goal_poses_quantity);
+							// UPDATE USER
+							ROS_INFO("PATH_PLANNER:-----POSE REACHED-----");
+							ROS_INFO("PATH_PLANNER:        %i  of  %i", point, goal_poses_quantity);
+							ROS_INFO("PATH_PLANNER:-----POSE REACHED-----\n");
 							if (point == goal_poses_quantity)  // if all the goal poses have been reached
 							{
 							  E_reached = true;  // true means the last pose has been reached
@@ -742,7 +779,6 @@ int main(int argc, char **argv)
 						}
 						else if (E_reached)  // if last point has been reached
 						{
-							ROS_INFO("PATH_PLANNER: End pose has been reached.\n");
 							E_never_reached = false;  // false means the last pose has been reached before
 							// use a smaller tolerance allowance next turn through
 							e_xy_allowed /= 2;  // EXPERIMENT WITH THIS
@@ -772,6 +808,9 @@ int main(int argc, char **argv)
 				break;
 
 			case 4:  // VRX4: Wildlife Encounter and Avoid
+				e_xy_allowed = VRX4_position_error_allowed;  // VRX4 positional error tolerance threshold
+				e_psi_allowed = VRX4_heading_error_allowed;  // VRX4 heading error tolerance threshold
+
 				if ((loop_count > (loop_goal_recieved)) && (CC_goal_recieved))  // if the goal poses have been recieved
 				{
 					if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
@@ -786,12 +825,36 @@ int main(int argc, char **argv)
 							e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
 							e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
 							e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
-							
+							while ((e_psi < -PI) || (e_psi > PI))
+							{
+								// Adjust e_psi back within -PI and PI
+								if (e_psi < -PI)
+								{
+									e_psi = e_psi + 2.0*PI;
+								}
+								if (e_psi > PI)
+								{
+									e_psi = e_psi - 2.0*PI;
+								}
+							}
+							// UPDATE USER OF POSE ERRORS WHEN CLOSE TO A GOAL POSE
+							if (e_xy < 1.0)
+							{
+								ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
+								ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
+								ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
+								ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
+								ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
+								ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+							}
 							// dependent on whether or not USV is within pose error tolerance of next goal feed or skip next goal
-							if ((e_xy < VRX4_position_error_allowed) && (e_psi < VRX4_heading_error_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
+							if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
 							{
 								point += 1;  // increment the point place keeper
-								ROS_INFO("PATH_PLANNER: Point %i of %i reached.", point, goal_poses_quantity);
+								// UPDATE USER
+								ROS_INFO("PATH_PLANNER:-----POSE REACHED-----");
+								ROS_INFO("PATH_PLANNER:        %i  of  %i", point, goal_poses_quantity);
+								ROS_INFO("PATH_PLANNER:-----POSE REACHED-----\n");
 								if (point == goal_poses_quantity)  // if all the goal poses have been reached
 								{
 								  E_reached = true;  // true means the last pose has been reached
@@ -836,8 +899,19 @@ int main(int argc, char **argv)
 						e_y = y_goal_poses[point] - y_usv_NED;  // calculate error in y position
 						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
 						e_psi = psi_goal_poses[point] - psi_usv_NED;  // calculate error in heading
-
-						if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
+						while ((e_psi < -PI) || (e_psi > PI))
+						{
+							// Adjust e_psi back within -PI and PI
+							if (e_psi < -PI)
+							{
+								e_psi = e_psi + 2.0*PI;
+							}
+							if (e_psi > PI)
+							{
+								e_psi = e_psi - 2.0*PI;
+							}
+						}
+						if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
 						{
 							point += 1;  // increment the point place keeper
 							ROS_INFO("Point %i of %i reached. --MC", point, goal_poses_quantity);

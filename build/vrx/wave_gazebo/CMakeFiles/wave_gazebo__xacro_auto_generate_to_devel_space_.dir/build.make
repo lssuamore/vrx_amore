@@ -78,19 +78,23 @@ vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate_to_devel_space_: /ho
 	cd /home/brad/vrx_amore/build/vrx/wave_gazebo && /usr/bin/cmake -E make_directory /home/brad/vrx_amore/devel/share/wave_gazebo/worlds
 
 vrx/wave_gazebo/worlds/ocean.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/worlds/ocean.world.xacro
-vrx/wave_gazebo/worlds/ocean.world: /home/brad/catkin_ws/src/wamv/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/wave_gazebo/worlds/ocean.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "xacro: generating worlds/ocean.world from worlds/ocean.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wave_gazebo/worlds/ocean.world worlds/ocean.world.xacro
 
 vrx/wave_gazebo/worlds/ocean_buoys.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/worlds/ocean_buoys.world.xacro
-vrx/wave_gazebo/worlds/ocean_buoys.world: /home/brad/catkin_ws/src/wamv/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/wave_gazebo/worlds/ocean_buoys.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "xacro: generating worlds/ocean_buoys.world from worlds/ocean_buoys.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wave_gazebo/worlds/ocean_buoys.world worlds/ocean_buoys.world.xacro
 
 vrx/wave_gazebo/worlds/ocean_wamv.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/worlds/ocean_wamv.world.xacro
-vrx/wave_gazebo/worlds/ocean_wamv.world: /home/brad/catkin_ws/src/wamv/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/wave_gazebo/worlds/ocean_wamv.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "xacro: generating worlds/ocean_wamv.world from worlds/ocean_wamv.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/wave_gazebo/worlds/ocean_wamv.world worlds/ocean_wamv.world.xacro
+
+/home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro.erb
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro"
+	cd /home/brad/vrx_amore/src/vrx/wave_gazebo && /usr/bin/erb world_models/ocean_waves/model.xacro.erb > /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 
 wave_gazebo__xacro_auto_generate_to_devel_space_: vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate_to_devel_space_
 wave_gazebo__xacro_auto_generate_to_devel_space_: /home/brad/vrx_amore/devel/share/wave_gazebo/worlds/ocean.world
@@ -100,6 +104,7 @@ wave_gazebo__xacro_auto_generate_to_devel_space_: /home/brad/vrx_amore/devel/sha
 wave_gazebo__xacro_auto_generate_to_devel_space_: vrx/wave_gazebo/worlds/ocean.world
 wave_gazebo__xacro_auto_generate_to_devel_space_: vrx/wave_gazebo/worlds/ocean_buoys.world
 wave_gazebo__xacro_auto_generate_to_devel_space_: vrx/wave_gazebo/worlds/ocean_wamv.world
+wave_gazebo__xacro_auto_generate_to_devel_space_: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 wave_gazebo__xacro_auto_generate_to_devel_space_: vrx/wave_gazebo/CMakeFiles/wave_gazebo__xacro_auto_generate_to_devel_space_.dir/build.make
 
 .PHONY : wave_gazebo__xacro_auto_generate_to_devel_space_

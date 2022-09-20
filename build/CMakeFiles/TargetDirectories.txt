@@ -65,10 +65,8 @@
 /home/brad/vrx_amore/build/amore/CMakeFiles/list_install_components.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/rebuild_cache.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/test.dir
-/home/brad/vrx_amore/build/amore/CMakeFiles/propulsion_system.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/path_planner.dir
-/home/brad/vrx_amore/build/amore/CMakeFiles/PID_HS_controller.dir
-/home/brad/vrx_amore/build/amore/CMakeFiles/PID_HP_controller.dir
+/home/brad/vrx_amore/build/amore/CMakeFiles/propulsion_system.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/navigation_array.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/actionlib_msgs_generate_messages_eus.dir

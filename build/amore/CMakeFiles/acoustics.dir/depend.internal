@@ -4,7 +4,7 @@
 amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.o
  /home/brad/vrx_amore/devel/include/amore/NED_acoustic.h
  /home/brad/vrx_amore/devel/include/amore/NED_objects.h
- /home/brad/vrx_amore/devel/include/amore/state_msg.h
+ /home/brad/vrx_amore/devel/include/amore/state.h
  /home/brad/vrx_amore/devel/include/usv_msgs/RangeBearing.h
  /home/brad/vrx_amore/src/amore/src/acoustics.cpp
  /opt/ros/noetic/include/geographic_msgs/GeoPoint.h
