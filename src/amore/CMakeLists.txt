@@ -139,29 +139,30 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-##[[
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-add_executable(mission_control src/mission_control.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(navigation_array src/navigation_array.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(perception_array src/perception_array.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(PID_HP_controller src/PID_HP_controller.cpp)
-add_executable(PID_HS_controller src/PID_HS_controller.cpp)
-add_executable(propulsion_system src/propulsion_system.cpp)	# COMMENT THIS 1ST CMAKE
-add_executable(path_planner src/path_planner.cpp)
-add_executable(acoustics src/acoustics.cpp)
-add_executable(coordinate_converter src/coordinate_converter.cpp)
+## Declare a C++ library
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/amore.cpp
+# )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
+# AMORE ADDITION NOTICE: Start of block comment: #[[   End of block comment: ]]
+##[[
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/amore_node.cpp)
+add_executable(mission_control src/mission_control.cpp)
+add_executable(navigation_array src/navigation_array.cpp)
+add_executable(perception_array src/perception_array.cpp)
+add_executable(propulsion_system src/propulsion_system.cpp)
+add_executable(path_planner src/path_planner.cpp)
+add_executable(acoustics src/acoustics.cpp)
+add_executable(coordinate_converter src/coordinate_converter.cpp)
+#add_executable(PID_HP_controller src/PID_HP_controller.cpp)
+#add_executable(PID_HS_controller src/PID_HS_controller.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -174,18 +175,16 @@ add_executable(coordinate_converter src/coordinate_converter.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(mission_control ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(navigation_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(perception_array ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
-target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
-target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
-target_link_libraries(propulsion_system ${catkin_LIBRARIES})	# COMMENT THIS 1ST CMAKE
+target_link_libraries(mission_control ${catkin_LIBRARIES})
+target_link_libraries(navigation_array ${catkin_LIBRARIES})
+target_link_libraries(perception_array ${catkin_LIBRARIES})
+target_link_libraries(propulsion_system ${catkin_LIBRARIES})
 target_link_libraries(path_planner ${catkin_LIBRARIES})
 target_link_libraries(acoustics ${catkin_LIBRARIES})
 target_link_libraries(coordinate_converter ${catkin_LIBRARIES})
-
+#target_link_libraries(PID_HP_controller ${catkin_LIBRARIES})
+#target_link_libraries(PID_HS_controller ${catkin_LIBRARIES})
 #]]
-
 #############
 ## Install ##
 #############

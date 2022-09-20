@@ -47,6 +47,7 @@ bool path_planner_initialized = false;
 bool propulsion_system_initialized = false;
 bool perception_array_initialized = false;
 bool acoustic_initialized = false;
+
 bool CC_goal_poses_published = false;  // false means the NED poses have not yet been calculated and published by navigation_array
 int acoustic_task_status;  // status feedback from the acoustic system (subscribed value)
 ros::Time current_time, last_time;  // creates time variables
@@ -300,7 +301,7 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)  // NOTE: To simplify, 
 
 		else if ((msg->name == "wayfinding") && ((msg->state == "ready") || (msg->state == "running")))  // if the wayfinding task is ready or running
 		{
-			MC_pp_state_msg.state.data = 2;  // set path_planner to VRX2: Wayfinding
+			MC_pp_state_msg.state.data = 2;  // set path_planner to VRX2: Wayfinding  // WAS TURNED ON ONCE GOAL POSES WERE PUBLISHED
 			if (CC_goal_poses_published)  // if the goal poses have been converted from lat/long to NED and published by coordinate_converter
 			{
 				MC_na_state_msg.state.data = 1;  // set navigation_array to USV NED state converter
@@ -422,7 +423,8 @@ void state_update(const vrx_gazebo::Task::ConstPtr& msg)  // NOTE: To simplify, 
 		ROS_INFO("MISSION_CONTROL:      PP_state: %i", MC_pp_state_msg.state.data);
 		ROS_INFO("MISSION_CONTROL:      PS_state: %i", MC_ps_state_msg.state.data);
 		ROS_INFO("MISSION_CONTROL:      PA_state: %i", MC_pa_state_msg.state.data);
-		ROS_INFO("MISSION_CONTROL:------------------------\n");
+		ROS_INFO("MISSION_CONTROL:       A_state: %i", MC_a_state_msg.state.data);
+		ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----\n");
 	}  // END OF if (system_initialized)
 }  // END OF state_update()
 //.............................................................................................................END OF Functions...............................................................................................................

@@ -101,7 +101,7 @@ buoyancy_plugin_test_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.2
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.6.0
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.10.0
-/home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.12.0
+/home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.2
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libuuid.so
@@ -136,7 +136,7 @@ buoyancy_plugin_test_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.2
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.6.0
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.10.0
-/home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.12.0
+/home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.2
 /home/brad/vrx_amore/devel/lib/usv_gazebo_plugins/buoyancy_plugin_test: /usr/lib/x86_64-linux-gnu/libuuid.so

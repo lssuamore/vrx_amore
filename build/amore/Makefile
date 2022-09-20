@@ -168,21 +168,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-amore/CMakeFiles/propulsion_system.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/propulsion_system.dir/rule
-.PHONY : amore/CMakeFiles/propulsion_system.dir/rule
-
-# Convenience name for target.
-propulsion_system: amore/CMakeFiles/propulsion_system.dir/rule
-
-.PHONY : propulsion_system
-
-# fast build rule for target.
-propulsion_system/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
-.PHONY : propulsion_system/fast
-
-# Convenience name for target.
 amore/CMakeFiles/path_planner.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/path_planner.dir/rule
 .PHONY : amore/CMakeFiles/path_planner.dir/rule
@@ -198,34 +183,19 @@ path_planner/fast:
 .PHONY : path_planner/fast
 
 # Convenience name for target.
-amore/CMakeFiles/PID_HS_controller.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HS_controller.dir/rule
-.PHONY : amore/CMakeFiles/PID_HS_controller.dir/rule
+amore/CMakeFiles/propulsion_system.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/propulsion_system.dir/rule
+.PHONY : amore/CMakeFiles/propulsion_system.dir/rule
 
 # Convenience name for target.
-PID_HS_controller: amore/CMakeFiles/PID_HS_controller.dir/rule
+propulsion_system: amore/CMakeFiles/propulsion_system.dir/rule
 
-.PHONY : PID_HS_controller
+.PHONY : propulsion_system
 
 # fast build rule for target.
-PID_HS_controller/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
-.PHONY : PID_HS_controller/fast
-
-# Convenience name for target.
-amore/CMakeFiles/PID_HP_controller.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/PID_HP_controller.dir/rule
-.PHONY : amore/CMakeFiles/PID_HP_controller.dir/rule
-
-# Convenience name for target.
-PID_HP_controller: amore/CMakeFiles/PID_HP_controller.dir/rule
-
-.PHONY : PID_HP_controller
-
-# fast build rule for target.
-PID_HP_controller/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
-.PHONY : PID_HP_controller/fast
+propulsion_system/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
+.PHONY : propulsion_system/fast
 
 # Convenience name for target.
 amore/CMakeFiles/navigation_array.dir/rule:
@@ -1172,60 +1142,6 @@ mission_control/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
 .PHONY : mission_control/fast
 
-src/PID_HP_controller.o: src/PID_HP_controller.cpp.o
-
-.PHONY : src/PID_HP_controller.o
-
-# target to build an object file
-src/PID_HP_controller.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.o
-.PHONY : src/PID_HP_controller.cpp.o
-
-src/PID_HP_controller.i: src/PID_HP_controller.cpp.i
-
-.PHONY : src/PID_HP_controller.i
-
-# target to preprocess a source file
-src/PID_HP_controller.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.i
-.PHONY : src/PID_HP_controller.cpp.i
-
-src/PID_HP_controller.s: src/PID_HP_controller.cpp.s
-
-.PHONY : src/PID_HP_controller.s
-
-# target to generate assembly for a file
-src/PID_HP_controller.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/src/PID_HP_controller.cpp.s
-.PHONY : src/PID_HP_controller.cpp.s
-
-src/PID_HS_controller.o: src/PID_HS_controller.cpp.o
-
-.PHONY : src/PID_HS_controller.o
-
-# target to build an object file
-src/PID_HS_controller.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.o
-.PHONY : src/PID_HS_controller.cpp.o
-
-src/PID_HS_controller.i: src/PID_HS_controller.cpp.i
-
-.PHONY : src/PID_HS_controller.i
-
-# target to preprocess a source file
-src/PID_HS_controller.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.i
-.PHONY : src/PID_HS_controller.cpp.i
-
-src/PID_HS_controller.s: src/PID_HS_controller.cpp.s
-
-.PHONY : src/PID_HS_controller.s
-
-# target to generate assembly for a file
-src/PID_HS_controller.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/src/PID_HS_controller.cpp.s
-.PHONY : src/PID_HS_controller.cpp.s
-
 src/acoustics.o: src/acoustics.cpp.o
 
 .PHONY : src/acoustics.o
@@ -1426,10 +1342,8 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... propulsion_system"
 	@echo "... path_planner"
-	@echo "... PID_HS_controller"
-	@echo "... PID_HP_controller"
+	@echo "... propulsion_system"
 	@echo "... navigation_array"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"
@@ -1495,12 +1409,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... mission_control"
-	@echo "... src/PID_HP_controller.o"
-	@echo "... src/PID_HP_controller.i"
-	@echo "... src/PID_HP_controller.s"
-	@echo "... src/PID_HS_controller.o"
-	@echo "... src/PID_HS_controller.i"
-	@echo "... src/PID_HS_controller.s"
 	@echo "... src/acoustics.o"
 	@echo "... src/acoustics.i"
 	@echo "... src/acoustics.s"

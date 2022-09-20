@@ -519,19 +519,6 @@ usv_msgs_generate_messages_lisp/fast:
 .PHONY : usv_msgs_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named propulsion_system
-
-# Build rule for target.
-propulsion_system: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 propulsion_system
-.PHONY : propulsion_system
-
-# fast build rule for target.
-propulsion_system/fast:
-	$(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
-.PHONY : propulsion_system/fast
-
-#=============================================================================
 # Target rules for targets named path_planner
 
 # Build rule for target.
@@ -545,30 +532,17 @@ path_planner/fast:
 .PHONY : path_planner/fast
 
 #=============================================================================
-# Target rules for targets named PID_HS_controller
+# Target rules for targets named propulsion_system
 
 # Build rule for target.
-PID_HS_controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_HS_controller
-.PHONY : PID_HS_controller
+propulsion_system: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 propulsion_system
+.PHONY : propulsion_system
 
 # fast build rule for target.
-PID_HS_controller/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_HS_controller.dir/build.make amore/CMakeFiles/PID_HS_controller.dir/build
-.PHONY : PID_HS_controller/fast
-
-#=============================================================================
-# Target rules for targets named PID_HP_controller
-
-# Build rule for target.
-PID_HP_controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_HP_controller
-.PHONY : PID_HP_controller
-
-# fast build rule for target.
-PID_HP_controller/fast:
-	$(MAKE) -f amore/CMakeFiles/PID_HP_controller.dir/build.make amore/CMakeFiles/PID_HP_controller.dir/build
-.PHONY : PID_HP_controller/fast
+propulsion_system/fast:
+	$(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/build
+.PHONY : propulsion_system/fast
 
 #=============================================================================
 # Target rules for targets named navigation_array
@@ -3275,10 +3249,8 @@ help:
 	@echo "... usv_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... usv_msgs_generate_messages_lisp"
-	@echo "... propulsion_system"
 	@echo "... path_planner"
-	@echo "... PID_HS_controller"
-	@echo "... PID_HP_controller"
+	@echo "... propulsion_system"
 	@echo "... navigation_array"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_eus"

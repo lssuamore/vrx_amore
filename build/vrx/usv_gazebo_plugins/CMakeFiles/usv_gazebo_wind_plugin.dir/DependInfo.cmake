@@ -31,8 +31,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include"
-  "/home/brad/catkin_ws/devel/include"
-  "/home/brad/catkin_ws/src/wamv/vrx/wave_gazebo_plugins/include"
+  "/home/brad/vrx_amore/devel/include"
+  "/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/gazebo-11"

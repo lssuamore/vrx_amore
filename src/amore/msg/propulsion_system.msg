@@ -5,3 +5,5 @@ geometry_msgs/Point usv_position
 std_msgs/Float64 usv_psi
 std_msgs/Float64 usv_latitude
 std_msgs/Float64 usv_longitude
+std_msgs/Float64 e_xy_allowed
+std_msgs/Float64 e_psi_allowed

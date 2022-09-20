@@ -46,7 +46,6 @@
 #include "std_msgs/Float32.h"
 #include "std_msgs/Bool.h"  // message type used for communicating initialization status to mission_control
 #include "amore/state.h"  // message type used to recieve state of operation from mission_control
-#include "amore/usv_pose_msg.h"
 #include "amore/NED_objects.h"
 //......................................................................................End of Included Libraries and Message Types.....................................................................................
 
@@ -96,12 +95,12 @@ bool system_initialized = false;  // false means the system has not been initial
 //	4 = VRX4: Wildlife Encounter and Avoid
 //	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	6 = VRX6: Scan and Dock and Deliver
-int PA_state = 0;
+int PA_state;
 
 //	STATES CONCERNED WITH "navigation_array"
 //	0 = On standby
 //	1 = USV NED state converter
-int NA_state = 0;
+int NA_state;
 
 geographic_msgs::GeoPoseStamped VRX3_landmark_msg;  // message type for VRX Task 3 judges topic, "/vrx/perception/landmark"
 ros::Publisher VRX3_landmark_pub;  // publisher for VRX Task 3 judges topic, "/vrx/perception/landmark"

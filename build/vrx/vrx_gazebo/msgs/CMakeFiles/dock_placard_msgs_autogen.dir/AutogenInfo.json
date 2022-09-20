@@ -46,8 +46,8 @@
 	[
 		"/home/brad/vrx_amore/devel/include",
 		"/home/brad/vrx_amore/src/vrx/vrx_gazebo/include",
-		"/home/brad/catkin_ws/src/wamv/vrx/usv_gazebo_plugins/include",
-		"/home/brad/catkin_ws/src/wamv/vrx/wave_gazebo_plugins/include",
+		"/home/brad/vrx_amore/src/vrx/usv_gazebo_plugins/include",
+		"/home/brad/vrx_amore/src/vrx/wave_gazebo_plugins/include",
 		"/opt/ros/noetic/include",
 		"/opt/ros/noetic/include/xmlrpcpp",
 		"/usr/include/gazebo-11",

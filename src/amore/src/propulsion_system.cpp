@@ -44,19 +44,29 @@
 
 //.................................................................................................................Global Variables..............................................................................................................
 int loop_count = 0;  // loop counter
-int loop_count_ON = 0;  // loop count holder for when the the controller is turned on, used to ensure differential and integral terms are not started until they are calculated
+int loop_count_ON;  // loop count holder for when the the controller is turned on, used to ensure differential and integral terms are not started until they are calculated
 bool PS_state_ON = false;  // used to set and reset the above count holder like a oneshot
 	
 //	STATES CONCERNED WITH "propulsion_system"
-int PS_state = 0;
 //	0 = On standby
 //	1 = Propulsion system ON
-int LL_state = 1;
+int PS_state;
+//	LL_state is the state of the low-level controller
 //	1 = PID HP Dual-azimuthing station keeping controller
 //	2 = PID HP Differential wayfinding controller
 //	3 = PID HP Ackermann controller
+int LL_state = 1;
 
-float dt = 0.25;  // [s] used for differential term  // MAKE THIS A FUNCTION OF THE LOOP RATE 
+//	STATES CONCERNED WITH "path_planner"
+//	0 = On standby
+//	1 = VRX1: Station-Keeping
+//	2 = VRX2: Wayfinding
+//	4 = VRX4: Wildlife Encounter and Avoid
+//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	6 = VRX6: Scan and Dock and 
+int PP_state;
+
+float dt = 0.2;  // [s] used for differential term  // MAKE THIS A FUNCTION OF THE LOOP RATE 
 
 float x_goal, y_goal, psi_goal;  // [m, m, radians] desired position and heading
 float x_usv_NED, y_usv_NED, psi_usv_NED;  // vehicle position and heading (pose) in NED
@@ -72,6 +82,10 @@ float e_x_prev = 0;
 float e_y_prev = 0;
 float e_xy_prev = 0;
 float e_psi_prev = 0;
+
+// pose tolerance from path_planner, used for resetting integral terms
+float e_xy_allowed;  // positional error tolerance threshold; NOTE: make as small as possible
+float e_psi_allowed;  // heading error tolerance threshold; NOTE: make as small as possible
 
 float T_x;  // thrust to set in x-direction in earth-fixed frame
 float T_y;  // thrust to set in y-direction in earth-fixed frame
@@ -199,6 +213,18 @@ void MC_ps_state_update(const amore::state::ConstPtr& msg)
 	}
 } // END OF MC_ps_state_update()
 
+// THIS FUNCTION: Updates the state of "path_planner" given by "mission_control"
+// ACCEPTS: amore::state from "MC_pp_state"
+// RETURNS: (VOID)
+//=============================================================================================================
+void MC_pp_state_update(const amore::state::ConstPtr& msg)
+{
+	if (PS_initialization_state_msg.data)
+	{
+		PP_state = msg->state.data;
+	}
+}  // END OF MC_pp_state_update()
+
 // THIS FUNCTION: Updates the current NED USV pose converted through the navigation_array
 // ACCEPTS: nav_msgs::Odometry from "NA_nav_ned"
 // RETURNS: (VOID)
@@ -225,6 +251,9 @@ void PP_propulsion_system_topic_update(const amore::propulsion_system::ConstPtr&
 	x_goal = topic->goal_position.x;
 	y_goal = topic->goal_position.y;
 	psi_goal = topic->goal_psi.data;
+	// update pose error tolerances
+	e_xy_allowed = topic->e_xy_allowed.data;
+	e_psi_allowed = topic->e_psi_allowed.data;
 }  // END OF PP_propulsion_system_topic_update()
 
 // THIS FUNCTION: Displays the updated gains
@@ -255,16 +284,19 @@ void update_gains_LL_controller()
 	if (PS_state == 1)
 	{
 		// GET ALL GAIN PARAMETERS FROM LAUNCH FILE
-		ros::param::get("/Kp_xy_G", Kp_x);
-		Kp_y = Kp_x; //ros::param::get("/Kp_y_G", Kp_y);
-		ros::param::get("/Kp_psi_G", Kp_psi);
-		ros::param::get("/Kd_xy_G", Kd_x);
-		Kd_y = Kd_x; //ros::param::get("/Kd_y_G", Kd_y);
-		ros::param::get("/Kd_psi_G", Kd_psi);
-		ros::param::get("/Ki_xy_G", Ki_x);
-		Ki_y = Ki_x; //::param::get("/Ki_y_G", Ki_y);
-		ros::param::get("/Ki_psi_G", Ki_psi);
-		display_gains();  // DO NOT COMMENT OUT THIS LINE IF YOU WANT TO PRINT GAINS TO USER 
+		ros::param::get("/kp_xy", Kp_x);
+		Kp_y = Kp_x; //ros::param::get("/kp_y", Kp_y);
+		ros::param::get("/kp_psi", Kp_psi);
+		ros::param::get("/kd_xy", Kd_x);
+		Kd_y = Kd_x; //ros::param::get("/kd_y", Kd_y);
+		ros::param::get("/kd_psi", Kd_psi);
+		ros::param::get("/ki_xy", Ki_x);
+		Ki_y = Ki_x; //::param::get("/ki_y", Ki_y);
+		ros::param::get("/ki_psi_G", Ki_psi);
+		if (PP_state == 1)  // VRX1: Station-Keeping path_planner
+		{
+			display_gains();  // DO NOT COMMENT THIS LINE IF YOU WANT TO PRINT GAINS TO USER
+		}
 	}
 } // END OF update_gains_LL_controller()
 
@@ -275,19 +307,29 @@ void update_gains_LL_controller()
 //=============================================================================================================
 void Integral_reset()
 {
-	if ( ((float)abs(e_x) < 0.1) || ((float)abs(e_x) > 1.0) )  // NOTE: this value may need adjusting
+	if ((float)abs(e_x) > 1.0)  // NOTE: this value may need adjusting
+	//if ( ((float)abs(e_x) <= 0.1) || ((float)abs(e_x) > 1.0) )  // PERHAPS TRY THIS INSTEAD
 	{
 	  e_x_total = 0.0;
 	}
-	if ( ((float)abs(e_y) < 0.1) || ((float)abs(e_y) > 1.0) )  // NOTE: this value may need adjusting
+	if ((float)abs(e_y) > 1.0)  // NOTE: this value may need adjusting
+	//if ( ((float)abs(e_y) <= 0.1) || ((float)abs(e_y) > 1.0) )  // PERHAPS TRY THIS INSTEAD
 	{
 	  e_y_total = 0.0;
 	}
-	if ( ((float)abs(e_xy) < 0.5) || ((float)abs(e_xy) > 1.0) )
+	if ((float)abs(e_xy) > 1.0)
 	{
 	  e_xy_total = 0.0;
 	}
-	if ((float)abs(e_psi) < 0.2)  // NOTE: this value may need adjusting
+	//if ( ((float)abs(e_xy) <= e_xy_allowed) || ((float)abs(e_xy) > 1.0) )
+	//{
+	  //e_xy_total = 0.0;
+	  //e_x_total = 0.0;
+	  //e_y_total = 0.0;
+	//}
+	if ((float)abs(e_psi) >= PI/2)  // NOTE: this value may need adjusting 
+	//if (((float)abs(e_psi) < 0.05) || (e_xy > 3.0))  // PERHAPS TRY THIS INSTEAD
+	//if ((float)abs(e_psi) <= e_psi_allowed)          // OR MAYBE THIS?
 	{
 	  e_psi_total = 0.0;
 	}
@@ -356,7 +398,7 @@ void thrust_saturation_check()
 		}
 		T_p = T_p_C;
 		T_s = T_s_C;
-		ROS_WARN("PROPULSION_SYSTEM:----CORRECTED THRUSTS----");
+		ROS_WARN("PROPULSION_SYSTEM:----STANDARDIZED THRUSTS----");
 		ROS_WARN("PROPULSION_SYSTEM: Port: %4.2f    Stbd: %4.2f\n", T_p, T_s);
 	}
 } // END OF thrust_saturation_check()
@@ -368,34 +410,34 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "propulsion_system");  // names the program for visual purposes
 
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh7;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh7;
 
 	// Subscribers
 	// from mission_control
 	ros::Subscriber MC_ps_state_sub = nh1.subscribe("MC_ps_state", 1, MC_ps_state_update);
+	ros::Subscriber MC_pp_state_sub = nh2.subscribe("MC_pp_state", 1, MC_pp_state_update);
 	// from path_planner
-	ros::Subscriber PP_propulsion_system_topic_sub = nh2.subscribe("PP_propulsion_system_topic", 1, PP_propulsion_system_topic_update);  // path_planner directions update
+	ros::Subscriber PP_propulsion_system_topic_sub = nh3.subscribe("PP_propulsion_system_topic", 1, PP_propulsion_system_topic_update);  // path_planner directions update
 	// from navigation_array
-	ros::Subscriber NA_nav_ned_sub = nh3.subscribe("NA_nav_ned", 1, NA_nav_ned_update);  // Obtains the USV pose in local NED
+	ros::Subscriber NA_nav_ned_sub = nh4.subscribe("NA_nav_ned", 1, NA_nav_ned_update);  // Obtains the USV pose in local NED
 
 	// Publishers
 	// to mission_control
 	PS_initialization_state_pub = nh7.advertise<std_msgs::Bool>("PS_initialization_state", 1);  // state of initialization
-	// to system interface
+	// to the user
+	PS_control_efforts_topic_pub = nh7.advertise<amore::control_efforts>("PS_control_efforts_topic", 1);  // control_efforts
+	
+	// Simulation thruster topics 
 	ros::Publisher right_thrust_cmd_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_cmd", 10);  // between -1.0 and 1.0, speed to right thruster
 	ros::Publisher left_thrust_cmd_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_cmd", 10);  // value between -1.0 and 1.0, speed to left thruster
 	ros::Publisher right_thrust_angle_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/right_thrust_angle", 10);  // value between -PI to PI, angle to right thruster
 	ros::Publisher left_thrust_angle_pub = nh7.advertise<std_msgs::Float32>("/wamv/thrusters/left_thrust_angle", 10);  // value between -PI to PI, angle to left thruster
-	// to the user
-	PS_control_efforts_topic_pub = nh7.advertise<amore::control_efforts>("PS_control_efforts_topic", 1);  // control_efforts
-
-	// Local variables
+	// Simulation variables
 	std_msgs::Float32 left_thrust_cmd_msg, right_thrust_cmd_msg, left_thrust_angle_msg, right_thrust_angle_msg;
 	
 	// Initialize global variables
 	PS_initialization_state_msg.data = false;
 	current_time = ros::Time::now();  // sets current time to the time it is now
-	last_time = current_time;  // sets last time to the time it is now
 	
 	ros::Rate loop_rate((int)1/dt);  // sets the frequency for which the program loops at 100 = 1/100 second  // was 3
 	
@@ -415,6 +457,17 @@ int main(int argc, char **argv)
 			e_y = y_goal - y_usv_NED;
 			e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
 
+			// dynamic controller selector
+			//if (e_xy > 8.0)
+			//{
+			//	LL_state = 2;	// Differential drive
+			//	Kp_x = Kp_x/2.0;
+			//	Kp_psi = Kp_psi*1.4;
+			//}
+			//else
+			//{
+			//	LL_state = 1;
+			//}
 			/* // if within error, have selective gains
 			if (e_xy < 1.0) 
 			{
@@ -575,12 +628,12 @@ int main(int argc, char **argv)
 			// ROS_INFO("PROPULSION_SYSTEM: psi_usv: %.2f", psi_usv_NED);
 			// ROS_INFO("PROPULSION_SYSTEM:---USV POSE---\n");
 
-			ROS_INFO("PROPULSION_SYSTEM:--------ERRORS--------");  // UPDATE USER
-			ROS_INFO("PROPULSION_SYSTEM:     e_x   :  %4.2f", e_x);  // x posn. error
-			ROS_INFO("PROPULSION_SYSTEM:     e_y   :  %4.2f", e_y);  // y posn. error
-			ROS_INFO("PROPULSION_SYSTEM:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
-			ROS_INFO("PROPULSION_SYSTEM:     e_psi :  %4.2f", e_psi);  // heading error
-			ROS_INFO("PROPULSION_SYSTEM:--------ERRORS--------\n");
+			// ROS_INFO("PROPULSION_SYSTEM:--------ERRORS--------");  // UPDATE USER
+			// ROS_INFO("PROPULSION_SYSTEM:     e_x   :  %4.2f", e_x);  // x posn. error
+			// ROS_INFO("PROPULSION_SYSTEM:     e_y   :  %4.2f", e_y);  // y posn. error
+			// ROS_INFO("PROPULSION_SYSTEM:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
+			// ROS_INFO("PROPULSION_SYSTEM:     e_psi :  %4.2f", e_psi);  // heading error
+			// ROS_INFO("PROPULSION_SYSTEM:--------ERRORS--------\n");
 
 			// fill out control_efforts message and publish to "PS_control_efforts_topic"
 			PS_control_efforts_topic_msg.t_x.data = T_x;
@@ -612,7 +665,7 @@ int main(int argc, char **argv)
 				T_y = 0.0;
 			}
 
-			// EXPERIMENTING WITH THIS
+			/* // EXPERIMENTING WITH THIS
 			// if within a meter only control heading
 			if (e_xy < 0.4) 
 			{
@@ -633,7 +686,7 @@ int main(int argc, char **argv)
 			if ((float)abs(e_psi) < 0.1)
 			{
 				M_z = 0.0;
-			}
+			} */
 			
 			// ALLOCATION to go from control_efforts to thruster commands
 			if (LL_state == 1)  // 1 = PID HP Dual-azimuthing station-keeping controller
@@ -756,7 +809,10 @@ int main(int argc, char **argv)
 			left_thrust_cmd_pub.publish(left_thrust_cmd_msg);
 			right_thrust_cmd_pub.publish(right_thrust_cmd_msg);
 		}  // END OF else if (PS_state == 0)
-
+		else  // if PS_state has not yet been recieved from mission_control
+		{
+			ROS_WARN("PROPULSION_SYSTEM:---WAITING TO RECIEVE STATE---\n");
+		}
 		ros::spinOnce();  // update subscribers
 		loop_rate.sleep();  // sleep to accomplish set loop_rate
 		last_time = current_time;  // update last_time

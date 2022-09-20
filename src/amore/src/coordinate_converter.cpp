@@ -40,18 +40,18 @@
 
 //.......................................................................................................................Constants.....................................................................................................................
 #define PI 3.14159265
-#define CONFIRM 4  // count of loops to hold the same data point for before sending next pose to convert
+//#define CONFIRM 2  // count of loops to hold the same data point for before sending next pose to convert
 //................................................................................................................End of Constants...............................................................................................................
 
 //.................................................................................................................Global Variables..............................................................................................................
 int loop_count = 0;  // loop counter
 
 //	STATES CONCERNED WITH "coordinate_converter"
-int CC_state = 0;
 //	0 = On standby
 //	1 = VRX1: Station-Keeping NED goal pose converter
 //	2 = VRX2: Wayfinding NED goal pose converter
 //	4 = VRX4: Wildlife NED animals converter
+int CC_state;
 
 double latitude, longitude, altitude;  // geodetic coordinates
 float vx, vy, vz;  // linear velocities
@@ -82,7 +82,8 @@ float NED_x_goal[100], NED_y_goal[100], NED_psi_goal[100];  // NED converted goa
 
 bool lat_lon_goal_recieved = false;  // false means goal waypoint poses in lat and long coordinates have not been recieved
 bool lat_lon_pose_sent = false;  // false means the current point has not been published to nav_odom for conversion
-bool goal_poses_converted_NED = false;  // false means goal poses have not been converted from lat/long to NED, not used in standard USV 
+bool pose_converted_NED = false;  // false means current goal pose has not been converted from lat/long to NED, this becomes true when lat_lon_pose_sent and its ENU conversion has been subscribed to and then converted with the NED_Func
+bool goal_poses_converted_NED = false;  // false means goal poses have not been converted from lat/long to NED
 
 std_msgs::Bool CC_goal_poses_publish_state_msg;  // "CC_goal_poses_publish_state" message; false means goal NED waypoints have not been published
 ros::Publisher CC_goal_poses_publish_state_pub;  // "CC_goal_poses_publish_state" publisher for whether NED converted waypoints have been published
@@ -98,7 +99,7 @@ ros::Publisher CC_animals_ned_pub;  // "CC_animals_ned" publisher
 bool usv_NED_pose_updated = false;  // false means usv NED pose has not been acquired from navigation_array by the path_planner  // TASK 4
 
 //	STATES CONCERNED WITH "path_planner"
-int PP_state = 0;
+int PP_state;
 //	0 = On standby
 //	1 = VRX1: Station-Keeping
 //	2 = VRX2: Wayfinding
@@ -115,6 +116,7 @@ int PP_state = 0;
 void COORDINATE_CONVERTER_inspector()
 {
 	current_time = ros::Time::now();  // sets current_time to the time it is now
+	ros::spinOnce();
 	loop_count += 1;  // increment loop counter
 	if (loop_count > 3)
 	{
@@ -161,39 +163,44 @@ void MC_pp_state_update(const amore::state::ConstPtr& msg)
 //=============================================================================================================
 void NED_Func(const nav_msgs::Odometry::ConstPtr& enu_state)
 {
-	// Variables
-	float q1, q2, q3, q0, phi, theta, psi;
-	
-	// Convert the position to NED from ENU
-	xNED = enu_state->pose.pose.position.y;
-	yNED = enu_state->pose.pose.position.x;
-	zNED = -(enu_state->pose.pose.position.z);
-	// Convert from quaternion into radians
-	q1 = enu_state->pose.pose.orientation.x;
-	q2 = enu_state->pose.pose.orientation.y;
-	q3 = enu_state->pose.pose.orientation.z;
-	q0 = enu_state->pose.pose.orientation.w;
-	phi = atan2((2.0*(q1*q0 + q3*q2)) , (1.0 - 2.0*(pow(q1,2.0) + pow(q2,2.0)))); 
-	theta = asin(2.0*(q0*q2 - q1*q3));
-	psi = atan2((2.0*(q3*q0 + q1*q2)) , (1.0 - 2.0*(pow(q2,2.0) + pow(q3,2.0))));  // orientation off x-axis
-	// Convert the orientation to NED from ENU
-	phiNED = theta;
-	thetaNED = phi;
-	psiNED = PI/2.0 - psi;
-	// Adjust psiNED back within -PI and PI
-	if (psiNED < -PI)
+	if ((!goal_poses_converted_NED) && (lat_lon_pose_sent))  // if all the goal poses have not been converted yet AND the current goal to be converted has been sent
 	{
-		psiNED = psiNED + 2.0*PI;
-	}
-	if (psiNED > PI)
-	{
-		psiNED = psiNED - 2.0*PI;
-	}
-	// Convert the linear velocity to NED from NWU
-	vxNED = vx;
-	vyNED = -vy;
-	vzNED = -vz;
-	// Convert the angular velocity to NED
+		// Variables
+		float q1, q2, q3, q0, phi, theta, psi;
+		
+		// Convert the position to NED from ENU
+		xNED = enu_state->pose.pose.position.y;
+		yNED = enu_state->pose.pose.position.x;
+		zNED = -(enu_state->pose.pose.position.z);
+		// Convert from quaternion into radians
+		q1 = enu_state->pose.pose.orientation.x;
+		q2 = enu_state->pose.pose.orientation.y;
+		q3 = enu_state->pose.pose.orientation.z;
+		q0 = enu_state->pose.pose.orientation.w;
+		phi = atan2((2.0*(q1*q0 + q3*q2)) , (1.0 - 2.0*(pow(q1,2.0) + pow(q2,2.0)))); 
+		theta = asin(2.0*(q0*q2 - q1*q3));
+		psi = atan2((2.0*(q3*q0 + q1*q2)) , (1.0 - 2.0*(pow(q2,2.0) + pow(q3,2.0))));  // orientation off x-axis
+		// Convert the orientation to NED from ENU
+		phiNED = theta;
+		thetaNED = phi;
+		psiNED = PI/2.0 - psi;
+		// Adjust psiNED back within -PI and PI
+		if (psiNED < -PI)
+		{
+			psiNED = psiNED + 2.0*PI;
+		}
+		if (psiNED > PI)
+		{
+			psiNED = psiNED - 2.0*PI;
+		}
+		// Convert the linear velocity to NED from NWU
+		vxNED = vx;
+		vyNED = -vy;
+		vzNED = -vz;
+		// Convert the angular velocity to NED
+		
+		pose_converted_NED = true;  // true means lat_lon_pose_sent and its ENU conversion has been subscribed to and then converted with the NED_Func
+	}  // END OF if ((!goal_poses_converted_NED) && (lat_lon_pose_sent))
 }  // END OF NED_Func()
 
 // THIS FUNCTION: Fills out nav_odom_msg and publishes to "nav_odom"
@@ -264,7 +271,7 @@ void goal_convert_update()
 //=============================================================================================================
 void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)  // if goal waypoint poses in lat and long coordinates have not been recieved
+	if ((!lat_lon_goal_recieved) && (CC_state != 0))  // if goal waypoint poses in lat and long coordinates have not been recieved and the coordinate_converter is ON
 	{
 		goal_lat[point_num] = goal->pose.position.latitude;
 		goal_long[point_num] = goal->pose.position.longitude;
@@ -276,6 +283,7 @@ void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
 		lat_lon_goal_recieved = true;  // true means goal waypoint poses in lat and long coordinates have been recieved
 
 		// UPDATE USER OF STATUSES
+		std::cout << "\n";
 		ROS_INFO("COORDINATE_CONVERTER: GOAL POSE ACQUIRED FROM VRX TASK 1");
 		ROS_INFO("COORDINATE_CONVERTER: goal_lat: %.2f    goal_long: %.2f\n", goal_lat[point_num], goal_long[point_num]);
 	}
@@ -287,7 +295,7 @@ void VRX_T1_goal_update(const geographic_msgs::GeoPoseStamped::ConstPtr& goal)
 //=============================================================================================================
 void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)  // if goal waypoint poses in lat and long coordinates have not been recieved
+	if ((!lat_lon_goal_recieved) && (CC_state != 0))  // if goal waypoint poses in lat and long coordinates have not been recieved and the coordinate_converter is ON
 	{
 		int i = 0;
 		current_time = goal->header.stamp;  // used to check to see if there are more poses in message
@@ -305,6 +313,7 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 		lat_lon_goal_recieved = true;  // true means goal waypoint poses in lat and long coordinates have been recieved
 
 		// UPDATE USER OF STATUSES
+		std::cout << "\n";
 		ROS_INFO("COORDINATE_CONVERTER: GOAL POSES ACQUIRED FROM VRX TASK 2");
 		ROS_INFO("COORDINATE_CONVERTER: Quantity of goal poses: %i\n", goal_poses_quantity);
 	}
@@ -316,7 +325,7 @@ void VRX_T2_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 //=============================================================================================================
 void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 {
-	if (!lat_lon_goal_recieved)  // if goal waypoint poses in lat and long coordinates have not been recieved
+	if ((!lat_lon_goal_recieved) && (CC_state != 0))  // if goal waypoint poses in lat and long coordinates have not been recieved and the coordinate_converter is ON
 	{
 		int i = 0;
 		current_time = goal->header.stamp;  // used to check to see if there are more poses in message
@@ -335,6 +344,7 @@ void VRX_T4_goal_update(const geographic_msgs::GeoPath::ConstPtr& goal)
 		lat_lon_goal_recieved = true;  // true means goal waypoint poses in lat and long coordinates have been recieved
 		
 		// UPDATE USER OF STATUSES
+		// std::cout << "\n";
 		// ROS_INFO("COORDINATE_CONVERTER: GOAL POSES ACQUIRED FROM VRX TASK 4");
 		// ROS_INFO("COORDINATE_CONVERTER: Quantity of goal poses (should be 3): %i", goal_poses_quantity);
 		// for (int i = 0; i < goal_poses_quantity; i++)
@@ -366,6 +376,7 @@ void PP_USV_pose_update_state_update(const std_msgs::Bool status)
 //=============================================================================================================
 void CC_goal_poses_ned_publish()
 {
+	std::cout << "\n";
 	ROS_INFO("COORDINATE_CONVERTER: PUBLISHING ARRAY OF GOAL POSES WRT LOCAL NED FRAME");  // UPDATE USER
 	goal_poses_ned_msg.poses.clear();
 	goal_poses_ned_msg.quantity = goal_poses_quantity;  // publish quantity of poses so the high level control knows
@@ -461,7 +472,7 @@ int main(int argc, char **argv)
 	last_time = current_time;  // sets last time to the time it is now
 
 	// sets the frequency for which the program loops at 10 = 1/10 second
-	ros::Rate loop_rate(20);  // {Hz}
+	ros::Rate loop_rate(10);  // {Hz} geonav_transform rate: 10
 
 	while(ros::ok())
 	{
@@ -475,14 +486,12 @@ int main(int argc, char **argv)
 		switch(CC_state)
 		{
 			case 0:  // On standby
+				goal_poses_converted_NED = false;  // reset for next times task conversion
 				// if path_planner is in VRX4: Wildlife Encounter and Avoid and the usv pose has been updated in the path_planner, but
 				// the goal_poses_published_state has not been reset
 				if ((PP_state == 4) && (usv_NED_pose_updated) && (CC_goal_poses_publish_state_msg.data))
 				{
 					// reset for next times task conversion
-					point_num = 0;  // reset point_num to begin at 0
-					lat_lon_goal_recieved = false;
-					goal_poses_converted_NED = false;
 					CC_goal_poses_publish_state_msg.data = false;  // reset goal_poses_published_state
 					//ROS_INFO("COORDINATE_CONVERTER: CC_goal_poses_publish_state_msg SHOULD BE RESET");
 				}
@@ -506,12 +515,17 @@ int main(int argc, char **argv)
 		
 		if ((CC_state == 1) || (CC_state == 2) || (CC_state == 4))
 		{
-			if (!goal_poses_converted_NED)  // if Goal Pose Conversion mode
+			if (!goal_poses_converted_NED)  // if all the current goal poses have not been converted to the local NED frame
 			{
+				// while(!lat_lon_goal_recieved)  // while goal poses in lat and long coordinates have not been recieved
+				// {
+					// ros::spinOnce();
+					// loop_rate.sleep();  // sleep to accomplish set loop_rate
+				// }
 				if (!lat_lon_goal_recieved)  // if goal poses in lat and long coordinates have not been recieved
 				{
 					ros::spinOnce();  // cycle the task topic subscriber to get the goal poses in geodetic coordinates
-				}  // if (!lat_lon_goal_recieved)
+				}
 				else if (lat_lon_goal_recieved)  // if goal poses in lat and long coordinates have been recieved
 				{
 					if (!lat_lon_pose_sent)  // if the current point to convert has not been sent
@@ -520,7 +534,7 @@ int main(int argc, char **argv)
 						nav_odom_publish();  // fills nav_odom_msg and publishes to "nav_odom"
 						lat_lon_pose_sent = true;
 					}
-					else if (lat_lon_pose_sent)  // if the current point to convert has been sent
+					else if ((lat_lon_pose_sent) && (pose_converted_NED))  // if the current point to convert has been sent to be converted, AND its ENU conversion has been subscribed to and converted to NED
 					{
 						// Update goal pose array in NED units
 						if (point_num < goal_poses_quantity)  // if not all the poses have been converted yet
@@ -529,20 +543,26 @@ int main(int argc, char **argv)
 							NED_y_goal[point_num] = yNED;
 							NED_psi_goal[point_num] = psiNED;
 							
-							loops_published += 1;
+							/* loops_published += 1;
 							if (loops_published == CONFIRM)
 							{
 								loops_published = 0;  // reset loops_published counter
 								point_num += 1;  // used to keep track of the point being converted
 								lat_lon_pose_sent = false;
-							}
+							} */
+							point_num += 1;  // used to keep track of the point being converted
 						}
 						if (point_num == goal_poses_quantity)  // if all coordinates have been converted
 						{
+							point_num = 0;  // reset point_num to begin at 0
+							//lat_lon_goal_recieved = false;  // reset for next times task conversion
 							goal_poses_converted_NED = true;  // true means goal poses have been converted from lat/long to NED
 							//ROS_INFO("COORDINATE_CONVERTER: GOAL POSES HAVE BEEN CONVERTED, PUBLISHING NEXT");
 						}
-					}  // else if (lat_lon_pose_sent)
+						// reset for next pose's conversion
+						pose_converted_NED = false;
+						lat_lon_pose_sent = false;
+					}  // END OF else if ((lat_lon_pose_sent) && (pose_converted_NED))
 				}  // else if (lat_lon_goal_recieved)
 			}  //  if (!goal_poses_converted_NED)
 			else if ((goal_poses_converted_NED) && (!CC_goal_poses_publish_state_msg.data))  // if the goal poses have been converted to NED convention and have not been published
@@ -559,9 +579,8 @@ int main(int argc, char **argv)
 			}  // else if ((goal_poses_converted_NED) && (!CC_goal_poses_publish_state_msg.data))
 		}  // if ((CC_state == 1) || (CC_state == 2) || (CC_state == 4))
 		
-		ros::spinOnce();  // update subscribers
+		//ros::spinOnce();  // update subscribers
 		loop_rate.sleep();  // sleep to accomplish set loop_rate
-		last_time = current_time;  // update last_time
 	}  // END OF while(ros::ok())
 	
 	return 0;

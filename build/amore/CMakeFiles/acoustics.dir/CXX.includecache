@@ -42,7 +42,7 @@ ros/message_operations.h
 geometry_msgs/PointStamped.h
 -
 
-/home/brad/vrx_amore/devel/include/amore/state_msg.h
+/home/brad/vrx_amore/devel/include/amore/state.h
 string
 -
 vector
@@ -105,8 +105,8 @@ amore/NED_acoustic.h
 /home/brad/vrx_amore/src/amore/src/amore/NED_acoustic.h
 geometry_msgs/Point.h
 /home/brad/vrx_amore/src/amore/src/geometry_msgs/Point.h
-amore/state_msg.h
-/home/brad/vrx_amore/src/amore/src/amore/state_msg.h
+amore/state.h
+/home/brad/vrx_amore/src/amore/src/amore/state.h
 amore/NED_objects.h
 /home/brad/vrx_amore/src/amore/src/amore/NED_objects.h
 

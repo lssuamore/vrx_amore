@@ -15,7 +15,7 @@
 #include "geographic_msgs/GeoPoseStamped.h"
 #include "amore/NED_acoustic.h"										// msg that holds location of acoustic source in NED
 #include "geometry_msgs/Point.h"										// message type used to hold the goal waypoints w/headings
-#include "amore/state_msg.h"												// message type used to recieve state of operation from mission_control
+#include "amore/state.h"												// message type used to recieve state of operation from mission_control
 #include "amore/NED_objects.h"										// message type used to recieve array of buoys from perception_array
 //......................................................................................End of Included Libraries and Message Types.....................................................................................
 
@@ -39,7 +39,7 @@ int red_cnt = 0, green_cnt = 0, white_cnt = 0, black_cnt = 0; // Counters used t
 // 2 = Navigating between red and green buoys
 // 3 = Finding exit gate (black buoy)
 // 4 = Navigating to acoustic source
-int A_state = 0;
+int A_state;
 
 float range_msg, bearing_msg, elevation_msg; 																									// range, bearing, and elevation of acoustic source wrt USV (sub_acoustic function)
 float x_usv_NED, y_usv_NED, psi_NED; 																												// vehicle position and heading (pose) in NED (NA_nav_ned_update function)
@@ -96,10 +96,10 @@ void ACOUSTICS_inspector()
 }  // END OF ACOUSTICS_inspector()
 
 // THIS FUNCTION: Updates the state of "acoustics" given by "mission_control"
-// ACCEPTS: acoustics state_msg from "MC_a_state"
+// ACCEPTS: acoustics state from "MC_a_state"
 // RETURNS: (VOID) Updates global variable
 //=============================================================================================================
-void MC_a_state_update(const amore::state_msg::ConstPtr& msg) 
+void MC_a_state_update(const amore::state::ConstPtr& msg) 
 {
 	if (system_initialized)
 	{
@@ -306,32 +306,32 @@ int main(int argc, char **argv)
 	while(ros::ok())
 	{
 		ACOUSTICS_inspector();
-		A_sourceloc_publish_state_pub.publish(A_sourceloc_publish_state_msg);	// publish whether NED converted waypoints have been published
+		A_sourceloc_publish_state_pub.publish(A_sourceloc_publish_state_msg);  // publish whether NED converted waypoints have been published
 		
-		if(A_state == 0)						// 0 = On standby
+		if(A_state == 0)  // 0 = On standby
 		{
 			// reset
 			bool system_initialized = false;																							
 			bool source_goal_recieved = false; 
 		}
-		else if(A_state == 1)						// 1 = Finding entrance gate (white buoy)
+		else if(A_state == 1)  // 1 = Finding entrance gate (white buoy)
 		{
-			A_system_state_msg.data = 1; //Have passed through the entrance gate
+			A_system_state_msg.data = 1;  // Have passed through the entrance gate
 			A_system_state_pub.publish(A_system_state_msg);
 		}
-		else if(A_state == 2)						// 2 = Navigating between red and green buoys
+		else if(A_state == 2)  // 2 = Navigating between red and green buoys
 		{					
-			A_system_state_msg.data = 2; // Have navigated the buoy channel
+			A_system_state_msg.data = 2;  // Have navigated the buoy channel
 			A_system_state_pub.publish(A_system_state_msg);
 		} 
-		else if(A_state == 3)						// 3 = Finding exit gate (black buoy)
+		else if(A_state == 3)  // 3 = Finding exit gate (black buoy)
 		{
-			A_system_state_msg.data = 3; // Have exited the buoy channel
+			A_system_state_msg.data = 3;  // Have exited the buoy channel
 			A_system_state_pub.publish(A_system_state_msg);
 		}
-		else if(A_state == 4)						// 4 = Navigating to acoustic source
+		else if(A_state == 4)  // 4 = Navigating to acoustic source
 		{
-			sourceloc_calc(); // function getting beacon location
+			sourceloc_calc();  // function getting beacon location
 		}
 	
 		ros::spinOnce();

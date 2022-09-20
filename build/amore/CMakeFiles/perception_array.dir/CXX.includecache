@@ -44,32 +44,6 @@ std_msgs/Header.h
 std_msgs/Int32.h
 -
 
-/home/brad/vrx_amore/devel/include/amore/usv_pose_msg.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-std_msgs/Header.h
--
-geometry_msgs/Point.h
--
-std_msgs/Float64.h
--
-std_msgs/Float64.h
--
-std_msgs/Float64.h
--
-
 /home/brad/vrx_amore/src/amore/src/perception_array.cpp
 ros/ros.h
 /home/brad/vrx_amore/src/amore/src/ros/ros.h
@@ -115,8 +89,6 @@ std_msgs/Bool.h
 /home/brad/vrx_amore/src/amore/src/std_msgs/Bool.h
 amore/state.h
 /home/brad/vrx_amore/src/amore/src/amore/state.h
-amore/usv_pose_msg.h
-/home/brad/vrx_amore/src/amore/src/amore/usv_pose_msg.h
 amore/NED_objects.h
 /home/brad/vrx_amore/src/amore/src/amore/NED_objects.h
 
@@ -1293,22 +1265,6 @@ ros/message_operations.h
 -
 
 /opt/ros/noetic/include/std_msgs/Float32.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-
-/opt/ros/noetic/include/std_msgs/Float64.h
 string
 -
 vector
