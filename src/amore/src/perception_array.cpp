@@ -91,10 +91,10 @@ bool system_initialized = false;  // false means the system has not been initial
 //	STATES CONCERNED WITH "perception_array"
 //	0 = On standby
 //	1 = General State
-//	3 = VRX3: Landmark Localization and Characterization
-//	4 = VRX4: Wildlife Encounter and Avoid
-//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = VRX6: Scan and Dock and Deliver
+//	13 = VRX3: Landmark Localization and Characterization
+//	14 = VRX4: Wildlife Encounter and Avoid
+//	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	16 = VRX6: Scan and Dock and Deliver
 int PA_state;
 
 //	STATES CONCERNED WITH "navigation_array"
@@ -427,7 +427,7 @@ void buoys_publish()
 			color_type_buoy.insert(0, RbHead);											// Append RbHead to the front of color_type_buoy
 		}
 		
-		if (PA_state == 3)
+		if (PA_state == 13)
 		{
 			VRX3_landmark_msg.header.seq +=1;												// sequence number
 			VRX3_landmark_msg.header.stamp = current_time;						// sets stamp to current time
@@ -439,7 +439,7 @@ void buoys_publish()
 		
 		
 		// LUT made to for buoys within [7 - 15] m in front (NORTH) of the USV and [-9 - 9] m to the side of the USV (WEST OR EAST)
-		if ((PA_state == 5) || (PA_state == 3))				// if calculated values are within expected range, put into buoy array  // ((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0)
+		if ((PA_state == 15) || (PA_state == 13))				// if calculated values are within expected range, put into buoy array  // ((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0)
 		{
 			geometry_msgs::PointStamped buoy;						//publisher message type
 			buoy.header.seq +=1;												// sequence number
@@ -452,7 +452,7 @@ void buoys_publish()
 		}
 		color_type_buoy = " ";
 	}
-	if ((PA_state == 5) || (PA_state == 3))
+	if ((PA_state == 15) || (PA_state == 13))
 	{
 		ROS_INFO("Printing array of buoys locations wrt USV -- PA");
 		ROS_INFO("true_size: %2i", true_size);
@@ -839,7 +839,7 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 					}
 					DisparityFunc();			// Use disparity to find the centroids of detected objects wrt local NED frame 
 					
-					if (PA_state == 3)		// If task 3: Landmark Localization and Characterization
+					if (PA_state == 13)		// If task 3: Landmark Localization and Characterization
 					{
 						for (int i=0; i<buoy_total_L; i++)
 						{
@@ -992,28 +992,28 @@ int main(int argc, char **argv)
 		PERCEPTION_ARRAY_inspector();
 		//	0 = On standby
 		//	1 = General State
-		//	3 = Task 3: Landmark Localization and Characterization
-		//	4 = Task 4: Wildlife Encounter and Avoid
-		//	5 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-		//	6 = Task 6: Scan and Dock and Deliver
+		//	13 = Task 3: Landmark Localization and Characterization
+		//	14 = Task 4: Wildlife Encounter and Avoid
+		//	15 = Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+		//	16 = Task 6: Scan and Dock and Deliver
 		/* switch(PA_state)
 		{
-			case 0:						// On standby
+			case 0:  // On standby
 			
 				break;
-			case 1:						// General State
+			case 1:  // General State
 			
 				break;
-			case 3:						// Task 3: Landmark Localization and Characterization
+			case 13:  // Task 3: Landmark Localization and Characterization
 			
 				break;
-			case 4:						// Task 4: Wildlife Encounter and Avoid
+			case 14:  // Task 4: Wildlife Encounter and Avoid
 			
 				break;
-			case 5:						// Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+			case 15:  // Task 5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 			
 				break;
-			case 6:						// Task 6: Scan and Dock and Deliver
+			case16:  // Task 6: Scan and Dock and Deliver
 			
 				break;
 			default:

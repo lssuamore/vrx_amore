@@ -6,6 +6,12 @@ file(REMOVE_RECURSE
   "worlds/scan_dock_deliver.world"
   "worlds/stationkeeping_task.world"
   "worlds/sydneyregatta.world"
+  "worlds/task1.world"
+  "worlds/task3.world"
+  "worlds/task5.world"
+  "worlds/task6.world"
+  "worlds/task7.world"
+  "worlds/vision_proj.world"
   "worlds/wayfinding_task.world"
   "worlds/wildlife_task.world"
 )
