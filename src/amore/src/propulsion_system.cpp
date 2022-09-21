@@ -59,11 +59,11 @@ int LL_state = 1;
 
 //	STATES CONCERNED WITH "path_planner"
 //	0 = On standby
-//	1 = VRX1: Station-Keeping
-//	2 = VRX2: Wayfinding
-//	4 = VRX4: Wildlife Encounter and Avoid
-//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = VRX6: Scan and Dock and 
+//	11 = VRX1: Station-Keeping
+//	12 = VRX2: Wayfinding
+//	14 = VRX4: Wildlife Encounter and Avoid
+//	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	16 = VRX6: Scan and Dock and 
 int PP_state;
 
 float dt = 0.2;  // [s] used for differential term  // MAKE THIS A FUNCTION OF THE LOOP RATE 
@@ -293,7 +293,7 @@ void update_gains_LL_controller()
 		ros::param::get("/ki_xy", Ki_x);
 		Ki_y = Ki_x; //::param::get("/ki_y", Ki_y);
 		ros::param::get("/ki_psi_G", Ki_psi);
-		if (PP_state == 1)  // VRX1: Station-Keeping path_planner
+		if (PP_state == 11)  // VRX1: Station-Keeping path_planner
 		{
 			display_gains();  // DO NOT COMMENT THIS LINE IF YOU WANT TO PRINT GAINS TO USER
 		}

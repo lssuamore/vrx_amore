@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!-- World containing sydneyregatta model and some course challenges -->
+<sdf version="1.6" xmlns:xacro="http://ros.org/wiki/xacro">
+  <world name="robotx_example_course">
+    <xacro:include filename="$(find vrx_gazebo)/worlds/sydneyregatta.xacro" />
+    <xacro:sydneyregatta />
+    <!--Waves-->
+    <xacro:include filename="$(find wave_gazebo)/world_models/ocean_waves/model.xacro"/>
+    <xacro:ocean_waves scale="2.5"/>
+    <!--Wind-->
+    <xacro:include filename="$(find vrx_gazebo)/worlds/xacros/usv_wind_plugin.xacro"/>
+    <xacro:usv_wind_gazebo>
+      <wind_objs>
+        <wind_obj>
+          <name>wamv</name>
+          <link_name>wamv/base_link</link_name>
+          <coeff_vector>.5 .5 .33</coeff_vector>
+        </wind_obj>
+      </wind_objs>
+    </xacro:usv_wind_gazebo>
+    <!-- Add one red and green buoy pair to start dynamic navigation course -->
+    <include>
+      <name>buoy_green_1</name>
+      <uri>model://mb_marker_buoy_green</uri>  <!-- The green buoy -->
+      <pose>-515 185 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_red_1</name>
+      <uri>model://mb_marker_buoy_red</uri>   <!-- The red buoy -->
+      <pose>-525 185 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_green_2</name>
+      <uri>model://mb_marker_buoy_green</uri>  <!-- The green buoy -->
+      <pose>-515 215 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_red_2</name>
+      <uri>model://mb_marker_buoy_red</uri>   <!-- The red buoy -->
+      <pose>-525 215 0.25 0 0 0</pose>
+    </include> -->
+    <!-- Add a second red and green buoy pair to end dynamic navigation course -->
+  </world>
+</sdf>

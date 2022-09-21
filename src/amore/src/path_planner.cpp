@@ -54,11 +54,11 @@ int loop_count = 0;  // loop counter
 
 //	STATES CONCERNED WITH "path_planner"
 //	0 = On standby
-//	1 = VRX1: Station-Keeping
-//	2 = VRX2: Wayfinding
-//	4 = VRX4: Wildlife Encounter and Avoid
-//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = VRX6: Scan and Dock and Deliver
+//	11 = VRX1: Station-Keeping
+//	12 = VRX2: Wayfinding
+//	14 = VRX4: Wildlife Encounter and Avoid
+//	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	16 = VRX6: Scan and Dock and Deliver
 int PP_state;
 
 //	STATES CONCERNED WITH "navigation_array"
@@ -74,10 +74,10 @@ int PS_state;
 //	STATES CONCERNED WITH "perception_array"
 //	0 = On standby
 //	1 = General State
-//	3 = VRX3: Landmark Localization and Characterization
-//	4 = VRX4: Wildlife Encounter and Avoid
-//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-//	6 = VRX6: Scan and Dock and Deliver
+//	13 = VRX3: Landmark Localization and Characterization
+//	14 = VRX4: Wildlife Encounter and Avoid
+//	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+//	16 = VRX6: Scan and Dock and Deliver
 int PA_state;
 
 // STATES CONCERNED WITH "acoustics" 
@@ -198,7 +198,7 @@ void PATH_PLANNER_inspector()
 		PP_initialization_state_msg.data = false;
 		//ROS_INFO("PATH_PLANNER: !path_planner_initialized");
 	}
-	if ((propulsion_system_topic_published) && (PP_state == 4))  // if the PP_propulsion_system_topic has been published and VRX4: Wildlife Encounter and Avoid
+	if ((propulsion_system_topic_published) && (PP_state == 14))  // if the PP_propulsion_system_topic has been published and VRX4: Wildlife Encounter and Avoid
 	{
 		// reset for next update of animal locations
 		CC_goal_recieved = false;  // false means NED goal poses have not been acquired from coordinate_converter
@@ -529,7 +529,7 @@ void update_animal_path()
 //=============================================================================================================
 void A_source_location_update(const amore::NED_acoustic::ConstPtr& sourceloc) 
 {
-	if (PP_state == 5) // if path_planner gymkhana task (task 5)
+	if (PP_state == 15) // if path_planner gymkhana task (task 5)
 	{
 		if (!CC_goal_recieved)  // if the NED goal waypoints have been published but not recieved yet
 		{
@@ -551,7 +551,7 @@ void A_source_location_update(const amore::NED_acoustic::ConstPtr& sourceloc)
 // update left and right buoy centroid location (x,y) in global frame
 void NED_buoys_update (const geometry_msgs::PoseArray::ConstPtr& buoys)
 {
-	if ((PP_initialization_state_msg.data) && (PP_state == 5) && (!NED_buoys_recieved))
+	if ((PP_initialization_state_msg.data) && (PP_state == 15) && (!NED_buoys_recieved))
 	{
 		CL_x = buoys->poses[0].position.x;
 		CL_y = buoys->poses[0].position.y;
@@ -563,7 +563,7 @@ void NED_buoys_update (const geometry_msgs::PoseArray::ConstPtr& buoys)
 
 void calculate_buoy_waypoints()
 {
-	if ((PP_state == 5) && (!calculations_done) && (NED_buoys_recieved))  // if the intermediate approach, mid-, and exit points have been calculated
+	if ((PP_state == 15) && (!calculations_done) && (NED_buoys_recieved))  // if the intermediate approach, mid-, and exit points have been calculated
 	{
 		// hardcode values
 		//CL_x = 37.85;
@@ -711,7 +711,7 @@ int main(int argc, char **argv)
 				//NED_buoys_recieved = false;  // FOR TASK 5
 				break;
 
-			case 1:  // VRX1: Station-Keeping
+			case 11:  // VRX1: Station-Keeping
 				if ((loop_count > (loop_goal_recieved)) && (CC_goal_recieved))
 				{
 					if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
@@ -720,11 +720,39 @@ int main(int argc, char **argv)
 						y_goal_pose = y_goal_poses[point];
 						psi_goal_pose = psi_goal_poses[point];
 						propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
+						
+						e_x = x_goal_pose - x_usv_NED;  // calculate error in x position
+						e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
+						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
+						e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
+						while ((e_psi < -PI) || (e_psi > PI))
+						{
+							// Adjust e_psi back within -PI and PI
+							if (e_psi < -PI)
+							{
+								e_psi = e_psi + 2.0*PI;
+							}
+							if (e_psi > PI)
+							{
+								e_psi = e_psi - 2.0*PI;
+							}
+						}
+						// UPDATE USER OF POSE ERRORS WHEN CLOSE TO A GOAL POSE
+						if (e_xy < 1.0)
+						{
+							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
+							ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
+							ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
+							ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
+							ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
+							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+						}
+						
 					}
 				}
 				break;
 
-			case 2:  // VRX2: Wayfinding
+			case 12:  // VRX2: Wayfinding
 				if (E_never_reached)  // if the end pose has never been reached
 				{
 					e_xy_allowed = VRX2_position_error_allowed;  // default VRX2 positional error tolerance threshold
@@ -807,7 +835,7 @@ int main(int argc, char **argv)
 				}  // END OF if ((loop_count > (loop_goal_recieved)) && (CC_goal_recieved))
 				break;
 
-			case 4:  // VRX4: Wildlife Encounter and Avoid
+			case 14:  // VRX4: Wildlife Encounter and Avoid
 				e_xy_allowed = VRX4_position_error_allowed;  // VRX4 positional error tolerance threshold
 				e_psi_allowed = VRX4_heading_error_allowed;  // VRX4 heading error tolerance threshold
 
@@ -890,7 +918,7 @@ int main(int argc, char **argv)
 				}  // END OF if ((loop_count > (loop_goal_recieved)) && (CC_goal_recieved))
 				break;
 
-			case 5:  // VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+			case 15:  // VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 				if ((loop_count > (loop_goal_recieved)) && (CC_goal_recieved))  // if the goal poses have been recieved
 				{
 					if ((NA_state == 1) && (PS_state == 1) && (!E_reached))  // if the navigation_array is providing NED USV state and the propulsion_system is ON
@@ -926,7 +954,7 @@ int main(int argc, char **argv)
 				}
 				break;
 
-			case 6:  // VRX6: Scan and Dock and Deliver
+			case 16:  // VRX6: Scan and Dock and Deliver
 			
 				break;
 				
