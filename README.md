@@ -49,9 +49,6 @@ Download the following libraries if necessary...
 sudo apt-get install ros-noetic-xacro
 ```
 ```
-sudo apt-get install ros-noetic-gazebo_ros
-```
-```
 sudo apt-get install ros-noetic-geographic-msgs
 ```
 ```
