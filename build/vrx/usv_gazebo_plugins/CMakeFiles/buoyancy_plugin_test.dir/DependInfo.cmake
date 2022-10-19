@@ -36,7 +36,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/gazebo-11"
   "/usr/include/bullet"
-  "/usr/include/sdformat-9.8"
+  "/usr/include/sdformat-9.9"
   "/usr/include/OGRE"
   "/usr/include/OGRE/Terrain"
   "/usr/include/OGRE/Paging"
@@ -49,7 +49,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/eigen3"
   "/usr/src/googletest/googletest/include"
   "/usr/src/googletest/googletest"
-  "/usr/include/sdformat-9.8/sdf/.."
+  "/usr/include/sdformat-9.9/sdf/.."
   "/usr/include/ignition/cmake2"
   "/usr/include/uuid"
   )

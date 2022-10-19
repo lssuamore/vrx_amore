@@ -9,15 +9,27 @@
 
   <!-- create parameters -->
   <param name="/kp_xy" value="0.7" />     <!-- Real-world was 0.1 last time out -->
-  <param name="/kp_psi" value="1.0" />    <!-- Real-world was 0.8 last time out -->
+  <param name="/kp_psi" value="1.42" />    <!-- Real-world was 0.8 last time out -->
   <param name="/ki_xy" value="0.05" />    <!-- Real-world was 0.0 last time out -->
-  <param name="/ki_psi" value="0.01" />   <!-- Real-world was 0.05 last time out -->
+  <param name="/ki_psi" value="0.05" />   <!-- Real-world was 0.05 last time out -->
   <param name="/kd_xy" value="2.0" />     <!-- Real-world was 0.5 last time out -->
   <param name="/kd_psi" value="1.0" />    <!-- Real-world was 2.0 last time out -->
   
   <!-- 0:ON STANDBY, 1:STATION-KEEPING, 2:FIGURE EIGHT -->
   <param name="/MC" value="0" />
-
+  
+  <!-- Start location for the dynamic navigation demonstration -->
+  <param name="/x_DnD" value="160" />      <!-- Meter value in Local NED frame -->
+  <param name="/y_DnD" value="-523" />      <!-- Meter value in Local NED frame -->
+  <param name="/psi_DnD" value="0.0" />    <!-- Radian value between -Pi and Pi -->
+  
+  <!-- Hard code values for buoy positions wrt USV-->
+  <param name="/updated_buoy_pair" value="0" />      <!-- 0 = false  1 = true -->
+  <param name="/x_LB" value="0" />                   <!-- Meter value -->
+  <param name="/y_LB" value="0" />                   <!-- Meter value -->
+  <param name="/x_RB" value="0" />                   <!-- Meter value -->
+  <param name="/y_RB" value="0" />                   <!-- Meter value -->
+  
   <!-- Launches codes -->
   <node pkg="amore" type="navigation_array" name="navigation_array" output="screen">
   </node>

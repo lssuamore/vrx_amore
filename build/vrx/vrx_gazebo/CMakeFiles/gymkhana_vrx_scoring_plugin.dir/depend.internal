@@ -249,11 +249,13 @@ vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_p
  /usr/include/gazebo-11/gazebo/transport/TransportTypes.hh
  /usr/include/gazebo-11/gazebo/transport/transport.hh
  /usr/include/gazebo-11/gazebo/util/system.hh
+ /usr/include/ignition/common3/gz/common/Profiler.hh
+ /usr/include/ignition/common3/gz/common/SingletonT.hh
+ /usr/include/ignition/common3/gz/common/config.hh
+ /usr/include/ignition/common3/gz/common/profiler/Export.hh
+ /usr/include/ignition/common3/gz/common/profiler/detail/Export.hh
  /usr/include/ignition/common3/ignition/common/Profiler.hh
- /usr/include/ignition/common3/ignition/common/SingletonT.hh
  /usr/include/ignition/common3/ignition/common/config.hh
- /usr/include/ignition/common3/ignition/common/profiler/Export.hh
- /usr/include/ignition/common3/ignition/common/profiler/detail/Export.hh
  /usr/include/ignition/math6/gz/math.hh
  /usr/include/ignition/math6/gz/math/AdditivelySeparableScalarField3.hh
  /usr/include/ignition/math6/gz/math/Angle.hh
@@ -340,54 +342,54 @@ vrx/vrx_gazebo/CMakeFiles/gymkhana_vrx_scoring_plugin.dir/src/gymkhana_scoring_p
  /usr/include/ignition/msgs5/ignition/msgs/header.pb.h
  /usr/include/ignition/msgs5/ignition/msgs/material.pb.h
  /usr/include/ignition/msgs5/ignition/msgs/time.pb.h
- /usr/include/sdformat-9.8/sdf/Actor.hh
- /usr/include/sdformat-9.8/sdf/AirPressure.hh
- /usr/include/sdformat-9.8/sdf/Altimeter.hh
- /usr/include/sdformat-9.8/sdf/Assert.hh
- /usr/include/sdformat-9.8/sdf/Atmosphere.hh
- /usr/include/sdformat-9.8/sdf/Box.hh
- /usr/include/sdformat-9.8/sdf/Camera.hh
- /usr/include/sdformat-9.8/sdf/Collision.hh
- /usr/include/sdformat-9.8/sdf/Console.hh
- /usr/include/sdformat-9.8/sdf/Cylinder.hh
- /usr/include/sdformat-9.8/sdf/Element.hh
- /usr/include/sdformat-9.8/sdf/Error.hh
- /usr/include/sdformat-9.8/sdf/Exception.hh
- /usr/include/sdformat-9.8/sdf/Filesystem.hh
- /usr/include/sdformat-9.8/sdf/ForceTorque.hh
- /usr/include/sdformat-9.8/sdf/Frame.hh
- /usr/include/sdformat-9.8/sdf/Geometry.hh
- /usr/include/sdformat-9.8/sdf/Gui.hh
- /usr/include/sdformat-9.8/sdf/Heightmap.hh
- /usr/include/sdformat-9.8/sdf/Imu.hh
- /usr/include/sdformat-9.8/sdf/Joint.hh
- /usr/include/sdformat-9.8/sdf/JointAxis.hh
- /usr/include/sdformat-9.8/sdf/Lidar.hh
- /usr/include/sdformat-9.8/sdf/Light.hh
- /usr/include/sdformat-9.8/sdf/Link.hh
- /usr/include/sdformat-9.8/sdf/Magnetometer.hh
- /usr/include/sdformat-9.8/sdf/Material.hh
- /usr/include/sdformat-9.8/sdf/Mesh.hh
- /usr/include/sdformat-9.8/sdf/Model.hh
- /usr/include/sdformat-9.8/sdf/NavSat.hh
- /usr/include/sdformat-9.8/sdf/Noise.hh
- /usr/include/sdformat-9.8/sdf/Param.hh
- /usr/include/sdformat-9.8/sdf/Pbr.hh
- /usr/include/sdformat-9.8/sdf/Physics.hh
- /usr/include/sdformat-9.8/sdf/Plane.hh
- /usr/include/sdformat-9.8/sdf/Polyline.hh
- /usr/include/sdformat-9.8/sdf/Root.hh
- /usr/include/sdformat-9.8/sdf/SDFImpl.hh
- /usr/include/sdformat-9.8/sdf/Scene.hh
- /usr/include/sdformat-9.8/sdf/SemanticPose.hh
- /usr/include/sdformat-9.8/sdf/Sensor.hh
- /usr/include/sdformat-9.8/sdf/Sky.hh
- /usr/include/sdformat-9.8/sdf/Sphere.hh
- /usr/include/sdformat-9.8/sdf/Surface.hh
- /usr/include/sdformat-9.8/sdf/Types.hh
- /usr/include/sdformat-9.8/sdf/Visual.hh
- /usr/include/sdformat-9.8/sdf/World.hh
- /usr/include/sdformat-9.8/sdf/parser.hh
- /usr/include/sdformat-9.8/sdf/sdf.hh
- /usr/include/sdformat-9.8/sdf/sdf_config.h
- /usr/include/sdformat-9.8/sdf/system_util.hh
+ /usr/include/sdformat-9.9/sdf/Actor.hh
+ /usr/include/sdformat-9.9/sdf/AirPressure.hh
+ /usr/include/sdformat-9.9/sdf/Altimeter.hh
+ /usr/include/sdformat-9.9/sdf/Assert.hh
+ /usr/include/sdformat-9.9/sdf/Atmosphere.hh
+ /usr/include/sdformat-9.9/sdf/Box.hh
+ /usr/include/sdformat-9.9/sdf/Camera.hh
+ /usr/include/sdformat-9.9/sdf/Collision.hh
+ /usr/include/sdformat-9.9/sdf/Console.hh
+ /usr/include/sdformat-9.9/sdf/Cylinder.hh
+ /usr/include/sdformat-9.9/sdf/Element.hh
+ /usr/include/sdformat-9.9/sdf/Error.hh
+ /usr/include/sdformat-9.9/sdf/Exception.hh
+ /usr/include/sdformat-9.9/sdf/Filesystem.hh
+ /usr/include/sdformat-9.9/sdf/ForceTorque.hh
+ /usr/include/sdformat-9.9/sdf/Frame.hh
+ /usr/include/sdformat-9.9/sdf/Geometry.hh
+ /usr/include/sdformat-9.9/sdf/Gui.hh
+ /usr/include/sdformat-9.9/sdf/Heightmap.hh
+ /usr/include/sdformat-9.9/sdf/Imu.hh
+ /usr/include/sdformat-9.9/sdf/Joint.hh
+ /usr/include/sdformat-9.9/sdf/JointAxis.hh
+ /usr/include/sdformat-9.9/sdf/Lidar.hh
+ /usr/include/sdformat-9.9/sdf/Light.hh
+ /usr/include/sdformat-9.9/sdf/Link.hh
+ /usr/include/sdformat-9.9/sdf/Magnetometer.hh
+ /usr/include/sdformat-9.9/sdf/Material.hh
+ /usr/include/sdformat-9.9/sdf/Mesh.hh
+ /usr/include/sdformat-9.9/sdf/Model.hh
+ /usr/include/sdformat-9.9/sdf/NavSat.hh
+ /usr/include/sdformat-9.9/sdf/Noise.hh
+ /usr/include/sdformat-9.9/sdf/Param.hh
+ /usr/include/sdformat-9.9/sdf/Pbr.hh
+ /usr/include/sdformat-9.9/sdf/Physics.hh
+ /usr/include/sdformat-9.9/sdf/Plane.hh
+ /usr/include/sdformat-9.9/sdf/Polyline.hh
+ /usr/include/sdformat-9.9/sdf/Root.hh
+ /usr/include/sdformat-9.9/sdf/SDFImpl.hh
+ /usr/include/sdformat-9.9/sdf/Scene.hh
+ /usr/include/sdformat-9.9/sdf/SemanticPose.hh
+ /usr/include/sdformat-9.9/sdf/Sensor.hh
+ /usr/include/sdformat-9.9/sdf/Sky.hh
+ /usr/include/sdformat-9.9/sdf/Sphere.hh
+ /usr/include/sdformat-9.9/sdf/Surface.hh
+ /usr/include/sdformat-9.9/sdf/Types.hh
+ /usr/include/sdformat-9.9/sdf/Visual.hh
+ /usr/include/sdformat-9.9/sdf/World.hh
+ /usr/include/sdformat-9.9/sdf/parser.hh
+ /usr/include/sdformat-9.9/sdf/sdf.hh
+ /usr/include/sdformat-9.9/sdf/sdf_config.h
+ /usr/include/sdformat-9.9/sdf/system_util.hh

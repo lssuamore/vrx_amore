@@ -22,12 +22,12 @@
   <!-- original values [-532 162 0.1 0 0 1] -->
   <!-- Phase 1 values [-470 218 0.1 0 0 -0.3] -->
   <!-- Visions Project values [-470 218 0.1 0 0 -0.3] -->
-  <arg name="x" default="-520" />
-  <arg name="y" default="170" />
-  <arg name="z" default="0.2" />
-  <arg name="P" default="0" />
-  <arg name="R" default="0" />
-  <arg name="Y" default="1.5707" />
+  <arg name="x" default="-520" />   <!-- -520 -->
+  <arg name="y" default="160" />    <!-- 170 -->
+  <arg name="z" default="0.2" />    <!-- 0.2 -->
+  <arg name="P" default="0" />      <!-- 0 -->
+  <arg name="R" default="0" />      <!-- 0 -->
+  <arg name="Y" default="1.5707" /> <!-- 1.5707 -->
 
   <!-- Allow user specified thruster configurations
        H = stern trusters on each hull

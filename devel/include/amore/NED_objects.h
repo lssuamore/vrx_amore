@@ -8,7 +8,7 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <memory>
 
 #include <ros/types.h>
 #include <ros/serialization.h>
@@ -36,7 +36,7 @@ struct NED_objects_
 
 
 
-   typedef std::vector< ::geometry_msgs::PointStamped_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::geometry_msgs::PointStamped_<ContainerAllocator> >::other >  _objects_type;
+   typedef std::vector< ::geometry_msgs::PointStamped_<ContainerAllocator> , typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::geometry_msgs::PointStamped_<ContainerAllocator> >> _objects_type;
   _objects_type objects;
 
    typedef int32_t _quantity_type;

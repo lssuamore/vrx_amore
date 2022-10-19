@@ -7,7 +7,7 @@
 
   <node pkg="geonav_transform" type="geonav_transform_node" name="geonav_transform_node" clear_params="true" output="screen">
     <!-- Datum as latitude, longitude [decimal deg.], yaw [ENU, degrees] -->
-    <rosparam param="datum">[-33.724223, 150.679736, 0.0]</rosparam>
+    <rosparam param="datum">[-33.724221788056596, 150.6797274940323, 0.0]</rosparam>  <!-- -33.724223, 150.679736, 0.0 -->
   </node>
 
   <!--

@@ -147,39 +147,45 @@ void publish_states()
 	MC_na_state_msg.header.seq +=1;  // sequence number
 	MC_na_state_msg.header.stamp = current_time;  // set stamp to current time
 	MC_na_state_msg.header.frame_id = "mission_control";  // header frame
+	MC_na_state_msg.sim_mode.data = vrx_mode;
 	MC_na_state_pub.publish(MC_na_state_msg);  // publish MC_na_state_msg to "MC_na_state"
 
 	// SEND STATE TO COORDINATE_CONVERTER
 	MC_cc_state_msg.header.seq +=1;  // sequence number
 	MC_cc_state_msg.header.stamp = current_time;  // set stamp to current time
 	MC_cc_state_msg.header.frame_id = "mission_control";  // header frame
+	MC_cc_state_msg.sim_mode.data = vrx_mode;
 	MC_cc_state_pub.publish(MC_cc_state_msg);  // publish MC_cc_state_msg to "MC_cc_state"
 
 	// SEND STATE TO PATH_PLANNER
 	MC_pp_state_msg.header.seq +=1;  // sequence number
 	MC_pp_state_msg.header.stamp = current_time;  // set stamp to current time
 	MC_pp_state_msg.header.frame_id = "mission_control";  // header frame
+	MC_pp_state_msg.sim_mode.data = vrx_mode;
 	MC_pp_state_pub.publish(MC_pp_state_msg);  // publish MC_pp_state_msg to "MC_pp_state"
 
 	// SEND STATE TO PROPULSION_SYSTEM
 	MC_ps_state_msg.header.seq +=1;  // sequence number
 	MC_ps_state_msg.header.stamp = current_time;  // set stamp to current time
 	MC_ps_state_msg.header.frame_id = "mission_control";  // header frame
+	MC_ps_state_msg.sim_mode.data = vrx_mode;
 	MC_ps_state_pub.publish(MC_ps_state_msg);  // publish MC_ps_state_msg to "MC_ps_state"
 
 	// SEND STATE TO PERCEPTION_ARRAY
 	MC_pa_state_msg.header.seq +=1;  // sequence number
 	MC_pa_state_msg.header.stamp = current_time;  // set stamp to current time
 	MC_pa_state_msg.header.frame_id = "mission_control";  // header frame
+	MC_pa_state_msg.sim_mode.data = vrx_mode;
 	MC_pa_state_pub.publish(MC_pa_state_msg);  // publish MC_pa_state_msg to "MC_pa_state"
 
 	// SEND STATE TO ACOUSTICS
 	MC_a_state_msg.header.seq +=1;  // sequence number
 	MC_a_state_msg.header.stamp = current_time;  // set stamp to current time
 	MC_a_state_msg.header.frame_id = "mission_control";  // header frame
+	MC_a_state_msg.sim_mode.data = vrx_mode;
 	MC_a_state_pub.publish(MC_a_state_msg);  // publish MC_a_state_msg to "MC_a_state"
 
-	// UPDATE USER OF EACH CODES STATE
+	/* // UPDATE USER OF EACH CODES STATE
 	ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----");
 	if (!vrx_mode)  // if in user control mode
 	{
@@ -191,7 +197,7 @@ void publish_states()
 	ROS_INFO("MISSION_CONTROL:      PS_state: %i", MC_ps_state_msg.state.data);
 	ROS_INFO("MISSION_CONTROL:      PA_state: %i", MC_pa_state_msg.state.data);
 	ROS_INFO("MISSION_CONTROL:       A_state: %i", MC_a_state_msg.state.data);
-	ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----\n");
+	ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----\n"); */
 } // END OF publish_states()
 
 // THIS FUNCTION: Updates all subsystem states if in real-world mode
