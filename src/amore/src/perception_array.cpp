@@ -11,10 +11,10 @@
 // The program uses OpenCV. 
 
 // Inputs and Outputs
-//				Inputs: Camera sensor data from forward facing cameras, state command from mission_control, USV
-//							pose from mission_control, and data from OpenCV
-//				Outputs: Detected object data to mission_control, target data to weapon_system,
-//							report to mission_control, data to OpenCV
+//		Inputs: Camera sensor data from forward facing cameras, state command from mission_control, USV
+//					 pose from mission_control, and data from OpenCV
+//		Outputs: Detected object data to mission_control, target data to weapon_system,
+//						report to mission_control, data to OpenCV
 
 //...................................................About the sensors.....................................................................
 // Cameras: Two, forward-facing RGB cameras. Update rate is 30 Hz. Our estimated focal length of the camera's
@@ -284,8 +284,8 @@ void USVtoECEF(float Bn, float Be, float Un, float Ue, float Ud, float Upsi, int
 {
 	// Variables
 	// Could add Bd if the program gets improved. This would allow us to find the object in 3-space
-	double r11, r12, r13, r21, r22, r23, r31, r32, r33;								// Transformation from local NED to global NED (Rz)
-	float bn, be, bd, bE, bN, bU, x, y, z;													// Variables to hold object position in various frames
+	double r11, r12, r13, r21, r22, r23, r31, r32, r33;  // Transformation from local NED to global NED (Rz)
+	float bn, be, bd, bE, bN, bU, x, y, z;  // Variables to hold object position in various frames
 	
 	// Populate Rz matrix
 	r11 = cos(Upsi);
@@ -308,7 +308,7 @@ void USVtoECEF(float Bn, float Be, float Un, float Ue, float Ud, float Upsi, int
 	// Convert from global NED to global ENU
 	bE = bn;
 	bN = be;
-	bU = -Ud - 1.0;															// u-coordinate - USV's offset
+	bU = -Ud - 1.0;  // u-coordinate - USV's offset
 	// Convert from global ENU to rectangular ECEF
 	x = (R11*bE + R12*bN + R13*bU) - 4630032.0;
 	y = (R21*bE + R22*bN + R23*bU) + 2600407.0;
@@ -347,9 +347,9 @@ void HSVFunc(cv::Mat imgHSV)
 	am_background_high = cv::Scalar(33, 255, 255);  */
 	
 	// Fog scenario #1
-	cv::inRange(imgHSV, fog_background_low, fog_background_high, fog_background_mask);									// Masks imgHSV based on limits, copies to fog_background_mask
-	cv::findContours(fog_background_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds contours around coloured objects and draws a rectangle around the object
-	if (contours.size() >0)																																					// Set new color limits
+	cv::inRange(imgHSV, fog_background_low, fog_background_high, fog_background_mask);  // Masks imgHSV based on limits, copies to fog_background_mask
+	cv::findContours(fog_background_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds contours around coloured objects and draws a rectangle around the object
+	if (contours.size() >0)  // Set new color limits
 	{
 		green_low = cv::Scalar(59, 25, 0);  
 		green_high = cv::Scalar(100, 255, 255); 
@@ -363,9 +363,9 @@ void HSVFunc(cv::Mat imgHSV)
 		black_high = cv::Scalar(179, 0, 125);
 	}
 	// Fog scenario #2
-	cv::inRange(imgHSV, fog_background1_low, fog_background1_high, fog_background1_mask);							// Masks imgHSV based on limits, copies to fog_background1_mask
-	cv::findContours(fog_background1_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);	// Finds contours around coloured objects and draws a rectangle around the object
-	if (contours.size() >0)																																					// Set new color limits
+	cv::inRange(imgHSV, fog_background1_low, fog_background1_high, fog_background1_mask);  // Masks imgHSV based on limits, copies to fog_background1_mask
+	cv::findContours(fog_background1_mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds contours around coloured objects and draws a rectangle around the object
+	if (contours.size() >0)  // Set new color limits
 	{
 		green_low = cv::Scalar(59, 50, 0);  
 		green_high = cv::Scalar(100, 255, 255); 
@@ -381,8 +381,8 @@ void HSVFunc(cv::Mat imgHSV)
 	} // end of HSVFunc()
 
 // THIS FUNCTION: Performs iteritive buoy ID concatination using the colors and typers ID arrays
-//                                  Publishes the buoy IDs with ECEF locations of the buoys to "/vrx/perception/landmark"
-//                                  Publishes the buoy IDs with local NED locations of the buoys to "PA_NED_buoys"
+//		Publishes the buoy IDs with ECEF locations of the buoys to "/vrx/perception/landmark"
+//		Publishes the buoy IDs with local NED locations of the buoys to "PA_NED_buoys"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
 //=============================================================================================================
@@ -395,7 +395,7 @@ void buoys_publish()
 	
 	for (int i=0; i<buoy_total_L; i++)
 	{
-		current_time = ros::Time::now(); 							// time update
+		current_time = ros::Time::now();  // time update
 		switch(colors[i])
 		{
 			// 1: RED; 2: GREEN; 3: ORANGE; 4: WHITE; 5: BLACK
@@ -417,53 +417,54 @@ void buoys_publish()
 			default:
 				break;
 		}
+		// create buoy string name
 		color_type_buoy = buoy_id;
 		if (typers[i] == 'm')
 		{
-			color_type_buoy.insert(0, MbHead);											// Append MbHead to the front of color_type_buoy
+			color_type_buoy.insert(0, MbHead);  // Append MbHead to the front of color_type_buoy
 		}
 		else if (typers[i] == 'r')
 		{
-			color_type_buoy.insert(0, RbHead);											// Append RbHead to the front of color_type_buoy
+			color_type_buoy.insert(0, RbHead);  // Append RbHead to the front of color_type_buoy
 		}
 		
 		if (PA_state == 13)
 		{
-			VRX3_landmark_msg.header.seq +=1;												// sequence number
-			VRX3_landmark_msg.header.stamp = current_time;						// sets stamp to current time
-			VRX3_landmark_msg.header.frame_id = color_type_buoy.c_str(); 	// header frame
+			VRX3_landmark_msg.header.seq +=1;  // sequence number
+			VRX3_landmark_msg.header.stamp = current_time;  // sets stamp to current time
+			VRX3_landmark_msg.header.frame_id = color_type_buoy.c_str();  // header frame
 			VRX3_landmark_msg.pose.position.latitude = new_lat[i];
 			VRX3_landmark_msg.pose.position.longitude = new_long[i];
 			VRX3_landmark_pub.publish(VRX3_landmark_msg);
 		}
 		
-		
-		// LUT made to for buoys within [7 - 15] m in front (NORTH) of the USV and [-9 - 9] m to the side of the USV (WEST OR EAST)
-		if ((PA_state == 15) || (PA_state == 13))				// if calculated values are within expected range, put into buoy array  // ((x_offset[i]) < 15.0) && ((x_offset[i]) > 5.0) && ((y_offset[i]) < 10.0) && ((y_offset[i]) > -10.0)
+		/* // LUT made for buoys within [7 - 15] m in front (NORTH) of the USV and [-9 - 9] m to the side of the USV (WEST OR EAST)
+		if ((x_offset[i] < 15.0) && (x_offset[i] > 5.0) && (y_offset[i] < 10.0) && (y_offset[i] > -10.0)) // if calculated values are within expected range, put into buoy array
 		{
-			geometry_msgs::PointStamped buoy;						//publisher message type
-			buoy.header.seq +=1;												// sequence number
-			buoy.header.stamp = current_time;							// sets stamp to current time
-			buoy.header.frame_id = color_type_buoy.c_str(); 	// header frame
-			buoy.point.x = x_offset[i];
-			buoy.point.y = y_offset[i];
-			PA_NED_buoys_msg.objects.push_back(buoy);
-			true_size += 1;
-		}
+			
+		} */
+		geometry_msgs::PointStamped buoy;  // publisher message type
+		buoy.header.seq +=1;  // sequence number
+		buoy.header.stamp = current_time;  // sets stamp to current time
+		buoy.header.frame_id = color_type_buoy.c_str();  // header frame
+		buoy.point.x = x_offset[i];
+		buoy.point.y = y_offset[i];
+		PA_NED_buoys_msg.objects.push_back(buoy);
+		true_size += 1;
+
+		// reset for next loop
 		color_type_buoy = " ";
 	}
-	if ((PA_state == 15) || (PA_state == 13))
+
+	/* ROS_INFO("PERCEPTION_ARRAY: Printing array of buoys locations wrt USV");
+	ROS_INFO("PERCEPTION_ARRAY: true_size: %2i", true_size);
+	
+	for (int j=0; j<true_size; j++)
 	{
-		ROS_INFO("Printing array of buoys locations wrt USV -- PA");
-		ROS_INFO("true_size: %2i", true_size);
-		
-		for (int j=0; j<true_size; j++)
-		{
-			ROS_INFO("Buoy: %s		number: %2i			x: %4.2f			y: %4.2f", PA_NED_buoys_msg.objects[j].header.frame_id.c_str(), j, PA_NED_buoys_msg.objects[j].point.x, PA_NED_buoys_msg.objects[j].point.y);
-		}
-		PA_NED_buoys_msg.quantity = true_size;				// publish quantity of poses so the path planner knows
-		PA_NED_buoys_pub.publish(PA_NED_buoys_msg);		// publish left and right buoy locations, respectively, in array "PA_NED_buoys"
-	}
+		ROS_INFO("PERCEPTION_ARRAY: Buoy: %s	number: %2i   x: %4.2f   y: %4.2f", PA_NED_buoys_msg.objects[j].header.frame_id.c_str(), j, PA_NED_buoys_msg.objects[j].point.x, PA_NED_buoys_msg.objects[j].point.y);
+	} */
+	PA_NED_buoys_msg.quantity = true_size;  // publish quantity of poses so the path planner knows
+	PA_NED_buoys_pub.publish(PA_NED_buoys_msg);  // publish left and right buoy locations, respectively, in array "PA_NED_buoys"
 } // end of buoys_publish()
 
 // THIS FUNCTION: Fills out the global buoy camera image centroids, as well as the buoy IDs (color and type)
@@ -472,7 +473,7 @@ void buoys_publish()
 //=============================================================================================================
 int ClassLocFunc(int cunter, int ckey, int keyer)
 {
-	float y1, y2;																																		// Hold the distance values from centroid to extreme point [pixels]
+	float y1, y2;  // Hold the distance values from centroid to extreme point [pixels]
 	int first_counter = 0;
 	
 	// For LeftCamFunc() vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
@@ -500,14 +501,14 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				break;
 		}
 		
-		vector<Moments> mu(contours.size());																		// Holds the moments of the blob
-		std::vector<cv::Point> pts;																							// Used in finding the extreme points
-		vector<Point2f> mc(contours.size());																			// Holds the mass centroid
+		vector<Moments> mu(contours.size());  // Holds the moments of the blob
+		std::vector<cv::Point> pts;  // Used in finding the extreme points
+		vector<Point2f> mc(contours.size());  // Holds the mass centroid
 		
 		for (int i=0; i < contours.size(); i++)
 		{
-			cv::Rect boundRect = cv::boundingRect(contours[i]);													// Finds and saves locations of bounding rectangles
-			if ((boundRect.area() > 100) && (boundRect.width < 1000))											// Filter out small noise
+			cv::Rect boundRect = cv::boundingRect(contours[i]);  // Finds and saves locations of bounding rectangles
+			if ((boundRect.area() > 100) && (boundRect.width < 1000))  // Filter out small noise
 			{
 				/* // Draws the bounding rectangles on the image
 				if (ckey == 1)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 255), 3);			}
@@ -516,21 +517,21 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				if (ckey == 4)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 179, 255), 3);		}
 				if (ckey == 5)		{		cv::rectangle(background, boundRect.tl(), boundRect.br(), cv::Scalar(0, 0, 0), 3);				} */
 				
-				mu[i] = cv::moments(contours[i], false);																	// This calculates the moments of the contours, but these change depeding on scaling
+				mu[i] = cv::moments(contours[i], false);  // This calculates the moments of the contours, but these change depeding on scaling
 				pts = contours[i];
-				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);								// Finds the centroid of each BLOB [pixels]
-				u_x[cunter+first_counter] = mc[i].x;																								// x-bar of centroid [pixels]
-				v_y[cunter+first_counter] = mc[i].y;																								// y-bar of centroid [pixels]
-				colors[cunter+first_counter] = ckey;																								// Orders the colors to the respective u_x, u_y centroids
-				first_counter += 1;																												// Counter for the number of BLOBs
+				mc[i] = Point2f(mu[i].m10/mu[i].m00 , mu[i].m01/mu[i].m00);  // Finds the centroid of each BLOB [pixels]
+				u_x[cunter+first_counter] = mc[i].x;  // x-bar of centroid [pixels]
+				v_y[cunter+first_counter] = mc[i].y;  // y-bar of centroid [pixels]
+				colors[cunter+first_counter] = ckey;  // Orders the colors to the respective u_x, u_y centroids
+				first_counter += 1;  // Counter for the number of BLOBs
 			}
 		}
 		
 		// fill out the buoy shape type
 		for( int i = 0; i<contours.size(); i++ )
 		{
-			cv::Rect boundRect = cv::boundingRect(contours[i]);													// Finds and saves locations of bounding rectangles
-			if ((boundRect.area() > 100) && (boundRect.width < 1000))											// Filter out small noise
+			cv::Rect boundRect = cv::boundingRect(contours[i]);  // Finds and saves locations of bounding rectangles
+			if ((boundRect.area() > 100) && (boundRect.width < 1000))  // Filter out small noise
 			{
 				// Finds extreme points of buoys
 				auto val = std::minmax_element(pts.begin(), pts.end(), [](Point const& a, Point const& b){return a.x < b.x;});
@@ -541,22 +542,22 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 				//	Buoy classification based on extreme point ratio, Ry
 				Ry = y1 / y2;
 				// Classify the buoys	
-				area = cv::contourArea(contours[i]);																													// Area of the given BLOB. [pixels]
-				perimeter = cv::arcLength(contours[i], true);																									// Perimeter of the given BLOB. [pixels]
-				compactness = (area) / (pow(perimeter, 2));																									// Compactness of given BLOB
-				if ((compactness >= MbCMIN & compactness <= MbCMAX) && (Ry >= MbRMIN & Ry <= MbRMAX))	// Finds marker/regular buoys
+				area = cv::contourArea(contours[i]);  // Area of the given BLOB. [pixels]
+				perimeter = cv::arcLength(contours[i], true);  // Perimeter of the given BLOB. [pixels]
+				compactness = (area) / (pow(perimeter, 2));  // Compactness of given BLOB
+				if ((compactness >= MbCMIN & compactness <= MbCMAX) && (Ry >= MbRMIN & Ry <= MbRMAX))  // Finds marker/regular buoys
 				{
-					typers[cunter] = 'm';		// 'm' = mb_marker_buoy_
+					typers[cunter] = 'm';  // 'm' = mb_marker_buoy_
 				}
-				else if ((compactness >= RbCMIN & compactness <= RbCMAX)  && (Ry >= RbRMIN & Ry <= RbRMAX))	// Finds the round buoys
+				else if ((compactness >= RbCMIN & compactness <= RbCMAX)  && (Ry >= RbRMIN & Ry <= RbRMAX))  // Finds the round buoys
 				{
-					typers[cunter] = 'r';			// 'r' = mb_round_buoy_
+					typers[cunter] = 'r';  // 'r' = mb_round_buoy_
 				}
 				else 
 				{
-					typers[cunter] = 'm';		// 'm' = mb_marker_buoy_					SET TO mb_marker_buoy_ IF NEITHER TYPE WAS DETECTED
+					typers[cunter] = 'm';  // 'm' = mb_marker_buoy_					SET TO mb_marker_buoy_ IF NEITHER TYPE WAS DETECTED
 				}
-				cunter += 1;																												// Counter for the number of BLOBs
+				cunter += 1;  // Counter for the number of BLOBs
 			}
 		}
 	}
@@ -565,15 +566,15 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 	{
 		for (int i=0; i < contours1.size(); i++)
 		{
-			cv::Rect boundRect = cv::boundingRect(contours1[i]);									// Finds and saves locations of bounding rectangles
-			if ((boundRect.area() > 100) && (boundRect.width < 1000))							// Filter out small noise
+			cv::Rect boundRect = cv::boundingRect(contours1[i]);  // Finds and saves locations of bounding rectangles
+			if ((boundRect.area() > 100) && (boundRect.width < 1000))  // Filter out small noise
 			{			
-				vector<Moments> mu1(contours1.size());													// Holds the moments of the blob
-				vector<Point2f> mc1(contours1.size());														// Holds the mass centroid
-				mu1[i] = cv::moments(contours1[i], false);													// This calculates the moments of the red contours, but these change depeding on scaling
-				mc1[i] = Point2f(mu1[i].m10/mu1[i].m00 , mu1[i].m01/mu1[i].m00);			// Finds the centroid of each BLOB [pixels]
-				u_x1[cunter] = mc1[i].x;																				// x-bar of centroid [pixels]
-				v_y1[cunter] = mc1[i].y;																				// y-bar of centroid [pixels]
+				vector<Moments> mu1(contours1.size());  // Holds the moments of the blob
+				vector<Point2f> mc1(contours1.size());  // Holds the mass centroid
+				mu1[i] = cv::moments(contours1[i], false);  // This calculates the moments of the red contours, but these change depeding on scaling
+				mc1[i] = Point2f(mu1[i].m10/mu1[i].m00 , mu1[i].m01/mu1[i].m00);  // Finds the centroid of each BLOB [pixels]
+				u_x1[cunter] = mc1[i].x;  // x-bar of centroid [pixels]
+				v_y1[cunter] = mc1[i].y;  // y-bar of centroid [pixels]
 				cunter += 1;			
 			}
 		}
@@ -588,37 +589,37 @@ int ClassLocFunc(int cunter, int ckey, int keyer)
 float fpLUT(float zz)
 {
 	float focal_length;
-	zz = round(zz - 6.0);				// Use longitudinal distance to find entry for LUT
+	zz = round(zz - 6.0);  // Use longitudinal distance to find entry for LUT
 	switch(int(zz))
 	{
-		case 0:								// <7m
+		case 0:  // <7m
 			focal_length = 865.0;
 			break;
-		case 1:								// 7m
+		case 1:  // 7m
 			focal_length = 855.0;
 			break;
-		case 2:								// 8m
+		case 2:  // 8m
 			focal_length = 846.0;
 			break;
-		case 3:								// 9m
+		case 3:  // 9m
 			focal_length = 839.2;
 			break;
-		case 4:								// 10m
+		case 4:  // 10m
 			focal_length = 837.0;
 			break;
-		case 5:								// 11m
+		case 5:  // 11m
 			focal_length = 829.0;
 			break;
-		case 6:								// 12m
+		case 6:  // 12m
 			focal_length = 826.1;
 			break;
-		case 7:								// 13m
+		case 7:  // 13m
 			focal_length = 823.0;
 			break;
-		case 8:								// 14m
+		case 8:  // 14m
 			focal_length = 821.0;
 			break;
-		case 9:								// 15m
+		case 9:  // 15m
 			focal_length = 815.9;
 			break;
 		default:
@@ -638,37 +639,37 @@ float lateral_gainLUT(float latzz)
 	// This LUT is referenced to a longitudinal translation of 13m
 	switch(int(latzz))
 	{
-		case 0:						// in-line
+		case 0:  // in-line
 			gainer = 62.5;
 			break;
-		case 1:						// 1m shift
+		case 1:  // 1m shift
 			gainer = 62.5;
 			break;
-		case 2:						// 2m shift
+		case 2:  // 2m shift
 			gainer = 62.5;
 			break;
-		case 3:						// 3m shift
+		case 3:  // 3m shift
 			gainer = 62.5;
 			break;
-		case 4:						// 4m shift
+		case 4:  // 4m shift
 			gainer = 62.5;
 			break;
-		case 5:						// 5m shift
+		case 5:  // 5m shift
 			gainer = 62.5;
 			break;
-		case 6:						// 6m shift
+		case 6:  // 6m shift
 			gainer = 61.86;
 			break;
-		case 7:						// 7m shift
+		case 7:  // 7m shift
 			gainer = 62.5;
 			break;
-		case 8:						// 8m shift
+		case 8:  // 8m shift
 			gainer = 63.0;
 			break;
-		case 9:						// 9m shift
+		case 9:  // 9m shift
 			gainer = 63.38;
 			break;
-		default:					// in-line
+		default:  // in-line
 			gainer = 62.5;
 	}
 	return gainer;
@@ -682,22 +683,22 @@ float lateral_scale(float lat_z, float long_z)
 {
 	float lats = 1.0, lat_z_prev, error_s;
 	int r, c;
-	c = int(round(long_z) - 7.0);							// Use the longitudinal translation to determine the column of the LUT to look at
-	if(c<0)														//_ Do not let c break the LUT columns
-	{																//	|
-		c = 0;													//	|
-	}																//	|
-	if(c>8)														//	|
-	{																//	|
-		c = 8;													//	|
-	}																//_|
+	c = int(round(long_z) - 7.0);  // Use the longitudinal translation to determine the column of the LUT to look at
+	if(c<0)		//_ Do not let c break the LUT columns
+	{					//	|
+		c = 0;		//	|
+	}					//	|
+	if(c>8)		//	|
+	{					//	|
+		c = 8;		//	|
+	}					//_|
 	lat_z_prev = lat_z;
 	lat_z = 1.0/lat_z;
-	if(c==6)													// Ignore lat_scale_LUT because column 6 is filled with ones
+	if(c==6)  // Ignore lat_scale_LUT because column 6 is filled with ones
 	{
 		return lats;
 	}
-	for(r=1;r<10;r++)										// Find and apply lateral gain from lat_scale_LUT
+	for(r=1;r<10;r++)  // Find and apply lateral gain from lat_scale_LUT
 	{
 		if(lat_z>=lat_scale_LUT[r][c])
 		{
@@ -714,42 +715,42 @@ float lateral_scale(float lat_z, float long_z)
 //=============================================================================================================
 void DisparityFunc()
 {
-	float d[buoy_total_L];																// The disparity between camera images [pixels]
-	float f_p = 820.0;																	// experimental focal length [pixels]
-	float z[buoy_total_L];																// Distance along USV surge to the projection of the point [m]
-	float z_0;																				// Used to obtain more accurate estimate of z [m]
-	float s_left[buoy_total_L], s_right[buoy_total_L];						// Distances from centroid to each image's interior vertical [pixels]
-	float ds_left[buoy_total_L], ds_right[buoy_total_L];					// The "lateral disparity" for each camera image [pixels]
-	float ds_lat = -1.0;																// Average of ds_left and ds_right [pixels]
-	float lat_z_left[buoy_total_L], lat_z_right[buoy_total_L];			// Distance along USV sway to the projection of the point [m]
-	float lat_z_avg[buoy_total_L];												// Average of lat_z_left and lat_z_right [m]
-	float g_left = 62.5, g_right = 62.5;										// Initial lateral gains for cameras
-	float k_lat = -1.0;																	// Final average lateral gain for cameras
+	float d[buoy_total_L];  // The disparity between camera images [pixels]
+	float f_p = 820.0;  // experimental focal length [pixels]
+	float z[buoy_total_L];  // Distance along USV surge to the projection of the point [m]
+	float z_0;  // Used to obtain more accurate estimate of z [m]
+	float s_left[buoy_total_L], s_right[buoy_total_L];  // Distances from centroid to each image's interior vertical [pixels]
+	float ds_left[buoy_total_L], ds_right[buoy_total_L];  // The "lateral disparity" for each camera image [pixels]
+	float ds_lat = -1.0;  // Average of ds_left and ds_right [pixels]
+	float lat_z_left[buoy_total_L], lat_z_right[buoy_total_L];  // Distance along USV sway to the projection of the point [m]
+	float lat_z_avg[buoy_total_L];  // Average of lat_z_left and lat_z_right [m]
+	float g_left = 62.5, g_right = 62.5;  // Initial lateral gains for cameras
+	float k_lat = -1.0;  // Final average lateral gain for cameras
 	
 	for(int i=0; i<buoy_total_L; i++)
 	{
-		d[i] = MC[i].x - MC1[i].x;												// Find longitudinal disparity [pixels]
-		z_0 = (f_p*BASELINE)/d[i];											// Initial calculation of distance along USV surge to the projection of the point [m]
-		f_p = fpLUT(z_0);															// Uses z_0 to tune the focal length with fpLUT() [pixels]
-		z[i] = (f_p*BASELINE)/d[i];											// Improved calculation of distance along USV surge to the projection of the point [m]
-		s_left[i] = MC[i].x - (Umax/2.0);									// Find distance from centroid to left image's interior vertical [pixels]
-		s_right[i] = MC1[i].x - (Umax/2.0);								// Find distance from centroid to right image' interior vertical [pixels]
-		ds_left[i] = (z[i]*s_left[i])/f_p;											// Find "lateral disparity" for left camera image [pixels]
-		ds_right[i] = (z[i]*s_right[i])/f_p;										// Find "lateral disparity" for right camera image [pixels]
-		ds_lat = (ds_left[i]+ds_right[i])/2.0;								// Find the average "lateral disparity" [pixels]
-		lat_z_left[i] = g_left*((z[i]*ds_left[i])/f_p - 0.001);			// Initial finding of leftward sway distance to the projection of the point [m]
-		lat_z_right[i] = g_right*((z[i]*ds_right[i])/f_p + 0.002);	// Initial finding of rightward sway distance to the projection of the point [m]
-		g_left = lateral_gainLUT(lat_z_left[i]);							// Initial lateral gain of left camera using lateral_gainLUT()
-		g_right = lateral_gainLUT(lat_z_right[i]);						// Initial lateral gain of right camera using lateral_gainLUT()
-		lat_z_left[i] = g_left*((z[i]*ds_left[i])/f_p - 0.001);			// Improved finding of leftward sway distance to the projection of the point [m]
-		lat_z_right[i] = g_right*((z[i]*ds_right[i])/f_p + 0.002);	// Improved finding of rightward sway distance to the projection of the point [m]
-		lat_z_avg[i] = (lat_z_left[i] + lat_z_right[i])/2.0;				// Initial average sway distance to the projection of the point [m]
-		k_lat = lateral_scale(lat_z_avg[i], z[i]);							// Final lateral gain
-		lat_z_avg[i] = lat_z_avg[i]*k_lat;									// Improved average sway distance to the projection of the point [m]
+		d[i] = MC[i].x - MC1[i].x;  // Find longitudinal disparity [pixels]
+		z_0 = (f_p*BASELINE)/d[i];  // Initial calculation of distance along USV surge to the projection of the point [m]
+		f_p = fpLUT(z_0);  // Uses z_0 to tune the focal length with fpLUT() [pixels]
+		z[i] = (f_p*BASELINE)/d[i];  // Improved calculation of distance along USV surge to the projection of the point [m]
+		s_left[i] = MC[i].x - (Umax/2.0);  // Find distance from centroid to left image's interior vertical [pixels]
+		s_right[i] = MC1[i].x - (Umax/2.0);  // Find distance from centroid to right image' interior vertical [pixels]
+		ds_left[i] = (z[i]*s_left[i])/f_p;  // Find "lateral disparity" for left camera image [pixels]
+		ds_right[i] = (z[i]*s_right[i])/f_p;  // Find "lateral disparity" for right camera image [pixels]
+		ds_lat = (ds_left[i]+ds_right[i])/2.0;  // Find the average "lateral disparity" [pixels]
+		lat_z_left[i] = g_left*((z[i]*ds_left[i])/f_p - 0.001);  // Initial finding of leftward sway distance to the projection of the point [m]
+		lat_z_right[i] = g_right*((z[i]*ds_right[i])/f_p + 0.002);  // Initial finding of rightward sway distance to the projection of the point [m]
+		g_left = lateral_gainLUT(lat_z_left[i]);  // Initial lateral gain of left camera using lateral_gainLUT()
+		g_right = lateral_gainLUT(lat_z_right[i]);  // Initial lateral gain of right camera using lateral_gainLUT()
+		lat_z_left[i] = g_left*((z[i]*ds_left[i])/f_p - 0.001);  // Improved finding of leftward sway distance to the projection of the point [m]
+		lat_z_right[i] = g_right*((z[i]*ds_right[i])/f_p + 0.002);  // Improved finding of rightward sway distance to the projection of the point [m]
+		lat_z_avg[i] = (lat_z_left[i] + lat_z_right[i])/2.0;  // Initial average sway distance to the projection of the point [m]
+		k_lat = lateral_scale(lat_z_avg[i], z[i]);  // Final lateral gain
+		lat_z_avg[i] = lat_z_avg[i]*k_lat;  // Improved average sway distance to the projection of the point [m]
 		
 		// Update global array of buoy centroids wrt USV in NED convention
-		x_offset[i] = z[i];										// Surge (North) distance [m]
-		y_offset[i] = lat_z_avg[i];						// Sway (East) distance [m]
+		x_offset[i] = z[i];  // Surge (North) distance [m]
+		y_offset[i] = lat_z_avg[i];  // Sway (East) distance [m]
 	}
 } // end of DisparityFunc()
 
@@ -761,12 +762,12 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 {
 	if (PA_state != 0) // as long as perception_array is not on standby
 	{
-		Mat imgHSV;																								// Holds the HSV copy of the original image
+		Mat imgHSV;  // Holds the HSV copy of the original image
 		
 		try 
 		{
 			int counter_L = 0;
-			buoy_total_L = 0;																						// Reset the buoy count
+			buoy_total_L = 0;  // Reset the buoy count
 			size_red = 0;
 			size_green = 0;
 			size_orange = 0;
@@ -775,16 +776,16 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 			size_mask_t = 0;
 			
 			// Convert original image to bgr8-type and make a copy in HSV color space
-			org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;		// Converts message camera_msg into bgr8 type image
-			org_img.copyTo(background);																// Copies the original image to background image
-			cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV);					// Copies original image into HSV color space
-			HSVFunc(imgHSV);																				// Sets new color limits and finds blobs of imgHSV (contours)
+			org_img = cv_bridge::toCvShare(camera_msg, "bgr8") -> image;  // Converts message camera_msg into bgr8 type image
+			org_img.copyTo(background);  // Copies the original image to background image
+			cv::cvtColor(org_img, imgHSV, cv::COLOR_BGR2HSV);  // Copies original image into HSV color space
+			HSVFunc(imgHSV);  // Sets new color limits and finds blobs of imgHSV (contours)
 			
 			// Find all the BLOBs
 			// Find the red BLOBs
 			cv::inRange(imgHSV, red_low, red_high, red_mask); 
 			cv::inRange(imgHSV, red_low1, red_high1, red_mask1); 
-			red_mask = red_mask + red_mask1;													// Image containing only Red BLOBs
+			red_mask = red_mask + red_mask1;  // Image containing only Red BLOBs
 			
 			// Find the green BLOBs
 			cv::inRange(imgHSV, green_low, green_high, green_mask);
@@ -820,11 +821,11 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 			buoy_total_L = counter_L;
 			size_mask_t = size_red + size_green + size_white + size_orange + size_black;
 			
-			ROS_INFO("The buoy_total_L: %i", buoy_total_L);
-			ROS_INFO("The size_mask_t: %i\n", size_mask_t);
+			//ROS_INFO("The buoy_total_L: %i", buoy_total_L);
+			//ROS_INFO("The size_mask_t: %i\n", size_mask_t);
 			
 			// Perform the disparity calculations if BLOBs were detected
-			if (buoy_total_L == 0) // Nothing was found
+			if (buoy_total_L == 0)  // Nothing was found
 			{
 				//ROS_INFO("No Object Detected by Left Camera. {perception_array}");
 			}
@@ -837,9 +838,9 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 						MC[i].x = u_x[i];
 						MC[i].y = v_y[i];
 					}
-					DisparityFunc();			// Use disparity to find the centroids of detected objects wrt local NED frame 
+					DisparityFunc();  // Use disparity to find the centroids of detected objects wrt local NED frame 
 					
-					if (PA_state == 13)		// If task 3: Landmark Localization and Characterization
+					if (PA_state == 13)  // If VRX3: Landmark Localization and Characterization
 					{
 						for (int i=0; i<buoy_total_L; i++)
 						{
@@ -847,17 +848,20 @@ void LeftCamFunc(const sensor_msgs::ImageConstPtr& camera_msg)
 							USVtoECEF(x_offset[i], y_offset[i], N_USV, E_USV, D_USV, PSI_USV, i);
 						}
 					}
-					buoys_publish();			// publish desired identified objects
+					if ((PA_state == 15) || (PA_state == 13) || (PA_state == 1))
+					{
+						buoys_publish();  // publish desired identified objects
+					}
 				}
 			}
 			
 			// NOTE: comment the following line out for the docker image, but uncomment for user display of cameras and detected buoys
 			//cv::imshow("Left Camera Updated", background);
-			cv::waitKey(30);			// Wait 30 milliseconds
+			cv::waitKey(30);  // Wait 30 milliseconds
 		} // try 
-		catch (cv_bridge::Exception& e) // looks for errors 
+		catch (cv_bridge::Exception& e)  // looks for errors 
 		{
-			ROS_ERROR("Left Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg -> encoding.c_str()); //prints out the encoding string
+			ROS_ERROR("Left Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg -> encoding.c_str());  // prints out the encoding string
 		}
 	} // if (PA_state != 0) 
 } // end of LeftCamFunc()
@@ -870,23 +874,23 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 {
 	if (PA_state != 0) // as long as perception_array is not on standby
 	{
-		Mat imgHSV1;																											// Holds the HSV copy of the original image
+		Mat imgHSV1;  // Holds the HSV copy of the original image
 	
 		try 
 		{		
-			int counter_R = 0;																										// Used for placement in arrays
+			int counter_R = 0;  // Used for placement in arrays
 			buoy_total_R = 0;
 			size_mask_t1 = 0;
 			// Convert original image to bgr8-type and make a copy in HSV color space
-			org_img1 = cv_bridge::toCvShare(camera_msg1, "bgr8") -> image;					// Converts message camera_msg into bgr8 type image
-			org_img1.copyTo(background1);																			// Copies the original image to background image
-			cv::cvtColor(org_img1, imgHSV1, cv::COLOR_BGR2HSV);								// Holds the final BLOB detection result
-			HSVFunc(imgHSV1);																							// Sets new color limits and finds blobs of imgHSV1 (contours)
+			org_img1 = cv_bridge::toCvShare(camera_msg1, "bgr8") -> image;  // Converts message camera_msg into bgr8 type image
+			org_img1.copyTo(background1);  // Copies the original image to background image
+			cv::cvtColor(org_img1, imgHSV1, cv::COLOR_BGR2HSV);  // Holds the final BLOB detection result
+			HSVFunc(imgHSV1);  // Sets new color limits and finds blobs of imgHSV1 (contours)
 			
 			// Find the red BLOBs
 			cv::inRange(imgHSV1, red_low, red_high, red_mask_r); 
 			cv::inRange(imgHSV1, red_low1, red_high1, red_mask1_r); 
-			red_mask_r = red_mask_r + red_mask1_r;															// Image containing only Red BLOBs
+			red_mask_r = red_mask_r + red_mask1_r;  // Image containing only Red BLOBs
 			// Find the white BLOBs 
 			cv::inRange(imgHSV1, white_low, white_high, white_mask_r);
 			// Find the orange BLOBs
@@ -903,21 +907,21 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 			cv::medianBlur(red_mask_r, red_mask_r, 3);
 			cv::medianBlur(green_mask_r, green_mask_r, 3);
 			
-			cv::findContours(red_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);			// Finds the contours of the "red" image
-			counter_R = ClassLocFunc(counter_R, 1, 0);																											// Classifies the buoy and marks its centroid
-			cv::findContours(green_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds the contours of the "green" image
-			counter_R = ClassLocFunc(counter_R, 2, 0);																											// Classifies the buoy and marks its centroid
-			cv::findContours(white_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds the contours of the "white" image
-			counter_R = ClassLocFunc(counter_R, 3, 0);																											// Classifies the buoy and marks its centroid
-			cv::findContours(orange_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds the contours of the "orange" image
-			counter_R = ClassLocFunc(counter_R, 4, 0);																											// Classifies the buoy and marks its centroid
-			cv::findContours(black_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);		// Finds the contours of the "black" image
-			counter_R = ClassLocFunc(counter_R, 5, 0);																											// Classifies the buoy and marks its centroid
+			cv::findContours(red_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds the contours of the "red" image
+			counter_R = ClassLocFunc(counter_R, 1, 0);  // Classifies the buoy and marks its centroid
+			cv::findContours(green_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds the contours of the "green" image
+			counter_R = ClassLocFunc(counter_R, 2, 0);  // Classifies the buoy and marks its centroid
+			cv::findContours(white_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds the contours of the "white" image
+			counter_R = ClassLocFunc(counter_R, 3, 0);  // Classifies the buoy and marks its centroid
+			cv::findContours(orange_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds the contours of the "orange" image
+			counter_R = ClassLocFunc(counter_R, 4, 0);  // Classifies the buoy and marks its centroid
+			cv::findContours(black_mask_r , contours1, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);  // Finds the contours of the "black" image
+			counter_R = ClassLocFunc(counter_R, 5, 0);  // Classifies the buoy and marks its centroid
 			
 			buoy_total_R = counter_R;
 			//size_mask_t1 = size_red + size_green + size_white + size_orange + size_black;
 			
-			if (buoy_total_R == 0) // Nothing was found
+			if (buoy_total_R == 0)  // Nothing was found
 			{
 				//ROS_INFO("No Object Detected by Right Camera. {perception_array}");
 			}
@@ -931,9 +935,9 @@ void RightCamFunc(const sensor_msgs::ImageConstPtr& camera_msg1)
 			}
 			cv::waitKey(30);
 		}
-		catch (cv_bridge::Exception& e) //looks for errors 
+		catch (cv_bridge::Exception& e)  // looks for errors 
 		{
-			ROS_ERROR("Right Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg1 -> encoding.c_str()); //prints out the encoding string
+			ROS_ERROR("Right Camera could not convert from '%s' to 'bgr8'. {perception_array}", camera_msg1 -> encoding.c_str());  // prints out the encoding string
 		}
 	} // if (PA_state != 0) 
 } // end of RightCamFunc()
@@ -976,7 +980,7 @@ int main(int argc, char **argv)
 	last_time = current_time;  // sets last time to the time it is now
   
 	// set the frequency for which the program loops at
-	ros::Rate loop_rate(10);																// {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
+	ros::Rate loop_rate(30);  // {Hz} Camera update rate: 30, 16 beam lidar update rate: 10
 
 	ros::spinOnce();
 	loop_rate.sleep();

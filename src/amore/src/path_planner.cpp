@@ -47,6 +47,8 @@
 #define VRX4_position_error_allowed 3.0  // [m] this can be bigger for this task so the USV moves smoothly through path (circles around animals)
 #define VRX4_heading_error_allowed 0.785  // [rad] equivalent to 45 degrees
 #define max_next_position_distance 4.0  // [m] this is the maximum next position distance from the USV position to place a goal pose
+#define red_buoy "mb_marker_buoy_red"  // Red marker buoy
+#define green_buoy "mb_marker_buoy_green"  // Green marker buoy
 //................................................................................................................End of Constants...............................................................................................................
 
 //.................................................................................................................Global Variables..............................................................................................................
@@ -54,12 +56,28 @@ int loop_count = 0;  // loop counter
 
 //	STATES CONCERNED WITH "path_planner"
 //	0 = On standby
+//  1 = Dynamic navigation demonstration
+//  2 = Entrance and Exit gates
+//  3 = Follow the path
+//  4 = Wildlife Encounter - React and Report
+//  5 = Scan the code
+//  6 = Detect and dock
+//  7 = Find and Fling
+//  8 = UAV replenishment
 //	11 = VRX1: Station-Keeping
 //	12 = VRX2: Wayfinding
 //	14 = VRX4: Wildlife Encounter and Avoid
 //	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
 //	16 = VRX6: Scan and Dock and Deliver
 int PP_state;
+
+//	STATES CONCERNED WITH STATE 1 OF  "DnD_path_planner"
+//  1 = Start point search and approach
+//  2 = Search for entrance buoy pair
+//  3 = Going to calculated approach- and mid- points of entrance buoy pair
+//	4 = Start search and approach for exit buoy pair while continuing on current updated path
+//	5 = Exit point has been reached and task is complete
+int DnD_path_planner = 1;
 
 //	STATES CONCERNED WITH "navigation_array"
 //	0 = On standby
@@ -88,12 +106,16 @@ int PA_state;
 // 4 = Navigating to acoustic source
 int A_state;
 
+bool vrx_mode;  // false means vrx mode is not true and that user mode should be used
+
 int point = 0;  // number of points on trajectory reached
 int goal_poses_quantity;  // total number of poses to reach
 int loop_goal_recieved;  // this is kept in order to ensure planner doesn't start controller until the goal is published		// CHECK IF UNEEDED AFTER REBUILD
 
 float x_goal_poses[100], y_goal_poses[100], psi_goal_poses[100];  // arrays to hold the NED goal poses for tasks
 float x_goal_pose, y_goal_pose, psi_goal_pose;  // current goal pose to be published to propulsion_system
+int buoy_pair_updated;  // 0 = false  1 = true
+float x_DnD_start, y_DnD_start, psi_DnD_start;  // start location for the dynamic navigation demonstration
 float x_usv_NED, y_usv_NED, psi_usv_NED;  // vehicle position and heading (pose) in NED
 float e_x, e_y, e_xy, e_psi;  // current errors between goal pose and usv pose
 
@@ -101,6 +123,7 @@ std::string Animal[3];  // string array to hold the names of the animals
 float x_animals_NED[3], y_animals_NED[3];  // arrays to hold animal locations
 
 bool CC_goal_recieved = false;  // false means NED goal poses have not been acquired from coordinate_converter
+bool M_reached = false;  // false means the mid-point has not been reached for travelling through pair of buoys
 bool E_reached = false;  // false means the last point has not been reached
 bool E_never_reached = true;  // true means the last point has never been reached
 
@@ -126,9 +149,9 @@ float x_plat_g[9];
 float y_plat_g[9];
 float psi_plat_g[9];
 
-/* // possible Task 5 variables
+// possible Task 5 variables
 // VARIABLES FOR THE BUOY NAVIGATION CALCULATIONS
-// for calculating desired poses
+// Centroid locations of left and right buoys given by "perception_array"
 float CL_x;  // x-location of left buoy wrt USV
 float CL_y;  // y-location of left buoy wrt USV
 float CR_x;  // x-location of right buoy wrt USV
@@ -166,7 +189,9 @@ float y_E_CL;  // y-coord. of exit point wrt left buoy
 float s_M;  // slope of of line from CL to CR
 float alpha;  // angle of frame CL wrt global frame
 
-bool NED_buoys_recieved = false; // false means the NED_buoys array has not yet been acquired USED FOR BUOY	NAVIGATION POSSIBLY */
+bool buoy_positions_recieved = false; // false means the NED_buoys array has not yet been acquired USED FOR BUOY NAVIGATION POSSIBLY
+bool left_buoy_found = false;  // false means that the left buoy position was not found
+bool right_buoy_found = false;  // false means that the right buoy position was not found
 
 std_msgs::Bool PP_initialization_state_msg;  // "PP_initialization_state" message
 ros::Publisher PP_initialization_state_pub;  // "PP_initialization_state" publisher
@@ -181,6 +206,27 @@ ros::Time current_time;  // creates time variables
 //..........................................................................................................End of Global Variables........................................................................................................
 
 //.....................................................................................................................Functions.......................................................................................................................
+// THIS FUNCTION: Updates the state of mission_control when not in vrx_mode
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+// =====================================================
+void parameters_function()
+{
+	ros::param::get("/x_DnD", x_DnD_start);
+	ros::param::get("/y_DnD", y_DnD_start);
+	ros::param::get("/psi_DnD", psi_DnD_start);
+	ros::param::get("/updated_buoy_pair", buoy_pair_updated);
+	if (buoy_pair_updated == 1)
+	{
+		ros::param::get("/x_LB", CL_x);
+		ros::param::get("/y_LB", CL_y);
+		ros::param::get("/x_RB", CR_x);
+		ros::param::get("/y_RB", CR_y);
+		buoy_positions_recieved = true;
+		ros::param::set("/updated_buoy_pair", 0);
+	}
+} // END OF parameters_function()
+
 // THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "PP_initialization_state"
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
@@ -197,6 +243,10 @@ void PATH_PLANNER_inspector()
 	{
 		PP_initialization_state_msg.data = false;
 		//ROS_INFO("PATH_PLANNER: !path_planner_initialized");
+	}
+	if (!vrx_mode)
+	{
+		parameters_function();
 	}
 	if ((propulsion_system_topic_published) && (PP_state == 14))  // if the PP_propulsion_system_topic has been published and VRX4: Wildlife Encounter and Avoid
 	{
@@ -220,6 +270,7 @@ void MC_pp_state_update(const amore::state::ConstPtr& msg)
 	if (PP_initialization_state_msg.data)
 	{
 		PP_state = msg->state.data;
+		vrx_mode = msg->sim_mode.data;
 		//ROS_INFO("PATH_PLANNER: PP_state = %i", PP_state);
 	}
 }  // END OF MC_pp_state_update()
@@ -314,6 +365,111 @@ void CC_goal_poses_ned_update(const amore::NED_poses::ConstPtr& goal)
 		CC_goal_recieved = true;  // true means NED goal poses have been acquired from coordinate_converter
 	}  // END OF if (!CC_goal_recieved)
 } // END OF CC_goal_poses_ned_update()
+
+// THIS FUNCTION: Sets goal pose
+// ACCEPTS: float values for x,y, and psi of goal pose to be set in local NED frame
+// RETURNS: (VOID)
+//=============================================================================================================
+void set_goal_pose(float x_goal, float y_goal, float psi_goal)
+{
+	x_goal_pose = x_goal;
+	y_goal_pose = y_goal;
+	psi_goal_pose = psi_goal;
+	// ensure psi_goal_pose stays within -PI and PI 
+	while ((psi_goal_pose < -PI) || (psi_goal_pose > PI))
+	{
+		if (psi_goal_pose < -PI)
+		{
+			psi_goal_pose += 2.0*PI;
+		}
+		if (psi_goal_pose > PI)
+		{
+			psi_goal_pose -= 2.0*PI;
+		}
+	}
+}  // END OF set_goal_pose()
+
+// THIS FUNCTION: Sets next goal pose x meters in front of USV
+// ACCEPTS: float values for distance to move forward
+// RETURNS: (VOID)
+//=============================================================================================================
+void go_forward(float dist)
+{
+	x_goal_poses[point] = x_usv_NED + cos(psi_usv_NED)*dist;
+	y_goal_poses[point] = y_usv_NED + sin(psi_usv_NED)*dist;
+	psi_goal_poses[point] = psi_usv_NED;
+	/* x_goal_pose = x_usv_NED + cos(psi_usv_NED)*dist;
+	y_goal_pose = y_usv_NED + sin(psi_usv_NED)*dist;
+	psi_goal_pose = psi_usv_NED;
+	// ensure psi_goal_pose stays within -PI and PI 
+	while ((psi_goal_pose < -PI) || (psi_goal_pose > PI))
+	{
+		if (psi_goal_pose < -PI)
+		{
+			psi_goal_pose += 2.0*PI;
+		}
+		if (psi_goal_pose > PI)
+		{
+			psi_goal_pose -= 2.0*PI;
+		}
+	} */
+}  // END OF go_forward()
+
+// THIS FUNCTION: Calculates pose errors
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+//=============================================================================================================
+void calculate_pose_errors()
+{
+	e_x = x_goal_pose - x_usv_NED;  // calculate error in x position
+	e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
+	e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
+	e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
+	while ((e_psi < -PI) || (e_psi > PI))
+	{
+		// Adjust e_psi back within -PI and PI
+		if (e_psi < -PI)
+		{
+			e_psi = e_psi + 2.0*PI;
+		}
+		if (e_psi > PI)
+		{
+			e_psi = e_psi - 2.0*PI;
+		}
+	}
+}  // END OF calculate_pose_errors()
+
+// THIS FUNCTION: Display USV and goal pose
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+//=============================================================================================================
+void display_usv_and_goal_pose()
+{
+	ROS_INFO("PATH_PLANNER:-----USV POSE-----");
+	ROS_INFO("PATH_PLANNER:     x   :  %4.2f", x_usv_NED);  // x posn.
+	ROS_INFO("PATH_PLANNER:     y   :  %4.2f", y_usv_NED);  // y posn.
+	ROS_INFO("PATH_PLANNER:     psi :  %4.2f", psi_usv_NED);  // heading
+	ROS_INFO("PATH_PLANNER:-----USV POSE-----\n");
+	ROS_INFO("PATH_PLANNER:-----GOAL POSE-----");
+	ROS_INFO("PATH_PLANNER:     x   :  %4.2f", x_goal_pose);  // x posn.
+	ROS_INFO("PATH_PLANNER:     y   :  %4.2f", y_goal_pose);  // y posn.
+	ROS_INFO("PATH_PLANNER:     psi :  %4.2f", psi_goal_pose);  // heading
+	ROS_INFO("PATH_PLANNER:-----GOAL POSE-----\n");
+}  // END OF display_usv_and_goal_pose()
+
+// THIS FUNCTION: Display pose errors
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+//=============================================================================================================
+void display_pose_errors()
+{
+	ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
+	ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
+	ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
+	ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
+	ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
+	ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+}  // END OF display_pose_errors()
 
 // THIS FUNCTION: Fills out PP_propulsion_system_topic_msg and publishes to "PP_propulsion_system_topic" for the propulsion_system
 // ACCEPTS: (VOID) Uses global variable pose arrays
@@ -547,103 +703,184 @@ void A_source_location_update(const amore::NED_acoustic::ConstPtr& sourceloc)
 	}
 }  // END OF A_source_location_update()
 
-/* // START OF FUNCTIONS FOR VISION PATH PLANNER 
+// START OF FUNCTIONS FOR VISION PATH PLANNER 
 // update left and right buoy centroid location (x,y) in global frame
-void NED_buoys_update (const geometry_msgs::PoseArray::ConstPtr& buoys)
+void NED_buoys_update (const amore::NED_objects::ConstPtr& buoys)
 {
-	if ((PP_initialization_state_msg.data) && (PP_state == 15) && (!NED_buoys_recieved))
+	if ((PP_initialization_state_msg.data) && (!buoy_positions_recieved))
 	{
-		CL_x = buoys->poses[0].position.x;
-		CL_y = buoys->poses[0].position.y;
-		CR_x = buoys->poses[1].position.x;
-		CR_y = buoys->poses[1].position.y;
-		NED_buoys_recieved = true;
+		if ((PP_state == 15) || (DnD_path_planner == 2) || (DnD_path_planner == 4) || (PP_state == 2) || (PP_state == 3))
+		{
+			for (int i = 0; i < buoys->quantity; i++)
+			{
+				ROS_INFO("Check%i", i);
+				if ((buoys->objects[i].point.x < 15.0) && (buoys->objects[i].point.x > 5.0) && (buoys->objects[i].point.y < 10.0) && (buoys->objects[i].point.y > -10.0))
+				{
+					ROS_INFO("GOOD");
+				}
+				else
+				{
+					ROS_INFO("BAD");
+				}
+				if (strcmp(buoys->objects[i].header.frame_id.c_str(), red_buoy) == 0)
+				{
+					ROS_INFO("RED");
+				}
+				if (strcmp(buoys->objects[i].header.frame_id.c_str(), green_buoy) == 0)
+				{
+					ROS_INFO("GREEN");
+				}
+				if ((strcmp(buoys->objects[i].header.frame_id.c_str(), red_buoy) == 0) && (buoys->objects[i].point.x < 15.0) && (buoys->objects[i].point.x > 5.0) && (buoys->objects[i].point.y < 10.0) && (buoys->objects[i].point.y > -10.0))
+				{
+					CL_x = buoys->objects[i].point.x;
+					CL_y = buoys->objects[i].point.y;
+					left_buoy_found = true;
+				}
+				if ((strcmp(buoys->objects[i].header.frame_id.c_str(), green_buoy) == 0) && (buoys->objects[i].point.x < 15.0) && (buoys->objects[i].point.x > 5.0) && (buoys->objects[i].point.y < 10.0) && (buoys->objects[i].point.y > -10.0))
+				{
+					CR_x = buoys->objects[i].point.x;
+					CR_y = buoys->objects[i].point.y;
+					right_buoy_found = true;
+				}
+			}
+			if (!left_buoy_found)
+			{
+				ROS_INFO("PATH_PLANNER:---LEFT BUOY NOT FOUND---");
+			}
+			if (!right_buoy_found)
+			{
+				ROS_INFO("PATH_PLANNER:---RIGHT BUOY NOT FOUND---");
+			}
+			if ((left_buoy_found) && (right_buoy_found))
+			{
+				buoy_positions_recieved = true;
+			}
+			// PERHAPS ADD CODE HERE TO SLIGHLTY ADJUST CURRENT GOAL HEADING TO ROTATE THE VEHICLE SIGHT BACK TOWARDS NEXT SET OF BUOYS
+			if (!buoy_positions_recieved)
+			{
+				if ((left_buoy_found) && (!right_buoy_found))
+				{
+					psi_goal_pose += PI/18;
+				}
+				else if ((right_buoy_found) && (!left_buoy_found))
+				{
+					psi_goal_pose -= PI/18;
+				}
+				// ensure psi_goal_pose stays within -PI and PI 
+				while ((psi_goal_pose < -PI) || (psi_goal_pose > PI))
+				{
+					if (psi_goal_pose < -PI)
+					{
+						psi_goal_pose += 2.0*PI;
+					}
+					if (psi_goal_pose > PI)
+					{
+						psi_goal_pose -= 2.0*PI;
+					}
+				}
+			}
+			// reset for next update
+			left_buoy_found = false;
+			right_buoy_found = false;
+		}
 	}
 }  // END OF NED_buoys_update()
 
+// THIS FUNCTION: Calculates the updated approach-, mid-, and exit- points to go through the current pair of buoys
+// ACCEPTS: (VOID)
+// RETURNS: (VOID)
+//=============================================================================================================
 void calculate_buoy_waypoints()
 {
-	if ((PP_state == 15) && (!calculations_done) && (NED_buoys_recieved))  // if the intermediate approach, mid-, and exit points have been calculated
+	// hardcode values
+	//CL_x = 37.85;
+	//CL_y = 2.2;
+	//CR_x = 37.85;
+	//CR_y = 15.75;
+	//x_usv_NED = 24.24;
+	//y_usv_NED = 11.88;
+	//psi_usv_NED = 0.0;
+	ROS_INFO("________vvvvvvvvvvv  {PP}  vvvvvvvvvvv___________________\n");
+	ROS_INFO("~~~USV pose wrt local NED frame~~~");
+	ROS_INFO("psi: %f", psi_usv_NED);
+	ROS_INFO("x: %f", x_usv_NED);
+	ROS_INFO("y: %f\n", y_usv_NED);
+	ROS_INFO("~~~Buoy locations wrt USV~~~");
+	ROS_INFO("LB_x: %f", CL_x);
+	ROS_INFO("LB_y: %f", CL_y);
+	ROS_INFO("RB_x: %f", CR_x);
+	ROS_INFO("RB_y: %f\n", CR_y);
+	CL_x_NED = cos(psi_usv_NED)*CL_x - sin(psi_usv_NED)*CL_y + x_usv_NED;
+	CL_y_NED = sin(psi_usv_NED)*CL_x + cos(psi_usv_NED)*CL_y + y_usv_NED;
+	CR_x_NED = cos(psi_usv_NED)*CR_x - sin(psi_usv_NED)*CR_y + x_usv_NED;
+	CR_y_NED = sin(psi_usv_NED)*CR_x + cos(psi_usv_NED)*CR_y + y_usv_NED;
+	ROS_INFO("~~~Buoy locations wrt local NED frame~~~");
+	ROS_INFO("LB_x: %f", CL_x_NED);
+	ROS_INFO("LB_y: %f", CL_y_NED);
+	ROS_INFO("RB_x: %f", CR_x_NED);
+	ROS_INFO("RB_y: %f\n", CR_y_NED);
+
+	M_x = (CL_x_NED+CR_x_NED)/2.0;  // x-location of midpoint
+	M_y = (CL_y_NED+CR_y_NED)/2.0;  // y-location of midpoint
+
+	d_L = sqrt(pow((CL_x_NED-x_usv_NED),2.0)+pow((CL_y_NED-y_usv_NED),2.0));  // distance from USV to left buoy
+	d_M = sqrt(pow((M_x-x_usv_NED),2.0)+pow((M_y-y_usv_NED),2.0));  // distance from USV to midpoint
+	d_R = sqrt(pow((CR_x_NED-x_usv_NED),2.0)+pow((CR_y_NED-y_usv_NED),2.0));  // distance from USV to right buoy
+	d_I = (d_L+d_M+d_R)/3.0;  // distance from midpoint to approach point
+
+	// intermediate approach point doesn't need to be more than 4 meters back from midpoint
+	if (d_I > 4.0)
 	{
-		// hardcode values
-		//CL_x = 37.85;
-		//CL_y = 2.2;
-		//CR_x = 37.85;
-		//CR_y = 15.75;
-		//x_usv_NED = 24.24;
-		//y_usv_NED = 11.88;
-		//psi_usv_NED = 0.0;
-		ROS_DEBUG("________vvvvvvvvvvv  {PP}  vvvvvvvvvvv___________________\n");
-		ROS_DEBUG("~~~USV POSE~~~");
-		ROS_DEBUG("Psi_NED: %f", psi_usv_NED);
-		ROS_DEBUG("x_NED: %f", x_usv_NED);
-		ROS_DEBUG("y_NED: %f\n", y_usv_NED);
-		ROS_DEBUG("~~~Buoy locations wrt USV~~~");
-		ROS_DEBUG("LB_x: %f", CL_x);
-		ROS_DEBUG("LB_y: %f", CL_y);
-		ROS_DEBUG("RB_x: %f", CR_x);
-		ROS_DEBUG("RB_y: %f\n", CR_y);
-		CL_x_NED = cos(psi_usv_NED)*CL_x - sin(psi_usv_NED)*CL_y + x_usv_NED;
-		CL_y_NED = sin(psi_usv_NED)*CL_x + cos(psi_usv_NED)*CL_y + y_usv_NED;
-		CR_x_NED = cos(psi_usv_NED)*CR_x - sin(psi_usv_NED)*CR_y + x_usv_NED;
-		CR_y_NED = sin(psi_usv_NED)*CR_x + cos(psi_usv_NED)*CR_y + y_usv_NED;
-		ROS_DEBUG("~~~Buoy locations in NED frame~~~");
-		ROS_DEBUG("LB_x: %f", CL_x_NED);
-		ROS_DEBUG("LB_y: %f", CL_y_NED);
-		ROS_DEBUG("RB_x: %f", CR_x_NED);
-		ROS_DEBUG("RB_y: %f\n", CR_y_NED);
+	  d_I = 4.0;
+	}
 
-		x_goal_poses[1] = (CL_x_NED+CR_x_NED)/2.0; // x-location of midpoint
-		y_goal_poses[1] = (CL_y_NED+CR_y_NED)/2.0; // y-location of midpoint
+	d_LM = 0.5*sqrt(pow((CR_x_NED-CL_x_NED),2.0)+pow((CR_y_NED-CL_y_NED),2.0));  // half distance between left and right buoys
+	a_L = sqrt(pow(d_LM,2.0)+pow(d_I,2.0));  // distance between left buoy and the approach point
+	theta = atan(d_I/d_LM);  // angle created by d_I and d_LM
 
-		d_L = sqrt(pow((CL_x_NED-x_usv_NED),2.0)+pow((CL_y_NED-y_usv_NED),2.0));    // distance from USV to left buoy
-		d_M = sqrt(pow((M_x-x_usv_NED),2.0)+pow((M_y-y_usv_NED),2.0));      // distance from USV to midpoint
-		d_R = sqrt(pow((CR_x_NED-x_usv_NED),2.0)+pow((CR_y_NED-y_usv_NED),2.0));  // distance from USV to right buoy
-		d_I = (d_L+d_M+d_R)/3.0; // distance from midpoint to approach point
+	x_I_CL = a_L*cos(theta);  // x-coord. of intermediate point wrt left buoy 
+	y_I_CL = a_L*sin(theta);  // y-coord. of intermediate point wrt left buoy
 
-		// intermediate approach point doesn't need to be more than 8 meters back from midpoint
-		if (d_I > 4.0)
-		{
-		  d_I = 4.0;
-		}
+	x_E_CL = a_L*cos(theta);  // x-coord. of exit point wrt left buoy 
+	y_E_CL = -a_L*sin(theta);  // y-coord. of exit point wrt left buoy
 
-		d_LM = 0.5*sqrt(pow((CR_x_NED-CL_x_NED),2.0)+pow((CR_y_NED-CL_y_NED),2.0));		// half distance between left and right buoys
-		a_L = sqrt(pow(d_LM,2.0)+pow(d_I,2.0));																						// distance between left buoy and the approach point
-		theta = atan(d_I/d_LM);																													// angle created by d_I and d_LM
+	// calculate intermediate position wrt global
+	s_M = (CR_y_NED-CL_y_NED)/(CR_x_NED-CL_x_NED);  // slope of of line from CL to CR 
+	alpha = atan2((CR_y_NED-CL_y_NED),(CR_x_NED-CL_x_NED));  // angle of frame CL wrt global frame
 
-		x_I_CL = a_L*cos(theta);																												// x-coord. of intermediate point wrt left buoy 
-		y_I_CL = a_L*sin(theta);																												// y-coord. of intermediate point wrt left buoy
+	ROS_INFO("ALPHA: %4.2f    THETA: %4.2f\n", alpha, theta);
 
-		x_E_CL = a_L*cos(theta);																												// x-coord. of exit point wrt left buoy 
-		y_E_CL = -a_L*sin(theta);																												// y-coord. of exit point wrt left buoy
+	I_x = cos(alpha)*x_I_CL - sin(alpha)*y_I_CL + CL_x_NED;  // x-coord. of intermediate point wrt global
+	I_y = sin(alpha)*x_I_CL + cos(alpha)*y_I_CL + CL_y_NED;  // y-coord. of intermediate point wrt global
 
-		// calculate intermediate position wrt global
-		s_M = (CR_y_NED-CL_y_NED)/(CR_x_NED-CL_x_NED);														// slope of of line from CL to CR 
-		alpha = atan2((CR_y_NED-CL_y_NED),(CR_x_NED-CL_x_NED));											// angle of frame CL wrt global frame
-		
-		x_goal_poses[0] = cos(alpha)*x_I_CL - sin(alpha)*y_I_CL + CL_x_NED;												// x-coord. of intermediate point wrt global
-		y_goal_poses[0] = sin(alpha)*x_I_CL + cos(alpha)*y_I_CL + CL_y_NED;												// y-coord. of intermediate point wrt global
+	E_x = cos(alpha)*x_E_CL - sin(alpha)*y_E_CL + CL_x_NED;  // x-coord. of exit point wrt global
+	E_y = sin(alpha)*x_E_CL + cos(alpha)*y_E_CL + CL_y_NED;  // y-coord. of exit point wrt global
 
-		x_goal_poses[2] = cos(alpha)*x_E_CL - sin(alpha)*y_E_CL + CL_x_NED;											// x-coord. of exit point wrt global
-		y_goal_poses[2] = sin(alpha)*x_E_CL + cos(alpha)*y_E_CL + CL_y_NED;											// y-coord. of exit point wrt global
+	x_goal_poses[0] = I_x;
+	y_goal_poses[0] = I_y;
+	psi_goal_poses[0] = alpha - PI/2;
+	x_goal_poses[1] = M_x;
+	y_goal_poses[1] = M_y;
+	psi_goal_poses[1] = alpha - PI/2;
+	x_goal_poses[2] = E_x;
+	y_goal_poses[2] = E_y;
+	psi_goal_poses[2] = alpha - PI/2;
 
-		// display calculated goal points to reach
-		ROS_DEBUG("~~~Desired points~~~");
-		ROS_DEBUG("I_x: %f", x_goal_poses[0]);
-		ROS_DEBUG("I_y: %f", y_goal_poses[0]);
-		ROS_DEBUG("M_x: %f", x_goal_poses[1]);
-		ROS_DEBUG("M_y: %f", y_goal_poses[1]);
-		ROS_DEBUG("E_x: %f", x_goal_poses[2]);
-		ROS_DEBUG("E_y: %f\n", y_goal_poses[2]);
-		ROS_DEBUG("________^^^^^^^^^^^  {PP}  ^^^^^^^^^^^___________________|\n");
+	// display calculated goal points to reach
+	ROS_INFO("~~~Desired points~~~");
+	ROS_INFO("I_x: %f", x_goal_poses[0]);
+	ROS_INFO("I_y: %f", y_goal_poses[0]);
+	ROS_INFO("M_x: %f", x_goal_poses[1]);
+	ROS_INFO("M_y: %f", y_goal_poses[1]);
+	ROS_INFO("E_x: %f", x_goal_poses[2]);
+	ROS_INFO("E_y: %f\n", y_goal_poses[2]);
+	ROS_INFO("________^^^^^^^^^^^  {PP}  ^^^^^^^^^^^___________________|\n");
 
-		point = 0;
-		goal_poses_quantity = 3;
-		calculations_done = true;
-		loop_goal_recieved = loop_count;
-	} // if (!calculations_done)
+	point = 0;
+	goal_poses_quantity = 3;
+	calculations_done = true;
 }  // END OF calculate_buoy_waypoints()
-// END OF FUNCTIONS FOR VISIONS PATH PLANNER  */
+// END OF FUNCTIONS FOR VISIONS PATH PLANNER 
 //.............................................................................................................END OF Functions...............................................................................................................
 
 //..................................................................................................................Main Program..................................................................................................................
@@ -653,7 +890,7 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "path_planner");
 
 	// NodeHandles
-	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh12;
+	ros::NodeHandle nh1, nh2, nh3, nh4, nh5, nh6, nh7, nh8, nh9, nh10, nh12;
 
 	// Subscribers
 	// from mission_control
@@ -664,11 +901,13 @@ int main(int argc, char **argv)
 	ros::Subscriber MC_a_state_sub = nh5.subscribe("MC_a_state", 1, MC_a_state_update);
 	// from navigation_array
 	ros::Subscriber NA_nav_ned_sub = nh6.subscribe("NA_nav_ned", 1, NA_nav_ned_update);  // Obtains the USV pose in local NED
+	// from perception_array
+	ros::Subscriber PA_NED_buoys_sub = nh7.subscribe("PA_NED_buoys", 1, NED_buoys_update);  // current buoy IDs with respective locations for planner to use to generate path
 	// from coordinate_converter
-	ros::Subscriber CC_goal_poses_ned_sub = nh7.subscribe("CC_goal_poses_ned", 1, CC_goal_poses_ned_update);  // goal poses converted to NED
-	ros::Subscriber CC_animals_ned_sub = nh8.subscribe("CC_animals_ned", 1, CC_animals_ned_update);  // goal animal locations converted to NED
+	ros::Subscriber CC_goal_poses_ned_sub = nh8.subscribe("CC_goal_poses_ned", 1, CC_goal_poses_ned_update);  // goal poses converted to NED
+	ros::Subscriber CC_animals_ned_sub = nh9.subscribe("CC_animals_ned", 1, CC_animals_ned_update);  // goal animal locations converted to NED
 	// from acoustics
-	ros::Subscriber A_source_location_sub = nh9.subscribe("A_source_location", 1, A_source_location_update);  // acoustic pinger converted to NED
+	ros::Subscriber A_source_location_sub = nh10.subscribe("A_source_location", 1, A_source_location_update);  // acoustic pinger converted to NED
 
 	// Publishers
 	// to mission_control
@@ -687,17 +926,25 @@ int main(int argc, char **argv)
 	PP_initialization_state_msg.data = false;
 
 	// sets the frequency for which the program loops at 10 = 1/10 second
-	ros::Rate loop_rate(20);  // [Hz] WAS 50
+	ros::Rate loop_rate(10);  // [Hz] perception_array: 30, navigation_array: 20, mission_control: 10
 
 	// ros::ok() will stop when the user inputs Ctrl+C
 	while(ros::ok())
 	{
 		//	0 = On standby
-		//	1 = VRX1: Station-Keeping
-		//	2 = VRX2: Wayfinding
-		//	4 = VRX4: Wildlife Encounter and Avoid
-		//	5 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
-		//	6 = VRX6: Scan and Dock and Deliver
+		//  1 = Dynamic navigation demonstration
+		//  2 = Entrance and Exit gates
+		//  3 = Follow the path
+		//  4 = Wildlife Encounter - React and Report
+		//  5 = Scan the code
+		//  6 = Detect and dock
+		//  7 = Find and Fling
+		//  8 = UAV replenishment
+		//	11 = VRX1: Station-Keeping
+		//	12 = VRX2: Wayfinding
+		//	14 = VRX4: Wildlife Encounter and Avoid
+		//	15 = VRX5: Channel Navigation, Acoustic Beacon Localization and Obstacle Avoidance
+		//	16 = VRX6: Scan and Dock and Deliver
 		switch(PP_state)
 		{
 			case 0:  // On standby
@@ -708,7 +955,201 @@ int main(int argc, char **argv)
 				E_reached = false;  // means end of path reached (E_reached) is not true (false)
 				E_never_reached = true;  // means the last point has never been reached
 				calculations_done = false;  // CURRENTLY ONLY FOR TASK 4
-				//NED_buoys_recieved = false;  // FOR TASK 5
+				buoy_positions_recieved = false;  // FOR TASK 5
+				break;
+
+			case 1:  // Dynamic navigation demonstration
+				ROS_INFO("PATH_PLANNER: DnD State %i\n", DnD_path_planner);
+				//  1 = Start point search and approach
+				//  2 = Search for entrance buoy pair
+				//  3 = Going to calculated approach and mid points of entrance buoy pair
+				//	4 = Start search and approach for exit buoy pair while continuing on current updated path
+				//	5 = Exit point has been reached and task is complete
+				switch(DnD_path_planner)
+				{
+					case 1:  // Start point search and approach
+						e_xy_allowed = 1.0;  // [m] positional error tolerance threshold
+						e_psi_allowed =  0.03;  // [rad] (about 2 degrees) heading error tolerance threshold
+						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
+						{
+							set_goal_pose(x_DnD_start, y_DnD_start, psi_DnD_start);  // set the goal pose to the start pose of the dynamic navigation demonstration
+							propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
+							calculate_pose_errors();
+							display_pose_errors();
+							display_usv_and_goal_pose();
+							if ((e_xy < e_xy_allowed) && (e_psi < e_psi_allowed))
+							{
+								DnD_path_planner = 2;  // Search for entrance buoy pair
+								ROS_INFO("PATH_PLANNER:-----Start point reached-----\n");
+							}
+						}
+						break;
+					case 2:  // Search for entrance buoy pair
+						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
+						{
+							propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
+							if ((buoy_positions_recieved) && (!calculations_done))  // if buoy positions wrt the USV have been recieved but the path through the buoy pair has not been (re)calculated
+							{
+								calculate_buoy_waypoints();
+							}
+							if (calculations_done)
+							{
+								DnD_path_planner = 3;  // Going to calculated approach and mid points of entrance buoy pair
+								ROS_INFO("PATH_PLANNER:-----Entrance gate approach calculated-----\n");
+								// reset for next search
+								buoy_positions_recieved = false;
+								calculations_done = false;
+							}
+						}
+						break;
+					case 3:  // Going to calculated approach and mid points of entrance buoy pair
+						e_xy_allowed = 1.0;  // [m] positional error tolerance threshold
+						e_psi_allowed =  0.03;  // [rad] (about 2 degrees) heading error tolerance threshold
+						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
+						{
+							set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the current goal pose in the array of goal poses
+							calculate_pose_errors();
+							display_pose_errors();
+							// dependent on whether or not USV is within pose error tolerance of next goal feed or skip next goal
+							if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!M_reached))  // if within pose tolerance and mid-point not reached 
+							{
+								point += 1;  // increment the point place keeper
+								// UPDATE USER
+								ROS_INFO("PATH_PLANNER:-----POSE REACHED-----");
+								ROS_INFO("PATH_PLANNER:        %i  of  %i", point, goal_poses_quantity);
+								ROS_INFO("PATH_PLANNER:-----POSE REACHED-----\n");
+								if (point == (goal_poses_quantity-1))  // if the mid-point has been reached
+								{
+								  M_reached = true;  // true means the mid-point has been reached
+								}
+							}
+							else if (M_reached)  // if mid point has been reached
+							{
+								go_forward(20);  // tell the USV to go 30 meters forward
+								DnD_path_planner = 4;  // Start search and approach for exit buoy pair while continuing on current updated path
+								ROS_INFO("PATH_PLANNER:-----Mid-point of entrance gates reached-----\n");
+								// reset for next time doing task
+								M_reached = false;  // false means the mid point has not been reached
+							}
+							// decide whether to feed proposed goal pose or overide with intermediate point that is en route to proposed goal pose
+							else if (e_xy > max_next_position_distance)  // if the position error is off by more than 4.0 [m] overide
+							{
+								// make next goal pose for propulsion_system have a heading en route to next goal pose from the tasks with a position on a line following that heading that is 4.0 [m] from the USV
+								psi_goal_pose = atan2(e_y,e_x);  // [radians] atan2() returns between -PI and PI
+								x_goal_pose = x_usv_NED + cos(psi_goal_pose)*max_next_position_distance;
+								y_goal_pose = y_usv_NED + sin(psi_goal_pose)*max_next_position_distance;
+								propulsion_system_topic_publish();  // update the propulsion_system topic to go to the intermediate goal pose
+							}
+							else if (e_xy <= max_next_position_distance)
+							{
+								propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
+							}
+							else
+							{
+								ROS_INFO("PATH_PLANNER: HMMMMMMMMMMMMMMMMMMMMM look into this?\n");
+							}
+							display_usv_and_goal_pose();
+						}  // END OF if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))
+						break;
+					/* case 4:  // Going 10 meters forward
+						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
+						{
+							
+						}
+						break; */
+					case 4:  // Start search and approach for exit buoy pair while continuing on current updated path
+						e_xy_allowed = 1.0;  // [m] positional error tolerance threshold
+						e_psi_allowed =  0.785;  // [rad] (about 45 degrees) heading error tolerance threshold
+						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
+						{
+							if ((buoy_positions_recieved) && (!calculations_done))  // if buoy positions wrt the USV have been recieved but the path through the buoy pair has not been (re)calculated
+							{
+								calculate_buoy_waypoints();
+								// reset for next search
+								buoy_positions_recieved = false;
+								calculations_done = false;
+								ROS_INFO("PATH_PLANNER:-----Path through exit gate recalculated-----");
+							}
+							set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the current goal pose in the array of goal poses
+							calculate_pose_errors();
+							display_pose_errors();
+							// dependent on whether or not USV is within pose error tolerance of next goal feed or skip next goal
+							if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and end point not reached 
+							{
+								point += 1;  // increment the point place keeper
+								// UPDATE USER
+								ROS_INFO("PATH_PLANNER:-----POSE REACHED-----");
+								ROS_INFO("PATH_PLANNER:        %i  of  %i", point, goal_poses_quantity);
+								ROS_INFO("PATH_PLANNER:-----POSE REACHED-----\n");
+								if (point == goal_poses_quantity)  // if the exit point has been reached
+								{
+								  E_reached = true;  // true means the exit point has been reached
+								}
+							}
+							else if (E_reached)  // if exit point has been reached
+							{
+								set_goal_pose(x_usv_NED, y_usv_NED, psi_usv_NED);  // have the USV station-keep until next task
+								DnD_path_planner = 5;  // Exit point has been reached and task is complete
+								ROS_INFO("PATH_PLANNER:-----End point of exit gates reached-----");
+								// reset for next time doing task
+								E_reached = false;  // false means the exit point has not been reached
+								point -= 1;  // decrement point for feeding end point goal to station-keep until new task
+							}
+							// decide whether to feed proposed goal pose or overide with intermediate point that is en route to proposed goal pose
+							else if (e_xy > max_next_position_distance)  // if the position error is off by more than 4.0 [m] overide
+							{
+								// make next goal pose for propulsion_system have a heading en route to next goal pose from the tasks with a position on a line following that heading that is 4.0 [m] from the USV
+								psi_goal_pose = atan2(e_y,e_x);  // [radians] atan2() returns between -PI and PI
+								x_goal_pose = x_usv_NED + cos(psi_goal_pose)*max_next_position_distance;
+								y_goal_pose = y_usv_NED + sin(psi_goal_pose)*max_next_position_distance;
+								propulsion_system_topic_publish();  // update the propulsion_system topic to go to the intermediate goal pose
+							}
+							else if (e_xy <= max_next_position_distance)
+							{
+								propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
+							}
+							else
+							{
+								ROS_INFO("PATH_PLANNER: HMMMMMMMMMMMMMMMMMMMMM look into this?\n");
+							}
+							display_usv_and_goal_pose();
+						}  // END OF if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))
+						break;
+					case 5:  // Exit point has been reached and task is complete
+						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
+						{
+							propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
+						}
+						break;
+				}
+				break;
+
+			case 2:  // Entrance and Exit gates
+				
+				break;
+
+			case 3:  // Follow the path
+				
+				break;
+
+			case 4:  // Dynamic navigation demonstration
+				
+				break;
+
+			case 5:  // Dynamic navigation demonstration
+				
+				break;
+
+			case 6:  // Dynamic navigation demonstration
+				
+				break;
+
+			case 7:  // Dynamic navigation demonstration
+				
+				break;
+
+			case 8:  // Dynamic navigation demonstration
+				
 				break;
 
 			case 11:  // VRX1: Station-Keeping
@@ -716,38 +1157,14 @@ int main(int argc, char **argv)
 				{
 					if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
 					{
-						x_goal_pose = x_goal_poses[point];
-						y_goal_pose = y_goal_poses[point];
-						psi_goal_pose = psi_goal_poses[point];
+						set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the station-keeping goal location
 						propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
-						
-						e_x = x_goal_pose - x_usv_NED;  // calculate error in x position
-						e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
-						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
-						e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
-						while ((e_psi < -PI) || (e_psi > PI))
-						{
-							// Adjust e_psi back within -PI and PI
-							if (e_psi < -PI)
-							{
-								e_psi = e_psi + 2.0*PI;
-							}
-							if (e_psi > PI)
-							{
-								e_psi = e_psi - 2.0*PI;
-							}
-						}
+						calculate_pose_errors();
 						// UPDATE USER OF POSE ERRORS WHEN CLOSE TO A GOAL POSE
 						if (e_xy < 1.0)
 						{
-							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
-							ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
-							ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
-							ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
-							ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
-							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+							display_pose_errors();
 						}
-						
 					}
 				}
 				break;
@@ -763,34 +1180,12 @@ int main(int argc, char **argv)
 					if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
 					{
 						// start by proposing that the goal pose to go to next is the next goal pose from the tasks
-						x_goal_pose = x_goal_poses[point];
-						y_goal_pose = y_goal_poses[point];
-						psi_goal_pose = psi_goal_poses[point];
-						e_x = x_goal_pose - x_usv_NED;  // calculate error in x position
-						e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
-						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
-						e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
-						while ((e_psi < -PI) || (e_psi > PI))
-						{
-							// Adjust e_psi back within -PI and PI
-							if (e_psi < -PI)
-							{
-								e_psi = e_psi + 2.0*PI;
-							}
-							if (e_psi > PI)
-							{
-								e_psi = e_psi - 2.0*PI;
-							}
-						}
+						set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the current goal pose in the array of goal poses
+						calculate_pose_errors();
 						// UPDATE USER OF POSE ERRORS WHEN CLOSE TO A GOAL POSE
 						if (e_xy < 1.0)
 						{
-							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
-							ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
-							ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
-							ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
-							ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
-							ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+							display_pose_errors();
 						}
 						// dependent on whether or not USV is within pose error tolerance of next goal feed or skip next goal
 						if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
@@ -846,34 +1241,12 @@ int main(int argc, char **argv)
 						if (calculations_done)  // if the updated array of poses to accomplish task has been calculated
 						{
 							// start by proposing that the goal pose to go to next is the next goal pose from the tasks
-							x_goal_pose = x_goal_poses[point];
-							y_goal_pose = y_goal_poses[point];
-							psi_goal_pose = psi_goal_poses[point];
-							e_x = x_goal_pose - x_usv_NED;  // calculate error in x position
-							e_y = y_goal_pose - y_usv_NED;  // calculate error in y position
-							e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
-							e_psi = psi_goal_pose - psi_usv_NED;  // calculate error in heading
-							while ((e_psi < -PI) || (e_psi > PI))
-							{
-								// Adjust e_psi back within -PI and PI
-								if (e_psi < -PI)
-								{
-									e_psi = e_psi + 2.0*PI;
-								}
-								if (e_psi > PI)
-								{
-									e_psi = e_psi - 2.0*PI;
-								}
-							}
+							set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the current goal pose in the array of goal poses
+							calculate_pose_errors();
 							// UPDATE USER OF POSE ERRORS WHEN CLOSE TO A GOAL POSE
 							if (e_xy < 1.0)
 							{
-								ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----");
-								ROS_INFO("PATH_PLANNER:     e_x   :  %4.2f", e_x);  // x posn. error
-								ROS_INFO("PATH_PLANNER:     e_y   :  %4.2f", e_y);  // y posn. error
-								ROS_INFO("PATH_PLANNER:     e_xy  :  %4.2f", e_xy);  // magnitude of posn. error
-								ROS_INFO("PATH_PLANNER:     e_psi :  %4.2f", e_psi);  // heading error
-								ROS_INFO("PATH_PLANNER:-----POSE ERRORS-----\n");
+								display_pose_errors();
 							}
 							// dependent on whether or not USV is within pose error tolerance of next goal feed or skip next goal
 							if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
@@ -923,22 +1296,8 @@ int main(int argc, char **argv)
 				{
 					if ((NA_state == 1) && (PS_state == 1) && (!E_reached))  // if the navigation_array is providing NED USV state and the propulsion_system is ON
 					{
-						e_x = x_goal_poses[point] - x_usv_NED;  // calculate error in x position
-						e_y = y_goal_poses[point] - y_usv_NED;  // calculate error in y position
-						e_xy = sqrt(pow(e_x,2.0)+pow(e_y,2.0));  // calculate magnitude of positional error
-						e_psi = psi_goal_poses[point] - psi_usv_NED;  // calculate error in heading
-						while ((e_psi < -PI) || (e_psi > PI))
-						{
-							// Adjust e_psi back within -PI and PI
-							if (e_psi < -PI)
-							{
-								e_psi = e_psi + 2.0*PI;
-							}
-							if (e_psi > PI)
-							{
-								e_psi = e_psi - 2.0*PI;
-							}
-						}
+						set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the current goal pose in the array of goal poses
+						calculate_pose_errors();
 						if ((e_xy < e_xy_allowed) && ((float)abs(e_psi) < e_psi_allowed) && (!E_reached))  // if within pose tolerance and last pose not reached 
 						{
 							point += 1;  // increment the point place keeper

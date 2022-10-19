@@ -234,8 +234,8 @@ void PA_NED_buoys_update(const amore::NED_objects::ConstPtr& NED_buoys_msg)
 			type_buoy_green[green_cnt] = NED_buoys_msg->objects[i].header.frame_id; 
 			x_buoy_green[green_cnt] = NED_buoys_msg->objects[i].point.x;
 			y_buoy_green[green_cnt] = NED_buoys_msg->objects[i].point.y;
-			ROS_INFO("ACOUSTICS: green buoy x: %2f", x_buoy_green[green_cnt]);
-			ROS_INFO("ACOUSTICS: green buoy y: %2f", y_buoy_green[green_cnt]);
+			//ROS_INFO("ACOUSTICS: green buoy x: %2f", x_buoy_green[green_cnt]);
+			//ROS_INFO("ACOUSTICS: green buoy y: %2f", y_buoy_green[green_cnt]);
 			green_cnt = green_cnt + 1; 
 		}
 		else if(type_buoy[i] == "mb_marker_buoy_red")
@@ -243,8 +243,8 @@ void PA_NED_buoys_update(const amore::NED_objects::ConstPtr& NED_buoys_msg)
 			type_buoy_red[red_cnt] = NED_buoys_msg->objects[i].header.frame_id; 
 			x_buoy_red[red_cnt] = NED_buoys_msg->objects[i].point.x;
 			y_buoy_red[red_cnt] = NED_buoys_msg->objects[i].point.y;
-			ROS_INFO("ACOUSTICS: red buoy x: %2f", x_buoy_red[red_cnt]);
-			ROS_INFO("ACOUSTICS: red buoy y: %2f", y_buoy_red[red_cnt]);
+			//ROS_INFO("ACOUSTICS: red buoy x: %2f", x_buoy_red[red_cnt]);
+			//ROS_INFO("ACOUSTICS: red buoy y: %2f", y_buoy_red[red_cnt]);
 			red_cnt = red_cnt + 1; 
 		}
 		else if(type_buoy[i] == "mb_marker_buoy_white")
@@ -252,8 +252,8 @@ void PA_NED_buoys_update(const amore::NED_objects::ConstPtr& NED_buoys_msg)
 			type_buoy_white[white_cnt] = NED_buoys_msg->objects[i].header.frame_id; 
 			x_buoy_white[white_cnt] = NED_buoys_msg->objects[i].point.x;
 			y_buoy_white[white_cnt] = NED_buoys_msg->objects[i].point.y;
-			ROS_INFO("ACOUSTICS: white buoy x: %2f", x_buoy_white[white_cnt]);
-			ROS_INFO("ACOUSTICS: white buoy y: %2f", y_buoy_white[white_cnt]);
+			//ROS_INFO("ACOUSTICS: white buoy x: %2f", x_buoy_white[white_cnt]);
+			//ROS_INFO("ACOUSTICS: white buoy y: %2f", y_buoy_white[white_cnt]);
 			white_cnt = white_cnt + 1; 	
 		}
 		else if(type_buoy[i] == "mb_marker_buoy_black")
@@ -261,8 +261,8 @@ void PA_NED_buoys_update(const amore::NED_objects::ConstPtr& NED_buoys_msg)
 			type_buoy_black[black_cnt] = NED_buoys_msg->objects[i].header.frame_id; 
 			x_buoy_black[black_cnt] = NED_buoys_msg->objects[i].point.x;
 			y_buoy_black[black_cnt] = NED_buoys_msg->objects[i].point.y;
-			ROS_INFO("ACOUSTICS: black buoy x: %2f", x_buoy_black[black_cnt]);
-			ROS_INFO("ACOUSTICS: black buoy y: %2f", y_buoy_black[black_cnt]);
+			//ROS_INFO("ACOUSTICS: black buoy x: %2f", x_buoy_black[black_cnt]);
+			//ROS_INFO("ACOUSTICS: black buoy y: %2f", y_buoy_black[black_cnt]);
 			black_cnt = black_cnt + 1; 
 		}
 	}
@@ -285,7 +285,7 @@ int main(int argc, char **argv)
 	// from navigation_array
 	ros::Subscriber NA_nav_ned_sub = n.subscribe("NA_nav_ned", 1000, NA_nav_ned_update);  // gets the current NED pose of the USV
 	// from perception_array
-	ros::Subscriber PA_NED_buoys_sub = n.subscribe("PA_NED_buoys", 1, PA_NED_buoys_update);  // current buoy IDs with respective locations for planner to use to generate path					
+	ros::Subscriber PA_NED_buoys_sub = n.subscribe("PA_NED_buoys", 1, PA_NED_buoys_update);  // current buoy IDs with respective locations for planner to use to generate path
 	
 	// Publishers	
 	A_initialization_state_pub = n.advertise<std_msgs::Bool>("A_initialization_state", 1);  // publisher for state of initialization

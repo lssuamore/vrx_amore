@@ -383,11 +383,12 @@ if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/vrx_
     PATTERN "__init__.pyc" EXCLUDE
   )
   # install init files which are not in the root folder of the generated code
+  string(REGEX REPLACE "([][+.*()^])" "\\\\\\1" ESCAPED_PATH "${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/vrx_gazebo")
   install(
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/vrx_gazebo
     DESTINATION ${genpy_INSTALL_DIR}
     FILES_MATCHING
-    REGEX "${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/vrx_gazebo/.+/__init__.pyc?$"
+    REGEX "${ESCAPED_PATH}/.+/__init__.pyc?$"
   )
 endif()
 if(TARGET std_msgs_generate_messages_py)
