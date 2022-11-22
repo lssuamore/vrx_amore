@@ -532,6 +532,19 @@ path_planner/fast:
 .PHONY : path_planner/fast
 
 #=============================================================================
+# Target rules for targets named propulsion_system_QUT
+
+# Build rule for target.
+propulsion_system_QUT: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 propulsion_system_QUT
+.PHONY : propulsion_system_QUT
+
+# fast build rule for target.
+propulsion_system_QUT/fast:
+	$(MAKE) -f amore/CMakeFiles/propulsion_system_QUT.dir/build.make amore/CMakeFiles/propulsion_system_QUT.dir/build
+.PHONY : propulsion_system_QUT/fast
+
+#=============================================================================
 # Target rules for targets named propulsion_system
 
 # Build rule for target.
@@ -855,19 +868,6 @@ rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
 rosgraph_msgs_generate_messages_cpp/fast:
 	$(MAKE) -f amore/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make amore/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named acoustics
-
-# Build rule for target.
-acoustics: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 acoustics
-.PHONY : acoustics
-
-# fast build rule for target.
-acoustics/fast:
-	$(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/build
-.PHONY : acoustics/fast
 
 #=============================================================================
 # Target rules for targets named uuid_msgs_generate_messages_lisp
@@ -3250,6 +3250,7 @@ help:
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... usv_msgs_generate_messages_lisp"
 	@echo "... path_planner"
+	@echo "... propulsion_system_QUT"
 	@echo "... propulsion_system"
 	@echo "... navigation_array"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -3275,7 +3276,6 @@ help:
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... amore_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... acoustics"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_lisp"

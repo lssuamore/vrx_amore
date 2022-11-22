@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/brad/vrx_amore/build/vrx/vrx_gazebo/stationkeeping_scoring_plugin_autogen/mocs_compilation.cpp
+
 /home/brad/vrx_amore/devel/include/vrx_gazebo/Contact.h
 string
 -

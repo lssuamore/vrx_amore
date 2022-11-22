@@ -232,7 +232,7 @@ Hydrodynamics_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
-/home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.15.0
+/home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.15.1
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
@@ -251,7 +251,7 @@ Hydrodynamics_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.15.0
+/home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.15.1
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libuuid.so
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: /usr/lib/x86_64-linux-gnu/libuuid.so
 /home/brad/vrx_amore/devel/lib/libHydrodynamics.so: vrx/wave_gazebo_plugins/CMakeFiles/Hydrodynamics.dir/link.txt

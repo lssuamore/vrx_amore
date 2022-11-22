@@ -22,7 +22,7 @@
   <!-- original values [-532 162 0.1 0 0 1] -->
   <!-- Phase 1 values [-470 218 0.1 0 0 -0.3] -->
   <!-- Visions Project values [-470 218 0.1 0 0 -0.3] -->
-  <arg name="x" default="-520" />
+  <arg name="x" default="-530" />
   <arg name="y" default="170" />
   <arg name="z" default="0.2" />
   <arg name="P" default="0" />

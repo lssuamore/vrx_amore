@@ -1,26 +1,23 @@
-//  Filename:  propulsion_system.cpp
-//  Creation Date:  1/31/2022
-//  Last Revision Date:  8/17/2022
+//  Filename:  propulsion_system_QUT.cpp
+//  Creation Date:  11/07/2022
+//  Last Revision Date:  11/07/2022
 //  Author(s) [email]:  Brad Hacker [bhacker@lssu.edu]
-//                                                  
-//  Revisor(s) [Revision Date]:
 //  Organization/Institution:  Lake Superior State University RobotX Team AMORE
 // 
-// ...........................propulsion_system.cpp.......................
-//  This code recieves a goal pose to reach. It then calculates the errors and control efforts then uses control allocation to convert the efforts to outputs.in the global NED frame as a usv_pose_msg given by path_planner. 
-//  It gets the goal pose by subscribing to the "current_goal_pose" node published by path_planner.
-//  This code then uses PID control theory to control the heading and position control efforts of the USV.
-//  The control effort is then converted to thrusts and angles on each thruster to be published to "/gazebo".
-//  Currently, this code is set up to use a dual-azimuthing drive configuration. Having 4 actuators: 
-//  port thrust and angle and starboard thrust and angle to control makes the system over-actuated.
-//  For station-keeping three degrees of freedom must be controlled, position on a plane (x,y - long/lat)
-//  and the heading of the USV. Since the system is over-actuated, control allocation is used to solve for 
-//  the thrusts and azimuthing angles of each thruster.
+// ...........................propulsion_system_QUT.cpp.......................
+//  This code recieves a goal pose to reach in a 2D plane. It then calculates the errors between the goal pose and the current USV pose.
+//  PID control theory is used to calculate control efforts based on the errors to correct the position of the USV.
+//  The control efforts are then converted to thrusts for each thruster on the QUT USV: PORT_MAIN, STBD_MAIN, PORT_BOW, STBD_BOW.
+//  For station-keeping, three degrees of freedom must be controlled, position on a plane (x,y - long/lat) and the heading of the USV.
+//  Having four actuators to control makes the system over-actuated since only three degrees of freedom are being controlled.
+//  Since the system is over-actuated, control allocation is used to solve for the thruster outputs.
 //
 //  Inputs and Outputs of the propulsion_system.cpp file
 //				Inputs: ["PP_propulsion_system_topic" - amore/propulsion_system - goal pose (x,y,psi) to reach in local NED frame and current USV pose from path_planner]
 //
 //				Outputs: "thruster_int_right", "thuster_int_left", "angle_int_right", "angle_int_left" - dual-azimuthing Minn Kota thruster commands
+//								"PORT_MAIN", "STBD_MAIN", "PORT_BOW", "STBD_BOW" - QUT thruster commands
+
 
 //...............................................................................................Included Libraries and Message Types.........................................................................................
 #include "ros/ros.h"
@@ -28,6 +25,7 @@
 #include "time.h"
 #include <sstream>
 #include <iostream>
+#include <algorithm>  // library included to be able to do std::max function
 #include "math.h"
 #include "stdio.h"
 #include "nav_msgs/Odometry.h"  // message type used for receiving USV state from navigation_array
@@ -36,6 +34,7 @@
 #include "amore/propulsion_system.h"  // message type that holds all needed operation information from path_planner
 #include "std_msgs/Float32.h"  // message type of thruster commands, and type for control efforts
 #include "amore/control_efforts.h"  // message type that holds thrust x, thrust y, and moment z
+#include "std_msgs/Int32.h"  // thruster commands
 //......................................................................................End of Included Libraries and Message Types.....................................................................................
 
 //.......................................................................................................................Constants.....................................................................................................................
@@ -52,9 +51,8 @@ bool PS_state_ON = false;  // used to set and reset the above count holder like 
 //	1 = Propulsion system ON
 int PS_state;
 //	drive_config is the drive configuration of the low-level controller
-//	1 = PID HP Dual-azimuthing station-keeping
+//	1 = PID HP station-keeping
 //	2 = PID HP Differential wayfinding
-//	3 = PID HP Ackermann
 int drive_config = 1;
 
 //	STATES CONCERNED WITH "path_planner"
@@ -74,7 +72,7 @@ int drive_config = 1;
 //	16 = VRX6: Scan and Dock and Deliver
 int PP_state;
 
-float dt = 0.2;  // [s] used for differential term  // MAKE THIS A FUNCTION OF THE LOOP RATE 
+float dt = 0.1;  // [s] used for differential term  // MAKE THIS A FUNCTION OF THE LOOP RATE
 
 float x_goal, y_goal, psi_goal, psi_to_goal;  // [m, m, radians] desired position and heading, and heading to goal pose
 float x_goal_prev, y_goal_prev, psi_goal_prev;  // [m, m, radians] previous desired position and heading 
@@ -115,17 +113,17 @@ float M_z_P;  // Proportional term in computing effort in z-rotation
 float M_z_I;  // Integral term in computing effort in z-rotation
 float M_z_D;  // Derivative term in computing effort in z-rotation
 
-// matrix to hold outputs of controlller
-//float tau[3][1];
+// thuster outputs
+float PM;  // used to set the port (left) main thruster output
+float PB;  // used to set the port (left) bow thruster output
+float SM;  // used to set the starboard (right) main thruster output
+float SB;  // used to set the starboard (right) bow thruster output
 
-float T_p;  // used to set the port (left) thruster output
-float T_s;  // used to set the starboard (right) thruster output
-float A_p;  // used to set the port (left) thruster angle
-float A_s;  // used to set the starboard (right) thruster angle
-
-// Used for correction of saturated thrust values 
-float T_p_C;  // Corrected port (left) thrust output
-float T_s_C;  // Corrected starboard (right) thrust output
+// Used for correction of saturated thrust values
+float PM_C;  // Corrected port (left) main thruster output
+float PB_C;  // Corrected port (left) bow thruster output
+float SM_C;  // Corrected starboard (right) main thruster output
+float SB_C;  // Corrected starboard (right) bow thruster output
 
 float Kp_x, Kp_y, Kp_psi;  // Proportional gains
 float Kd_x, Kd_y, Kd_psi;  // Differential gains
@@ -136,20 +134,18 @@ float B = 2.0;  // [m] FAU FOUND IT TO BE 2.0
 float lx = 2.3;  // [m] bf x-offset of thrusters
 float ly = 1.0;  // [m] bf y-offset of thrusters
 /* 
-float L = 4.6; // [m] length of USV, 16 ft or 4.88 m
-
 // Transformation Matrix to convert from external dynamics to internal dynamics
 float Transform[3][4] = {
    {1.0, 0.0, 1.0, 0.0} ,
    {0.0, 1.0, 0.0, 1.0} ,
-   {1.0, -2.3, -1.0, -2.3}
+   {1.0, 1.39, -1.0, 1.39}
 };
 
 float Transform_transpose[4][3] = {
    {1.0, 0.0, 1.0} ,
-   {0.0, 1.0, -2.3} ,
+   {0.0, 1.0, 1.39} ,
    {1.0,0.0, -1.0} ,
-   {0.0,1.0, -2.3}
+   {0.0,1.0, 1.39}
 };
 }; */
 
@@ -157,17 +153,11 @@ float Transform_transpose[4][3] = {
 // forces experienced directly at the thrusters to forces experienced at the USV COG
 // Transform_pseudoinverse = Transform_transpose * inv(Transform*Transform_transpose)
 float Transform_pseudoinverse[4][3] = {
-   {0.5, 1.15, 0.5} ,
+   {0.5, -0.695, 0.5} ,
    {0.0, 0.5, 0.0} ,
-   {0.5, -1.15, -0.5} ,
+   {0.5, 0.695, -0.5} ,
    {0.0, 0.5, 0.0}
 };
-
-// Control Allocation output
-float F_xp;  // force in the x-direction on the port side
-float F_yp;  // force in the y-direction on the port side
-float F_xs;  // force in the x-direction on the starboard side
-float F_ys;  // force in the y-direction on the starboard side
 
 std_msgs::Bool PS_initialization_state_msg;  // "PS_initialization_state" message
 ros::Publisher PS_initialization_state_pub;  // "PS_initialization_state" publisher
@@ -406,125 +396,41 @@ void Integral_reset()
 	}
 }  // END OF Integral_reset()
 
-// THIS FUNCTION: Checks that angles are between -PI/2 and PI/2 and corrects accordingly
+// THIS FUNCTION: Checks for saturation of thrust outputs and corrects if so
 // ACCEPTS: (VOID)
 // RETURNS: (VOID)
 //=============================================================================================================
-void angle_correction_check()
-{
-	/* ROS_DEBUG("PROPULSION_SYSTEM:-----BEFORE angle_correction_check()-----");
-	ROS_DEBUG("PROPULSION_SYSTEM: Port Thrust: %.2f", T_p);
-	ROS_DEBUG("PROPULSION_SYSTEM: Stbd Thrust: %.2f", T_s);
-	ROS_DEBUG("PROPULSION_SYSTEM: Port Angle: %.2f", A_p);
-	ROS_DEBUG("PROPULSION_SYSTEM: Stbd Angle: %.2f", A_s); */
-	while ((A_p > PI/2.0) || (A_p < -PI/2.0) || (A_s > PI/2.0) || (A_s < -PI/2.0))
-	{
-		// Angles to thrusters can only be set between -PI/2 and PI/2
-		if (A_p > PI/2.0)
-		{
-			A_p = A_p - PI;
-			T_p = -1.0 * T_p;
-		}
-		else if (A_p < -PI/2.0)
-		{
-			A_p = A_p + PI;
-			T_p = -1.0 * T_p;
-		}
-		if (A_s > PI/2.0)
-		{
-			A_s = A_s - PI;
-			T_s = -1.0 * T_s;
-		}
-		else if (A_s < -PI/2.0)
-		{
-			A_s = A_s + PI;
-			T_s = -1.0 * T_s;
-		}
-	}
-	/* ROS_DEBUG("PROPULSION_SYSTEM:-----AFTER angle_correction_check()-----");
-	ROS_DEBUG("PROPULSION_SYSTEM: Port Thrust: %.2f", T_p);
-	ROS_DEBUG("PROPULSION_SYSTEM: Stbd Thrust: %.2f", T_s);
-	ROS_DEBUG("PROPULSION_SYSTEM: Port Angle: %.2f", A_p);
-	ROS_DEBUG("PROPULSION_SYSTEM: Stbd Angle: %.2f\n", A_s); */
-}  // END OF angle_correction_check()
-
-// THIS FUNCTION: Checks for saturation of thrust outputs and corrects if so
-// ACCEPTS: (VOID) 
-// RETURNS: (VOID) 
-//=============================================================================================================
 void thrust_saturation_check()
 {
+	float abs_PM = (float)abs(PM);
+	float abs_PB = (float)abs(PB);
+	float abs_SM = (float)abs(SM);
+	float abs_SB = (float)abs(SB);
+	float max_thrust = std::max({abs_PM, abs_PB, abs_SM, abs_SB});
+	//ROS_INFO("%f     %f     %f     %f", abs_PM, abs_PB, abs_SM, abs_SB);
+	//ROS_INFO("The max thrust is %f\n", max_thrust);
 	// check for saturation
-	if (((float)abs(T_p) > 1.0) || ((float)abs(T_s) > 1.0))
+	if (max_thrust > 1.0)
 	{
-		// correct for saturation by normalizing thrust data
-		if ((float)abs(T_p) > (float)abs(T_s))
-		{
-		  // ROS_DEBUG("PROPULSION_SYSTEM: LT IS ISSUE!");
-		  T_p_C= T_p / (float)abs(T_p);
-		  T_s_C = T_s / (float)abs(T_p);
-		}
-		else if ((float)abs(T_p) < (float)abs(T_s))
-		{
-		  // ROS_DEBUG("PROPULSION_SYSTEM: RT IS ISSUE!");
-		  T_p_C = T_p / (float)abs(T_s);
-		  T_s_C = T_s / (float)abs(T_s);
-		}
-		else 
-		{
-		  // ROS_DEBUG("PROPULSION_SYSTEM: Equal");
-		  // ROS_DEBUG("PROPULSION_SYSTEM: Divide by : %f\n", (float)abs(T_p));  // displays right thrust value
-		  T_p_C = T_p / (float)abs(T_p);
-		  T_s_C = T_s / (float)abs(T_p);
-		}
-		T_p = T_p_C;
-		T_s = T_s_C;
+		PM_C = PM / max_thrust;
+		PB_C = PB / max_thrust;
+		SM_C = SM / max_thrust;
+		SB_C = SB / max_thrust;
+		PM = (int)PM_C * 100;
+		PB = (int)PB_C * 100;
+		SM = (int)SM_C * 100;
+		SB = (int)SB_C * 100;
 		ROS_WARN("PROPULSION_SYSTEM:----STANDARDIZED THRUSTS----");
-		ROS_WARN("PROPULSION_SYSTEM: Port: %4.2f    Stbd: %4.2f\n", T_p, T_s);
+		ROS_WARN("PROPULSION_SYSTEM: PORT_MAIN: %4.2f    PORT_BOW: %4.2f    STBD_MAIN: %4.2f    STBD_BOW: %4.2f\n", PM, PB, SM, SB);
+	}
+	else
+	{
+		PM = (int)PM * 100;
+		PB = (int)PB * 100;
+		SM = (int)SM * 100;
+		SB = (int)SB * 100;
 	}
 }  // END OF thrust_saturation_check()
-
-/* // THIS FUNCTION: Checks if position effort should be negated
-// ACCEPTS: (VOID) 
-// RETURNS: (VOID) 
-//=============================================================================================================
-void tx_negation_check()
-{
-	psi_to_goal = atan2(e_y,e_x);  // [radians] atan2() returns between -PI and PI
-	if ((float)abs(psi_usv_NED) <= 0.785)  // if USV is faced in northern quarter
-	{
-		if ((float)abs(psi_to_goal) > 1.57)  // if absolute value of heading to goal is greater than 1.57 (meaning USV passed goal)
-		{
-			T_x *= -1.0;
-			ROS_WARN("PROPULSION_SYSTEM:----T_x negated----");
-		}
-	}
-	if ((psi_usv_NED > 0.785) && (psi_usv_NED < 2.356)) // if USV is faced in eastern quarter
-	{
-		if (psi_to_goal <= 0.0) && (psi_to_goal >= 3.14)  // if absolute value of heading to goal is greater than 1.57 (meaning USV passed goal)
-		{
-			T_x *= -1.0;
-			ROS_WARN("PROPULSION_SYSTEM:----T_x negated----");
-		}
-	}
-	if ((float)abs(psi_usv_NED) < 0.785)  // if USV is faced in southern quarter
-	{
-		if ((float)abs(psi_to_goal) > 1.57)  // if absolute value of heading to goal is greater than 1.57 (meaning USV passed goal)
-		{
-			T_x *= -1.0;
-			ROS_WARN("PROPULSION_SYSTEM:----T_x negated----");
-		}
-	}
-	if ((float)abs(psi_usv_NED) < 0.785)  // if USV is faced in western quarter
-	{
-		if ((float)abs(psi_to_goal) > 1.57)  // if absolute value of heading to goal is greater than 1.57 (meaning USV passed goal)
-		{
-			T_x *= -1.0;
-			ROS_WARN("PROPULSION_SYSTEM:----T_x negated----");
-		}
-	}
-	
-}  // END OF tx_negation_check() */
 //.............................................................................................................END OF Functions...............................................................................................................
 
 //..................................................................................................................Main Program..................................................................................................................
@@ -591,7 +497,7 @@ int main(int argc, char **argv)
 			if ( (loop_count >= loop_new_goal) && (loop_count < (loop_new_goal + 2)) )  // don't include differential term or integration term first 2 loops after being turned ON
 			{
 				// USE P CONTROLLER SINCE I AND D TERMS ARE NOT YET DEFINED THE LOOP AFTER NEW GOAL IS ACHIEVED
-				if (drive_config == 1)  // 1 = PID HP Dual-azimuthing station-keeping
+				if (drive_config == 1)  // 1 = PID HP station-keeping
 				{
 					// effort in x-translation
 					T_x_P = Kp_x*e_x;  // P-term
@@ -604,7 +510,7 @@ int main(int argc, char **argv)
 					T_y_D = 0.0;  // D-term
 					T_y = T_y_P;  // only P-term
 				}
-				else if ((drive_config == 2) || (drive_config == 3))  // 2 = PID HP Differential wayfinding  // 3 = PID HP Ackermann wayfinding
+				else if (drive_config == 2)  // 2 = PID HP Differential wayfinding
 				{
 					// effort in xy-translation
 					T_x_P = Kp_x*e_xy;  // P-term
@@ -623,7 +529,7 @@ int main(int argc, char **argv)
 			else if (loop_count >= (loop_new_goal + 2))
 			{
 				// USE PID CONTROLLER ONCE I AND D TERMS ARE DEFINED
-				if (drive_config == 1)  // 1 = PID HP Dual-azimuthing station-keeping
+				if (drive_config == 1)  // 1 = PID HP station-keeping
 				{
 					// trapezoidal integration of errors for integral term
 					e_x_total = e_x_total + ((e_x_prev + e_x)/2.0)*dt;
@@ -639,7 +545,7 @@ int main(int argc, char **argv)
 					T_y_D = Kd_y*((e_y - e_y_prev)/dt);  // D-term
 					T_y = T_y_P + T_y_I + T_y_D;  // PID terms
 				}
-				else if ((drive_config == 2) || (drive_config == 3))  // 2 = PID HP Differential wayfinding  // 3 = PID HP Ackermann wayfinding
+				else if (drive_config == 2)  // 2 = PID HP Differential wayfinding
 				{
 					e_xy_total = e_xy_total + ((e_xy_prev + e_xy)/2.0)*dt;  // trapezoidal integration of errors for integral term
 					// effort in xy-translation
@@ -756,93 +662,38 @@ int main(int argc, char **argv)
 				M_z = 0.0;
 			} */
 
-			//tx_negation_check();
-
 			// ALLOCATION to go from control_efforts to thruster commands
-			if (drive_config == 1)  // 1 = PID HP Dual-azimuthing station-keeping controller
-			{
-				//ROS_INFO("PROPULSION_SYSTEM:-----Dual-azimuthing station-keeping controller-----\n");
-				// Convert to USV body-fixed frame from global frame
-				T_x_bf = T_x*cos(psi_usv_NED) + T_y*sin(psi_usv_NED);
-				T_y_bf = T_y*cos(psi_usv_NED) - T_x*sin(psi_usv_NED);
+			//ROS_INFO("PROPULSION_SYSTEM:-----Dual-azimuthing station-keeping controller-----\n");
+			// Convert to USV body-fixed frame from global frame
+			T_x_bf = T_x*cos(psi_usv_NED) + T_y*sin(psi_usv_NED);
+			T_y_bf = T_y*cos(psi_usv_NED) - T_x*sin(psi_usv_NED);
 
-				T_x = T_x_bf;
-				T_y = T_y_bf;
+			// calculate the control allocation outputs
+			// f = Transform_pseudoinverse * tau;
+			PM = Transform_pseudoinverse[0][0]*T_x_bf + Transform_pseudoinverse[0][1]*T_y_bf + Transform_pseudoinverse[0][2]*M_z;
+			PB = Transform_pseudoinverse[1][0]*T_x_bf + Transform_pseudoinverse[1][1]*T_y_bf + Transform_pseudoinverse[1][2]*M_z;
+			SM = Transform_pseudoinverse[2][0]*T_x_bf + Transform_pseudoinverse[2][1]*T_y_bf + Transform_pseudoinverse[2][2]*M_z;
+			SB = Transform_pseudoinverse[3][0]*T_x_bf + Transform_pseudoinverse[3][1]*T_y_bf + Transform_pseudoinverse[3][2]*M_z;
 
-				// calculate the control allocation outputs
-				// f = Transform_pseudoinverse * tau;
-				F_xp = Transform_pseudoinverse[0][0]*T_x + Transform_pseudoinverse[0][1]*T_y + Transform_pseudoinverse[0][2]*M_z;
-				F_yp = Transform_pseudoinverse[1][0]*T_x + Transform_pseudoinverse[1][1]*T_y + Transform_pseudoinverse[1][2]*M_z;
-				F_xs = Transform_pseudoinverse[2][0]*T_x + Transform_pseudoinverse[2][1]*T_y + Transform_pseudoinverse[2][2]*M_z;
-				F_ys = Transform_pseudoinverse[3][0]*T_x + Transform_pseudoinverse[3][1]*T_y + Transform_pseudoinverse[3][2]*M_z;
+			// DEBUG INFORMATION ////////////////////////////////////////////////////////////
+			// Print thrust control efforts in x and y directions in both the local frame (working frame) and the body-fixed frame (USV frame)
+			// ROS_DEBUG("PROPULSION_SYSTEM: BEFORE SWAP TO BODY-FIXED FRAME");
+			// ROS_DEBUG("PROPULSION_SYSTEM: T_x_G: %f", T_x);
+			// ROS_DEBUG("PROPULSION_SYSTEM: T_y_G: %f", T_y);
+			// ROS_DEBUG("PROPULSION_SYSTEM: AFTER SWAP");
+			// ROS_DEBUG("PROPULSION_SYSTEM: T_x_bf: %f", T_x_bf);
+			// ROS_DEBUG("PROPULSION_SYSTEM: T_y_bf: %f\n", T_y_bf);
 
-				T_p = sqrt(pow(F_xp,2.0)+pow(F_yp,2.0));  // calculate magnitude of port thrust
-				T_s = sqrt(pow(F_xs,2.0)+pow(F_ys,2.0));  // calculate magnitude of starboard thrust
-				A_p = -atan2(F_yp,F_xp);  // calculate angle of port thrust
-				A_s = -atan2(F_ys,F_xs);  // calculate angle of starboard thrust
-
-				// DEBUG INFORMATION ////////////////////////////////////////////////////////////
-				// Print thrust control efforts in x and y directions in both the local frame (working frame) and the body-fixed frame (USV frame)
-				// ROS_DEBUG("PROPULSION_SYSTEM: BEFORE SWAP TO BODY-FIXED FRAME");
-				// ROS_DEBUG("PROPULSION_SYSTEM: T_x_G: %f", T_x);
-				// ROS_DEBUG("PROPULSION_SYSTEM: T_y_G: %f", T_y);
-				// ROS_DEBUG("PROPULSION_SYSTEM: AFTER SWAP");
-				// ROS_DEBUG("PROPULSION_SYSTEM: T_x_bf: %f", T_x_bf);
-				// ROS_DEBUG("PROPULSION_SYSTEM: T_y_bf: %f\n", T_y_bf);
-
-				// Print force control effort values in x and y directions on each thruster
-				// ROS_DEBUG("PROPULSION_SYSTEM: F_xp: %f", F_xp);
-				// ROS_DEBUG("PROPULSION_SYSTEM: F_yp: %f", F_yp);
-				// ROS_DEBUG("PROPULSION_SYSTEM: F_xs: %f", F_xs);
-				// ROS_DEBUG("PROPULSION_SYSTEM: F_ys: %f\n", F_ys);
-			}
-			else if (drive_config == 2)  // 2 = PID HP Differential wayfinding controller
-			{
-				//ROS_INFO("PROPULSION_SYSTEM:-----Differential wayfinding controller-----");
-				// Calculate torque to thrusters
-				T_p = T_x/2.0 + M_z/B;
-				T_s = T_x/2.0 - M_z/B;
-
-				// Set thruster angles to zero since it is differential drive
-				A_p = 0.0;
-				A_s = 0.0;
-
-				/* // display contributions of thrust outputs
-				ROS_DEBUG("PROPULSION_SYSTEM: LT_T is: %f", T_x/2.0);  // displays left thrust value
-				ROS_DEBUG("PROPULSION_SYSTEM: LT_M is: %f", M_z/B);  // displays right thrust value
-				ROS_DEBUG("PROPULSION_SYSTEM: RT_T is: %f", T_x/2.0);  // displays left thrust value
-				ROS_DEBUG("PROPULSION_SYSTEM: RT_M is: %f\n", -M_z/B);  // displays right thrust value
-
-				ROS_DEBUG("PROPULSION_SYSTEM: left_thrust_cmd_msg is: %f", T_p);  // displays left thrust value
-				ROS_DEBUG("PROPULSION_SYSTEM: right_thrust_cmd_msg is: %f\n", T_s);  // displays right thrust value */
-			}
-			else if (drive_config == 3)  // 3 = PID HP Ackermann wayfinding controller
-			{
-				//ROS_INFO("PROPULSION_SYSTEM:-----Ackermann wayfinding controller-----");
-				// Use Ackermann drive configuration to set angles to thrusters 
-				A_p = atan(lx/(M_z+ly));
-				A_s = atan(lx/(M_z-ly));
-
-				// Calculate torque to thrusters
-				T_p = T_x/(cos(A_p)+cos(A_s));
-				T_s = T_p;
-			}
+			// Print control allocation outputs before saturation check
+			ROS_DEBUG("PROPULSION_SYSTEM: BEFORE THRUSTER SATURATION CHECK");
+			ROS_DEBUG("PROPULSION_SYSTEM: PM: %f", PM);
+			ROS_DEBUG("PROPULSION_SYSTEM: PB: %f", PB);
+			ROS_DEBUG("PROPULSION_SYSTEM: SM: %f", SM);
+			ROS_DEBUG("PROPULSION_SYSTEM: SB: %f\n", SB);
 
 			// adjust thruster outputs to ensure they are in the expected range
-			angle_correction_check();
 			thrust_saturation_check();
-
-			// set thruster message commands
-			left_thrust_angle_msg.data = A_p;
-			left_thrust_cmd_msg.data = T_p;
-			right_thrust_angle_msg.data = A_s;
-			right_thrust_cmd_msg.data = T_s;
-			// publish thruster message commands
-			left_thrust_angle_pub.publish(left_thrust_angle_msg);
-			left_thrust_cmd_pub.publish(left_thrust_cmd_msg);
-			right_thrust_angle_pub.publish(right_thrust_angle_msg);
-			right_thrust_cmd_pub.publish(right_thrust_cmd_msg);
-
+			
 			// update previous errors
 			e_x_prev = e_x;
 			e_y_prev = e_y;
@@ -856,26 +707,49 @@ int main(int argc, char **argv)
 		else if (PS_state == 0)  // Controller is told to be On standby by command from mission_control
 		{
 			// set thruster speeds to zero
-			left_thrust_cmd_msg.data = 0.0;
-			right_thrust_cmd_msg.data = 0.0;
-			// publish thruster speeds
-			left_thrust_cmd_pub.publish(left_thrust_cmd_msg);
-			right_thrust_cmd_pub.publish(right_thrust_cmd_msg);
+			PM = 0;
+			PB = 0;
+			SM = 0;
+			SB = 0;
 		}  // END OF else if (PS_state == 0)
 		else  // if PS_state has not yet been recieved from mission_control
 		{
 			ROS_WARN("PROPULSION_SYSTEM:---WAITING TO RECIEVE STATE---\n");
 		}
+		
+		// ENTER SERIAL COMMUNICATION PROTOCOL FUNCTION HERE
+		// SEND OUT THE THRUSTER COMMANDS NO SLOWER THAN 10 HERTZ
+		// set thruster message commands
+		left_thrust_angle_msg.data = PB;
+		left_thrust_cmd_msg.data = PM;
+		right_thrust_angle_msg.data = SB;
+		right_thrust_cmd_msg.data = SM;
+		// publish thruster message commands
+		left_thrust_angle_pub.publish(left_thrust_angle_msg);
+		left_thrust_cmd_pub.publish(left_thrust_cmd_msg);
+		right_thrust_angle_pub.publish(right_thrust_angle_msg);
+		right_thrust_cmd_pub.publish(right_thrust_cmd_msg);
+		
 		ros::spinOnce();  // update subscribers
 		loop_rate.sleep();  // sleep to accomplish set loop_rate
 		last_time = current_time;  // update last_time
 	}  // END OF while(ros::ok())
 
 	// set thruster speeds to zero
-	left_thrust_cmd_msg.data = 0.0;
-	right_thrust_cmd_msg.data = 0.0;
-	// publish thruster speeds
+	PM = 0;
+	PB = 0;
+	SM = 0;
+	SB = 0;
+	// ENTER SERIAL COMMUNICATION PROTOCOL FUNCTION HERE
+	// set thruster message commands
+	left_thrust_angle_msg.data = PB;
+	left_thrust_cmd_msg.data = PM;
+	right_thrust_angle_msg.data = SB;
+	right_thrust_cmd_msg.data = SM;
+	// publish thruster message commands
+	left_thrust_angle_pub.publish(left_thrust_angle_msg);
 	left_thrust_cmd_pub.publish(left_thrust_cmd_msg);
+	right_thrust_angle_pub.publish(right_thrust_angle_msg);
 	right_thrust_cmd_pub.publish(right_thrust_cmd_msg);
 
 	return 0;

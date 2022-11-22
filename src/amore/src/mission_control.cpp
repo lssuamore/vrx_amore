@@ -185,7 +185,7 @@ void publish_states()
 	MC_a_state_msg.sim_mode.data = vrx_mode;
 	MC_a_state_pub.publish(MC_a_state_msg);  // publish MC_a_state_msg to "MC_a_state"
 
-	/* // UPDATE USER OF EACH CODES STATE
+	// UPDATE USER OF EACH CODES STATE
 	ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----");
 	if (!vrx_mode)  // if in user control mode
 	{
@@ -197,7 +197,7 @@ void publish_states()
 	ROS_INFO("MISSION_CONTROL:      PS_state: %i", MC_ps_state_msg.state.data);
 	ROS_INFO("MISSION_CONTROL:      PA_state: %i", MC_pa_state_msg.state.data);
 	ROS_INFO("MISSION_CONTROL:       A_state: %i", MC_a_state_msg.state.data);
-	ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----\n"); */
+	ROS_INFO("MISSION_CONTROL:-----CURRENT STATES-----\n");
 } // END OF publish_states()
 
 // THIS FUNCTION: Updates all subsystem states if in real-world mode
@@ -213,7 +213,7 @@ void user_state_update()
 	//	STATES CONCERNED WITH "navigation_array"
 	//	0 = On standby
 	//	1 = USV NED state converter
-	MC_na_state_msg.state.data = 0;
+	MC_na_state_msg.state.data = 1;  // originally 0
 
 	//	STATES CONCERNED WITH "coordinate_converter"
 	//	0 = On standby
@@ -306,6 +306,20 @@ void user_state_update()
 			MC_pp_state_msg.state.data = 8;  // 8 = UAV replenishment path planner
 			MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
 			MC_pa_state_msg.state.data = 1;  // 1 = General State
+		}
+		else if (MC_state == 11)  // Station-keeping
+		{
+			MC_na_state_msg.state.data = 1;  // 1 = USV NED state converter
+			MC_pp_state_msg.state.data = 11;  // 11 = Station-keeping planner
+			MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			//MC_pa_state_msg.state.data = 1;  // 1 = General State
+		}
+		else if (MC_state == 12)  // Figure eight wayfinding
+		{
+			MC_na_state_msg.state.data = 1;  // 1 = USV NED state converter
+			MC_pp_state_msg.state.data = 12;  // 12 = Figure eight wayfinding path planner
+			MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			//MC_pa_state_msg.state.data = 1;  // 1 = General State
 		}
 		else if (MC_state == 0)
 		{

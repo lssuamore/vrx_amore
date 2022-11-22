@@ -18,27 +18,67 @@
   <!-- 0:ON STANDBY, 1:STATION-KEEPING, 2:FIGURE EIGHT -->
   <param name="/MC" value="0" />
   
+  <!-- STATION-KEEPING GOAL (MC = 1) -->
+  <param name="/x_G" value="-120" />        <!-- SET THIS IN METERS -->
+  <param name="/y_G" value="390" />         <!-- SET THIS IN METERS -->
+  <param name="/psi_G" value="0.0" />       <!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  
+  <!-- NORTH AND SOUTH POINTS ARE USED FOR GENERATING FIGURE EIGHT PATH -->
+  <param name="/x_north" value="20.0" />    <!-- SET THIS IN METERS -->
+  <param name="/y_north" value="0.0" />     <!-- SET THIS IN METERS -->
+  <param name="/x_south" value="-20.0" />   <!-- SET THIS IN METERS -->
+  <param name="/y_south" value="0.0" />     <!-- SET THIS IN METERS -->
+  
+  <!-- key positions for task 2 (Entrance and Exit gates) -->
+  <param name="/x_t2_first" value="-120" />       <!-- Meter value in Local NED frame -->
+  <param name="/y_t2_first" value="420" />        <!-- Meter value in Local NED frame -->
+  <param name="/psi_t2_first" value="0.0" />      <!-- Radian value between -Pi and Pi -->
+
+  <param name="/x_t2_blackie" value="-100" />     <!-- Meter value in Local NED frame -->
+  <param name="/y_t2_blackie" value="420" />      <!-- Meter value in Local NED frame -->
+  <param name="/psi_t2_blackie" value="0" />      <!-- Radian value in Local NED frame -->
+
+  <!-- key positions for task 6 (Detect and dock) -->
+  <param name="/params_Updated" value="false" />  <!-- 0 = false  1 = true -->
+  <param name="/x_Red_Dock" value="0" />          <!-- Meter value in Local NED frame -->
+  <param name="/y_Red_Dock" value="0" />          <!-- Meter value in Local NED frame -->
+
+  <param name="/x_Green_Dock" value="0" />        <!-- Meter value in Local NED frame -->
+  <param name="/y_Green_Dock" value="0" />        <!-- Meter value in Local NED frame -->
+  <param name="/x_Blue_Dock" value="0" />         <!-- Meter value in Local NED frame -->
+  <param name="/y_Blue_Dock" value="0" />         <!-- Meter value in Local NED frame -->
+  <param name="/psi_t6_dock" value="0.0" />       <!-- Radian value between -Pi and Pi -->
+
+  <param name="/Dock_color" value="0" />
+
   <!-- Start location for the dynamic navigation demonstration -->
-  <param name="/x_DnD" value="160" />      <!-- Meter value in Local NED frame -->
-  <param name="/y_DnD" value="-523" />      <!-- Meter value in Local NED frame -->
-  <param name="/psi_DnD" value="0.0" />    <!-- Radian value between -Pi and Pi -->
+  <param name="/x_DnD" value="160" />             <!-- Meter value in Local NED frame -->
+  <param name="/y_DnD" value="-523" />            <!-- Meter value in Local NED frame -->
+  <param name="/psi_DnD" value="0.0" />           <!-- Radian value between -Pi and Pi -->
+  
+  <!-- Start location for the follow the path task -->
+  <param name="/x_FtP" value="157" />             <!-- Meter value in Local NED frame -->
+  <param name="/y_FtP" value="-533" />            <!-- Meter value in Local NED frame -->
+  <param name="/psi_FtP" value="0.0" />           <!-- Radian value between -Pi and Pi -->
   
   <!-- Hard code values for buoy positions wrt USV-->
-  <param name="/updated_buoy_pair" value="0" />      <!-- 0 = false  1 = true -->
-  <param name="/x_LB" value="0" />                   <!-- Meter value -->
-  <param name="/y_LB" value="0" />                   <!-- Meter value -->
-  <param name="/x_RB" value="0" />                   <!-- Meter value -->
-  <param name="/y_RB" value="0" />                   <!-- Meter value -->
+  <param name="/updated_buoy_pair" value="0" />   <!-- 0 = false  1 = true -->
+  <param name="/x_LB" value="0" />                <!-- Meter value -->
+  <param name="/y_LB" value="0" />                <!-- Meter value -->
+  <param name="/x_RB" value="0" />                <!-- Meter value -->
+  <param name="/y_RB" value="0" />                <!-- Meter value -->
   
   <!-- Launches codes -->
   <node pkg="amore" type="navigation_array" name="navigation_array" output="screen">
   </node>
   <node pkg="amore" type="coordinate_converter" name="coordinate_converter" output="screen">
   </node>
-  <node pkg="amore" type="path_planner" name="path_planner" output="screen">
-  </node>
+  <!-- node pkg="amore" type="path_planner" name="path_planner" output="screen">
+  </node -->
   <node pkg="amore" type="propulsion_system" name="propulsion_system" output="screen">
   </node>
+  <!-- node pkg="amore" type="propulsion_system_QUT" name="propulsion_system_QUT" output="screen">
+  </node -->
   <node pkg="amore" type="mission_control" name="mission_control" output="screen">
   </node>
   <node pkg="amore" type="perception_array" name="perception_array" output="screen">
