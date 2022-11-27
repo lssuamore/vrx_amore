@@ -47,6 +47,7 @@ bool propulsion_system_initialized = false;
 bool perception_array_initialized = false;
 bool acoustic_initialized = false;
 
+bool PP_params_GOTTEN = false;  // false means that the params for current task haven't done been GOTTED by path_planner
 bool vrx_mode;  // false means  vrx mode is not true, and that mission_control should get the mission from /MC parameter in launch file
 bool CC_goal_poses_published = false;  // false means the NED poses have not yet been calculated and published by navigation_array
 int acoustic_task_status;  // status feedback from the acoustic system (subscribed value)
@@ -213,7 +214,7 @@ void user_state_update()
 	//	STATES CONCERNED WITH "navigation_array"
 	//	0 = On standby
 	//	1 = USV NED state converter
-	MC_na_state_msg.state.data = 1;  // originally 0
+	MC_na_state_msg.state.data = 1;
 
 	//	STATES CONCERNED WITH "coordinate_converter"
 	//	0 = On standby
@@ -260,9 +261,12 @@ void user_state_update()
 		}
 		else if (MC_state == 2)  // Entrance and Exit gates
 		{
+			if (PP_params_GOTTEN)
+			{
+				MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			}
 			MC_na_state_msg.state.data = 1;  // 1 = USV NED state converter
 			MC_pp_state_msg.state.data = 2;  // 2 = Entrance and Exit gates path planner
-			MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
 			MC_pa_state_msg.state.data = 1;  // 1 = General State
 		}
 		else if (MC_state == 3)  // Follow the path
@@ -468,6 +472,15 @@ void CC_goal_poses_publish_state_update(const std_msgs::Bool status)
 		// ROS_DEBUG("MISSION_CONTROL: COORDINATE CONVERTER NOT FINISHED");
 	// }
 }  // END OF CC_goal_poses_publish_state_update()
+
+// THIS FUNCTION: Updates when the parameters have been GOT by path_planner
+// ACCEPTS: std_msgs::Bool from "PP_params_GOT"
+// RETURNS: (VOID)
+//=============================================================================================================
+void PP_params_GOT_update(const std_msgs::Bool status)
+{
+	PP_params_GOTTEN = status.data;
+}  // END OF PP_params_GOT_update()
 
 // THIS FUNCTION: Updates and publishes all subsytem states, as well as mission_control state dependent on current system statuses
 // ACCEPTS: vrx_gazebo::Task from "vrx/task/info"
@@ -840,6 +853,7 @@ int main(int argc, char **argv)
 	ros::Subscriber task_status_sub = nh7.subscribe("/vrx/task/info", 1, vrx_state_update);  // VRX task topic
 	ros::Subscriber CC_goal_poses_publish_state_sub = nh8.subscribe("CC_goal_poses_publish_state", 1, CC_goal_poses_publish_state_update);  // whether or not goal waypoints have been converted and published yet
 	ros::Subscriber A_system_state_sub = nh9.subscribe("A_system_state", 1, A_system_state_update);  // subscriber for status of acoustic program
+	ros::Subscriber PP_params_GOT_sub = nh10.subscribe("PP_params_GOT", 1, PP_params_GOT_update);  // params_GOT status of path_planner
 
 	// Publishers
 	// these publishers publish all the state topics off all the other programs so that mission_control can tell them all how to operate
