@@ -120,15 +120,15 @@ vrx/vrx_2019/CMakeFiles/vrx_2019__xacro_auto_generate_to_devel_space_: /home/bra
 	cd /home/brad/vrx_amore/build/vrx/vrx_2019 && /usr/bin/cmake -E make_directory /home/brad/vrx_amore/devel/share/vrx_2019/worlds
 
 vrx/vrx_2019/worlds/dock.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/dock.world.xacro
+vrx/vrx_2019/worlds/dock.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx_2019/worlds/dock.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/dock.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
-vrx/vrx_2019/worlds/dock.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "xacro: generating worlds/dock.world from worlds/dock.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/dock.world worlds/dock.world.xacro
 
 vrx/vrx_2019/worlds/example_course.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/example_course.world.xacro
-vrx/vrx_2019/worlds/example_course.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_2019/worlds/example_course.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx_2019/worlds/example_course.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_2019/worlds/example_course.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "xacro: generating worlds/example_course.world from worlds/example_course.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/example_course.world worlds/example_course.world.xacro
@@ -146,43 +146,43 @@ vrx/vrx_2019/worlds/ocean.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/ocean.world worlds/ocean.world.xacro
 
 vrx/vrx_2019/worlds/perception_task.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/perception_task.world.xacro
-vrx/vrx_2019/worlds/perception_task.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 vrx/vrx_2019/worlds/perception_task.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx_2019/worlds/perception_task.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "xacro: generating worlds/perception_task.world from worlds/perception_task.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/perception_task.world worlds/perception_task.world.xacro
 
 vrx/vrx_2019/worlds/sandisland.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.world.xacro
 vrx/vrx_2019/worlds/sandisland.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
-vrx/vrx_2019/worlds/sandisland.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_2019/worlds/sandisland.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx_2019/worlds/sandisland.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "xacro: generating worlds/sandisland.world from worlds/sandisland.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/sandisland.world worlds/sandisland.world.xacro
 
 vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/scan_and_dock.world.xacro
 vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx_2019/worlds/scan_and_dock.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "xacro: generating worlds/scan_and_dock.world from worlds/scan_and_dock.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/scan_and_dock.world worlds/scan_and_dock.world.xacro
 
 vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/stationkeeping_task.world.xacro
-vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
+vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_2019/worlds/stationkeeping_task.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "xacro: generating worlds/stationkeeping_task.world from worlds/stationkeeping_task.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/stationkeeping_task.world worlds/stationkeeping_task.world.xacro
 
 vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/wayfinding_task.world.xacro
 vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
-vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
+vrx/vrx_2019/worlds/wayfinding_task.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "xacro: generating worlds/wayfinding_task.world from worlds/wayfinding_task.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/wayfinding_task.world worlds/wayfinding_task.world.xacro
 
 vrx/vrx_2019/worlds/wind_test.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/wind_test.world.xacro
 vrx/vrx_2019/worlds/wind_test.world: /home/brad/vrx_amore/src/vrx/wave_gazebo/world_models/ocean_waves/model.xacro
-vrx/vrx_2019/worlds/wind_test.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
 vrx/vrx_2019/worlds/wind_test.world: /home/brad/vrx_amore/src/vrx/vrx_gazebo/worlds/xacros/usv_wind_plugin.xacro
+vrx/vrx_2019/worlds/wind_test.world: /home/brad/vrx_amore/src/vrx/vrx_2019/worlds/sandisland.xacro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "xacro: generating worlds/wind_test.world from worlds/wind_test.world.xacro"
 	cd /home/brad/vrx_amore/src/vrx/vrx_2019 && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh xacro -o /home/brad/vrx_amore/build/vrx/vrx_2019/worlds/wind_test.world worlds/wind_test.world.xacro
 

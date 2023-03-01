@@ -1,0 +1,152 @@
+<?xml version="1.0" ?>
+<!-- World containing sydneyregatta model and some course challenges -->
+<sdf version="1.6" xmlns:xacro="http://ros.org/wiki/xacro">
+  <world name="robotx_example_course">
+    <xacro:include filename="$(find vrx_gazebo)/worlds/sydneyregatta.xacro" />
+    <xacro:sydneyregatta />
+    <!--Waves-->
+    <xacro:include filename="$(find wave_gazebo)/world_models/ocean_waves/model.xacro"/>
+    <xacro:ocean_waves scale="2.5"/>
+    <!--Wind-->
+    <xacro:include filename="$(find vrx_gazebo)/worlds/xacros/usv_wind_plugin.xacro"/>
+    <xacro:usv_wind_gazebo>
+      <wind_objs>
+        <wind_obj>
+          <name>wamv</name>
+          <link_name>wamv/base_link</link_name>
+          <coeff_vector>.5 .5 .33</coeff_vector>
+        </wind_obj>
+      </wind_objs>
+    </xacro:usv_wind_gazebo>
+    <!-- MC = Task 1-->
+    <!-- Add a red and green buoy pair to start dynamic navigation course -->
+    <include>
+      <name>buoy_red_2</name>
+      <uri>model://mb_marker_buoy_red</uri>   <!-- The red buoy -->
+      <pose>-545 225 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_green_2</name>
+      <uri>model://mb_marker_buoy_green</uri>  <!-- The green buoy -->
+      <pose>-535 225 0.25 0 0 0</pose>
+    </include> -->
+    <!-- Add a second red and green buoy pair to end dynamic navigation course -->
+    <include>
+      <name>buoy_red_1</name>
+      <uri>model://mb_marker_buoy_red</uri>   <!-- The red buoy -->
+      <pose>-545 195 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_green_1</name>
+      <uri>model://mb_marker_buoy_green</uri>  <!-- The green buoy -->
+      <pose>-535 195 0.25 0 0 0</pose>
+    </include> -->
+
+    <!-- MC = Task 2-->
+    <!-- Entrance and Exit Gates-->
+    <include>
+      <name>buoy_red_EE</name>
+      <uri>model://mb_marker_buoy_red</uri>   <!-- The red buoy -->
+      <pose>-470 200 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_white_EE_T</name>
+      <uri>model://mb_marker_buoy_white</uri>  <!-- The top white buoy -->
+      <pose>-470 190 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_white_EE_B</name>
+      <uri>model://mb_marker_buoy_white</uri>   <!-- The bottom white buoy -->
+      <pose>-470 180 0.25 0 0 0</pose>
+    </include> -->
+    <include>
+      <name>buoy_green_EE</name>
+      <uri>model://mb_marker_buoy_green</uri>  <!-- The green buoy -->
+      <pose>-470 170 0.25 0 0 0</pose>
+    </include> -->
+    <!-- black buoy is accomplished using light buoy-->
+
+    <!-- MC = Task 3-->
+    <!-- The navigation course -->
+    <include>
+      <uri>model://short_navigation_course0</uri>
+      <pose>-470 250 0 0 0 -2.14</pose>
+    </include>
+    
+    <!-- MC = Task 4-->
+    <!-- The VRX animal buoys -->
+    <include>
+      <name>crocodile_buoy</name>
+      <pose>-500 220 0 0 0 0</pose>
+      <uri>model://crocodile_buoy</uri>
+    </include>
+
+    <include>
+      <name>platypus_buoy</name>
+      <pose>-510 210 0 0 0 0</pose>
+      <uri>model://platypus_buoy</uri>
+    </include>
+
+    <include>
+      <name>turtle_buoy</name>
+      <pose>-460 215 0 0 0 0</pose>
+      <uri>model://turtle_buoy</uri>
+    </include>
+
+    <!-- The scoring plugin -->
+    <plugin name="wildlife_scoring_plugin"
+            filename="libwildlife_scoring_plugin.so">
+      <!-- Common parameters -->
+      <vehicle>wamv</vehicle>
+      <task_name>wildlife</task_name>
+      <initial_state_duration>10</initial_state_duration>
+      <ready_state_duration>10</ready_state_duration>
+      <running_state_duration>300</running_state_duration>
+      <collision_buffer>10</collision_buffer>
+      <release_joints>
+        <joint>
+          <name>wamv_external_pivot_joint</name>
+        </joint>
+        <joint>
+          <name>wamv_external_riser</name>
+        </joint>
+      </release_joints>
+
+      <!-- wildlife specific parameters -->
+      <buoys>
+        <buoy>
+          <model_name>crocodile_buoy</model_name>
+          <link_name>link</link_name>
+          <goal>avoid</goal>
+        </buoy>
+        <buoy>
+          <model_name>platypus_buoy</model_name>
+          <link_name>link</link_name>
+          <goal>circumnavigate_clockwise</goal>
+        </buoy>
+        <buoy>
+          <model_name>turtle_buoy</model_name>
+          <link_name>link</link_name>
+          <goal>circumnavigate_counterclockwise</goal>
+        </buoy>
+      </buoys>
+      <engagement_distance>10.0</engagement_distance>
+      <time_bonus>30.0</time_bonus>
+      <animals_topic>/vrx/wildlife/animals/poses</animals_topic>
+    </plugin>
+
+    <!-- MC = Task 5-->
+    <!-- The light buoy -->
+    <include>
+      <uri>model://robotx_light_buoy</uri>
+      <pose>-450 185 0.25 0 0 3.14</pose>
+    </include>
+
+    <!-- MC = Task 6 & 7-->
+    <!-- The 2022 dock with the placards -->
+    <include>
+      <uri>model://dock_2022</uri>
+      <pose>-560 190 0 0 0 3.14</pose>
+    </include>
+  </world>
+</sdf>

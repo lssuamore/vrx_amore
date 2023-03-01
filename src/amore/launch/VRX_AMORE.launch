@@ -27,13 +27,13 @@
   <param name="/y_south" value="0.0" />           <!-- SET THIS IN METERS -->
   
   <!-- key positions for task 2 (Entrance and Exit gates) -->
-  <param name="/x_t2_first" value="-120" />       <!-- Meter value in Local NED frame -->
-  <param name="/y_t2_first" value="420" />        <!-- Meter value in Local NED frame -->
-  <param name="/psi_t2_first" value="0.0" />      <!-- Radian value between -Pi and Pi -->
+  <param name="/x_t2_first" value="-102" />       <!-- Meter value in Local NED frame -->
+  <param name="/y_t2_first" value="438" />        <!-- Meter value in Local NED frame -->
+  <param name="/psi_t2_first" value="1.5708" />      <!-- Radian value between -Pi and Pi -->
 
-  <param name="/x_t2_blackie" value="-100" />     <!-- Meter value in Local NED frame -->
-  <param name="/y_t2_blackie" value="420" />      <!-- Meter value in Local NED frame -->
-  <param name="/psi_t2_blackie" value="0" />      <!-- Radian value in Local NED frame -->
+  <param name="/x_t2_blackie" value="-102" />     <!-- Meter value in Local NED frame -->
+  <param name="/y_t2_blackie" value="458" />      <!-- Meter value in Local NED frame -->
+  <param name="/psi_t2_blackie" value="1.5708" />      <!-- Radian value in Local NED frame -->
 
   <!-- key positions for task 6 (Detect and dock) -->
   <param name="/params_Updated" value="false" />  <!-- 0 = false  1 = true -->
@@ -69,18 +69,18 @@
   </include>
 
   <!-- Launches codes -->
+  <node pkg="amore" type="mission_control" name="mission_control" output="screen">
+  </node>
   <node pkg="amore" type="navigation_array" name="navigation_array" output="screen">
   </node>
   <node pkg="amore" type="coordinate_converter" name="coordinate_converter" output="screen">
   </node>
-  <!-- node pkg="amore" type="path_planner" name="path_planner" output="screen">
-  </node -->
   <node pkg="amore" type="propulsion_system" name="propulsion_system" output="screen">
   </node>
   <!-- node pkg="amore" type="propulsion_system_QUT" name="propulsion_system_QUT" output="screen">
   </node -->
-  <node pkg="amore" type="mission_control" name="mission_control" output="screen">
-  </node>
+  <!-- node pkg="amore" type="path_planner" name="path_planner" output="screen">
+  </node -->
   <node pkg="amore" type="perception_array" name="perception_array" output="screen">
   </node>
   <node pkg="amore" type="acoustics" name="acoustics" output="screen">

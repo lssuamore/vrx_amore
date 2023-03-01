@@ -169,10 +169,10 @@ wayfinding_scoring_plugin_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
-/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.9.0
-/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.3.0
+/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.0
+/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.4.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.15.1
-/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.6.0
+/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.8.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
@@ -222,10 +222,10 @@ wayfinding_scoring_plugin_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
-/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.9.0
-/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.3.0
+/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.0
+/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.4.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.15.1
-/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.6.0
+/home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.8.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/libwayfinding_scoring_plugin.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
