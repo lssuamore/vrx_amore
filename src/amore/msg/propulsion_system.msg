@@ -7,3 +7,4 @@ std_msgs/Float64 usv_latitude
 std_msgs/Float64 usv_longitude
 std_msgs/Float64 e_xy_allowed
 std_msgs/Float64 e_psi_allowed
+std_msgs/Int32 drive_configuration

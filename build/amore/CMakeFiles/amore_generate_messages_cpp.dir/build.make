@@ -65,16 +65,16 @@ amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/vrx_amore/devel/include
 /home/brad/vrx_amore/devel/include/amore/usv_pose.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/vrx_amore/devel/include/amore/usv_pose.h: /home/brad/vrx_amore/src/amore/msg/usv_pose.msg
 /home/brad/vrx_amore/devel/include/amore/usv_pose.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/brad/vrx_amore/devel/include/amore/usv_pose.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/vrx_amore/devel/include/amore/usv_pose.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/include/amore/usv_pose.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/vrx_amore/devel/include/amore/usv_pose.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from amore/usv_pose.msg"
 	cd /home/brad/vrx_amore/src/amore && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/vrx_amore/src/amore/msg/usv_pose.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/include/amore -e /opt/ros/noetic/share/gencpp/cmake/..
 
 /home/brad/vrx_amore/devel/include/amore/state.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/vrx_amore/devel/include/amore/state.h: /home/brad/vrx_amore/src/amore/msg/state.msg
-/home/brad/vrx_amore/devel/include/amore/state.h: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 /home/brad/vrx_amore/devel/include/amore/state.h: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/brad/vrx_amore/devel/include/amore/state.h: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 /home/brad/vrx_amore/devel/include/amore/state.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 /home/brad/vrx_amore/devel/include/amore/state.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from amore/state.msg"
@@ -89,8 +89,8 @@ amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/vrx_amore/devel/include
 
 /home/brad/vrx_amore/devel/include/amore/NED_objects.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/vrx_amore/devel/include/amore/NED_objects.h: /home/brad/vrx_amore/src/amore/msg/NED_objects.msg
-/home/brad/vrx_amore/devel/include/amore/NED_objects.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/include/amore/NED_objects.h: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
+/home/brad/vrx_amore/devel/include/amore/NED_objects.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/include/amore/NED_objects.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
 /home/brad/vrx_amore/devel/include/amore/NED_objects.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from amore/NED_objects.msg"
@@ -105,9 +105,10 @@ amore/CMakeFiles/amore_generate_messages_cpp: /home/brad/vrx_amore/devel/include
 
 /home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg
+/home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
 /home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-/home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 /home/brad/vrx_amore/devel/include/amore/propulsion_system.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from amore/propulsion_system.msg"
 	cd /home/brad/vrx_amore/src/amore && /home/brad/vrx_amore/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/include/amore -e /opt/ros/noetic/share/gencpp/cmake/..

@@ -133,7 +133,7 @@ dock_placard_msgs_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
-/home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.15.0
+/home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.15.1
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libgazebo.so
@@ -170,7 +170,7 @@ dock_placard_msgs_EXTERNAL_OBJECTS =
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.13.0
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
-/home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.15.0
+/home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.15.1
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libuuid.so
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: /usr/lib/x86_64-linux-gnu/libuuid.so
 /home/brad/vrx_amore/devel/lib/libdock_placard_msgs.so: vrx/vrx_gazebo/msgs/CMakeFiles/dock_placard_msgs.dir/link.txt

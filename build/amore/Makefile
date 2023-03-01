@@ -68,18 +68,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -111,6 +99,18 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -181,6 +181,21 @@ path_planner: amore/CMakeFiles/path_planner.dir/rule
 path_planner/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/path_planner.dir/build.make amore/CMakeFiles/path_planner.dir/build
 .PHONY : path_planner/fast
+
+# Convenience name for target.
+amore/CMakeFiles/propulsion_system_QUT.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/propulsion_system_QUT.dir/rule
+.PHONY : amore/CMakeFiles/propulsion_system_QUT.dir/rule
+
+# Convenience name for target.
+propulsion_system_QUT: amore/CMakeFiles/propulsion_system_QUT.dir/rule
+
+.PHONY : propulsion_system_QUT
+
+# fast build rule for target.
+propulsion_system_QUT/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system_QUT.dir/build.make amore/CMakeFiles/propulsion_system_QUT.dir/build
+.PHONY : propulsion_system_QUT/fast
 
 # Convenience name for target.
 amore/CMakeFiles/propulsion_system.dir/rule:
@@ -556,21 +571,6 @@ rosgraph_msgs_generate_messages_cpp: amore/CMakeFiles/rosgraph_msgs_generate_mes
 rosgraph_msgs_generate_messages_cpp/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make amore/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-amore/CMakeFiles/acoustics.dir/rule:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/acoustics.dir/rule
-.PHONY : amore/CMakeFiles/acoustics.dir/rule
-
-# Convenience name for target.
-acoustics: amore/CMakeFiles/acoustics.dir/rule
-
-.PHONY : acoustics
-
-# fast build rule for target.
-acoustics/fast:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/build
-.PHONY : acoustics/fast
 
 # Convenience name for target.
 amore/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule:
@@ -1142,33 +1142,6 @@ mission_control/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
 .PHONY : mission_control/fast
 
-src/acoustics.o: src/acoustics.cpp.o
-
-.PHONY : src/acoustics.o
-
-# target to build an object file
-src/acoustics.cpp.o:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.o
-.PHONY : src/acoustics.cpp.o
-
-src/acoustics.i: src/acoustics.cpp.i
-
-.PHONY : src/acoustics.i
-
-# target to preprocess a source file
-src/acoustics.cpp.i:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.i
-.PHONY : src/acoustics.cpp.i
-
-src/acoustics.s: src/acoustics.cpp.s
-
-.PHONY : src/acoustics.s
-
-# target to generate assembly for a file
-src/acoustics.cpp.s:
-	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.s
-.PHONY : src/acoustics.cpp.s
-
 src/coordinate_converter.o: src/coordinate_converter.cpp.o
 
 .PHONY : src/coordinate_converter.o
@@ -1331,6 +1304,33 @@ src/propulsion_system.cpp.s:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system.dir/build.make amore/CMakeFiles/propulsion_system.dir/src/propulsion_system.cpp.s
 .PHONY : src/propulsion_system.cpp.s
 
+src/propulsion_system_QUT.o: src/propulsion_system_QUT.cpp.o
+
+.PHONY : src/propulsion_system_QUT.o
+
+# target to build an object file
+src/propulsion_system_QUT.cpp.o:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system_QUT.dir/build.make amore/CMakeFiles/propulsion_system_QUT.dir/src/propulsion_system_QUT.cpp.o
+.PHONY : src/propulsion_system_QUT.cpp.o
+
+src/propulsion_system_QUT.i: src/propulsion_system_QUT.cpp.i
+
+.PHONY : src/propulsion_system_QUT.i
+
+# target to preprocess a source file
+src/propulsion_system_QUT.cpp.i:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system_QUT.dir/build.make amore/CMakeFiles/propulsion_system_QUT.dir/src/propulsion_system_QUT.cpp.i
+.PHONY : src/propulsion_system_QUT.cpp.i
+
+src/propulsion_system_QUT.s: src/propulsion_system_QUT.cpp.s
+
+.PHONY : src/propulsion_system_QUT.s
+
+# target to generate assembly for a file
+src/propulsion_system_QUT.cpp.s:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/propulsion_system_QUT.dir/build.make amore/CMakeFiles/propulsion_system_QUT.dir/src/propulsion_system_QUT.cpp.s
+.PHONY : src/propulsion_system_QUT.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1338,11 +1338,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... path_planner"
+	@echo "... install"
+	@echo "... propulsion_system_QUT"
 	@echo "... propulsion_system"
 	@echo "... navigation_array"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -1368,7 +1369,6 @@ help:
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... amore_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... acoustics"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_lisp"
@@ -1409,9 +1409,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... mission_control"
-	@echo "... src/acoustics.o"
-	@echo "... src/acoustics.i"
-	@echo "... src/acoustics.s"
 	@echo "... src/coordinate_converter.o"
 	@echo "... src/coordinate_converter.i"
 	@echo "... src/coordinate_converter.s"
@@ -1430,6 +1427,9 @@ help:
 	@echo "... src/propulsion_system.o"
 	@echo "... src/propulsion_system.i"
 	@echo "... src/propulsion_system.s"
+	@echo "... src/propulsion_system_QUT.o"
+	@echo "... src/propulsion_system_QUT.i"
+	@echo "... src/propulsion_system_QUT.s"
 .PHONY : help
 
 

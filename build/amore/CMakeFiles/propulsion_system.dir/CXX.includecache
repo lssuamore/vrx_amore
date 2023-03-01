@@ -79,6 +79,8 @@ std_msgs/Float64.h
 -
 std_msgs/Float64.h
 -
+std_msgs/Int32.h
+-
 
 /home/brad/vrx_amore/devel/include/amore/state.h
 string
