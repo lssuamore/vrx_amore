@@ -64,8 +64,8 @@ amore/CMakeFiles/amore_generate_messages_lisp: /home/brad/vrx_amore/devel/share/
 
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose.lisp: /home/brad/vrx_amore/src/amore/msg/usv_pose.msg
-/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/usv_pose.lisp: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from amore/usv_pose.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/vrx_amore/src/amore/msg/usv_pose.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg
@@ -73,8 +73,8 @@ amore/CMakeFiles/amore_generate_messages_lisp: /home/brad/vrx_amore/devel/share/
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state.lisp: /home/brad/vrx_amore/src/amore/msg/state.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state.lisp: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state.lisp: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/state.lisp: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from amore/state.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/vrx_amore/src/amore/msg/state.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg
 
@@ -86,9 +86,9 @@ amore/CMakeFiles/amore_generate_messages_lisp: /home/brad/vrx_amore/devel/share/
 
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /home/brad/vrx_amore/src/amore/msg/NED_objects.msg
-/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
-/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/NED_objects.lisp: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from amore/NED_objects.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/vrx_amore/src/amore/msg/NED_objects.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg
 
@@ -101,8 +101,8 @@ amore/CMakeFiles/amore_generate_messages_lisp: /home/brad/vrx_amore/devel/share/
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg/propulsion_system.lisp: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Lisp code from amore/propulsion_system.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/common-lisp/ros/amore/msg

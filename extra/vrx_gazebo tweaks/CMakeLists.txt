@@ -354,11 +354,7 @@ endif()
 xacro_add_files(
   worlds/example_course.world.xacro
   worlds/vision_proj.world.xacro
-  worlds/task1.world.xacro
-  worlds/task3.world.xacro
-  worlds/task5.world.xacro
-  worlds/task6.world.xacro
-  worlds/task7.world.xacro
+  worlds/tasks.world.xacro
   worlds/gymkhana.world.xacro
   worlds/perception_task.world.xacro
   worlds/scan_dock_deliver.world.xacro

@@ -428,11 +428,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vrx_gazebo/worlds" TYPE FILE FILES
     "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/example_course.world"
     "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/vision_proj.world"
-    "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/task1.world"
-    "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/task3.world"
-    "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/task5.world"
-    "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/task6.world"
-    "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/task7.world"
+    "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/tasks.world"
     "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/gymkhana.world"
     "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/perception_task.world"
     "/home/brad/vrx_amore/build/vrx/vrx_gazebo/worlds/scan_dock_deliver.world"

@@ -64,8 +64,8 @@ amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/vrx_amore/devel/shar
 
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js: /home/brad/vrx_amore/src/amore/msg/usv_pose.msg
-/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/usv_pose.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from amore/usv_pose.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/vrx_amore/src/amore/msg/usv_pose.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg
@@ -73,8 +73,8 @@ amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/vrx_amore/devel/shar
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js: /home/brad/vrx_amore/src/amore/msg/state.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/state.js: /opt/ros/noetic/share/std_msgs/msg/Bool.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from amore/state.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/vrx_amore/src/amore/msg/state.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg
 
@@ -86,9 +86,9 @@ amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/vrx_amore/devel/shar
 
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /home/brad/vrx_amore/src/amore/msg/NED_objects.msg
-/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
-/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/NED_objects.js: /opt/ros/noetic/share/geometry_msgs/msg/PointStamped.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from amore/NED_objects.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/vrx_amore/src/amore/msg/NED_objects.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg
 
@@ -101,8 +101,8 @@ amore/CMakeFiles/amore_generate_messages_nodejs: /home/brad/vrx_amore/devel/shar
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
-/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
 /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg/propulsion_system.js: /opt/ros/noetic/share/std_msgs/msg/Float64.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/brad/vrx_amore/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Javascript code from amore/propulsion_system.msg"
 	cd /home/brad/vrx_amore/build/amore && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/brad/vrx_amore/src/amore/msg/propulsion_system.msg -Iamore:/home/brad/vrx_amore/src/amore/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p amore -o /home/brad/vrx_amore/devel/share/gennodejs/ros/amore/msg

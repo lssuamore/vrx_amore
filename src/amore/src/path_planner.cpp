@@ -1333,7 +1333,7 @@ int main(int argc, char **argv)
 				
 				break;
 
-			/* case 1:  // Dynamic navigation demonstration
+			/* case 1:  // Dynamic navigation demonstration - More Complex approach using vision
 				ROS_INFO("PATH_PLANNER: DnD State %i\n", DnD_path_planner);
 				//  1 = Start point search and approach
 				//  2 = Search for next buoy pair
@@ -1492,14 +1492,14 @@ int main(int argc, char **argv)
 						break;
 				}
 				break; */
-			case 1:  // Dynamic navigation demonstration
+			case 1:  // Dynamic navigation demonstration - Straight 50m shot approach
 				ROS_INFO("PATH_PLANNER: DnD State %i\n", DnD_path_planner);
 				//  1 = Start point search and approach
 				//  2 = End point approach
 				//	3 = Task is complete, station-keep
 				switch(DnD_path_planner)
 				{
-					case 1:  // Publish point 35 meters ahead
+					case 1:  // Publish point 50 meters ahead
 						if (PP_USV_pose_update_state_msg.data)
 						{
 							go_forward(50);  // tell the USV to go 50 meters forward
@@ -1570,7 +1570,7 @@ int main(int argc, char **argv)
 						{
 							position_tolerance = default_position_error_allowed;
 
-							set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the station-keeping goal location
+							set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose
 							calculate_pose_errors();
 							//display_pose_errors();
 

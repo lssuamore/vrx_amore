@@ -32,7 +32,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/gazebo-11"
   "/usr/include/bullet"
   "/usr/include/simbody"
-  "/usr/include/sdformat-9.9"
+  "/usr/include/sdformat-9.10"
   "/usr/include/ignition/math6"
   "/usr/include/OGRE"
   "/usr/include/OGRE/Terrain"

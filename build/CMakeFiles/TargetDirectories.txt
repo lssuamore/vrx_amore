@@ -92,6 +92,7 @@
 /home/brad/vrx_amore/build/amore/CMakeFiles/geometry_msgs_generate_messages_eus.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/amore_gennodejs.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir
+/home/brad/vrx_amore/build/amore/CMakeFiles/acoustics.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/uuid_msgs_generate_messages_lisp.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/roscpp_generate_messages_nodejs.dir
 /home/brad/vrx_amore/build/amore/CMakeFiles/geometry_msgs_generate_messages_lisp.dir

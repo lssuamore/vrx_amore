@@ -573,6 +573,21 @@ rosgraph_msgs_generate_messages_cpp/fast:
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
+amore/CMakeFiles/acoustics.dir/rule:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/acoustics.dir/rule
+.PHONY : amore/CMakeFiles/acoustics.dir/rule
+
+# Convenience name for target.
+acoustics: amore/CMakeFiles/acoustics.dir/rule
+
+.PHONY : acoustics
+
+# fast build rule for target.
+acoustics/fast:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/build
+.PHONY : acoustics/fast
+
+# Convenience name for target.
 amore/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f CMakeFiles/Makefile2 amore/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
 .PHONY : amore/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
@@ -1142,6 +1157,33 @@ mission_control/fast:
 	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/mission_control.dir/build.make amore/CMakeFiles/mission_control.dir/build
 .PHONY : mission_control/fast
 
+src/acoustics.o: src/acoustics.cpp.o
+
+.PHONY : src/acoustics.o
+
+# target to build an object file
+src/acoustics.cpp.o:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.o
+.PHONY : src/acoustics.cpp.o
+
+src/acoustics.i: src/acoustics.cpp.i
+
+.PHONY : src/acoustics.i
+
+# target to preprocess a source file
+src/acoustics.cpp.i:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.i
+.PHONY : src/acoustics.cpp.i
+
+src/acoustics.s: src/acoustics.cpp.s
+
+.PHONY : src/acoustics.s
+
+# target to generate assembly for a file
+src/acoustics.cpp.s:
+	cd /home/brad/vrx_amore/build && $(MAKE) -f amore/CMakeFiles/acoustics.dir/build.make amore/CMakeFiles/acoustics.dir/src/acoustics.cpp.s
+.PHONY : src/acoustics.cpp.s
+
 src/coordinate_converter.o: src/coordinate_converter.cpp.o
 
 .PHONY : src/coordinate_converter.o
@@ -1369,6 +1411,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... amore_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... acoustics"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_lisp"
@@ -1409,6 +1452,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... mission_control"
+	@echo "... src/acoustics.o"
+	@echo "... src/acoustics.i"
+	@echo "... src/acoustics.s"
 	@echo "... src/coordinate_converter.o"
 	@echo "... src/coordinate_converter.i"
 	@echo "... src/coordinate_converter.s"
