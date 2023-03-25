@@ -3,7 +3,7 @@
 <!-- This launch file launches the GNC high level codes -->
 
 <launch>
-  <!-- create parameters -->
+  <!-- create any launch parameters parameters -->
   <!-- Gains for controller -->
   <param name="/kp_xy" value="0.7" />             <!-- Real-world was 0.1 last time out -->
   <param name="/kp_psi" value="1.42" />           <!-- Real-world was 0.8 last time out -->
@@ -11,51 +11,51 @@
   <param name="/ki_psi" value="0.05" />           <!-- Real-world was 0.05 last time out -->
   <param name="/kd_xy" value="2.0" />             <!-- Real-world was 0.5 last time out -->
   <param name="/kd_psi" value="1.0" />            <!-- Real-world was 2.0 last time out -->
-  
+
   <!-- mission_control state -->
   <param name="/MC" value="0" />
+  <!-- CAUTION: After setting the mission with "MC", examine the variables of interest for the mission and confirm their update by setting "params_Updated" to true -->
+  <param name="/params_Updated" value="false" />  <!-- 0 = false  1 = true -->
   
-  <!-- STATION-KEEPING GOAL (MC = 1) -->
-  <param name="/x_G" value="-120" />              <!-- SET THIS IN METERS -->
-  <param name="/y_G" value="390" />               <!-- SET THIS IN METERS -->
-  <param name="/psi_G" value="0.0" />             <!-- SET THIS BETWEEN -PI AND PI RADIANS -->
+  <!-- STATION-KEEPING GOAL in Local NED frame (MC = 1) -->
+  <param name="/x_G" value="-120" />              <!-- Meter value -->
+  <param name="/y_G" value="390" />               <!-- Meter value -->
+  <param name="/psi_G" value="0.0" />             <!-- Radian value -->
   
   <!-- NORTH AND SOUTH POINTS ARE USED FOR GENERATING FIGURE EIGHT PATH -->
-  <param name="/x_north" value="20.0" />          <!-- SET THIS IN METERS -->
-  <param name="/y_north" value="0.0" />           <!-- SET THIS IN METERS -->
-  <param name="/x_south" value="-20.0" />         <!-- SET THIS IN METERS -->
-  <param name="/y_south" value="0.0" />           <!-- SET THIS IN METERS -->
+  <param name="/x_north" value="20.0" />          <!-- Meter value -->
+  <param name="/y_north" value="0.0" />           <!-- Meter value -->
+  <param name="/x_south" value="-20.0" />         <!-- Meter value -->
+  <param name="/y_south" value="0.0" />           <!-- Meter value -->
   
-  <!-- key positions for task 2 (Entrance and Exit gates) -->
-  <param name="/x_t2_first" value="-102" />       <!-- Meter value in Local NED frame -->
-  <param name="/y_t2_first" value="438" />        <!-- Meter value in Local NED frame -->
-  <param name="/psi_t2_first" value="1.5708" />      <!-- Radian value between -Pi and Pi -->
+  <!-- key positions for task 2 (Entrance and Exit gates) in Local NED frame -->
+  <param name="/x_t2_first" value="-102" />       <!-- Meter value -->
+  <param name="/y_t2_first" value="438" />        <!-- Meter value -->
+  <param name="/psi_t2_first" value="1.5708" />   <!-- Radian value -->
 
-  <param name="/x_t2_blackie" value="-102" />     <!-- Meter value in Local NED frame -->
-  <param name="/y_t2_blackie" value="458" />      <!-- Meter value in Local NED frame -->
-  <param name="/psi_t2_blackie" value="1.5708" />      <!-- Radian value in Local NED frame -->
+  <param name="/x_t2_IOI" value="-102" />         <!-- Meter value -->
+  <param name="/y_t2_IOI" value="458" />          <!-- Meter value-->
+  <param name="/psi_t2_IOI" value="1.5708" />     <!-- Radian value -->
 
-  <!-- key positions for task 6 (Detect and dock) -->
-  <param name="/params_Updated" value="false" />  <!-- 0 = false  1 = true -->
-  <param name="/x_Red_Dock" value="0" />          <!-- Meter value in Local NED frame -->
-  <param name="/y_Red_Dock" value="0" />          <!-- Meter value in Local NED frame -->
-  <param name="/x_Green_Dock" value="0" />        <!-- Meter value in Local NED frame -->
-  <param name="/y_Green_Dock" value="0" />        <!-- Meter value in Local NED frame -->
-  <param name="/x_Blue_Dock" value="0" />         <!-- Meter value in Local NED frame -->
-  <param name="/y_Blue_Dock" value="0" />         <!-- Meter value in Local NED frame -->
-  <param name="/psi_t6_dock" value="0.0" />       <!-- Radian value between -Pi and Pi -->
-
+  <!-- key positions for task 6 (Detect and dock) in Local NED frame -->
+  <param name="/x_Red_Dock" value="0" />          <!-- Meter value -->
+  <param name="/y_Red_Dock" value="0" />          <!-- Meter value -->
+  <param name="/x_Green_Dock" value="0" />        <!-- Meter value -->
+  <param name="/y_Green_Dock" value="0" />        <!-- Meter value -->
+  <param name="/x_Blue_Dock" value="0" />         <!-- Meter value -->
+  <param name="/y_Blue_Dock" value="0" />         <!-- Meter value -->
+  <param name="/psi_t6_dock" value="0.0" />       <!-- Radian value -->
   <param name="/Dock_color" value="0" />
 
-  <!-- Start location for the dynamic navigation demonstration -->
-  <param name="/x_DnD" value="-120" />             <!-- Meter value in Local NED frame -->
-  <param name="/y_DnD" value="390" />            <!-- Meter value in Local NED frame -->
-  <param name="/psi_DnD" value="0.0" />           <!-- Radian value between -Pi and Pi -->
+  <!-- Start location for the dynamic navigation demonstration in Local NED frame -->
+  <param name="/x_DnD" value="-105" />            <!-- Meter value -->
+  <param name="/y_DnD" value="369" />             <!-- Meter value -->
+  <param name="/psi_DnD" value="0.0" />           <!-- Radian value -->
   
-  <!-- Start location for the follow the path task -->
-  <param name="/x_FtP" value="157" />             <!-- Meter value in Local NED frame -->
-  <param name="/y_FtP" value="-533" />            <!-- Meter value in Local NED frame -->
-  <param name="/psi_FtP" value="0.0" />           <!-- Radian value between -Pi and Pi -->
+  <!-- Start location for the follow the path task in Local NED frame -->
+  <param name="/x_FtP" value="157" />             <!-- Meter value -->
+  <param name="/y_FtP" value="-533" />            <!-- Meter value -->
+  <param name="/psi_FtP" value="0.0" />           <!-- Radian value -->
   
   <!-- Hard code values for buoy positions wrt USV-->
   <param name="/updated_buoy_pair" value="0" />   <!-- 0 = false  1 = true -->

@@ -131,32 +131,27 @@ float x_usv_NED, y_usv_NED, psi_usv_NED;  // vehicle position and heading (pose)
 float e_x, e_y, e_xy, e_psi;  // current errors between goal pose and usv pose
 float position_tolerance;  // this is used in the figure eight path planner
 
-
-
 bool params_updated = false;  // false means that the params for current task aren't ready to be GOTTED
 bool params_GOT = false;  // false means that the params for current task haven't done been GOTTED
-// Task 2: Entrance and Exit gates variables
-float x_t2_black_buoy;  // task 2 black buoy x position in local NED frame
-float y_t2_black_buoy;  // task 2 black buoy y position in local NED frame
-float x_t2_start_end;  // task 2 start/end x position in local NED frame
-float y_t2_start_end;  // task 2 start/end y position in local NED frame
-float psi_t2_start_end;  // task 2 start/end heading in local NED frame
+
+// Task 2: Entrance and Exit Gate's pocket full of posits and poses in local NED frame
+float x_t2_ioi;  // item    interest          local     frame
+float y_t2_ioi;	 //      of          posit-in       NED
+float x_t2_start_end;  // start/end x position
+float y_t2_start_end;  // start/end y position
+float psi_t2_start;  // start heading
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Task 6: Detect and dock
-float x_red_dock;	// x-coord of red dock in local NED frame
-float y_red_dock;	// y-coord of red dock in local NED frame
-float x_green_dock;	// x-coord of green dock in local NED frame
-float y_green_dock;	// y-coord of green dock in local NED frame
-float x_blue_dock;	// x-coord of blue dock in local NED frame
-float y_blue_dock;	// y-coord of blue dock in local NED frame
-float psi_dock;  // task 6 heading to station-keep in docking bay 
+// Task 6: Detect and Dock's pocket full of posits and heading in local NED frame
+float x_red_dock;	// x-coord of red dock
+float y_red_dock;	// y-coord of red dock
+float x_green_dock;	// x-coord of green dock
+float y_green_dock;	// y-coord of green dock
+float x_blue_dock;	// x-coord of blue dock
+float y_blue_dock;	// y-coord of blue dock
+float psi_dock;  // heading to station-keep in docking bay 
 int Dock_Name; // 1 = Red, 2 = Green, 3 = Blue
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 //	drive_config is the drive configuration of the low-level controller
 //	1 = PID HP Dual-azimuthing station-keeping
@@ -259,88 +254,96 @@ ros::Time current_time;  // creates time variables
 // =====================================================
 void parameters_function()
 {
-	if (PP_state == 1)  // 1 = Dynamic navigation demonstration
+	if (PP_state == 0)
 	{
-		ros::param::get("/x_DnD", x_DnD_start);
-		ros::param::get("/y_DnD", y_DnD_start);
-		ros::param::get("/psi_DnD", psi_DnD_start);
+		params_GOT = false;  // false is set since the planner is on standby, this can only be set true when there is a mission
 	}
-	if (PP_state == 2)	//	2 = Entrance and Exit gates
-	{
-		ros::param::get("/x_t2_first", x_t2_start_end);
-		ros::param::get("/y_t2_first", y_t2_start_end);
-		ros::param::get("/psi_t2_first", psi_t2_start_end);
-		while ((psi_t2_start_end < -PI) || (psi_t2_start_end > PI))
+	else {
+		if (PP_state == 1)  // 1 = Dynamic navigation demonstration
 		{
-			// Adjust psi_t2_start_end back within -PI and PI
-			if (psi_t2_start_end < -PI)
-			{
-				psi_t2_start_end = psi_t2_start_end + 2.0*PI;
-			}
-			if (psi_t2_start_end > PI)
-			{
-				psi_t2_start_end = psi_t2_start_end - 2.0*PI;
-			}
+			ros::param::get("/x_DnD", x_DnD_start);
+			ros::param::get("/y_DnD", y_DnD_start);
+			ros::param::get("/psi_DnD", psi_DnD_start);
 		}
-		ros::param::get("/x_t2_blackie", x_t2_black_buoy);
-		ros::param::get("/y_t2_blackie", y_t2_black_buoy);
-	}
-	if (PP_state == 3)  // 3 = Follow the path
-	{
-		ros::param::get("/x_FtP", x_FtP_start);
-		ros::param::get("/y_FtP", y_FtP_start);
-		ros::param::get("/psi_FtP", psi_FtP_start);
-	}
-	if(PP_state == 6)  // 6 = Detect and dock params
-	{
-		ros::param::get("/x_Red_Dock", x_red_dock);
-		ros::param::get("/y_Red_Dock", y_red_dock);
-		ros::param::get("/x_Green_Dock", x_green_dock);
-		ros::param::get("/y_Green_Dock", y_green_dock);
-		ros::param::get("/x_Blue_Dock", x_blue_dock);
-		ros::param::get("/y_Blue_Dock", y_blue_dock);
-		ros::param::get("/psi_t6_dock", psi_dock);
-		while ((psi_dock < -PI) || (psi_dock > PI))
+		if (PP_state == 2)	//	2 = Entrance and Exit gates
 		{
-			// Adjust psi_dock back within -PI and PI
-			if (psi_dock < -PI)
+			ros::param::get("/x_t2_first", x_t2_start_end);
+			ros::param::get("/y_t2_first", y_t2_start_end);
+			ros::param::get("/psi_t2_first", psi_t2_start);
+			while ((psi_t2_start < -PI) || (psi_t2_start > PI))
 			{
-				psi_dock += 2.0*PI;
+				// Adjust psi_t2_start back within -PI and PI
+				if (psi_t2_start < -PI)
+				{
+					psi_t2_start = psi_t2_start + 2.0*PI;
+				}
+				if (psi_t2_start > PI)
+				{
+					psi_t2_start = psi_t2_start - 2.0*PI;
+				}
 			}
-			if (psi_dock > PI)
-			{
-				psi_dock -= 2.0*PI;
-			}
+			ros::param::get("/x_t2_IOI", x_t2_ioi);
+			ros::param::get("/y_t2_IOI", y_t2_ioi);
 		}
-		ros::param::get("/Dock_color", Dock_Name);
-	}
-	if (PP_state == 11)	//	11 = Station-Keeping
-	{
-		ros::param::get("/x_G", x_goal_poses[0]);
-		ros::param::get("/y_G", y_goal_poses[0]);
-		ros::param::get("/psi_G", psi_goal_poses[0]);
-		while ((psi_goal_poses[0] < -PI) || (psi_goal_poses[0] > PI))
+		if (PP_state == 3)  // 3 = Follow the path
 		{
-			// Adjust psi_goal_poses[0] back within -PI and PI
-			if (psi_goal_poses[0] < -PI)
-			{
-				psi_goal_poses[0] = psi_goal_poses[0] + 2.0*PI;
-			}
-			if (psi_goal_poses[0] > PI)
-			{
-				psi_goal_poses[0] = psi_goal_poses[0] - 2.0*PI;
-			}
+			ros::param::get("/x_FtP", x_FtP_start);
+			ros::param::get("/y_FtP", y_FtP_start);
+			ros::param::get("/psi_FtP", psi_FtP_start);
 		}
-		point = 0;
-		goal_poses_quantity = 1;
+		if(PP_state == 6)  // 6 = Detect and dock params
+		{
+			ros::param::get("/x_Red_Dock", x_red_dock);
+			ros::param::get("/y_Red_Dock", y_red_dock);
+			ros::param::get("/x_Green_Dock", x_green_dock);
+			ros::param::get("/y_Green_Dock", y_green_dock);
+			ros::param::get("/x_Blue_Dock", x_blue_dock);
+			ros::param::get("/y_Blue_Dock", y_blue_dock);
+			ros::param::get("/psi_t6_dock", psi_dock);
+			while ((psi_dock < -PI) || (psi_dock > PI))
+			{
+				// Adjust psi_dock back within -PI and PI
+				if (psi_dock < -PI)
+				{
+					psi_dock += 2.0*PI;
+				}
+				if (psi_dock > PI)
+				{
+					psi_dock -= 2.0*PI;
+				}
+			}
+			ros::param::get("/Dock_color", Dock_Name);
+		}
+		if (PP_state == 11)	//	11 = Station-Keeping
+		{
+			ros::param::get("/x_G", x_goal_poses[0]);
+			ros::param::get("/y_G", y_goal_poses[0]);
+			ros::param::get("/psi_G", psi_goal_poses[0]);
+			while ((psi_goal_poses[0] < -PI) || (psi_goal_poses[0] > PI))
+			{
+				// Adjust psi_goal_poses[0] back within -PI and PI
+				if (psi_goal_poses[0] < -PI)
+				{
+					psi_goal_poses[0] = psi_goal_poses[0] + 2.0*PI;
+				}
+				if (psi_goal_poses[0] > PI)
+				{
+					psi_goal_poses[0] = psi_goal_poses[0] - 2.0*PI;
+				}
+			}
+			point = 0;
+			goal_poses_quantity = 1;
+		}
+		if (PP_state == 12)  //	12 = VRX2: Wayfinding - Figure Eight
+		{
+			ros::param::get("/x_north", x_North);
+			ros::param::get("/y_north", y_North);
+			ros::param::get("/x_south", x_South);
+			ros::param::get("/y_south", y_South);
+		}
+		params_GOT = true;  // true means the task parameters have been acquired
 	}
-	if (PP_state == 12)  //	12 = VRX2: Wayfinding - Figure Eight
-	{
-		ros::param::get("/x_north", x_North);
-		ros::param::get("/y_north", y_North);
-		ros::param::get("/x_south", x_South);
-		ros::param::get("/y_south", y_South);
-	}	
+	
 	ros::param::get("/updated_buoy_pair", buoy_pair_updated);
 	if (buoy_pair_updated == 1)
 	{
@@ -350,12 +353,11 @@ void parameters_function()
 		ros::param::get("/y_RB", CR_y);
 		buoy_positions_recieved = true;
 		ros::param::set("/updated_buoy_pair", 0);
-	}
-
-	params_GOT = true;  // true means the task parameters have been acquired
-	// reset that the parameters have been updated
-	ros::param::set("/params_Updated", false);
-	params_updated = false;
+	} //                                                             _/_                                                             
+	// The Scarecrow watches, his position is unpredictable          _()_          
+	//                                                             // !! \\               
+	// CATION: "MC" must be set for parameters to be updated successfully ^   
+	ros::param::set("/params_Updated", false);  // reset status ensuring oneshot functionality                             
 } // END OF parameters_function()
 
 // THIS FUNCTION: Updates global current_time, loop_count, and publishes initialization status to "PP_initialization_state"
@@ -386,6 +388,7 @@ void PATH_PLANNER_inspector()
 		CC_goal_recieved = false;  // false means NED goal poses have not been acquired from coordinate_converter
 		calculations_done = false;  // false means the wildlife path has not been made
 	}
+
 	PP_initialization_state_pub.publish(PP_initialization_state_msg);  // publish the initialization status of the path_planner to "PP_initialization_state"
 
 	PP_params_GOT_msg.data = params_GOT;
@@ -888,12 +891,12 @@ void NED_buoys_update (const amore::NED_objects::ConstPtr& buoys)
 				if ((left_buoy_found) && (!right_buoy_found))
 				{
 					ROS_INFO("PATH_PLANNER:---Adjusting goal heading to find buoy pair location---");
-					psi_goal_pose += PI/18;
+					psi_goal_pose += PI/6;  // WAS PI/18
 				}
 				else if ((right_buoy_found) && (!left_buoy_found))
 				{
 					ROS_INFO("PATH_PLANNER:---Adjusting goal heading to find buoy pair location---");
-					psi_goal_pose -= PI/18;
+					psi_goal_pose -= PI/6;  // WAS PI/18
 				}
 				// ensure psi_goal_pose stays within -PI and PI 
 				while ((psi_goal_pose < -PI) || (psi_goal_pose > PI))
@@ -1117,40 +1120,40 @@ void calculate_t2_path()
 	// first pose - entrance point
 	x_goal_poses[point] = x_t2_start_end;
 	y_goal_poses[point] = y_t2_start_end;
-	psi_goal_poses[point] = psi_t2_start_end;
+	psi_goal_poses[point] = psi_t2_start;
 	point++;
 
 	// next 5 poses around black buoy
 	// second pose - left
-	x_goal_poses[point] = x_t2_black_buoy;
-	y_goal_poses[point] = y_t2_black_buoy-r;
+	x_goal_poses[point] = x_t2_ioi;
+	y_goal_poses[point] = y_t2_ioi-r;
 	psi_goal_poses[point] = 0.0;
 	point++;
 	// third pose
-	x_goal_poses[point] = x_t2_black_buoy+r*0.707107;
-	y_goal_poses[point] = y_t2_black_buoy-r*0.707107;
+	x_goal_poses[point] = x_t2_ioi+r*0.707107;
+	y_goal_poses[point] = y_t2_ioi-r*0.707107;
 	psi_goal_poses[point] = PI/4.0;
 	point++;
 	// fourth pose - top
-	x_goal_poses[point] = x_t2_black_buoy+r;
-	y_goal_poses[point] = y_t2_black_buoy;
+	x_goal_poses[point] = x_t2_ioi+r;
+	y_goal_poses[point] = y_t2_ioi;
 	psi_goal_poses[point] = PI/2.0;
 	point++;
 	// fifth pose
-	x_goal_poses[point] = x_t2_black_buoy+r*0.707107;
-	y_goal_poses[point] = y_t2_black_buoy+r*0.707107;
+	x_goal_poses[point] = x_t2_ioi+r*0.707107;
+	y_goal_poses[point] = y_t2_ioi+r*0.707107;
 	psi_goal_poses[point] = 3.0*PI/4.0;
 	point++;
 	// sixth pose - right
-	x_goal_poses[point] = x_t2_black_buoy;
-	y_goal_poses[point] = y_t2_black_buoy+r;
+	x_goal_poses[point] = x_t2_ioi;
+	y_goal_poses[point] = y_t2_ioi+r;
 	psi_goal_poses[point] = PI;
 	point++;
 
 	// seventh pose - exit point
 	x_goal_poses[point] = x_t2_start_end;
 	y_goal_poses[point] = y_t2_start_end;
-	psi_goal_poses[point] = psi_t2_start_end + PI;
+	psi_goal_poses[point] = psi_t2_start + PI;
 	point++;
 
 	while ((psi_goal_poses[point] < -PI) || (psi_goal_poses[point] > PI))
@@ -1328,12 +1331,10 @@ int main(int argc, char **argv)
 				buoy_positions_recieved = false;  // FOR BUOY NAVIGATION
 				DnD_path_planner = 1;  // DnD_path_planner reset
 				FtP_path_planner = 1;  // FtP_path_planner reset
-				params_GOT = false;  // false means the task parameters have not yet been acquired
-				params_updated = false;  // reset that the parameters have been updated
-				
+				params_GOT = false;  // false means the task parameters have not yet been acquired				
 				break;
 
-			/* case 1:  // Dynamic navigation demonstration - More Complex approach using vision
+			case 1:  // Dynamic navigation demonstration - More Complex approach using vision
 				ROS_INFO("PATH_PLANNER: DnD State %i\n", DnD_path_planner);
 				//  1 = Start point search and approach
 				//  2 = Search for next buoy pair
@@ -1345,7 +1346,7 @@ int main(int argc, char **argv)
 					case 1:  // Start point search and approach
 						e_xy_allowed = 1.0;  // [m] positional error tolerance threshold
 						e_psi_allowed =  0.03;  // [rad] (about 2 degrees) heading error tolerance threshold
-						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
+						if ((params_GOT) && (PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic not published
 						{
 							set_goal_pose(x_DnD_start, y_DnD_start, psi_DnD_start);  // set the goal pose to the start pose of the dynamic navigation demonstration
 							propulsion_system_topic_publish();  // update the propulsion_system topic to go to the goal pose
@@ -1491,8 +1492,8 @@ int main(int argc, char **argv)
 						}
 						break;
 				}
-				break; */
-			case 1:  // Dynamic navigation demonstration - Straight 50m shot approach
+				break;
+			/*case 1:  // Dynamic navigation demonstration - Straight 50m shot approach
 				ROS_INFO("PATH_PLANNER: DnD State %i\n", DnD_path_planner);
 				//  1 = Start point search and approach
 				//  2 = End point approach
@@ -1558,7 +1559,7 @@ int main(int argc, char **argv)
 						}
 						break;
 				}
-				break;
+				break;*/
 
 			case 2:  // Entrance and Exit gates
 				if (params_GOT)  // if the params have been got
@@ -1690,8 +1691,8 @@ int main(int argc, char **argv)
 							}
 							else if (M_reached)  // if mid point has been reached
 							{
-								go_forward(20);  // tell the USV to go 30 meters forward
-								FtP_path_planner = 4;  // Start search and approach for exit buoy pair while continuing on current updated path
+								go_forward(20);  // tell the USV to go 20 meters forward
+								FtP_path_planner = 4;  // Start search and approach for next buoy pair while continuing on current updated path
 								ROS_INFO("PATH_PLANNER:-----Mid-point of entrance gates reached-----\n");
 								// reset for next time doing task
 								M_reached = false;  // false means the mid point has not been reached
@@ -1716,7 +1717,7 @@ int main(int argc, char **argv)
 							display_usv_and_goal_pose();
 						}  // END OF if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))
 						break;
-					case 4:  // Start search and approach for exit buoy pair while continuing on current path
+					case 4:  // Start search and approach for next buoy pair while continuing on current path
 						e_xy_allowed = 1.5;  // [m] positional error tolerance threshold
 						e_psi_allowed =  0.785;  // [rad] (about 45 degrees) heading error tolerance threshold
 						if ((PP_USV_pose_update_state_msg.data) && (!propulsion_system_topic_published))  // if the USV pose updated but the propulsion_system_topic has not been published
@@ -1727,7 +1728,7 @@ int main(int argc, char **argv)
 								// reset for next search
 								buoy_positions_recieved = false;
 								calculations_done = false;
-								ROS_INFO("PATH_PLANNER:-----Path through exit gate recalculated-----");
+								ROS_INFO("PATH_PLANNER:-----Path through next gate calculated-----");
 							}
 							set_goal_pose(x_goal_poses[point], y_goal_poses[point], psi_goal_poses[point]);  // set the goal pose to the current goal pose in the array of goal poses
 							calculate_pose_errors();
