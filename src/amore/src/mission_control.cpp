@@ -256,7 +256,10 @@ void user_state_update()
 		{
 			MC_na_state_msg.state.data = 1;  // 1 = USV NED state converter
 			MC_pp_state_msg.state.data = 1;  // 1 = Dynamic navigation demonstration path planner
-			MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			if (PP_params_GOTTEN)
+			{
+				MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			}
 			MC_pa_state_msg.state.data = 1;  // 1 = General State
 		}
 		else if (MC_state == 2)  // Entrance and Exit gates
@@ -273,7 +276,10 @@ void user_state_update()
 		{
 			MC_na_state_msg.state.data = 1;  // 1 = USV NED state converter
 			MC_pp_state_msg.state.data = 3;  // 3 = Follow the path path planner
-			MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			if (PP_params_GOTTEN)
+			{
+				MC_ps_state_msg.state.data = 1;  // 1 = Propulsion system ON
+			}
 			MC_pa_state_msg.state.data = 1;  // 1 = General State
 		}
 		else if (MC_state == 4)  // Wildlife Encounter - React and Report
