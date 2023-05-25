@@ -9,7 +9,7 @@ lssuamore
 ```
 PASSWORD
 ```
-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
+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
 ```
 
 ## Install Git Repository to Local Machine
